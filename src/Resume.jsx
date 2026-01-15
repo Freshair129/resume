@@ -1,7 +1,46 @@
 import { Link } from 'react-router-dom';
 import { Phone, Mail, MapPin, GraduationCap, Briefcase, Code, Brain, Star, CheckCircle2, ArrowLeft, FileText, Image, Download } from 'lucide-react';
+import React, { useRef } from 'react';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 
 const Resume = () => {
+    const resumeRef = useRef(null);
+
+    const handleDownload = async (type) => {
+        const element = resumeRef.current;
+        if (!element) return;
+
+        try {
+            const canvas = await html2canvas(element, {
+                scale: 2, // Improve quality
+                useCORS: true, // Handle cross-origin images
+                backgroundColor: '#ffffff'
+            });
+            const data = canvas.toDataURL('image/jpeg', 1.0);
+
+            if (type === 'jpg') {
+                const link = document.createElement('a');
+                link.href = data;
+                link.download = 'Pornpon_Resume.jpg';
+                link.click();
+            } else if (type === 'pdf') {
+                const pdf = new jsPDF('p', 'mm', 'a4');
+                const imgProps = pdf.getImageProperties(data);
+                const pdfWidth = pdf.internal.pageSize.getWidth();
+                const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+
+                // If height > A4, we might need multiple pages, but for now fit to width
+                // For a single page resume, this scales it nicely.
+                pdf.addImage(data, 'JPEG', 0, 0, pdfWidth, pdfHeight);
+                pdf.save('Pornpon_Resume.pdf');
+            }
+        } catch (error) {
+            console.error("Download failed:", error);
+            alert("เกิดข้อผิดพลาดในการดาวน์โหลด กรุณาลองใหม่อีกครั้ง");
+        }
+    };
+
     // ข้อมูลรูปภาพ (ในสภาพแวดล้อมจริงคุณสามารถเปลี่ยน path รูปภาพได้ที่นี่)
     const profileImage = "https://i.postimg.cc/tTGwsnXb/518287125-10228728079362270-6514242073905598389-n.jpg";
     // หมายเหตุ: สำหรับรูปที่คุณอัปโหลด ระบบจะแสดงผลผ่านไฟล์ต้นฉบับที่คุณแนบมา
@@ -92,7 +131,7 @@ const Resume = () => {
                 </div>
                 <div className="text-xl font-black tracking-tighter text-blue-600 hidden sm:block">PORNPON.T</div>
             </div>
-            <div className="max-w-5xl mx-auto bg-white shadow-2xl rounded-2xl overflow-hidden flex flex-col md:flex-row">
+            <div ref={resumeRef} className="max-w-5xl mx-auto bg-white shadow-2xl rounded-2xl overflow-hidden flex flex-col md:flex-row">
 
                 {/* Left Column / Sidebar */}
                 <div className="md:w-1/3 bg-slate-900 text-white p-8">
@@ -113,17 +152,17 @@ const Resume = () => {
                     </div>
 
                     {/* Download Buttons */}
-                    <div className="flex flex-col gap-3 mb-8">
+                    <div className="flex flex-col gap-3 mb-8" data-html2canvas-ignore="true">
                         <p className="text-xs text-slate-400 font-bold uppercase tracking-wider text-center flex items-center justify-center gap-1">
                             <Download size={12} /> Download Resume
                         </p>
                         <div className="flex gap-3 justify-center">
-                            <a href="/resume.pdf" download className="flex-1 bg-blue-600 hover:bg-blue-700 text-white px-3 py-2 rounded-lg text-sm font-bold flex items-center justify-center gap-2 transition-all hover:-translate-y-0.5 shadow-lg shadow-blue-900/50">
+                            <button onClick={() => handleDownload('pdf')} className="flex-1 bg-blue-600 hover:bg-blue-700 text-white px-3 py-2 rounded-lg text-sm font-bold flex items-center justify-center gap-2 transition-all hover:-translate-y-0.5 shadow-lg shadow-blue-900/50 cursor-pointer">
                                 <FileText size={16} /> PDF
-                            </a>
-                            <a href="/resume.jpg" download className="flex-1 bg-slate-700 hover:bg-slate-600 text-white px-3 py-2 rounded-lg text-sm font-bold flex items-center justify-center gap-2 transition-all hover:-translate-y-0.5 shadow-lg shadow-slate-900/50">
+                            </button>
+                            <button onClick={() => handleDownload('jpg')} className="flex-1 bg-slate-700 hover:bg-slate-600 text-white px-3 py-2 rounded-lg text-sm font-bold flex items-center justify-center gap-2 transition-all hover:-translate-y-0.5 shadow-lg shadow-slate-900/50 cursor-pointer">
                                 <Image size={16} /> JPG
-                            </a>
+                            </button>
                         </div>
                     </div>
 
