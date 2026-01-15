@@ -137,7 +137,7 @@ const Portfolio = () => {
         {
             id: 16,
             type: 'facebook',
-            category: 'auto', // Added category
+            category: ['auto', 'cinematic'],
             title: "Harley-Davidson Road Glide 2020: Cinematic Coating",
             url: "https://www.facebook.com/reel/10218575119024607",
             embedUrl: "https://www.facebook.com/plugins/video.php?href=https://www.facebook.com/reel/10218575119024607&show_text=false&t=0",
@@ -145,7 +145,7 @@ const Portfolio = () => {
         },
         {
             id: 17,
-            category: 'auto',
+            category: ['auto', 'cinematic'],
             type: 'facebook',
             title: "Harley-Davidson Street Glide: Cinematic Detailing",
             url: "https://www.facebook.com/reel/10218454125839853",
@@ -154,7 +154,7 @@ const Portfolio = () => {
         },
         {
             id: 18,
-            category: 'auto',
+            category: ['auto', 'cinematic'],
             type: 'facebook',
             title: "Kawasaki Ninja H2: Cinematic Detailing & Coating",
             url: "https://www.facebook.com/reel/10218348629802518",
@@ -217,7 +217,11 @@ const Portfolio = () => {
 
             {/* Grid */}
             <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {socialWorks.filter(w => activeCategory === 'all' || w.category === activeCategory).map((work) => (
+                {socialWorks.filter(w => {
+                    if (activeCategory === 'all') return true;
+                    if (Array.isArray(w.category)) return w.category.includes(activeCategory);
+                    return w.category === activeCategory;
+                }).map((work) => (
                     <div key={work.id} className="bg-white rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all hover:-translate-y-1 border border-slate-100 group">
                         {/* Media Container */}
                         <div className="aspect-[9/16] md:aspect-video bg-slate-900 relative block overflow-hidden">
