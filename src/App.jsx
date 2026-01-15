@@ -100,7 +100,7 @@ const MainPortfolio = () => {
   return (
     <div className="min-h-screen bg-white selection:bg-blue-100 selection:text-blue-900">
       {/* Navigation */}
-      <nav className={`fixed w - full z - 50 transition - all duration - 300 ${scrolled ? 'bg-white/80 backdrop-blur-md shadow-md py-3' : 'bg-transparent py-5'} `}>
+      <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white/80 backdrop-blur-md shadow-md py-3' : 'bg-transparent py-5'} `}>
         <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
           <div className="text-xl font-black tracking-tighter text-blue-600">PORNPON.P</div>
           <div className="hidden md:flex space-x-8 items-center">
