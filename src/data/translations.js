@@ -97,7 +97,7 @@ export const th = {
             all: "ทั้งหมด",
             graphic: "Motion Graphic",
             cinematic: "Cinematic & Motion",
-            beauty: "Beauty & Clinic",
+            beauty: "Beauty (ความงาม)",
             auto: "Automotive & Variety",
             ai: "AI & Innovation"
         }
@@ -276,7 +276,7 @@ export const en = {
             all: "All Works",
             graphic: "Motion Graphic",
             cinematic: "Cinematic & Motion",
-            beauty: "Beauty & Clinic",
+            beauty: "Beauty",
             auto: "Automotive & Variety",
             ai: "AI & Innovation"
         }
