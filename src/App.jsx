@@ -19,7 +19,7 @@ const ImageSlider = () => {
   const images = [
     img02, img03, img04, img05, img06
   ];
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const nextIndex = (currentIndex + 1) % images.length;
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -29,17 +29,29 @@ const ImageSlider = () => {
   }, []);
 
   return (
-    <div className="absolute inset-0 w-full h-full rounded-[3rem] -rotate-3 group-hover:rotate-0 transition-transform duration-500 border-4 border-white shadow-2xl overflow-hidden bg-white">
-      {images.map((img, index) => (
+    <>
+      {/* Background "Next" Card */}
+      <div className="absolute inset-0 w-full h-full rounded-[3rem] rotate-6 group-hover:rotate-3 transition-transform duration-500 overflow-hidden shadow-2xl bg-slate-100 z-0">
         <img
-          key={index}
-          src={img}
-          alt={`Slide ${index}`}
-          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${index === currentIndex ? 'opacity-100' : 'opacity-0'
-            }`}
+          src={images[nextIndex]}
+          alt="Next Slide"
+          className="w-full h-full object-cover opacity-90 blur-[1px] brightness-75 transition-all duration-500 group-hover:opacity-100 group-hover:blur-0 group-hover:brightness-100"
         />
-      ))}
-    </div>
+      </div>
+
+      {/* Foreground "Current" Slider */}
+      <div className="absolute inset-0 w-full h-full rounded-[3rem] -rotate-3 group-hover:rotate-0 transition-transform duration-500 border-4 border-white shadow-2xl overflow-hidden bg-white z-10">
+        {images.map((img, index) => (
+          <img
+            key={index}
+            src={img}
+            alt={`Slide ${index}`}
+            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${index === currentIndex ? 'opacity-100' : 'opacity-0'
+              }`}
+          />
+        ))}
+      </div>
+    </>
   );
 };
 
@@ -158,8 +170,7 @@ const MainPortfolio = () => {
           </div>
           <div className="flex-1 relative">
             <div className="w-64 h-64 md:w-96 md:h-96 mx-auto relative z-10 group">
-              <div className="absolute inset-0 bg-blue-600 rounded-[3rem] rotate-6 group-hover:rotate-3 transition-transform duration-500"></div>
-              {/* Image Slider */}
+              {/* Image Slider handles both background and foreground */}
               <ImageSlider />
             </div>
             <div className="absolute -bottom-4 -right-4 md:bottom-10 md:-right-10 bg-white p-6 rounded-3xl shadow-2xl z-20 animate-bounce-slow">
