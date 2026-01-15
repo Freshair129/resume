@@ -19,6 +19,7 @@ const ImageSlider = () => {
   const images = [
     img02, img03, img04, img05, img06
   ];
+  const [currentIndex, setCurrentIndex] = useState(0);
   const nextIndex = (currentIndex + 1) % images.length;
 
   useEffect(() => {
@@ -299,7 +300,7 @@ const MainPortfolio = () => {
                         <h3 className="text-xl font-bold">Core Skills</h3>
                       </div>
                       <div className="flex flex-wrap gap-2">
-                        {["Communication", "Teamwork", "Crisis Solving", "Growth Mindset", "Management", "Video Editor", "Creative", "Adaptability", "Work Smart", "Coding"].map(s => (
+                        {["Communication", "Teamwork", "Crisis Solving", "Growth Mindset", "Management", "Video Editor", "Creative", "Adaptability", "Work Smart", "Coding", "Photography"].map(s => (
                           <span key={s} className="px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-xs font-bold border border-blue-100">{s}</span>
                         ))}
                       </div>
