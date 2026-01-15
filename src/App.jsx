@@ -100,26 +100,18 @@ const MainPortfolio = () => {
       </nav>
 
       {/* Hero Section */}
-      <section id="home" className="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden bg-slate-900">
-        {/* Background Image Layer */}
-        <div
-          className="absolute inset-0 z-0 opacity-40 bg-cover bg-center bg-no-repeat scale-105 transition-transform duration-1000"
-          style={{ backgroundImage: `url(${heroBg})` }}
-        ></div>
-        {/* Gradient Overlay */}
-        <div className="absolute inset-0 z-0 bg-gradient-to-b from-slate-900/50 via-transparent to-slate-900/80"></div>
-
+      <section id="home" className="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden bg-white">
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center gap-12 relative z-10">
           <div className="flex-1 text-center md:text-left space-y-6">
             <div className="inline-flex items-center gap-2 bg-blue-50 text-blue-600 px-4 py-2 rounded-full text-sm font-bold">
               <span className="flex h-2 w-2 rounded-full bg-blue-600 animate-pulse"></span>
               Available for Work
             </div>
-            <h1 className="text-5xl md:text-7xl font-black leading-tight text-white">
-              พรพล <span className="text-blue-400">ธนสุวรรณธาร</span>
+            <h1 className="text-5xl md:text-7xl font-black leading-tight text-slate-900">
+              พรพล <span className="text-blue-600">ธนสุวรรณธาร</span>
             </h1>
-            <p className="text-xl text-slate-200 max-w-xl mx-auto md:mx-0 leading-relaxed drop-shadow-sm">
-              Assistant Manager & Digital Content Specialist ผู้เชี่ยวชาญการบริหารจัดการทีม ผสมผสานเทคโนโลยี AI เพื่อยระดับประสิทธิภาพงาน
+            <p className="text-xl text-slate-600 max-w-xl mx-auto md:mx-0 leading-relaxed">
+              Assistant Manager & Digital Content Specialist ผู้เชี่ยวชาญการบริหารจัดการทีม ผสมผสานเทคโนโลยี AI เพื่อยกระดับประสิทธิภาพงาน
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
               <a href="#experience" className="bg-slate-900 text-white px-8 py-4 rounded-2xl font-bold flex items-center justify-center gap-2 shadow-xl shadow-slate-200 hover:bg-slate-800 transition-all hover:-translate-y-1">
@@ -150,6 +142,22 @@ const MainPortfolio = () => {
                   <div className="text-lg font-black text-slate-900">Agentic RAG</div>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Showcase Section */}
+      <section className="py-12 bg-white">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="relative rounded-[3rem] overflow-hidden shadow-2xl group border-8 border-white">
+            <img
+              src={heroBg}
+              alt="Highlight"
+              className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-12">
+              <p className="text-white text-2xl font-black italic">"Crafting excellence through digital innovation."</p>
             </div>
           </div>
         </div>
