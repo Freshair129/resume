@@ -38,7 +38,7 @@ const Resume = () => {
             }
         } catch (error) {
             console.error("Download failed:", error);
-            alert("เกิดข้อผิดพลาดในการดาวน์โหลด กรุณาลองใหม่อีกครั้ง");
+            alert(`เกิดข้อผิดพลาดในการดาวน์โหลด: ${error.message}`);
         }
     };
 
