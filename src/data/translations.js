@@ -95,6 +95,7 @@ export const th = {
         ctaButton: "ดูประวัติการทำงาน (Resume)",
         categories: {
             all: "ทั้งหมด",
+            graphic: "Motion Graphic",
             cinematic: "Cinematic & Motion",
             beauty: "Beauty & Clinic",
             auto: "Automotive & Variety",
@@ -273,6 +274,7 @@ export const en = {
         ctaButton: "View Resume",
         categories: {
             all: "All Works",
+            graphic: "Motion Graphic",
             cinematic: "Cinematic & Motion",
             beauty: "Beauty & Clinic",
             auto: "Automotive & Variety",

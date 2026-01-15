@@ -68,16 +68,18 @@ const Portfolio = () => {
         },
         {
             id: 8,
+            category: 'graphic',
             type: 'facebook',
-            title: "Creative Motion Graphic",
+            title: "HAPPY SONGKRAN DAY: Motion Graphic",
             url: "https://www.facebook.com/reel/563823075079559",
             embedUrl: "https://www.facebook.com/plugins/video.php?href=https://www.facebook.com/reel/563823075079559&show_text=false&t=0",
             stats: { views: "View on FB", likes: "View on FB" }
         },
         {
             id: 9,
+            category: 'graphic',
             type: 'facebook',
-            title: "Creative Motion Graphic (2)",
+            title: "Filler Lip Review: Motion Graphic",
             url: "https://www.facebook.com/reel/244837657727946",
             embedUrl: "https://www.facebook.com/plugins/video.php?href=https://www.facebook.com/reel/244837657727946&show_text=false&t=0",
             stats: { views: "View on FB", likes: "View on FB" }
@@ -92,8 +94,9 @@ const Portfolio = () => {
         },
         {
             id: 11,
+            category: 'graphic',
             type: 'facebook',
-            title: "Creative Motion Graphic (3)",
+            title: "Melasma Laser: Motion Graphic Info",
             url: "https://www.facebook.com/reel/371694187327344",
             embedUrl: "https://www.facebook.com/plugins/video.php?href=https://www.facebook.com/reel/371694187327344&show_text=false&t=0",
             stats: { views: "View on FB", likes: "View on FB" }
