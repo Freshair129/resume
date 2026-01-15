@@ -9,11 +9,15 @@ import {
 } from 'lucide-react';
 import Resume from './Resume';
 import heroBg from './assets/hero-bg.jpg';
+import img02 from './assets/02.jpg';
+import img03 from './assets/03.jpg';
+import img04 from './assets/04.jpg';
+import img05 from './assets/05.jpg';
+import img06 from './assets/06.jpg';
 
 const ImageSlider = () => {
   const images = [
-    "https://i.postimg.cc/tTGwsnXb/518287125-10228728079362270-6514242073905598389-n.jpg",
-    heroBg // Using heroBg as the second image for now (placeholder)
+    img02, img03, img04, img05, img06
   ];
   const [currentIndex, setCurrentIndex] = useState(0);
 
