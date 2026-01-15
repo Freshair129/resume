@@ -10,6 +10,12 @@ export const th = {
         backToHome: "กลับหน้าหลัก",
         backToPortfolio: "กลับหน้า Portfolio"
     },
+    chatbot: {
+        welcomeMessage: "สวัสดีครับ! ผมคือ AI Assistant ของบอส มีคำถามอะไรเกี่ยวกับประวัติการทำงานหรือผลงานไหมครับ?",
+        placeholder: "พิมพ์คำถามของคุณ...",
+        send: "ส่ง",
+        errorMessage: "ขออภัยครับ เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง 😅"
+    },
     hero: {
         available: "Available for Work",
         name: "พรพล ธนสุวรรณธาร",
@@ -188,6 +194,12 @@ export const en = {
         hireMe: "Hire Me",
         backToHome: "Back to Home",
         backToPortfolio: "Back to Portfolio"
+    },
+    chatbot: {
+        welcomeMessage: "Hi! I'm Boss's AI Assistant. Do you have any questions about his work experience or portfolio?",
+        placeholder: "Type your question...",
+        send: "Send",
+        errorMessage: "Sorry, an error occurred. Please try again 😅"
     },
     hero: {
         available: "Available for Work",
