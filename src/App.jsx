@@ -119,11 +119,12 @@ const MainPortfolio = () => {
       {/* Navigation */}
       <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white/80 backdrop-blur-md shadow-md py-3' : 'bg-transparent py-5'} `}>
         <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
-          <div className="text-xl font-black tracking-tighter text-blue-600">PORNPON.P</div>
+          <div className="text-xl font-black tracking-tighter text-blue-600">PORNPON.T</div>
           <div className="hidden md:flex space-x-8 items-center">
             <a href="#home" className="text-sm font-medium hover:text-blue-600 transition-colors">หน้าหลัก</a>
             <a href="#skills" className="text-sm font-medium hover:text-blue-600 transition-colors">ทักษะ</a>
             <a href="#experience" className="text-sm font-medium hover:text-blue-600 transition-colors">ประสบการณ์</a>
+            <a href="#skills" className="text-sm font-medium hover:text-blue-600 transition-colors">Portfolio</a>
             <Link to="/resume" className="text-sm font-bold text-slate-900 hover:text-blue-600 transition-colors flex items-center gap-1">
               Resume <ExternalLink size={14} />
             </Link>
@@ -140,6 +141,7 @@ const MainPortfolio = () => {
             <a href="#home" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>หน้าหลัก</a>
             <a href="#skills" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>ทักษะ</a>
             <a href="#experience" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>ประสบการณ์</a>
+            <a href="#skills" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>Portfolio</a>
             <Link to="/resume" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>Resume</Link>
             <a href="#contact" className="bg-blue-600 text-white p-4 rounded-2xl text-center font-black" onClick={() => setIsMenuOpen(false)}>จ้างงานผม</a>
           </div>
