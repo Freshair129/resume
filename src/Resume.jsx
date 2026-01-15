@@ -8,6 +8,16 @@ const Resume = () => {
 
     const experiences = [
         {
+            title: "Freelance & Learning",
+            company: "Current Focus (Present)",
+            period: "2025 - Present",
+            responsibilities: [
+                "ศึกษาค้นคว้าด้าน AI Innovation และติตตามเทรนด์เทคโนโลยีใหม่ๆ (AI Agents, RAG)",
+                "รับงาน Content Creator อิสระ และทดลองนำ AI มาประยุกต์ใช้ในกระบวนการผลิตสื่อ",
+                "พัฒนาทักษะการเขียนโค้ด (Coding) เพื่อสร้าง AI Tools สำหรับใช้งานส่วนตัว"
+            ]
+        },
+        {
             title: "Assistant Manager",
             company: "Hostpital Feelgood Club",
             period: "2025 (6 Months)",
@@ -60,19 +70,26 @@ const Resume = () => {
         }
     ];
 
-    const hardSkills = ["Photoshop", "Illustrator", "Premiere Pro", "After Effects", "Canva"];
+    const hardSkills = ["Photoshop", "Premiere Pro", "After Effects", "Illustrator", "CapCut", "Canva", "Tiktok", "Reels", "Shorts"];
     const aiSkills = [
-        "Prompt Engineering", "Context Engineering", "Claude Code",
-        "Antigravity", "Agentic RAG", "AI Agent", "AI Search Engine", "AI Marketing"
+        "VS Code", "Antigravity", "Claude Code", "Gemini CLI", "Ollama", "LM Studio", "AnythingLLM",
+        "ChatGPT", "Gemini", "Maus", "Claude", "Poe",
+        "Prompt Engineering", "Context Engineering", "Agentic RAG"
     ];
-    const softSkills = ["การสื่อสาร", "การทำงานเป็นทีม", "การแก้ปัญหาเฉพาะหน้า", "ความคิดสร้างสรรค์", "การบริหารเวลา", "Growth Mindset"];
+    const softSkills = ["Communication", "Teamwork", "Crisis Solving", "Growth Mindset", "Management", "Video Editor", "Creative", "Adaptability", "Work Smart", "Coding", "English (Read/Write/Speak)"];
 
     return (
         <div className="min-h-screen bg-slate-50 py-10 px-4 sm:px-6 lg:px-8 font-sans text-slate-800">
-            <div className="max-w-5xl mx-auto mb-6">
-                <Link to="/" className="inline-flex items-center gap-2 text-slate-600 hover:text-blue-600 font-bold transition-colors bg-white px-4 py-2 rounded-xl shadow-sm border border-slate-100">
-                    <ArrowLeft size={18} /> กลับหน้าหลัก
-                </Link>
+            <div className="max-w-5xl mx-auto mb-6 flex justify-between items-center">
+                <div className="flex gap-4">
+                    <Link to="/" className="inline-flex items-center gap-2 text-slate-600 hover:text-blue-600 font-bold transition-colors bg-white px-4 py-2 rounded-xl shadow-sm border border-slate-100">
+                        <ArrowLeft size={18} /> หน้าหลัก
+                    </Link>
+                    <a href="/#skills" className="inline-flex items-center gap-2 text-slate-600 hover:text-blue-600 font-bold transition-colors bg-white px-4 py-2 rounded-xl shadow-sm border border-slate-100">
+                        <Briefcase size={18} /> Portfolio
+                    </a>
+                </div>
+                <div className="text-xl font-black tracking-tighter text-blue-600 hidden sm:block">PORNPON.T</div>
             </div>
             <div className="max-w-5xl mx-auto bg-white shadow-2xl rounded-2xl overflow-hidden flex flex-col md:flex-row">
 
@@ -100,9 +117,12 @@ const Resume = () => {
                                 <Phone size={18} className="text-blue-400" /> ติดต่อ
                             </h2>
                             <div className="space-y-2 text-sm text-slate-300">
-                                <p className="flex items-center gap-2"><Phone size={14} className="text-slate-500" /> 083-184-0662</p>
-                                <p className="flex items-center gap-2"><Mail size={14} className="text-slate-500" /> suanranger129@gmail.com</p>
-                                <p className="flex items-center gap-2"><MapPin size={14} className="text-slate-500" /> กรุงเทพมหานคร, ประเทศไทย</p>
+                                <div className="space-y-2 text-sm text-slate-300">
+                                    <p className="flex items-center gap-2"><Phone size={14} className="text-slate-500" /> 083-184-0662</p>
+                                    <p className="flex items-center gap-2"><Phone size={14} className="text-slate-500" /> 090-973-0775</p>
+                                    <p className="flex items-center gap-2"><Mail size={14} className="text-slate-500" /> suanranger129@gmail.com</p>
+                                    <p className="flex items-center gap-2"><MapPin size={14} className="text-slate-500" /> นนทบุรี, ประเทศไทย</p>
+                                </div>
                             </div>
                         </section>
 
