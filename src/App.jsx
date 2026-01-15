@@ -194,7 +194,7 @@ const MainPortfolio = () => {
                       <div key={s.name} className="flex justify-between items-center py-2 border-b border-slate-700/50 last:border-0">
                         <span className="text-slate-300 font-medium">{s.name}</span>
                         <span className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider ${s.level === 'Specialist' ? 'bg-blue-500 text-white shadow-lg shadow-blue-500/30' :
-                            'bg-slate-700 text-slate-300'
+                          'bg-slate-700 text-slate-300'
                           }`}>
                           {s.level}
                         </span>
@@ -214,14 +214,14 @@ const MainPortfolio = () => {
                       { name: "Premiere Pro", level: "Specialist" },
                       { name: "Canva", level: "Specialist" },
                       { name: "Photoshop", level: "Advanced" },
-                      { name: "Illustrator", level: "Advanced" },
-                      { name: "After Effects", level: "Intermediate" }
+                      { name: "Illustrator", level: "Basic" },
+                      { name: "After Effects", level: "Basic" }
                     ].map(s => (
                       <div key={s.name} className="flex justify-between items-center py-2 border-b border-slate-100 last:border-0">
                         <span className="text-slate-700 font-bold text-sm">{s.name}</span>
                         <span className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider ${s.level === 'Specialist' ? 'bg-blue-600 text-white shadow-md shadow-blue-200' :
-                            s.level === 'Advanced' ? 'bg-blue-50 text-blue-600 border border-blue-100' :
-                              'bg-slate-100 text-slate-500'
+                          s.level === 'Advanced' ? 'bg-blue-50 text-blue-600 border border-blue-100' :
+                            'bg-slate-100 text-slate-500'
                           }`}>
                           {s.level}
                         </span>
