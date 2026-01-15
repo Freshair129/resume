@@ -10,6 +10,7 @@ import {
 import { useLanguage } from './LanguageContext';
 import Resume from './Resume';
 import Portfolio from './Portfolio';
+import Gallery from './Gallery'; // Import Gallery
 import heroBg from './assets/hero-bg.jpg';
 import img02 from './assets/02.jpg';
 import img03 from './assets/03.jpg';
@@ -93,7 +94,7 @@ const MainPortfolio = () => {
             <a href="#skills" className="text-sm font-medium hover:text-blue-600 transition-colors">{t.nav.skills}</a>
             <a href="#experience" className="text-sm font-medium hover:text-blue-600 transition-colors">{t.nav.experience}</a>
             <Link to="/portfolio" className="text-sm font-medium hover:text-blue-600 transition-colors">{t.nav.portfolio}</Link>
-            <Link to="/portfolio#gallery" className="text-sm font-medium hover:text-blue-600 transition-colors">{t.nav.gallery}</Link>
+            <Link to="/gallery" className="text-sm font-medium hover:text-blue-600 transition-colors">{t.nav.gallery}</Link>
             <Link to="/resume" className="text-sm font-bold text-slate-900 hover:text-blue-600 transition-colors flex items-center gap-1">
               {t.nav.resume} <ExternalLink size={14} />
             </Link>
@@ -114,7 +115,7 @@ const MainPortfolio = () => {
             <a href="#skills" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>{t.nav.skills}</a>
             <a href="#experience" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>{t.nav.experience}</a>
             <Link to="/portfolio" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>{t.nav.portfolio}</Link>
-            <a href="/portfolio#gallery" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>{t.nav.gallery}</a>
+            <Link to="/gallery" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>{t.nav.gallery}</Link>
             <Link to="/resume" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>{t.nav.resume}</Link>
             <button onClick={() => { toggleLanguage(); setIsMenuOpen(false); }} className="flex items-center gap-2 text-lg font-bold">
               <Globe size={20} /> {language === 'th' ? 'English' : 'ไทย'}
@@ -370,6 +371,7 @@ const App = () => {
         <Route path="/" element={<MainPortfolio />} />
         <Route path="/resume" element={<Resume />} />
         <Route path="/portfolio" element={<Portfolio />} />
+        <Route path="/gallery" element={<Gallery />} />
       </Routes>
     </Router>
   );
