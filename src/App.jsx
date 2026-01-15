@@ -147,65 +147,86 @@ const MainPortfolio = () => {
         </div>
       </section>
 
-      {/* Showcase Section */}
-      <section className="py-12 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="relative rounded-[3rem] overflow-hidden shadow-2xl group border-8 border-white">
-            <img
-              src={heroBg}
-              alt="Highlight"
-              className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-12">
-              <p className="text-white text-2xl font-black italic">"Crafting excellence through digital innovation."</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Skills Section */}
+      {/* Skills & Showcase Section */}
       <section id="skills" className="bg-slate-50 py-24">
         <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-3xl md:text-5xl font-black text-center mb-16 text-slate-900">ทักษะและความสามารถ</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-slate-900 text-white p-8 rounded-[2rem] shadow-2xl transition-all hover:-translate-y-2 duration-500">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="p-3 bg-blue-600 rounded-2xl"><Cpu /></div>
-                <h3 className="text-2xl font-bold">AI Innovation</h3>
+          <div className="flex flex-col lg:flex-row gap-12 items-start">
+
+            {/* Left Column: Image */}
+            <div className="lg:w-1/3 w-full sticky top-24">
+              <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl group border-8 border-white bg-white">
+                <img
+                  src={heroBg}
+                  alt="Profile Highlight"
+                  className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-8">
+                  <p className="text-white text-lg font-bold italic">"Crafting excellence."</p>
+                </div>
               </div>
-              <div className="space-y-4">
-                {["Prompt Engineering", "Context Engineering", "Agentic RAG", "AI Marketing"].map(s => (
-                  <div key={s} className="flex justify-between items-center text-slate-300">
-                    <span>{s}</span>
-                    <CheckCircle2 size={14} className="text-blue-500" />
+            </div>
+
+            {/* Right Column: Skills */}
+            <div className="lg:w-2/3 w-full space-y-8">
+              <div className="mb-8">
+                <div className="inline-flex items-center gap-2 bg-blue-100 text-blue-700 px-4 py-1.5 rounded-full text-sm font-bold mb-4">
+                  <Brain size={16} /> Skills & Abilities
+                </div>
+                <h2 className="text-3xl md:text-5xl font-black text-slate-900 leading-tight">
+                  ทักษะและความสามารถ
+                </h2>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {/* AI Innovation Card */}
+                <div className="bg-slate-900 text-white p-8 rounded-[2rem] shadow-xl hover:-translate-y-1 transition-all duration-300">
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="p-3 bg-blue-600 rounded-2xl"><Cpu /></div>
+                    <h3 className="text-xl font-bold">AI Innovation</h3>
                   </div>
-                ))}
-              </div>
-            </div>
-            <div className="bg-white p-8 rounded-[2rem] shadow-xl border border-slate-100 transition-all hover:-translate-y-2 duration-500">
-              <div className="flex items-center gap-3 mb-6 text-slate-900">
-                <div className="p-3 bg-slate-100 rounded-2xl"><Code /></div>
-                <h3 className="text-2xl font-bold">Tools & Media</h3>
-              </div>
-              <div className="grid grid-cols-1 gap-4 text-slate-700 font-bold">
-                {["Premiere Pro", "Photoshop", "Illustrator", "After Effects", "Canva"].map(s => (
-                  <div key={s} className="flex items-center gap-3"><Check size={16} className="text-blue-600" /> {s}</div>
-                ))}
-              </div>
-            </div>
-            <div className="bg-white p-8 rounded-[2rem] shadow-xl border border-slate-100 transition-all hover:-translate-y-2 duration-500">
-              <div className="flex items-center gap-3 mb-6 text-slate-900">
-                <div className="p-3 bg-slate-100 rounded-2xl"><Star /></div>
-                <h3 className="text-2xl font-bold">Core Skills</h3>
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {["Communication", "Teamwork", "Crisis Solving", "Growth Mindset", "Management"].map(s => (
-                  <span key={s} className="px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-xs font-bold border border-blue-100">{s}</span>
-                ))}
-              </div>
-              <div className="mt-8 pt-6 border-t border-slate-100 text-sm">
-                <p className="font-bold text-slate-900">ม.รังสิต นิเทศศาสตร์</p>
-                <p className="text-slate-500">มัธยม สวนกุหลาบวิทยาลัย</p>
+                  <div className="space-y-3">
+                    {["Prompt Engineering", "Context Engineering", "Agentic RAG", "AI Marketing"].map(s => (
+                      <div key={s} className="flex justify-between items-center text-slate-300 text-sm">
+                        <span>{s}</span>
+                        <CheckCircle2 size={14} className="text-blue-500" />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Tools Card */}
+                <div className="bg-white p-8 rounded-[2rem] shadow-lg border border-slate-100 hover:-translate-y-1 transition-all duration-300">
+                  <div className="flex items-center gap-3 mb-6 text-slate-900">
+                    <div className="p-3 bg-slate-100 rounded-2xl"><Code /></div>
+                    <h3 className="text-xl font-bold">Tools & Media</h3>
+                  </div>
+                  <div className="space-y-3 text-slate-700 font-medium text-sm">
+                    {["Premiere Pro", "Photoshop", "Illustrator", "After Effects", "Canva"].map(s => (
+                      <div key={s} className="flex items-center gap-3"><Check size={16} className="text-blue-600" /> {s}</div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Core Skills Card - Full Width in Grid */}
+                <div className="md:col-span-2 bg-white p-8 rounded-[2rem] shadow-lg border border-slate-100 hover:-translate-y-1 transition-all duration-300">
+                  <div className="flex flex-col md:flex-row md:items-center gap-6">
+                    <div className="flex-1">
+                      <div className="flex items-center gap-3 mb-4 text-slate-900">
+                        <div className="p-3 bg-slate-100 rounded-2xl"><Star /></div>
+                        <h3 className="text-xl font-bold">Core Skills</h3>
+                      </div>
+                      <div className="flex flex-wrap gap-2">
+                        {["Communication", "Teamwork", "Crisis Solving", "Growth Mindset", "Management"].map(s => (
+                          <span key={s} className="px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-xs font-bold border border-blue-100">{s}</span>
+                        ))}
+                      </div>
+                    </div>
+                    <div className="md:border-l border-slate-100 md:pl-8 pt-6 md:pt-0">
+                      <p className="font-bold text-slate-900 text-sm">ม.รังสิต นิเทศศาสตร์</p>
+                      <p className="text-slate-500 text-sm">มัธยม สวนกุหลาบวิทยาลัย</p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
