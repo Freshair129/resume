@@ -148,6 +148,22 @@ const MainPortfolio = () => {
         </div>
       </section>
 
+      {/* Current Focus Section */}
+      <section className="bg-slate-900 py-10 border-y border-slate-800">
+        <div className="max-w-7xl mx-auto px-6 text-center">
+          <div className="inline-flex items-center gap-3 px-6 py-3 bg-blue-600/10 rounded-full border border-blue-500/20">
+            <span className="relative flex h-3 w-3">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-3 w-3 bg-blue-500"></span>
+            </span>
+            <span className="text-blue-300 font-bold tracking-wide uppercase text-sm">Target Focus</span>
+          </div>
+          <h2 className="text-2xl md:text-3xl font-bold text-white mt-6 leading-relaxed max-w-3xl mx-auto">
+            "ปัจจุบันกำลังศึกษา <span className="text-blue-400">AI Innovation</span> และเป็น <span className="text-blue-400">Freelance Content Creator</span>"
+          </h2>
+        </div>
+      </section>
+
       {/* Skills & Showcase Section */}
       <section id="skills" className="bg-slate-50 py-24">
         <div className="max-w-7xl mx-auto px-6">
@@ -259,7 +275,7 @@ const MainPortfolio = () => {
                         <h3 className="text-xl font-bold">Core Skills</h3>
                       </div>
                       <div className="flex flex-wrap gap-2">
-                        {["Communication", "Teamwork", "Crisis Solving", "Growth Mindset", "Management", "Video Editor", "Creative", "Adaptability", "Work Smart"].map(s => (
+                        {["Communication", "Teamwork", "Crisis Solving", "Growth Mindset", "Management", "Video Editor", "Creative", "Adaptability", "Work Smart", "Coding"].map(s => (
                           <span key={s} className="px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-xs font-bold border border-blue-100">{s}</span>
                         ))}
                       </div>
