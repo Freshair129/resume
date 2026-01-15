@@ -93,7 +93,14 @@ export const th = {
         galleryTitleHighlight: "GALLERY",
         galleryDesc: "รวมภาพผลงานการถ่ายภาพและเบื้องหลังการทำงาน",
         ctaTitle: "พร้อมสร้างผลลัพธ์แบบนี้ให้แบรนด์คุณ?",
-        ctaButton: "ดูประวัติการทำงาน (Resume)"
+        ctaButton: "ดูประวัติการทำงาน (Resume)",
+        categories: {
+            all: "ทั้งหมด",
+            cinematic: "Cinematic & Motion",
+            beauty: "Beauty & Clinic",
+            auto: "Automotive & Variety",
+            ai: "AI & Innovation"
+        }
     },
     resume: {
         contact: "Contact",
@@ -200,7 +207,14 @@ export const en = {
         galleryTitleHighlight: "GALLERY",
         galleryDesc: "A collection of photography works and behind-the-scenes moments.",
         ctaTitle: "Ready to create results like this for your brand?",
-        ctaButton: "View Resume"
+        ctaButton: "View Resume",
+        categories: {
+            all: "All Works",
+            cinematic: "Cinematic & Motion",
+            beauty: "Beauty & Clinic",
+            auto: "Automotive & Variety",
+            ai: "AI & Innovation"
+        }
     },
     resume: {
         contact: "Contact",

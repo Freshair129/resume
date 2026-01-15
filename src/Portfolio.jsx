@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import { ArrowLeft, ExternalLink, Heart, Eye, MessageCircle, Share2, Play, Github, Code, Camera, X, ZoomIn } from 'lucide-react';
-import { ArrowLeft, ExternalLink, Heart, Eye, MessageCircle, Share2, Play, Github, Code, Camera, X, ZoomIn } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { useLanguage } from './LanguageContext';
 
@@ -100,6 +99,7 @@ const Portfolio = () => {
         {
             id: 12,
             type: 'github',
+            category: 'ai', // Added category
             title: "Agentic Agent: AI Innovation Project",
             url: "https://github.com/Freshair129/agentic_agent.git",
             description: "Advanced AI Agent Architecture (EVA 9.4.0) exploring consciousness, memory systems, and autonomous task execution.",
@@ -108,6 +108,7 @@ const Portfolio = () => {
         {
             id: 13,
             type: 'youtube',
+            category: 'ai', // Added category
             title: "Original Song: AI Sound Production (1)",
             url: "https://www.youtube.com/embed/rKZ0Z09fXJQ",
             stats: { views: "YouTube", likes: "Music" }
@@ -115,6 +116,7 @@ const Portfolio = () => {
         {
             id: 14,
             type: 'youtube',
+            category: 'ai', // Added category
             title: "Original Song: AI Sound Production (2)",
             url: "https://www.youtube.com/embed/EndPHFnbnRQ",
             stats: { views: "YouTube", likes: "Music" }
@@ -122,9 +124,37 @@ const Portfolio = () => {
         {
             id: 15,
             type: 'youtube',
+            category: 'cinematic', // Added category
             title: "Full Production: Directing, Filming & Editing",
             url: "https://www.youtube.com/embed/kGRRIG-WLAU",
             stats: { views: "YouTube", likes: "Production" }
+        },
+        {
+            id: 16,
+            type: 'facebook',
+            category: 'auto', // Added category
+            title: "Harley-Davidson Road Glide 2020: Cinematic Coating",
+            url: "https://www.facebook.com/reel/10218575119024607",
+            embedUrl: "https://www.facebook.com/plugins/video.php?href=https://www.facebook.com/reel/10218575119024607&show_text=false&t=0",
+            stats: { views: "View on FB", likes: "View on FB" }
+        },
+        {
+            id: 17,
+            category: 'auto',
+            type: 'facebook',
+            title: "Harley-Davidson Street Glide: Cinematic Detailing",
+            url: "https://www.facebook.com/reel/10218454125839853",
+            embedUrl: "https://www.facebook.com/plugins/video.php?href=https://www.facebook.com/reel/10218454125839853&show_text=false&t=0",
+            stats: { views: "View on FB", likes: "View on FB" }
+        },
+        {
+            id: 18,
+            category: 'auto',
+            type: 'facebook',
+            title: "Kawasaki Ninja H2: Cinematic Detailing & Coating",
+            url: "https://www.facebook.com/reel/10218348629802518",
+            embedUrl: "https://www.facebook.com/plugins/video.php?href=https://www.facebook.com/reel/10218348629802518&show_text=false&t=0",
+            stats: { views: "View on FB", likes: "View on FB" }
         },
         // Add more works here...
     ];
@@ -162,9 +192,27 @@ const Portfolio = () => {
                 </p>
             </div>
 
+            {/* Category Filter */}
+            <div className="max-w-6xl mx-auto mb-10 overflow-x-auto">
+                <div className="flex gap-3 justify-start md:justify-center p-2 min-w-max">
+                    {['all', 'cinematic', 'beauty', 'auto', 'ai'].map((cat) => (
+                        <button
+                            key={cat}
+                            onClick={() => setActiveCategory(cat)}
+                            className={`px-5 py-2.5 rounded-full text-sm font-bold transition-all shadow-sm whitespace-nowrap ${activeCategory === cat
+                                ? 'bg-blue-600 text-white shadow-blue-200 shadow-md transform -translate-y-0.5'
+                                : 'bg-white text-slate-500 hover:bg-slate-50 border border-slate-100'
+                                }`}
+                        >
+                            {t.portfolio.categories[cat]}
+                        </button>
+                    ))}
+                </div>
+            </div>
+
             {/* Grid */}
             <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {socialWorks.map((work) => (
+                {socialWorks.filter(w => activeCategory === 'all' || w.category === activeCategory).map((work) => (
                     <div key={work.id} className="bg-white rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all hover:-translate-y-1 border border-slate-100 group">
                         {/* Media Container */}
                         <div className="aspect-[9/16] md:aspect-video bg-slate-900 relative block overflow-hidden">
