@@ -10,6 +10,35 @@ import {
 import Resume from './Resume';
 import heroBg from './assets/hero-bg.jpg';
 
+const ImageSlider = () => {
+  const images = [
+    "https://i.postimg.cc/tTGwsnXb/518287125-10228728079362270-6514242073905598389-n.jpg",
+    heroBg // Using heroBg as the second image for now (placeholder)
+  ];
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % images.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <div className="absolute inset-0 w-full h-full rounded-[3rem] -rotate-3 group-hover:rotate-0 transition-transform duration-500 border-4 border-white shadow-2xl overflow-hidden bg-white">
+      {images.map((img, index) => (
+        <img
+          key={index}
+          src={img}
+          alt={`Slide ${index}`}
+          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${index === currentIndex ? 'opacity-100' : 'opacity-0'
+            }`}
+        />
+      ))}
+    </div>
+  );
+};
+
 const MainPortfolio = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -192,7 +221,7 @@ const MainPortfolio = () => {
                       <div key={s.name} className="flex justify-between items-center py-2 border-b border-slate-700/50 last:border-0">
                         <span className="text-slate-300 font-medium">{s.name}</span>
                         <span className={`px - 3 py - 1 rounded - full text - [10px] font - black uppercase tracking - wider ${s.level === 'Specialist' ? 'bg-blue-500 text-white shadow-lg shadow-blue-500/30' :
-                            'bg-slate-700 text-slate-300'
+                          'bg-slate-700 text-slate-300'
                           } `}>
                           {s.level}
                         </span>
@@ -220,8 +249,8 @@ const MainPortfolio = () => {
                       <div key={s.name} className="flex justify-between items-center py-2 border-b border-slate-100 last:border-0">
                         <span className="text-slate-700 font-bold text-sm">{s.name}</span>
                         <span className={`px - 3 py - 1 rounded - full text - [10px] font - black uppercase tracking - wider ${s.level === 'Specialist' ? 'bg-blue-600 text-white shadow-md shadow-blue-200' :
-                            s.level === 'Advanced' ? 'bg-blue-50 text-blue-600 border border-blue-100' :
-                              'bg-slate-100 text-slate-500'
+                          s.level === 'Advanced' ? 'bg-blue-50 text-blue-600 border border-blue-100' :
+                            'bg-slate-100 text-slate-500'
                           } `}>
                           {s.level}
                         </span>
