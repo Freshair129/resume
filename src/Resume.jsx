@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Phone, Mail, MapPin, Download, ExternalLink, Award, Sparkles, Brain, Cpu, Code, Star, Video, Camera, Briefcase, Image } from 'lucide-react';
+import { ArrowLeft, Phone, Mail, MapPin, Download, ExternalLink, Award, Sparkles, Brain, Cpu, Code, Star, Video, Camera, Briefcase, Image as ImageIcon } from 'lucide-react';
 import { useLanguage } from './LanguageContext';
 import React, { useRef } from 'react';
 import html2canvas from 'html2canvas';
@@ -166,7 +166,7 @@ const Resume = () => {
                                 <FileText size={16} /> PDF
                             </button>
                             <button onClick={() => handleDownload('jpg')} className="flex-1 bg-[#334155] hover:bg-[#475569] text-[#ffffff] px-3 py-2 rounded-lg text-sm font-bold flex items-center justify-center gap-2 transition-all hover:-translate-y-0.5 shadow-lg shadow-[#0f172a80] cursor-pointer">
-                                <Image size={16} /> JPG
+                                <ImageIcon size={16} /> JPG
                             </button>
                         </div>
                     </div>

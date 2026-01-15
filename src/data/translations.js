@@ -1,11 +1,10 @@
-import { Github, Code, Camera, Video, Music, Mic, Layers, Cpu } from 'lucide-react';
-
 export const th = {
     nav: {
         home: "หน้าหลัก",
         skills: "ทักษะ",
         experience: "ประสบการณ์",
         portfolio: "Portfolio",
+        gallery: "แกลเลอรี่",
         resume: "Resume",
         hireMe: "จ้างงานผม",
         backToHome: "กลับหน้าหลัก",
@@ -183,6 +182,7 @@ export const en = {
         skills: "Skills",
         experience: "Experience",
         portfolio: "Portfolio",
+        gallery: "Gallery",
         resume: "Resume",
         hireMe: "Hire Me",
         backToHome: "Back to Home",
