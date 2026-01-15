@@ -189,7 +189,8 @@ const MainPortfolio = () => {
                       { name: "Prompt Engineering", level: "Specialist" },
                       { name: "Context Engineering", level: "Specialist" },
                       { name: "Agentic RAG", level: "Advanced" },
-                      { name: "AI Marketing", level: "Advanced" }
+                      { name: "AI Marketing", level: "Advanced" },
+                      { name: "Data Analysis", level: "Intermediate" }
                     ].map(s => (
                       <div key={s.name} className="flex justify-between items-center py-2 border-b border-slate-700/50 last:border-0">
                         <span className="text-slate-300 font-medium">{s.name}</span>
