@@ -300,7 +300,7 @@ const MainPortfolio = () => {
                         <h3 className="text-xl font-bold">Core Skills</h3>
                       </div>
                       <div className="flex flex-wrap gap-2">
-                        {["Communication", "Teamwork", "Crisis Solving", "Growth Mindset", "Management", "Video Editor", "Creative", "Adaptability", "Work Smart", "Coding", "Photography"].map(s => (
+                        {["Communication", "Teamwork", "Crisis Solving", "Growth Mindset", "Management", "Video Editor", "Creative", "Adaptability", "Work Smart", "Coding", "Photography", "English (Read/Write/Speak)"].map(s => (
                           <span key={s} className="px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-xs font-bold border border-blue-100">{s}</span>
                         ))}
                       </div>
