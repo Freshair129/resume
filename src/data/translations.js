@@ -110,7 +110,70 @@ export const th = {
         aboutMe: "About Me",
         aboutDesc: "Assistant Manager และ Digital Content Creator ที่มีความเชี่ยวชาญด้านการบริหารจัดการทีมและการผลิตสื่อสร้างสรรค์ มีความสนใจอย่างลึกซึ้งในการนำ AI Technology มาประยุกต์ใช้เพื่อเพิ่มประสิทธิภาพการทำงาน (Productivity) และสร้างสรรค์นวัตกรรมใหม่ๆ",
         toolsMedia: "Tools & Media",
-        aiTools: "AI Tools & Code Gen"
+        aiTools: "AI Tools & Code Gen",
+        profileAlt: "พรพล ธนสุวรรณธาร",
+        name: "พรพล ธนสุวรรณธาร",
+        title: "Assistant Manager & Content Specialist",
+        downloadResume: "Download Resume",
+        university: "มหาวิทยาลัยรังสิต",
+        degree: "ปริญญาตรี นิเทศศาสตร์ (โฆษณา)",
+        school: "โรงเรียนสวนกุหลาบวิทยาลัย",
+        experience: {
+            freelance: {
+                title: "Freelance & Learning",
+                company: "Current Focus (Present)",
+                period: "2025 - Present",
+                responsibility1: "ศึกษาค้นคว้าด้าน AI Innovation และติตตามเทรนด์เทคโนโลยีใหม่ๆ (AI Agents, RAG)",
+                responsibility2: "รับงาน Content Creator อิสระ และทดลองนำ AI มาประยุกต์ใช้ในกระบวนการผลิตสื่อ",
+                responsibility3: "พัฒนาทักษะการเขียนโค้ด (Coding) เพื่อสร้าง AI Tools สำหรับใช้งานส่วนตัว"
+            },
+            assistantManager: {
+                title: "Assistant Manager",
+                company: "Hostpital Feelgood Club",
+                period: "2025 (6 Months)",
+                responsibility1: "ดูแลบริหารจัดการภาพรวมการดำเนินงานของร้านให้ราบรื่น",
+                responsibility2: "บริหารจัดการและมอบหมายหน้าที่ให้ทีม Service, Security และทีม Host (PR)",
+                responsibility3: "ทำหน้าที่ MC ควบคุมลำดับกิจกรรมและบรรยากาศทั้งหมดภายในร้าน",
+                responsibility4: "บริหารจัดการความสัมพันธ์ลูกค้า (CRM) และแก้ไขปัญหาเฉพาะหน้าอย่างมีประสิทธิภาพ"
+            },
+            eventCoordinator: {
+                title: "Event Project Coordinator",
+                company: "Joe Luxury Car Service",
+                period: "2024 (1 Year)",
+                responsibility1: "วางแผนและบริหารจัดการทรัพยากร (บุคคล, ยานพาหนะ, เวลา) ให้สอดคล้องกับความต้องการ",
+                responsibility2: "ดูแลประสานงานระหว่างทีมภาคสนามและลูกค้ากลุ่ม VIP โดยตรง",
+                responsibility3: "แก้ไขปัญหาเฉพาะหน้าด้วยความรวดเร็วและรักษามาตรฐานการบริการ",
+                responsibility4: "สื่อสารและตอบสนองความต้องการเบื้องต้นของลูกค้าในฐานะตัวแทนทีม"
+            },
+            contentCreatorPermanent: {
+                title: "Content Creator",
+                company: "Saint Thonglor Clinic (Permanent)",
+                period: "2020 - 2022",
+                responsibility1: "วางแผนกลยุทธ์คอนเทนต์รายวัน รายสัปดาห์ และรายเดือน",
+                responsibility2: "ประสานงานร่วมกับทีมแพทย์และทีม Digital Marketing ภายนอกเพื่อสร้างสรรค์เนื้อหา",
+                responsibility3: "ควบคุมการผลิตคอนเทนต์ให้เป็นไปตามภาพลักษณ์ของแบรนด์"
+            },
+            contentCreatorPartTime: {
+                title: "Content Creator",
+                company: "U-Turn Shop (Part-Time)",
+                period: "2020 - 2022",
+                responsibility1: "วางแผนและผลิตสื่อวิดีโอ/ภาพนิ่งสำหรับโปรโมทสินค้า",
+                responsibility2: "ให้คำปรึกษาและดูแลแนวทางการตอบแชทของทีม Admin",
+                responsibility3: "ประสานงานร่วมกับทีมช่างเพื่อผลิตคอนเทนต์เจาะลึกทางเทคนิค"
+            },
+            editorContract: {
+                title: "Editor",
+                company: "Punnisa Clinic (Contract)",
+                period: "2019 (1 Year)",
+                responsibility1: "รับผิดชอบการผลิตและตัดต่อคอนเทนต์วิดีโอและภาพเคลื่อนไหวทั้งหมด",
+                responsibility2: "สร้างสรรค์สื่อเพื่อสนับสนุนแคมเปญการตลาดของคลินิก"
+            }
+        },
+        bachelorDegree: "ปริญญาตรี นิเทศศาสตร์ (โฆษณา)",
+        rungsitUniversity: "มหาวิทยาลัยรังสิต",
+        highSchool: "มัธยมศึกษา",
+        suankularb: "โรงเรียนสวนกุหลาบวิทยาลัย",
+        aiFutureSkills: "AI & Future Skills"
     }
 };
 
@@ -224,6 +287,69 @@ export const en = {
         aboutMe: "About Me",
         aboutDesc: "Assistant Manager and Digital Content Creator specializing in team management and creative media production. Deeply interested in applying AI Technology to enhance productivity and generate innovative solutions.",
         toolsMedia: "Tools & Media",
-        aiTools: "AI Tools & Code Gen"
+        aiTools: "AI Tools & Code Gen",
+        profileAlt: "Pornpon Thanasuwanthat",
+        name: "Pornpon Thanasuwanthat",
+        title: "Assistant Manager & Content Specialist",
+        downloadResume: "Download Resume",
+        university: "Rangsit University",
+        degree: "Bachelor of Communication Arts (Advertising)",
+        school: "Suankularb Wittayalai School",
+        experience: {
+            freelance: {
+                title: "Freelance & Learning",
+                company: "Current Focus (Present)",
+                period: "2025 - Present",
+                responsibility1: "Researching AI Innovation and tracking new technology trends (AI Agents, RAG).",
+                responsibility2: "Freelance Content Creator utilizing AI to optimize media production workflows.",
+                responsibility3: "Developing coding skills to build personal AI Tools."
+            },
+            assistantManager: {
+                title: "Assistant Manager",
+                company: "Hostpital Feelgood Club",
+                period: "2025 (6 Months)",
+                responsibility1: "Oversaw overall store operations for smooth execution.",
+                responsibility2: "Managed and assigned duties to Service, Security, and Host (PR) teams.",
+                responsibility3: "Served as MC controlling event sequences and overall atmosphere.",
+                responsibility4: "Managed CRM and effectively handled immediate customer issues."
+            },
+            eventCoordinator: {
+                title: "Event Project Coordinator",
+                company: "Joe Luxury Car Service",
+                period: "2024 (1 Year)",
+                responsibility1: "Planned and managed resources (manpower, vehicles, time) to meet requirements.",
+                responsibility2: "Coordinated directly between field teams and VIP clients.",
+                responsibility3: "Resolved immediate issues quickly while maintaining service standards.",
+                responsibility4: "Communicated and responded to initial client needs as a team representative."
+            },
+            contentCreatorPermanent: {
+                title: "Content Creator",
+                company: "Saint Thonglor Clinic (Permanent)",
+                period: "2020 - 2022",
+                responsibility1: "Planned daily, weekly, and monthly content strategies.",
+                responsibility2: "Coordinated with medical teams and external Digital Marketing agencies.",
+                responsibility3: "Controlled content production to align with brand image."
+            },
+            contentCreatorPartTime: {
+                title: "Content Creator",
+                company: "U-Turn Shop (Part-Time)",
+                period: "2020 - 2022",
+                responsibility1: "Planned and produced video/still media for product promotion.",
+                responsibility2: "Consulted and guided the Admin team on chat response guidelines.",
+                responsibility3: "Coordinated with technician teams to produce in-depth technical content."
+            },
+            editorContract: {
+                title: "Editor",
+                company: "Punnisa Clinic (Contract)",
+                period: "2019 (1 Year)",
+                responsibility1: "Responsible for editing all video and motion content.",
+                responsibility2: "Created media to support clinic marketing campaigns."
+            }
+        },
+        bachelorDegree: "Bachelor of Communication Arts (Advertising)",
+        rungsitUniversity: "Rangsit University",
+        highSchool: "High School",
+        suankularb: "Suankularb Wittayalai School",
+        aiFutureSkills: "AI & Future Skills"
     }
 };
