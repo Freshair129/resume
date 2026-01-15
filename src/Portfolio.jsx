@@ -169,16 +169,13 @@ const Portfolio = () => {
     return (
         <div className="min-h-screen bg-slate-50 py-10 px-4 sm:px-6 lg:px-8 font-sans text-slate-800">
             {/* Header */}
-            <div className="max-w-6xl mx-auto mb-10 flex flex-wrap justify-between items-center gap-4">
+            <div className="max-w-6xl mx-auto mb-10 flex justify-between items-center">
                 <Link to="/" className="inline-flex items-center gap-2 text-slate-600 hover:text-blue-600 font-bold transition-colors bg-white px-5 py-3 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md">
                     <ArrowLeft size={20} /> {t.nav.backToHome}
                 </Link>
-                <h1 className="text-3xl font-black text-slate-900 tracking-tight text-center md:text-left uppercase flex-1">
+                <h1 className="text-3xl font-black text-slate-900 tracking-tight text-right md:text-left uppercase">
                     {t.portfolio.title} <span className="text-blue-600">{t.portfolio.titleHighlight}</span>
                 </h1>
-                <Link to="/gallery" className="inline-flex items-center gap-2 text-white bg-blue-600 hover:bg-blue-700 font-bold transition-colors px-5 py-3 rounded-2xl shadow-md hover:shadow-lg hover:-translate-y-0.5">
-                    {t.nav.gallery}
-                </Link>
             </div>
 
             {/* Intro */}
@@ -205,6 +202,12 @@ const Portfolio = () => {
                             {t.portfolio.categories[cat]}
                         </button>
                     ))}
+                    <Link
+                        to="/gallery"
+                        className="px-5 py-2.5 rounded-full text-sm font-bold transition-all shadow-sm whitespace-nowrap bg-white text-slate-500 hover:bg-slate-50 border border-slate-100 hover:shadow-md"
+                    >
+                        Gallery
+                    </Link>
                 </div>
             </div>
 
