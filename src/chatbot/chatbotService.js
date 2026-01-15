@@ -1,37 +1,93 @@
-import { resumeContext, systemPrompt } from './chatbotContext';
+/**
+ * Chatbot Service - EVA Backend Integration
+ * Connects to EVA 9.4.0 API instead of direct Gemini calls
+ */
 
-const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent';
+const EVA_API_URL = import.meta.env.VITE_EVA_API_URL || 'http://localhost:8000/api/chat';
+const USE_EVA_BACKEND = import.meta.env.VITE_USE_EVA_BACKEND === 'true';
 
 /**
- * Send a message to Gemini API and get a response
+ * Send a message to EVA Backend API
  * @param {string} userMessage - The user's message
- * @param {Array} conversationHistory - Array of previous messages
+ * @param {Array} conversationHistory - Not used (EVA manages context internally)
  * @returns {Promise<string>} - The bot's response
  */
 export async function sendMessage(userMessage, conversationHistory = []) {
-    const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
-
-    if (!apiKey) {
-        throw new Error('Gemini API key is not configured. Please add VITE_GEMINI_API_KEY to your .env file.');
+    if (!USE_EVA_BACKEND) {
+        // Fallback to Gemini if EVA backend is not enabled
+        return await sendMessageGemini(userMessage, conversationHistory);
     }
 
     try {
-        // Build context from resume data
-        const contextSummary = buildContextSummary();
+        // Get stored conversation ID from session
+        const conversationId = sessionStorage.getItem('eva_conversation_id');
 
-        // Format conversation history for Gemini
+        const response = await fetch(EVA_API_URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                message: userMessage,
+                conversation_id: conversationId || null
+            })
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json().catch(() => ({}));
+            console.error('EVA API Error:', errorData);
+            throw new Error(`EVA API request failed: ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        // Store conversation ID for session continuity
+        if (data.conversation_id) {
+            sessionStorage.setItem('eva_conversation_id', data.conversation_id);
+        }
+
+        return data.response;
+
+    } catch (error) {
+        console.error('Error connecting to EVA:', error);
+
+        // Fallback to Gemini if EVA is unavailable
+        if (import.meta.env.VITE_GEMINI_API_KEY) {
+            console.log('Falling back to Gemini API...');
+            return await sendMessageGemini(userMessage, conversationHistory);
+        }
+
+        throw error;
+    }
+}
+
+/**
+ * Original Gemini API implementation (fallback)
+ */
+async function sendMessageGemini(userMessage, conversationHistory = []) {
+    const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+
+    if (!apiKey) {
+        throw new Error('No API configuration available. Please configure either EVA backend or Gemini API key.');
+    }
+
+    const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent';
+
+    try {
+        // Build simple context
+        const contextSummary = buildSimpleContext();
+
         const contents = [
             {
                 role: 'user',
-                parts: [{ text: systemPrompt + '\n\n' + contextSummary }]
+                parts: [{ text: contextSummary }]
             },
             {
                 role: 'model',
-                parts: [{ text: 'Understood! I\'m ready to help visitors learn about Boss. I\'ll be friendly, concise, and respond in the same language as the user.' }]
+                parts: [{ text: 'Understood! I\'m ready to help visitors learn about Boss.' }]
             }
         ];
 
-        // Add conversation history
         conversationHistory.forEach(msg => {
             contents.push({
                 role: msg.role === 'user' ? 'user' : 'model',
@@ -39,7 +95,6 @@ export async function sendMessage(userMessage, conversationHistory = []) {
             });
         });
 
-        // Add current message
         contents.push({
             role: 'user',
             parts: [{ text: userMessage }]
@@ -54,27 +109,13 @@ export async function sendMessage(userMessage, conversationHistory = []) {
                 contents,
                 generationConfig: {
                     temperature: 0.7,
-                    topK: 40,
-                    topP: 0.95,
-                    maxOutputTokens: 200, // Keep responses concise
-                },
-                safetySettings: [
-                    {
-                        category: 'HARM_CATEGORY_HARASSMENT',
-                        threshold: 'BLOCK_MEDIUM_AND_ABOVE'
-                    },
-                    {
-                        category: 'HARM_CATEGORY_HATE_SPEECH',
-                        threshold: 'BLOCK_MEDIUM_AND_ABOVE'
-                    }
-                ]
+                    maxOutputTokens: 200,
+                }
             })
         });
 
         if (!response.ok) {
-            const errorData = await response.json();
-            console.error('Gemini API Error:', errorData);
-            throw new Error(`API request failed: ${response.status}`);
+            throw new Error(`Gemini API request failed: ${response.status}`);
         }
 
         const data = await response.json();
@@ -83,44 +124,14 @@ export async function sendMessage(userMessage, conversationHistory = []) {
             throw new Error('No response generated from API');
         }
 
-        const botResponse = data.candidates[0].content.parts[0].text;
-        return botResponse;
+        return data.candidates[0].content.parts[0].text;
 
     } catch (error) {
-        console.error('Error in sendMessage:', error);
+        console.error('Error in sendMessageGemini:', error);
         throw error;
     }
 }
 
-/**
- * Build a concise context summary from resume data
- * @returns {string}
- */
-function buildContextSummary() {
-    const ctx = resumeContext;
-
-    return `
-Boss's Profile:
-- ${ctx.personalInfo.name} (${ctx.personalInfo.nickname}), ${ctx.personalInfo.age} years old
-- Role: ${ctx.personalInfo.currentRole}
-- Location: ${ctx.personalInfo.location}
-
-Recent Experience:
-${ctx.experience.slice(0, 3).map(exp =>
-        `- ${exp.title} at ${exp.company} (${exp.period})`
-    ).join('\n')}
-
-Key Skills:
-- Core: ${ctx.skills.core.slice(0, 5).join(', ')}
-- AI Tools: ${ctx.skills.aiTools.slice(0, 4).join(', ')}
-
-Portfolio:
-${Object.entries(ctx.portfolio.categories).map(([cat, count]) =>
-        `- ${cat}: ${count} works`
-    ).join('\n')}
-
-Current Focus: ${ctx.currentFocus.description}
-
-Contact: ${ctx.contact.github}
-`.trim();
+function buildSimpleContext() {
+    return `You are Boss's AI assistant. Boss is Pornpon, 32, an Assistant Manager with experience in Production to Management. He's currently focused on AI Innovation. Be friendly, concise, and respond in the user's language (Thai or English).`;
 }
