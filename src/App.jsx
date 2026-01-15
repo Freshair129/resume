@@ -4,7 +4,8 @@ import {
 } from 'react-router-dom';
 import {
   Phone, Mail, MapPin, GraduationCap, Briefcase, Code, Brain, Star,
-  CheckCircle2, ChevronRight, Menu, X, Cpu, Check, Camera, Video, Users, Car, FileText, ExternalLink
+  CheckCircle2, ChevronRight, Menu, X, Cpu, Check, Camera, Video, Users, Car, FileText, ExternalLink,
+  Bot, Sparkles
 } from 'lucide-react';
 import Resume from './Resume';
 import heroBg from './assets/hero-bg.jpg';
@@ -233,11 +234,24 @@ const MainPortfolio = () => {
                   </div>
                 </div>
 
-                {/* Core Skills Card - Full Width in Grid */}
-                <div className="md:col-span-2 bg-white p-8 rounded-[2rem] shadow-lg border border-slate-100 hover:-translate-y-1 transition-all duration-300">
-                  <div className="flex flex-col md:flex-row md:items-center gap-6">
-                    <div className="flex-1">
-                      <div className="flex items-center gap-3 mb-4 text-slate-900">
+                {/* AI Tools Card */}
+                <div className="bg-white p-8 rounded-[2rem] shadow-lg border border-slate-100 hover:-translate-y-1 transition-all duration-300">
+                  <div className="flex items-center gap-3 mb-6 text-slate-900">
+                    <div className="p-3 bg-slate-100 rounded-2xl"><Bot /></div>
+                    <h3 className="text-xl font-bold">AI Tools</h3>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {["ChatGPT", "Gemini", "Maus", "Claude", "Poe"].map(s => (
+                      <span key={s} className="px-3 py-1 bg-purple-50 text-purple-700 rounded-full text-xs font-bold border border-purple-100">{s}</span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Core Skills Card */}
+                <div className="bg-white p-8 rounded-[2rem] shadow-lg border border-slate-100 hover:-translate-y-1 transition-all duration-300">
+                  <div className="flex flex-col gap-6">
+                    <div>
+                      <div className="flex items-center gap-3 mb-6 text-slate-900">
                         <div className="p-3 bg-slate-100 rounded-2xl"><Star /></div>
                         <h3 className="text-xl font-bold">Core Skills</h3>
                       </div>
@@ -247,7 +261,7 @@ const MainPortfolio = () => {
                         ))}
                       </div>
                     </div>
-                    <div className="md:border-l border-slate-100 md:pl-8 pt-6 md:pt-0">
+                    <div className="pt-6 border-t border-slate-100">
                       <p className="font-bold text-slate-900 text-sm">ม.รังสิต นิเทศศาสตร์</p>
                       <p className="text-slate-500 text-sm">มัธยม สวนกุหลาบวิทยาลัย</p>
                     </div>
