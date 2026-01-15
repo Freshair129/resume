@@ -228,11 +228,11 @@ const MainPortfolio = () => {
                   </div>
                   <div className="space-y-4">
                     {[
-                      { name: "Prompt Engineering", level: "Specialist" },
-                      { name: "Context Engineering", level: "Specialist" },
-                      { name: "Agentic RAG", level: "Advanced" },
-                      { name: "AI Marketing", level: "Advanced" },
-                      { name: "Data Analysis", level: "Intermediate" }
+                      { name: "Prompt Engineering", level: "Advanced" },
+                      { name: "Context Engineering", level: "Intermediate" },
+                      { name: "Agentic RAG", level: "Intermediate" },
+                      { name: "AI Marketing", level: "Basic" },
+                      { name: "Data Analysis", level: "Basic" }
                     ].map(s => (
                       <div key={s.name} className="flex justify-between items-center py-2 border-b border-slate-700/50 last:border-0">
                         <span className="text-slate-300 font-medium">{s.name}</span>
