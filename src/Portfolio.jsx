@@ -146,7 +146,7 @@ const Portfolio = () => {
             type: 'facebook',
             title: "Harley-Davidson Street Glide: Cinematic Detailing",
             url: "https://www.facebook.com/reel/10218454125839853",
-            embedUrl: "https://www.facebook.com/plugins/video.php?href=https://www.facebook.com/reel/10218454125839853&show_text=false&t=0",
+            // embedUrl removed due to music copyright restrictions
             stats: { views: "View on FB", likes: "View on FB" }
         },
         {
@@ -155,7 +155,7 @@ const Portfolio = () => {
             type: 'facebook',
             title: "Kawasaki Ninja H2: Cinematic Detailing & Coating",
             url: "https://www.facebook.com/reel/10218348629802518",
-            embedUrl: "https://www.facebook.com/plugins/video.php?href=https://www.facebook.com/reel/10218348629802518&show_text=false&t=0",
+            // embedUrl removed due to music copyright restrictions
             stats: { views: "View on FB", likes: "View on FB" }
         },
         // Add more works here...
@@ -218,9 +218,9 @@ const Portfolio = () => {
                     <div key={work.id} className="bg-white rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all hover:-translate-y-1 border border-slate-100 group">
                         {/* Media Container */}
                         <div className="aspect-[9/16] md:aspect-video bg-slate-900 relative block overflow-hidden">
-                            {(work.type === 'youtube' || work.type === 'facebook') ? (
+                            {((work.type === 'youtube' || work.type === 'facebook') && work.embedUrl) ? (
                                 <iframe
-                                    src={work.embedUrl || work.url}
+                                    src={work.embedUrl}
                                     className="w-full h-full object-cover"
                                     title={work.title}
                                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
