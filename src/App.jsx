@@ -234,14 +234,14 @@ const MainPortfolio = () => {
                   </div>
                 </div>
 
-                {/* AI Tools Card */}
+                {/* AI Tools & Code Gen Card */}
                 <div className="bg-white p-8 rounded-[2rem] shadow-lg border border-slate-100 hover:-translate-y-1 transition-all duration-300">
                   <div className="flex items-center gap-3 mb-6 text-slate-900">
                     <div className="p-3 bg-slate-100 rounded-2xl"><Bot /></div>
-                    <h3 className="text-xl font-bold">AI Tools</h3>
+                    <h3 className="text-xl font-bold">AI Tools & Code Gen</h3>
                   </div>
                   <div className="flex flex-wrap gap-2">
-                    {["ChatGPT", "Gemini", "Maus", "Claude", "Poe"].map(s => (
+                    {["VS Code", "Antigravity", "Claude Code", "Gemini CLI", "Ollama", "LM Studio", "AnythingLLM"].map(s => (
                       <span key={s} className="px-3 py-1 bg-purple-50 text-purple-700 rounded-full text-xs font-bold border border-purple-100">{s}</span>
                     ))}
                   </div>
