@@ -3,7 +3,7 @@ import { Phone, Mail, MapPin, GraduationCap, Briefcase, Code, Brain, Star, Check
 
 const Resume = () => {
     // ข้อมูลรูปภาพ (ในสภาพแวดล้อมจริงคุณสามารถเปลี่ยน path รูปภาพได้ที่นี่)
-    const profileImage = https://i.postimg.cc/tTGwsnXb/518287125-10228728079362270-6514242073905598389-n.jpg;
+    const profileImage = "https://i.postimg.cc/tTGwsnXb/518287125-10228728079362270-6514242073905598389-n.jpg";
     // หมายเหตุ: สำหรับรูปที่คุณอัปโหลด ระบบจะแสดงผลผ่านไฟล์ต้นฉบับที่คุณแนบมา
 
     const experiences = [
@@ -82,7 +82,7 @@ const Resume = () => {
                         <div className="w-40 h-40 mx-auto mb-4 border-4 border-blue-500 rounded-2xl overflow-hidden shadow-lg bg-slate-800 flex items-center justify-center">
                             {/* Profile Image with Fallback */}
                             <img
-                                src="518287125_10228728079362270_6514242073905598389_n.jpg"
+                                src={profileImage}
                                 alt="พรพล ธนสุวรรณธาร"
                                 className="w-full h-full object-cover"
                                 onError={(e) => {
