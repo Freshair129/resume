@@ -211,9 +211,11 @@ const MainPortfolio = () => {
                   </div>
                   <div className="space-y-4">
                     {[
-                      { name: "Premiere Pro", level: "Specialist" },
-                      { name: "Canva", level: "Specialist" },
-                      { name: "Photoshop", level: "Advanced" },
+                      { name: "Photoshop", level: "Specialist" },
+                      { name: "Premiere Pro", level: "Advanced" },
+                      { name: "Canva", level: "Advanced" },
+                      { name: "NotebookLM", level: "Intermediate" },
+                      { name: "Google Sheets", level: "Basic" },
                       { name: "Illustrator", level: "Basic" },
                       { name: "After Effects", level: "Basic" }
                     ].map(s => (
