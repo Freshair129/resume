@@ -5,6 +5,8 @@ import { useLanguage } from './LanguageContext';
 
 const Portfolio = () => {
     const { t } = useLanguage();
+    const [activeCategory, setActiveCategory] = useState('all');
+
     // 📢 CONFIGURATION: Add your social media links here!
     // Types: 'youtube', 'tiktok', 'facebook', 'instagram'
     const socialWorks = [

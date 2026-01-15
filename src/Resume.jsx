@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Phone, Mail, MapPin, Download, ExternalLink, Award, Sparkles, Brain, Cpu, Code, Star, Video, Camera, Briefcase, Image as ImageIcon } from 'lucide-react';
+import { ArrowLeft, Phone, Mail, MapPin, Download, ExternalLink, Award, Sparkles, Brain, Cpu, Code, Star, Video, Camera, Briefcase, Image as ImageIcon, FileText, GraduationCap, CheckCircle2 } from 'lucide-react';
 import { useLanguage } from './LanguageContext';
 import React, { useRef } from 'react';
 import html2canvas from 'html2canvas';
