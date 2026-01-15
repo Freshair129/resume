@@ -12,10 +12,10 @@
             transform: translateY(-10px);
         }
     }
+}
 
-    .animate-bounce-slow {
-        animation: bounce-slow 3s infinite ease-in-out;
-    }
+.animate-bounce-slow {
+    animation: bounce-slow 3s infinite ease-in-out;
 }
 
 body {
