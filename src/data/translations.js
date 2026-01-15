@@ -91,7 +91,7 @@ export const th = {
         galleryTitle: "PHOTOGRAPHY",
         galleryTitleHighlight: "GALLERY",
         galleryDesc: "รวมภาพผลงานการถ่ายภาพและเบื้องหลังการทำงาน",
-        ctaTitle: "พร้อมสร้างผลลัพธ์แบบนี้ให้แบรนด์คุณ?",
+        ctaTitle: "นี่คือส่วนนึงของผลงาน อยากดูผลงานด้านไหนเพิ่มเติม ติดต่อได้เลยครับ",
         ctaButton: "ดูประวัติการทำงาน (Resume)",
         categories: {
             all: "ทั้งหมด",
@@ -270,7 +270,7 @@ export const en = {
         galleryTitle: "PHOTOGRAPHY",
         galleryTitleHighlight: "GALLERY",
         galleryDesc: "A collection of photography works and behind-the-scenes moments.",
-        ctaTitle: "Ready to create results like this for your brand?",
+        ctaTitle: "This is just a part of my portfolio. Want to see more work? Feel free to contact me!",
         ctaButton: "View Resume",
         categories: {
             all: "All Works",
