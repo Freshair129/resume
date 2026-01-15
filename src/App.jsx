@@ -184,11 +184,21 @@ const MainPortfolio = () => {
                     <div className="p-3 bg-blue-600 rounded-2xl"><Cpu /></div>
                     <h3 className="text-xl font-bold">AI Innovation</h3>
                   </div>
-                  <div className="space-y-3">
-                    {["Prompt Engineering", "Context Engineering", "Agentic RAG", "AI Marketing"].map(s => (
-                      <div key={s} className="flex justify-between items-center text-slate-300 text-sm">
-                        <span>{s}</span>
-                        <CheckCircle2 size={14} className="text-blue-500" />
+                  <div className="space-y-4">
+                    {[
+                      { name: "Prompt Engineering", level: 95 },
+                      { name: "Context Engineering", level: 90 },
+                      { name: "Agentic RAG", level: 85 },
+                      { name: "AI Marketing", level: 80 }
+                    ].map(s => (
+                      <div key={s.name} className="space-y-1">
+                        <div className="flex justify-between items-center text-slate-300 text-sm font-medium">
+                          <span>{s.name}</span>
+                          <span className="text-blue-400">{s.level}%</span>
+                        </div>
+                        <div className="w-full h-1.5 bg-slate-700 rounded-full overflow-hidden">
+                          <div className="h-full bg-blue-500 rounded-full" style={{ width: `${s.level}%` }}></div>
+                        </div>
                       </div>
                     ))}
                   </div>
@@ -200,9 +210,23 @@ const MainPortfolio = () => {
                     <div className="p-3 bg-slate-100 rounded-2xl"><Code /></div>
                     <h3 className="text-xl font-bold">Tools & Media</h3>
                   </div>
-                  <div className="space-y-3 text-slate-700 font-medium text-sm">
-                    {["Premiere Pro", "Photoshop", "Illustrator", "After Effects", "Canva"].map(s => (
-                      <div key={s} className="flex items-center gap-3"><Check size={16} className="text-blue-600" /> {s}</div>
+                  <div className="space-y-4">
+                    {[
+                      { name: "Premiere Pro", level: 90 },
+                      { name: "Photoshop", level: 85 },
+                      { name: "Illustrator", level: 80 },
+                      { name: "After Effects", level: 75 },
+                      { name: "Canva", level: 98 }
+                    ].map(s => (
+                      <div key={s.name} className="space-y-1">
+                        <div className="flex justify-between items-center text-slate-700 text-sm font-bold">
+                          <span>{s.name}</span>
+                          <span className="text-blue-600">{s.level}%</span>
+                        </div>
+                        <div className="w-full h-1.5 bg-slate-100 rounded-full overflow-hidden">
+                          <div className="h-full bg-blue-600 rounded-full" style={{ width: `${s.level}%` }}></div>
+                        </div>
+                      </div>
                     ))}
                   </div>
                 </div>
