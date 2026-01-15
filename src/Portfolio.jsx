@@ -200,7 +200,7 @@ const Portfolio = () => {
             {/* Category Filter */}
             <div className="max-w-6xl mx-auto mb-10 overflow-x-auto">
                 <div className="flex gap-3 justify-start md:justify-center p-2 min-w-max">
-                    {['all', 'cinematic', 'beauty', 'auto', 'ai'].map((cat) => (
+                    {['all', 'graphic', 'cinematic', 'beauty', 'auto', 'ai'].map((cat) => (
                         <button
                             key={cat}
                             onClick={() => setActiveCategory(cat)}
