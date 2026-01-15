@@ -74,9 +74,11 @@ const Resume = () => {
     const aiSkills = [
         "VS Code", "Antigravity", "Claude Code", "Gemini CLI", "Ollama", "LM Studio", "AnythingLLM",
         "ChatGPT", "Gemini", "Maus", "Claude", "Poe",
-        "Prompt Engineering", "Context Engineering", "Agentic RAG"
+        "Prompt Engineering", "Context Engineering", "Antigravity", "Claude Code",
+        "Agentic RAG", "Gemini CLI", "Ollama", "LM Studio", "AnythingLLM"
     ];
-    const softSkills = ["Communication", "Teamwork", "Crisis Solving", "Growth Mindset", "Management", "Video Editor", "Creative", "Adaptability", "Work Smart", "Coding", "English (Read/Write/Speak)"];
+    const coreCompetencies = ["Video Editor", "Creative", "Photography", "Motion Graphic", "Coding", "English (Read/Write/Speak)"];
+    const softSkills = ["Communication", "Teamwork", "Crisis Solving", "Growth Mindset", "Management", "Adaptability", "Work Smart"];
 
     return (
         <div className="min-h-screen bg-slate-50 py-10 px-4 sm:px-6 lg:px-8 font-sans text-slate-800">
@@ -149,6 +151,19 @@ const Resume = () => {
                             <div className="flex flex-wrap gap-2">
                                 {aiSkills.map(skill => (
                                     <span key={skill} className="bg-blue-600/20 text-blue-300 px-2 py-1 rounded text-[11px] border border-blue-500/30">
+                                        {skill}
+                                    </span>
+                                ))}
+                            </div>
+                        </section>
+
+                        <section>
+                            <h2 className="text-lg font-semibold border-b border-slate-700 pb-2 mb-3 flex items-center gap-2">
+                                <CheckCircle2 size={18} className="text-blue-400" /> Core Competencies
+                            </h2>
+                            <div className="flex flex-wrap gap-2">
+                                {coreCompetencies.map(skill => (
+                                    <span key={skill} className="bg-emerald-500/20 text-emerald-300 px-2 py-1 rounded text-[11px] border border-emerald-500/30">
                                         {skill}
                                     </span>
                                 ))}
