@@ -71,7 +71,7 @@ const MainPortfolio = () => {
   return (
     <div className="min-h-screen bg-white selection:bg-blue-100 selection:text-blue-900">
       {/* Navigation */}
-      <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white/80 backdrop-blur-md shadow-md py-3' : 'bg-transparent py-5'}`}>
+      <nav className={`fixed w - full z - 50 transition - all duration - 300 ${scrolled ? 'bg-white/80 backdrop-blur-md shadow-md py-3' : 'bg-transparent py-5'} `}>
         <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
           <div className="text-xl font-black tracking-tighter text-blue-600">PORNPON.P</div>
           <div className="hidden md:flex space-x-8 items-center">
@@ -108,30 +108,26 @@ const MainPortfolio = () => {
               <span className="flex h-2 w-2 rounded-full bg-blue-600 animate-pulse"></span>
               Available for Work
             </div>
-            <h1 className="text-5xl md:text-7xl font-black leading-tight text-slate-900">
+            <h1 className="text-4xl md:text-6xl font-black leading-tight text-slate-900">
               พรพล <span className="text-blue-600">ธนสุวรรณธาร</span>
             </h1>
             <p className="text-xl text-slate-600 max-w-xl mx-auto md:mx-0 leading-relaxed">
               Assistant Manager & Digital Content Specialist ผู้เชี่ยวชาญการบริหารจัดการทีม ผสมผสานเทคโนโลยี AI เพื่อยกระดับประสิทธิภาพงาน
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-              <a href="#experience" className="bg-slate-900 text-white px-8 py-4 rounded-2xl font-bold flex items-center justify-center gap-2 shadow-xl shadow-slate-200 hover:bg-slate-800 transition-all hover:-translate-y-1">
-                ดูประสบการณ์ <ChevronRight size={18} />
-              </a>
-              <Link to="/resume" className="bg-white text-slate-900 border-2 border-slate-900 px-8 py-4 rounded-2xl font-bold flex items-center justify-center gap-2 shadow-xl shadow-slate-100 hover:bg-slate-50 transition-all hover:-translate-y-1">
+              <Link to="/resume" className="bg-slate-900 text-white px-8 py-4 rounded-2xl font-bold flex items-center justify-center gap-2 shadow-xl shadow-slate-200 hover:bg-slate-800 transition-all hover:-translate-y-1">
                 ดู Resume <FileText size={18} />
               </Link>
+              <a href="#skills" className="bg-white text-slate-900 border-2 border-slate-900 px-8 py-4 rounded-2xl font-bold flex items-center justify-center gap-2 shadow-xl shadow-slate-100 hover:bg-slate-50 transition-all hover:-translate-y-1">
+                ดู Portfolio <ExternalLink size={18} />
+              </a>
             </div>
           </div>
           <div className="flex-1 relative">
             <div className="w-64 h-64 md:w-96 md:h-96 mx-auto relative z-10 group">
               <div className="absolute inset-0 bg-blue-600 rounded-[3rem] rotate-6 group-hover:rotate-3 transition-transform duration-500"></div>
-              <img
-                src="https://i.postimg.cc/tTGwsnXb/518287125-10228728079362270-6514242073905598389-n.jpg"
-                alt="Pornpon Thansuvanthanan"
-                className="absolute inset-0 w-full h-full object-cover rounded-[3rem] -rotate-3 group-hover:rotate-0 transition-transform duration-500 border-4 border-white shadow-2xl"
-                onError={(e) => { e.target.src = "https://via.placeholder.com/400?text=Pornpon+P." }}
-              />
+              {/* Image Slider */}
+              <ImageSlider />
             </div>
             <div className="absolute -bottom-4 -right-4 md:bottom-10 md:-right-10 bg-white p-6 rounded-3xl shadow-2xl z-20 animate-bounce-slow">
               <div className="flex items-center gap-4">
@@ -195,9 +191,9 @@ const MainPortfolio = () => {
                     ].map(s => (
                       <div key={s.name} className="flex justify-between items-center py-2 border-b border-slate-700/50 last:border-0">
                         <span className="text-slate-300 font-medium">{s.name}</span>
-                        <span className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider ${s.level === 'Specialist' ? 'bg-blue-500 text-white shadow-lg shadow-blue-500/30' :
-                          'bg-slate-700 text-slate-300'
-                          }`}>
+                        <span className={`px - 3 py - 1 rounded - full text - [10px] font - black uppercase tracking - wider ${s.level === 'Specialist' ? 'bg-blue-500 text-white shadow-lg shadow-blue-500/30' :
+                            'bg-slate-700 text-slate-300'
+                          } `}>
                           {s.level}
                         </span>
                       </div>
@@ -223,10 +219,10 @@ const MainPortfolio = () => {
                     ].map(s => (
                       <div key={s.name} className="flex justify-between items-center py-2 border-b border-slate-100 last:border-0">
                         <span className="text-slate-700 font-bold text-sm">{s.name}</span>
-                        <span className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider ${s.level === 'Specialist' ? 'bg-blue-600 text-white shadow-md shadow-blue-200' :
-                          s.level === 'Advanced' ? 'bg-blue-50 text-blue-600 border border-blue-100' :
-                            'bg-slate-100 text-slate-500'
-                          }`}>
+                        <span className={`px - 3 py - 1 rounded - full text - [10px] font - black uppercase tracking - wider ${s.level === 'Specialist' ? 'bg-blue-600 text-white shadow-md shadow-blue-200' :
+                            s.level === 'Advanced' ? 'bg-blue-50 text-blue-600 border border-blue-100' :
+                              'bg-slate-100 text-slate-500'
+                          } `}>
                           {s.level}
                         </span>
                       </div>
@@ -326,11 +322,12 @@ const MainPortfolio = () => {
       <footer id="contact" className="bg-slate-900 text-white py-20 px-6">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
           <div className="space-y-8">
-            <h2 className="text-4xl md:text-6xl font-black leading-tight text-center md:text-left">ร่วมงานกับผม<br /><span className="text-blue-500">คลิกเพื่อติดต่อ</span></h2>
+            <h2 className="text-2xl md:text-4xl font-black leading-tight text-center md:text-left">อยากให้ผมเป็นส่วนนึงของการเติบโต<br /><span className="text-blue-500">ช่องทางติดต่อ</span></h2>
             <div className="space-y-4">
               <a href="tel:0831840662" className="flex items-center gap-4 text-xl hover:text-blue-400 transition-colors"><Phone /> 083-184-0662</a>
+              <a href="tel:0831840662" className="flex items-center gap-4 text-xl hover:text-blue-400 transition-colors"><Phone /> 090-973-0775</a>
               <a href="mailto:suanranger129@gmail.com" className="flex items-center gap-4 text-xl hover:text-blue-400 transition-colors"><Mail /> suanranger129@gmail.com</a>
-              <p className="flex items-center gap-4 text-xl text-slate-400"><MapPin /> กรุงเทพมหานคร, ประเทศไทย</p>
+              <p className="flex items-center gap-4 text-xl text-slate-400"><MapPin /> นนทบุรี, ประเทศไทย</p>
             </div>
           </div>
           <div className="bg-white/5 p-10 rounded-[3rem] text-center space-y-4 backdrop-blur-sm">
