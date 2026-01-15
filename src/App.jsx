@@ -1,204 +1,231 @@
-import React from 'react';
-import { Phone, Mail, MapPin, GraduationCap, Briefcase, Code, Brain, Star, CheckCircle2 } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import {
+  Phone, Mail, MapPin, GraduationCap, Briefcase, Code, Brain, Star,
+  CheckCircle2, ChevronRight, Menu, X, Cpu, Check, Camera, Video, Users, Car
+} from 'lucide-react';
 
 const App = () => {
-  // ข้อมูลรูปภาพ (ในสภาพแวดล้อมจริงคุณสามารถเปลี่ยน path รูปภาพได้ที่นี่)
-  const profileImage = "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1000&auto=format&fit=crop";
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 50);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const experiences = [
     {
       title: "Assistant Manager",
       company: "Hostpital Feelgood Club",
       period: "2025 (6 Months)",
-      responsibilities: [
-        "ดูแลบริหารจัดการภาพรวมการดำเนินงานของร้านให้ราบรื่น",
-        "บริหารจัดการและมอบหมายหน้าที่ให้ทีม Service, Security และทีม Host (PR)",
-        "ทำหน้าที่ MC ควบคุมลำดับกิจกรรมและบรรยากาศทั้งหมดภายในร้าน",
-        "บริหารจัดการความสัมพันธ์ลูกค้า (CRM) และแก้ไขปัญหาเฉพาะหน้าอย่างมีประสิทธิภาพ"
-      ]
+      type: "Full-Time",
+      desc: "ดูแลภาพรวมของร้านและเป็น MC ควบคุมกิจกรรมทั้งหมด จัดแจงงานให้กับทีม Service, ทีมการ์ด และทีม Host (PR) รวมถึงทำ CRM และแก้ปัญหาเฉพาะหน้าให้แก่ลูกค้า",
+      IconComponent: Star,
+      iconColor: "text-yellow-500"
     },
     {
       title: "Event Project Coordinator",
       company: "Joe Luxury Car Service",
       period: "2024 (1 Year)",
-      responsibilities: [
-        "วางแผนและบริหารจัดการทรัพยากร (บุคคล, ยานพาหนะ, เวลา) ให้สอดคล้องกับความต้องการ",
-        "ดูแลประสานงานระหว่างทีมภาคสนามและลูกค้ากลุ่ม VIP โดยตรง",
-        "แก้ไขปัญหาเฉพาะหน้าด้วยความรวดเร็วและรักษามาตรฐานการบริการ",
-        "สื่อสารและตอบสนองความต้องการเบื้องต้นของลูกค้าในฐานะตัวแทนทีม"
-      ]
+      type: "Contract",
+      desc: "รับผิดชอบดูแลประสานงานทีมภาคสนามและลูกค้า VIP วางแผนจัดการทรัพยากร (คน, รถ, เวลา) และทำหน้าที่เป็นตัวแทนทีมในการติดต่อสื่อสารตอบสนองความต้องการลูกค้า",
+      IconComponent: Car,
+      iconColor: "text-blue-500"
     },
     {
       title: "Content Creator",
-      company: "Saint Thonglor Clinic (Permanent)",
+      company: "Saint Thonglor Clinic",
       period: "2020 - 2022",
-      responsibilities: [
-        "วางแผนกลยุทธ์คอนเทนต์รายวัน รายสัปดาห์ และรายเดือน",
-        "ประสานงานร่วมกับทีมแพทย์และทีม Digital Marketing ภายนอกเพื่อสร้างสรรค์เนื้อหา",
-        "ควบคุมการผลิตคอนเทนต์ให้เป็นไปตามภาพลักษณ์ของแบรนด์"
-      ]
+      type: "Permanent",
+      desc: "วางแผนคอนเทนต์รายวัน/สัปดาห์/เดือน วางแผนถ่ายทำ ประสานงานกับทีมแพทย์และทีม Digital Marketing ภายนอกเพื่อให้ผลงานออกมาตรงตามเป้าหมาย",
+      IconComponent: Video,
+      iconColor: "text-purple-500"
     },
     {
       title: "Content Creator",
-      company: "U-Turn Shop (Part-Time)",
+      company: "U-Turn Shop",
       period: "2020 - 2022",
-      responsibilities: [
-        "วางแผนและผลิตสื่อวิดีโอ/ภาพนิ่งสำหรับโปรโมทสินค้า",
-        "ให้คำปรึกษาและดูแลแนวทางการตอบแชทของทีม Admin",
-        "ประสานงานร่วมกับทีมช่างเพื่อผลิตคอนเทนต์เจาะลึกทางเทคนิค"
-      ]
+      type: "Part-Time",
+      desc: "วางแผนคอนเทนต์และถ่ายทำสื่อโปรโมทสินค้า ประสานงานร่วมกับทีมช่าง รวมถึงดูแลและให้คำปรึกษาแก่ทีม Admin เพื่อพัฒนาศักยภาพการบริการ",
+      IconComponent: Users,
+      iconColor: "text-orange-500"
     },
     {
       title: "Editor",
-      company: "Punnisa Clinic (Contract)",
+      company: "Punnisa Clinic",
       period: "2019 (1 Year)",
-      responsibilities: [
-        "รับผิดชอบการผลิตและตัดต่อคอนเทนต์วิดีโอและภาพเคลื่อนไหวทั้งหมด",
-        "สร้างสรรค์สื่อเพื่อสนับสนุนแคมเปญการตลาดของคลินิก"
-      ]
+      type: "Contract",
+      desc: "รับผิดชอบการตัดต่อและสร้างสรรค์คอนเทนต์ภาพเคลื่อนไหว (Motion Content) ทั้งหมดของคลินิก เพื่อสื่อสารแบรนด์ผ่านช่องทางดิจิทัล",
+      IconComponent: Camera,
+      iconColor: "text-teal-500"
     }
   ];
 
-  const hardSkills = ["Photoshop", "Illustrator", "Premiere Pro", "After Effects", "Canva"];
-  const aiSkills = [
-    "Prompt Engineering", "Context Engineering", "Claude Code",
-    "Antigravity", "Agentic RAG", "AI Agent", "AI Search Engine", "AI Marketing"
-  ];
-  const softSkills = ["การสื่อสาร", "การทำงานเป็นทีม", "การแก้ปัญหาเฉพาะหน้า", "ความคิดสร้างสรรค์", "การบริหารเวลา", "Growth Mindset"];
-
   return (
-    <div className="min-h-screen bg-slate-50 py-10 px-4 sm:px-6 lg:px-8 font-sans text-slate-800">
-      <div className="max-w-5xl mx-auto bg-white shadow-2xl rounded-2xl overflow-hidden flex flex-col md:flex-row">
+    <div className="min-h-screen bg-white selection:bg-blue-100 selection:text-blue-900">
+      {/* Navigation */}
+      <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white/80 backdrop-blur-md shadow-md py-3' : 'bg-transparent py-5'}`}>
+        <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
+          <div className="text-xl font-black tracking-tighter text-blue-600">PORNPON.P</div>
+          <div className="hidden md:flex space-x-8 items-center">
+            <a href="#home" className="text-sm font-medium hover:text-blue-600 transition-colors">หน้าหลัก</a>
+            <a href="#skills" className="text-sm font-medium hover:text-blue-600 transition-colors">ทักษะ</a>
+            <a href="#experience" className="text-sm font-medium hover:text-blue-600 transition-colors">ประสบการณ์</a>
+            <a href="#contact" className="bg-blue-600 text-white px-5 py-2 rounded-full text-sm font-bold hover:bg-blue-700 shadow-lg shadow-blue-200 transition-all hover:-translate-y-0.5">จ้างงานผม</a>
+          </div>
+          <button className="md:hidden text-slate-900" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
 
-        {/* Left Column / Sidebar */}
-        <div className="md:w-1/3 bg-slate-900 text-white p-8">
-          <div className="text-center mb-8">
-            <div className="w-40 h-40 mx-auto mb-4 border-4 border-blue-500 rounded-2xl overflow-hidden shadow-lg bg-slate-800 flex items-center justify-center">
-              {/* Profile Image with Fallback */}
+        {/* Mobile Menu */}
+        {isMenuOpen && (
+          <div className="md:hidden absolute top-full left-0 w-full bg-white border-b border-slate-100 p-6 flex flex-col gap-4 shadow-xl animate-in slide-in-from-top duration-300">
+            <a href="#home" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>หน้าหลัก</a>
+            <a href="#skills" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>ทักษะ</a>
+            <a href="#experience" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>ประสบการณ์</a>
+            <a href="#contact" className="bg-blue-600 text-white p-4 rounded-2xl text-center font-black" onClick={() => setIsMenuOpen(false)}>จ้างงานผม</a>
+          </div>
+        )}
+      </nav>
+
+      {/* Hero Section */}
+      <section id="home" className="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden">
+        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center gap-12">
+          <div className="flex-1 text-center md:text-left space-y-6">
+            <div className="inline-flex items-center gap-2 bg-blue-50 text-blue-600 px-4 py-2 rounded-full text-sm font-bold">
+              <span className="flex h-2 w-2 rounded-full bg-blue-600 animate-pulse"></span>
+              Available for Work
+            </div>
+            <h1 className="text-5xl md:text-7xl font-black leading-tight text-slate-900">
+              พรพล <span className="text-blue-600">ธนสุวรรณธาร</span>
+            </h1>
+            <p className="text-xl text-slate-600 max-w-xl mx-auto md:mx-0 leading-relaxed">
+              Assistant Manager & Digital Content Specialist ผู้เชี่ยวชาญการบริหารจัดการทีม ผสมผสานเทคโนโลยี AI เพื่อยกระดับประสิทธิภาพงาน
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+              <a href="#experience" className="bg-slate-900 text-white px-8 py-4 rounded-2xl font-bold flex items-center justify-center gap-2 shadow-xl shadow-slate-200 hover:bg-slate-800 transition-all hover:-translate-y-1">
+                ดูประสบการณ์ <ChevronRight size={18} />
+              </a>
+            </div>
+          </div>
+          <div className="flex-1 relative">
+            <div className="w-64 h-64 md:w-96 md:h-96 mx-auto relative z-10 group">
+              <div className="absolute inset-0 bg-blue-600 rounded-[3rem] rotate-6 group-hover:rotate-3 transition-transform duration-500"></div>
               <img
                 src="518287125_10228728079362270_6514242073905598389_n.jpg"
-                alt="พรพล ธนสุวรรณธาร"
-                className="w-full h-full object-cover"
-                onError={(e) => {
-                  e.target.src = "https://via.placeholder.com/150?text=Profile";
-                }}
+                alt="Pornpon Thansuvanthanan"
+                className="absolute inset-0 w-full h-full object-cover rounded-[3rem] -rotate-3 group-hover:rotate-0 transition-transform duration-500 border-4 border-white shadow-2xl"
+                onError={(e) => { e.target.src = "https://via.placeholder.com/400?text=Pornpon+P." }}
               />
             </div>
-            <h1 className="text-2xl font-bold tracking-wide">พรพล ธนสุวรรณธาร</h1>
-            <p className="text-blue-400 font-medium mt-1 uppercase text-sm tracking-wider">Assistant Manager & Content Specialist</p>
+            <div className="absolute -bottom-4 -right-4 md:bottom-10 md:-right-10 bg-white p-6 rounded-3xl shadow-2xl z-20 animate-bounce-slow">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 bg-blue-600 rounded-2xl flex items-center justify-center text-white">
+                  <Brain size={24} />
+                </div>
+                <div className="text-left">
+                  <div className="text-xs text-slate-400 font-bold uppercase">AI Specialist</div>
+                  <div className="text-lg font-black text-slate-900">Agentic RAG</div>
+                </div>
+              </div>
+            </div>
           </div>
+        </div>
+      </section>
 
-          <div className="space-y-6">
-            <section>
-              <h2 className="text-lg font-semibold border-b border-slate-700 pb-2 mb-3 flex items-center gap-2">
-                <Phone size={18} className="text-blue-400" /> ติดต่อ
-              </h2>
-              <div className="space-y-2 text-sm text-slate-300">
-                <p className="flex items-center gap-2"><Phone size={14} className="text-slate-500" /> 083-184-0662</p>
-                <p className="flex items-center gap-2"><Mail size={14} className="text-slate-500" /> suanranger129@gmail.com</p>
-                <p className="flex items-center gap-2"><MapPin size={14} className="text-slate-500" /> กรุงเทพมหานคร, ประเทศไทย</p>
+      {/* Skills Section */}
+      <section id="skills" className="bg-slate-50 py-24">
+        <div className="max-w-7xl mx-auto px-6">
+          <h2 className="text-3xl md:text-5xl font-black text-center mb-16 text-slate-900">ทักษะและความสามารถ</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="bg-slate-900 text-white p-8 rounded-[2rem] shadow-2xl transition-all hover:-translate-y-2 duration-500">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="p-3 bg-blue-600 rounded-2xl"><Cpu /></div>
+                <h3 className="text-2xl font-bold">AI Innovation</h3>
               </div>
-            </section>
-
-            <section>
-              <h2 className="text-lg font-semibold border-b border-slate-700 pb-2 mb-3 flex items-center gap-2">
-                <GraduationCap size={18} className="text-blue-400" /> การศึกษา
-              </h2>
-              <div className="space-y-4 text-sm text-slate-300">
-                <div>
-                  <p className="font-bold text-white">ปริญญาตรี นิเทศศาสตร์ (โฆษณา)</p>
-                  <p>มหาวิทยาลัยรังสิต</p>
-                </div>
-                <div>
-                  <p className="font-bold text-white">มัธยมศึกษา</p>
-                  <p>โรงเรียนสวนกุหลาบวิทยาลัย</p>
-                </div>
+              <div className="space-y-4">
+                {["Prompt Engineering", "Context Engineering", "Agentic RAG", "AI Marketing"].map(s => (
+                  <div key={s} className="flex justify-between items-center text-slate-300">
+                    <span>{s}</span>
+                    <CheckCircle2 size={14} className="text-blue-500" />
+                  </div>
+                ))}
               </div>
-            </section>
-
-            <section>
-              <h2 className="text-lg font-semibold border-b border-slate-700 pb-2 mb-3 flex items-center gap-2">
-                <Brain size={18} className="text-blue-400" /> AI & Future Skills
-              </h2>
+            </div>
+            <div className="bg-white p-8 rounded-[2rem] shadow-xl border border-slate-100 transition-all hover:-translate-y-2 duration-500">
+              <div className="flex items-center gap-3 mb-6 text-slate-900">
+                <div className="p-3 bg-slate-100 rounded-2xl"><Code /></div>
+                <h3 className="text-2xl font-bold">Tools & Media</h3>
+              </div>
+              <div className="grid grid-cols-1 gap-4 text-slate-700 font-bold">
+                {["Premiere Pro", "Photoshop", "Illustrator", "After Effects", "Canva"].map(s => (
+                  <div key={s} className="flex items-center gap-3"><Check size={16} className="text-blue-600" /> {s}</div>
+                ))}
+              </div>
+            </div>
+            <div className="bg-white p-8 rounded-[2rem] shadow-xl border border-slate-100 transition-all hover:-translate-y-2 duration-500">
+              <div className="flex items-center gap-3 mb-6 text-slate-900">
+                <div className="p-3 bg-slate-100 rounded-2xl"><Star /></div>
+                <h3 className="text-2xl font-bold">Core Skills</h3>
+              </div>
               <div className="flex flex-wrap gap-2">
-                {aiSkills.map(skill => (
-                  <span key={skill} className="bg-blue-600/20 text-blue-300 px-2 py-1 rounded text-[11px] border border-blue-500/30">
-                    {skill}
-                  </span>
+                {["Communication", "Teamwork", "Crisis Solving", "Growth Mindset", "Management"].map(s => (
+                  <span key={s} className="px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-xs font-bold border border-blue-100">{s}</span>
                 ))}
               </div>
-            </section>
-
-            <section>
-              <h2 className="text-lg font-semibold border-b border-slate-700 pb-2 mb-3 flex items-center gap-2">
-                <Star size={18} className="text-blue-400" /> Soft Skills
-              </h2>
-              <ul className="space-y-1 text-sm text-slate-300">
-                {softSkills.map(skill => (
-                  <li key={skill} className="flex items-center gap-2">
-                    <div className="w-1.5 h-1.5 bg-blue-500 rounded-full"></div> {skill}
-                  </li>
-                ))}
-              </ul>
-            </section>
-          </div>
-        </div>
-
-        {/* Right Column / Content */}
-        <div className="md:w-2/3 p-8 lg:p-12">
-          <section className="mb-10">
-            <h2 className="text-2xl font-bold text-slate-900 flex items-center gap-3 mb-6">
-              <Briefcase className="text-blue-600" /> ประสบการณ์การทำงาน
-            </h2>
-            <div className="space-y-8 relative before:absolute before:left-[17px] before:top-2 before:bottom-2 before:w-0.5 before:bg-slate-100">
-              {experiences.map((exp, index) => (
-                <div key={index} className="relative pl-10">
-                  <div className="absolute left-0 top-1.5 w-[36px] h-[36px] bg-white border-2 border-blue-600 rounded-full flex items-center justify-center z-10 shadow-sm">
-                    <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
-                  </div>
-                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-1">
-                    <h3 className="text-xl font-bold text-slate-800 leading-tight">{exp.title}</h3>
-                    <span className="text-xs font-bold text-blue-600 bg-blue-50 px-3 py-1 rounded-full mt-2 sm:mt-0 whitespace-nowrap">
-                      {exp.period}
-                    </span>
-                  </div>
-                  <p className="text-slate-500 font-medium text-sm mb-3 uppercase tracking-wide">{exp.company}</p>
-                  <ul className="list-none space-y-2 text-slate-600 text-sm leading-relaxed">
-                    {exp.responsibilities.map((item, i) => (
-                      <li key={i} className="flex gap-2">
-                        <span className="text-blue-500 font-bold">•</span>
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-bold text-slate-900 flex items-center gap-3 mb-6">
-              <Code className="text-blue-600" /> ทักษะความสามารถ (Hard Skills)
-            </h2>
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-              {hardSkills.map(skill => (
-                <div key={skill} className="bg-white border border-slate-200 p-3 rounded-lg flex items-center gap-3 shadow-sm hover:shadow-md hover:border-blue-200 transition-all">
-                  <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                  <span className="font-semibold text-slate-700 text-sm">{skill}</span>
-                </div>
-              ))}
-            </div>
-          </section>
-
-          <div className="mt-12 pt-8 border-t border-slate-100">
-            <div className="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-lg">
-              <p className="text-slate-600 text-xs italic">
-                "ด้วยพื้นฐานงานสาย Content Production กว่า 4 ปี ผสมผสานกับประสบการณ์บริหารจัดการทีมและการนำ AI มาปรับใช้ ผมพร้อมที่จะยกระดับการทำงานให้มีประสิทธิภาพและสร้างสรรค์ผลลัพธ์ที่จับต้องได้ให้กับองค์กร"
-              </p>
+              <div className="mt-8 pt-6 border-t border-slate-100 text-sm">
+                <p className="font-bold text-slate-900">ม.รังสิต นิเทศศาสตร์</p>
+                <p className="text-slate-500">มัธยม สวนกุหลาบวิทยาลัย</p>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </section>
+
+      {/* Experience Section */}
+      <section id="experience" className="py-24 max-w-4xl mx-auto px-6">
+        <h2 className="text-4xl font-black text-center mb-16 text-slate-900">ประสบการณ์การทำงาน</h2>
+        <div className="space-y-12">
+          {experiences.map((exp, idx) => (
+            <div key={idx} className="flex gap-6 group">
+              <div className="flex flex-col items-center">
+                <div className="w-12 h-12 bg-white border-2 border-slate-200 rounded-2xl flex items-center justify-center group-hover:bg-blue-600 group-hover:text-white transition-all shadow-lg text-slate-900">
+                  <exp.IconComponent size={24} />
+                </div>
+                {idx !== experiences.length - 1 && <div className="w-0.5 h-full bg-slate-100 mt-4 group-hover:bg-blue-100"></div>}
+              </div>
+              <div className="pb-12">
+                <div className="flex flex-wrap items-center gap-3 mb-2">
+                  <h3 className="text-2xl font-bold group-hover:text-blue-600 transition-colors text-slate-900">{exp.title}</h3>
+                  <span className="text-[10px] font-black uppercase bg-slate-100 px-2 py-1 rounded text-slate-500">{exp.type}</span>
+                </div>
+                <p className="text-blue-600 font-bold mb-4">{exp.company} • {exp.period}</p>
+                <p className="text-slate-600 italic leading-relaxed text-lg">"{exp.desc}"</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <footer id="contact" className="bg-slate-900 text-white py-20 px-6">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+          <div className="space-y-8">
+            <h2 className="text-4xl md:text-6xl font-black leading-tight text-center md:text-left">ร่วมงานกับผม<br /><span className="text-blue-500">คลิกเพื่อติดต่อ</span></h2>
+            <div className="space-y-4">
+              <a href="tel:0831840662" className="flex items-center gap-4 text-xl hover:text-blue-400 transition-colors"><Phone /> 083-184-0662</a>
+              <a href="mailto:suanranger129@gmail.com" className="flex items-center gap-4 text-xl hover:text-blue-400 transition-colors"><Mail /> suanranger129@gmail.com</a>
+              <p className="flex items-center gap-4 text-xl text-slate-400"><MapPin /> กรุงเทพมหานคร, ประเทศไทย</p>
+            </div>
+          </div>
+          <div className="bg-white/5 p-10 rounded-[3rem] text-center space-y-4 backdrop-blur-sm">
+            <p className="text-slate-400">ขอบคุณที่เยี่ยมชมประวัติการทำงานของผมครับ</p>
+            <p className="text-xs text-slate-600 font-bold uppercase tracking-widest">© 2025 PORNPON.P - DIGITAL PORTFOLIO</p>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };
