@@ -36,6 +36,7 @@ const Portfolio = () => {
         },
         {
             id: 4,
+            category: 'beauty',
             type: 'facebook',
             title: "Saint Thonglor Clinic: รีวิวความงาม (Beauty & Clinic)",
             url: "https://www.facebook.com/reel/556328102800987",
@@ -44,6 +45,7 @@ const Portfolio = () => {
         },
         {
             id: 5,
+            category: 'beauty',
             type: 'facebook',
             title: "Saint Thonglor Clinic: Advertising & Motion Graphic",
             url: "https://www.facebook.com/reel/424437353033861",
@@ -52,6 +54,7 @@ const Portfolio = () => {
         },
         {
             id: 6,
+            category: 'beauty',
             type: 'facebook',
             title: "Saint Thonglor Clinic: สัมภาษณ์ (Interview)",
             url: "https://www.facebook.com/reel/334908915382953",
@@ -60,6 +63,7 @@ const Portfolio = () => {
         },
         {
             id: 7,
+            category: 'beauty',
             type: 'facebook',
             title: "Saint Thonglor Clinic: Interview, Review & Motion Graphic",
             url: "https://www.facebook.com/reel/1161312484633412",
@@ -86,6 +90,7 @@ const Portfolio = () => {
         },
         {
             id: 10,
+            category: 'beauty',
             type: 'facebook',
             title: "Saint Thonglor Clinic: Influencer Review (ชานนท์ Master Chef Thailand)",
             url: "https://www.facebook.com/reel/282073853726582",
