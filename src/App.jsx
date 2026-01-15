@@ -125,7 +125,7 @@ const MainPortfolio = () => {
             <div className="w-64 h-64 md:w-96 md:h-96 mx-auto relative z-10 group">
               <div className="absolute inset-0 bg-blue-600 rounded-[3rem] rotate-6 group-hover:rotate-3 transition-transform duration-500"></div>
               <img
-                src="518287125_10228728079362270_6514242073905598389_n.jpg"
+                src="https://i.postimg.cc/tTGwsnXb/518287125-10228728079362270-6514242073905598389-n.jpg"
                 alt="Pornpon Thansuvanthanan"
                 className="absolute inset-0 w-full h-full object-cover rounded-[3rem] -rotate-3 group-hover:rotate-0 transition-transform duration-500 border-4 border-white shadow-2xl"
                 onError={(e) => { e.target.src = "https://via.placeholder.com/400?text=Pornpon+P." }}
