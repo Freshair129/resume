@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Phone, Mail, MapPin, GraduationCap, Briefcase, Code, Brain, Star, CheckCircle2, ArrowLeft } from 'lucide-react';
+import { Phone, Mail, MapPin, GraduationCap, Briefcase, Code, Brain, Star, CheckCircle2, ArrowLeft, FileText, Image, Download } from 'lucide-react';
 
 const Resume = () => {
     // ข้อมูลรูปภาพ (ในสภาพแวดล้อมจริงคุณสามารถเปลี่ยน path รูปภาพได้ที่นี่)
@@ -74,8 +74,7 @@ const Resume = () => {
     const aiSkills = [
         "VS Code", "Antigravity", "Claude Code", "Gemini CLI", "Ollama", "LM Studio", "AnythingLLM",
         "ChatGPT", "Gemini", "Maus", "Claude", "Poe",
-        "Prompt Engineering", "Context Engineering", "Antigravity", "Claude Code",
-        "Agentic RAG", "Gemini CLI", "Ollama", "LM Studio", "AnythingLLM"
+        "Prompt Engineering", "Context Engineering", "Agentic RAG"
     ];
     const coreCompetencies = ["Video Editor", "Creative", "Photography", "Motion Graphic", "Coding", "English (Read/Write/Speak)"];
     const softSkills = ["Communication", "Teamwork", "Crisis Solving", "Growth Mindset", "Management", "Adaptability", "Work Smart"];
@@ -111,6 +110,21 @@ const Resume = () => {
                         </div>
                         <h1 className="text-2xl font-bold tracking-wide">พรพล ธนสุวรรณธาร</h1>
                         <p className="text-blue-400 font-medium mt-1 uppercase text-sm tracking-wider">Assistant Manager & Content Specialist</p>
+                    </div>
+
+                    {/* Download Buttons */}
+                    <div className="flex flex-col gap-3 mb-8">
+                        <p className="text-xs text-slate-400 font-bold uppercase tracking-wider text-center flex items-center justify-center gap-1">
+                            <Download size={12} /> Download Resume
+                        </p>
+                        <div className="flex gap-3 justify-center">
+                            <a href="/resume.pdf" download className="flex-1 bg-blue-600 hover:bg-blue-700 text-white px-3 py-2 rounded-lg text-sm font-bold flex items-center justify-center gap-2 transition-all hover:-translate-y-0.5 shadow-lg shadow-blue-900/50">
+                                <FileText size={16} /> PDF
+                            </a>
+                            <a href="/resume.jpg" download className="flex-1 bg-slate-700 hover:bg-slate-600 text-white px-3 py-2 rounded-lg text-sm font-bold flex items-center justify-center gap-2 transition-all hover:-translate-y-0.5 shadow-lg shadow-slate-900/50">
+                                <Image size={16} /> JPG
+                            </a>
+                        </div>
                     </div>
 
                     <div className="space-y-6">
