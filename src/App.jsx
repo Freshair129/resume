@@ -8,6 +8,7 @@ import {
   Bot, Sparkles
 } from 'lucide-react';
 import Resume from './Resume';
+import Portfolio from './Portfolio';
 import heroBg from './assets/hero-bg.jpg';
 import img02 from './assets/02.jpg';
 import img03 from './assets/03.jpg';
@@ -124,7 +125,7 @@ const MainPortfolio = () => {
             <a href="#home" className="text-sm font-medium hover:text-blue-600 transition-colors">หน้าหลัก</a>
             <a href="#skills" className="text-sm font-medium hover:text-blue-600 transition-colors">ทักษะ</a>
             <a href="#experience" className="text-sm font-medium hover:text-blue-600 transition-colors">ประสบการณ์</a>
-            <a href="#skills" className="text-sm font-medium hover:text-blue-600 transition-colors">Portfolio</a>
+            <Link to="/portfolio" className="text-sm font-medium hover:text-blue-600 transition-colors">Portfolio</Link>
             <Link to="/resume" className="text-sm font-bold text-slate-900 hover:text-blue-600 transition-colors flex items-center gap-1">
               Resume <ExternalLink size={14} />
             </Link>
@@ -141,7 +142,7 @@ const MainPortfolio = () => {
             <a href="#home" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>หน้าหลัก</a>
             <a href="#skills" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>ทักษะ</a>
             <a href="#experience" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>ประสบการณ์</a>
-            <a href="#skills" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>Portfolio</a>
+            <Link to="/portfolio" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>Portfolio</Link>
             <Link to="/resume" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>Resume</Link>
             <a href="#contact" className="bg-blue-600 text-white p-4 rounded-2xl text-center font-black" onClick={() => setIsMenuOpen(false)}>จ้างงานผม</a>
           </div>
@@ -166,9 +167,9 @@ const MainPortfolio = () => {
               <Link to="/resume" className="bg-slate-900 text-white px-8 py-4 rounded-2xl font-bold flex items-center justify-center gap-2 shadow-xl shadow-slate-200 hover:bg-slate-800 transition-all hover:-translate-y-1">
                 ดู Resume <FileText size={18} />
               </Link>
-              <a href="#skills" className="bg-white text-slate-900 border-2 border-slate-900 px-8 py-4 rounded-2xl font-bold flex items-center justify-center gap-2 shadow-xl shadow-slate-100 hover:bg-slate-50 transition-all hover:-translate-y-1">
+              <Link to="/portfolio" className="bg-white text-slate-900 border-2 border-slate-900 px-8 py-4 rounded-2xl font-bold flex items-center justify-center gap-2 shadow-xl shadow-slate-100 hover:bg-slate-50 transition-all hover:-translate-y-1">
                 ดู Portfolio <ExternalLink size={18} />
-              </a>
+              </Link>
             </div>
           </div>
           <div className="flex-1 relative">
@@ -302,7 +303,7 @@ const MainPortfolio = () => {
                         <h3 className="text-xl font-bold">Core Skills</h3>
                       </div>
                       <div className="flex flex-wrap gap-2">
-                        {["Video Editor", "Creative", "Photography", "Motion Graphic", "Coding", "English (Read/Write/Speak)", "Communication", "Teamwork", "Crisis Solving", "Growth Mindset", "Management", "Adaptability", "Work Smart"].map(s => (
+                        {["Video Editor", "Creative", "Photography", "Motion Graphic", "Song Writer", "Coding", "English (Read/Write/Speak)", "Communication", "Teamwork", "Crisis Solving", "Growth Mindset", "Management", "Adaptability", "Work Smart"].map(s => (
                           <span key={s} className="px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-xs font-bold border border-blue-100">{s}</span>
                         ))}
                       </div>
@@ -393,6 +394,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<MainPortfolio />} />
         <Route path="/resume" element={<Resume />} />
+        <Route path="/portfolio" element={<Portfolio />} />
       </Routes>
     </Router>
   );

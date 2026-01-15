@@ -115,7 +115,7 @@ const Resume = () => {
         "ChatGPT", "Gemini", "Maus", "Claude", "Poe",
         "Prompt Engineering", "Context Engineering", "Agentic RAG"
     ];
-    const coreCompetencies = ["Video Editor", "Creative", "Photography", "Motion Graphic", "Coding", "English (Read/Write/Speak)"];
+    const coreCompetencies = ["Video Editor", "Creative", "Photography", "Motion Graphic", "Song Writer", "Coding", "English (Read/Write/Speak)"];
     const softSkills = ["Communication", "Teamwork", "Crisis Solving", "Growth Mindset", "Management", "Adaptability", "Work Smart"];
 
     return (
@@ -125,9 +125,9 @@ const Resume = () => {
                     <Link to="/" className="inline-flex items-center gap-2 text-[#475569] hover:text-[#2563eb] font-bold transition-colors bg-[#ffffff] px-4 py-2 rounded-xl shadow-sm border border-[#f1f5f9]">
                         <ArrowLeft size={18} /> หน้าหลัก
                     </Link>
-                    <a href="/#skills" className="inline-flex items-center gap-2 text-[#475569] hover:text-[#2563eb] font-bold transition-colors bg-[#ffffff] px-4 py-2 rounded-xl shadow-sm border border-[#f1f5f9]">
+                    <Link to="/portfolio" className="inline-flex items-center gap-2 text-slate-600 hover:text-blue-600 font-bold transition-colors bg-white px-4 py-2 rounded-xl shadow-sm border border-slate-100">
                         <Briefcase size={18} /> Portfolio
-                    </a>
+                    </Link>
                 </div>
                 <div className="text-xl font-black tracking-tighter text-[#2563eb] hidden sm:block">PORNPON.T</div>
             </div>
