@@ -241,7 +241,10 @@ const MainPortfolio = () => {
                     <h3 className="text-xl font-bold">AI Tools & Code Gen</h3>
                   </div>
                   <div className="flex flex-wrap gap-2">
-                    {["VS Code", "Antigravity", "Claude Code", "Gemini CLI", "Ollama", "LM Studio", "AnythingLLM"].map(s => (
+                    {[
+                      "VS Code", "Antigravity", "Claude Code", "Gemini CLI", "Ollama", "LM Studio", "AnythingLLM",
+                      "ChatGPT", "Gemini", "Maus", "Claude", "Poe"
+                    ].map(s => (
                       <span key={s} className="px-3 py-1 bg-purple-50 text-purple-700 rounded-full text-xs font-bold border border-purple-100">{s}</span>
                     ))}
                   </div>
