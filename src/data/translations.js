@@ -6,7 +6,7 @@ export const th = {
         portfolio: "Portfolio",
         gallery: "แกลเลอรี่",
         resume: "Resume",
-        hireMe: "จ้างงานผม",
+        hireMe: "Hire me!!",
         backToHome: "กลับหน้าหลัก",
         backToPortfolio: "กลับหน้า Portfolio"
     },
