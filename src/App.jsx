@@ -5,8 +5,9 @@ import {
 import {
   Phone, Mail, MapPin, GraduationCap, Briefcase, Code, Brain, Star,
   CheckCircle2, ChevronRight, Menu, X, Cpu, Check, Camera, Video, Users, Car, FileText, ExternalLink,
-  Bot, Sparkles
+  Bot, Sparkles, Globe
 } from 'lucide-react';
+import { useLanguage } from './LanguageContext';
 import Resume from './Resume';
 import Portfolio from './Portfolio';
 import heroBg from './assets/hero-bg.jpg';
@@ -58,6 +59,7 @@ const ImageSlider = () => {
 };
 
 const MainPortfolio = () => {
+  const { t, language, toggleLanguage } = useLanguage();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -67,53 +69,18 @@ const MainPortfolio = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const experiences = [
-    {
-      title: "Assistant Manager",
-      company: "Hostpital Feelgood Club",
-      period: "2025 (6 Months)",
-      type: "Full-Time",
-      desc: "ดูแลภาพรวมของร้านและเป็น MC ควบคุมกิจกรรมทั้งหมด จัดแจงงานให้กับทีม Service, ทีมการ์ด และทีม Host (PR) รวมถึงทำ CRM และแก้ปัญหาเฉพาะหน้าให้แก่ลูกค้า",
-      IconComponent: Star,
-      iconColor: "text-yellow-500"
-    },
-    {
-      title: "Event Project Coordinator",
-      company: "Joe Luxury Car Service",
-      period: "2024 (1 Year)",
-      type: "Contract",
-      desc: "รับผิดชอบดูแลประสานงานทีมภาคสนามและลูกค้า VIP วางแผนจัดการทรัพยากร (คน, รถ, เวลา) และทำหน้าที่เป็นตัวแทนทีมในการติดต่อสื่อสารตอบสนองความต้องการลูกค้า",
-      IconComponent: Car,
-      iconColor: "text-blue-500"
-    },
-    {
-      title: "Content Creator",
-      company: "Saint Thonglor Clinic",
-      period: "2020 - 2022",
-      type: "Permanent",
-      desc: "วางแผนคอนเทนต์รายวัน/สัปดาห์/เดือน วางแผนถ่ายทำ ประสานงานกับทีมแพทย์และทีม Digital Marketing ภายนอกเพื่อให้ผลงานออกมาตรงตามเป้าหมาย",
-      IconComponent: Video,
-      iconColor: "text-purple-500"
-    },
-    {
-      title: "Content Creator",
-      company: "U-Turn Shop",
-      period: "2020 - 2022",
-      type: "Part-Time",
-      desc: "วางแผนคอนเทนต์และถ่ายทำสื่อโปรโมทสินค้า ประสานงานร่วมกับทีมช่าง รวมถึงดูแลและให้คำปรึกษาแก่ทีม Admin เพื่อพัฒนาศักยภาพการบริการ",
-      IconComponent: Users,
-      iconColor: "text-orange-500"
-    },
-    {
-      title: "Editor",
-      company: "Punnisa Clinic",
-      period: "2019 (1 Year)",
-      type: "Contract",
-      desc: "รับผิดชอบการตัดต่อและสร้างสรรค์คอนเทนต์ภาพเคลื่อนไหว (Motion Content) ทั้งหมดของคลินิก เพื่อสื่อสารแบรนด์ผ่านช่องทางดิจิทัล",
-      IconComponent: Camera,
-      iconColor: "text-teal-500"
-    }
+  const experienceIcons = [
+    { IconComponent: Star, iconColor: "text-yellow-500" },
+    { IconComponent: Car, iconColor: "text-blue-500" },
+    { IconComponent: Video, iconColor: "text-purple-500" },
+    { IconComponent: Users, iconColor: "text-orange-500" },
+    { IconComponent: Camera, iconColor: "text-teal-500" }
   ];
+
+  const experiences = t.experience.timeline.slice(0, 5).map((exp, idx) => ({
+    ...exp,
+    ...(experienceIcons[idx] || { IconComponent: Star, iconColor: "text-gray-500" })
+  }));
 
   return (
     <div className="min-h-screen bg-white selection:bg-blue-100 selection:text-blue-900">
@@ -122,14 +89,18 @@ const MainPortfolio = () => {
         <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
           <div className="text-xl font-black tracking-tighter text-blue-600">PORNPON.T</div>
           <div className="hidden md:flex space-x-8 items-center">
-            <a href="#home" className="text-sm font-medium hover:text-blue-600 transition-colors">หน้าหลัก</a>
-            <a href="#skills" className="text-sm font-medium hover:text-blue-600 transition-colors">ทักษะ</a>
-            <a href="#experience" className="text-sm font-medium hover:text-blue-600 transition-colors">ประสบการณ์</a>
-            <Link to="/portfolio" className="text-sm font-medium hover:text-blue-600 transition-colors">Portfolio</Link>
+            <a href="#home" className="text-sm font-medium hover:text-blue-600 transition-colors">{t.nav.home}</a>
+            <a href="#skills" className="text-sm font-medium hover:text-blue-600 transition-colors">{t.nav.skills}</a>
+            <a href="#experience" className="text-sm font-medium hover:text-blue-600 transition-colors">{t.nav.experience}</a>
+            <Link to="/portfolio" className="text-sm font-medium hover:text-blue-600 transition-colors">{t.nav.portfolio}</Link>
+            <Link to="/portfolio#gallery" className="text-sm font-medium hover:text-blue-600 transition-colors">{t.nav.gallery}</Link>
             <Link to="/resume" className="text-sm font-bold text-slate-900 hover:text-blue-600 transition-colors flex items-center gap-1">
-              Resume <ExternalLink size={14} />
+              {t.nav.resume} <ExternalLink size={14} />
             </Link>
-            <a href="#contact" className="bg-blue-600 text-white px-5 py-2 rounded-full text-sm font-bold hover:bg-blue-700 shadow-lg shadow-blue-200 transition-all hover:-translate-y-0.5">จ้างงานผม</a>
+            <button onClick={toggleLanguage} className="flex items-center gap-1 bg-slate-100 px-3 py-1 rounded-full text-xs font-bold hover:bg-slate-200 transition-colors">
+              <Globe size={14} /> {language.toUpperCase()}
+            </button>
+            <a href="#contact" className="bg-blue-600 text-white px-5 py-2 rounded-full text-sm font-bold hover:bg-blue-700 shadow-lg shadow-blue-200 transition-all hover:-translate-y-0.5">{t.nav.hireMe}</a>
           </div>
           <button className="md:hidden text-slate-900" onClick={() => setIsMenuOpen(!isMenuOpen)}>
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -139,12 +110,16 @@ const MainPortfolio = () => {
         {/* Mobile Menu */}
         {isMenuOpen && (
           <div className="md:hidden absolute top-full left-0 w-full bg-white border-b border-slate-100 p-6 flex flex-col gap-4 shadow-xl animate-in slide-in-from-top duration-300">
-            <a href="#home" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>หน้าหลัก</a>
-            <a href="#skills" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>ทักษะ</a>
-            <a href="#experience" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>ประสบการณ์</a>
-            <Link to="/portfolio" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>Portfolio</Link>
-            <Link to="/resume" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>Resume</Link>
-            <a href="#contact" className="bg-blue-600 text-white p-4 rounded-2xl text-center font-black" onClick={() => setIsMenuOpen(false)}>จ้างงานผม</a>
+            <a href="#home" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>{t.nav.home}</a>
+            <a href="#skills" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>{t.nav.skills}</a>
+            <a href="#experience" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>{t.nav.experience}</a>
+            <Link to="/portfolio" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>{t.nav.portfolio}</Link>
+            <a href="/portfolio#gallery" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>{t.nav.gallery}</a>
+            <Link to="/resume" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>{t.nav.resume}</Link>
+            <button onClick={() => { toggleLanguage(); setIsMenuOpen(false); }} className="flex items-center gap-2 text-lg font-bold">
+              <Globe size={20} /> {language === 'th' ? 'English' : 'ไทย'}
+            </button>
+            <a href="#contact" className="bg-blue-600 text-white p-4 rounded-2xl text-center font-black" onClick={() => setIsMenuOpen(false)}>{t.nav.hireMe}</a>
           </div>
         )}
       </nav>
@@ -155,20 +130,20 @@ const MainPortfolio = () => {
           <div className="flex-1 text-center md:text-left space-y-6">
             <div className="inline-flex items-center gap-2 bg-blue-50 text-blue-600 px-4 py-2 rounded-full text-sm font-bold">
               <span className="flex h-2 w-2 rounded-full bg-blue-600 animate-pulse"></span>
-              Available for Work
+              {t.hero.available}
             </div>
             <h1 className="text-4xl md:text-6xl font-black leading-tight text-slate-900">
-              พรพล <span className="text-blue-600">ธนสุวรรณธาร</span>
+              {t.hero.name}
             </h1>
             <p className="text-xl text-slate-600 max-w-xl mx-auto md:mx-0 leading-relaxed">
-              Assistant Manager & Digital Content Specialist ผู้เชี่ยวชาญการบริหารจัดการทีม ผสมผสานเทคโนโลยี AI เพื่อยกระดับประสิทธิภาพงาน
+              {t.hero.desc}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
               <Link to="/resume" className="bg-slate-900 text-white px-8 py-4 rounded-2xl font-bold flex items-center justify-center gap-2 shadow-xl shadow-slate-200 hover:bg-slate-800 transition-all hover:-translate-y-1">
-                ดู Resume <FileText size={18} />
+                {t.hero.viewResume} <FileText size={18} />
               </Link>
               <Link to="/portfolio" className="bg-white text-slate-900 border-2 border-slate-900 px-8 py-4 rounded-2xl font-bold flex items-center justify-center gap-2 shadow-xl shadow-slate-100 hover:bg-slate-50 transition-all hover:-translate-y-1">
-                ดู Portfolio <ExternalLink size={18} />
+                {t.hero.viewPortfolio} <ExternalLink size={18} />
               </Link>
             </div>
           </div>
@@ -215,10 +190,10 @@ const MainPortfolio = () => {
             <div className="lg:w-2/3 w-full space-y-8">
               <div className="mb-8">
                 <div className="inline-flex items-center gap-2 bg-blue-100 text-blue-700 px-4 py-1.5 rounded-full text-sm font-bold mb-4">
-                  <Brain size={16} /> Skills & Abilities
+                  <Brain size={16} /> {t.skills.badge}
                 </div>
                 <h2 className="text-3xl md:text-5xl font-black text-slate-900 leading-tight">
-                  ทักษะและความสามารถ
+                  {t.skills.title}
                 </h2>
               </div>
 
@@ -309,8 +284,8 @@ const MainPortfolio = () => {
                       </div>
                     </div>
                     <div className="pt-6 border-t border-slate-100">
-                      <p className="font-bold text-slate-900 text-sm">ม.รังสิต นิเทศศาสตร์</p>
-                      <p className="text-slate-500 text-sm">มัธยม สวนกุหลาบวิทยาลัย</p>
+                      <p className="font-bold text-slate-900 text-sm">{t.skills.education}</p>
+                      <p className="text-slate-500 text-sm">{t.skills.highSchool}</p>
                     </div>
                   </div>
                 </div>
@@ -322,7 +297,7 @@ const MainPortfolio = () => {
 
       {/* Experience Section */}
       <section id="experience" className="py-24 max-w-4xl mx-auto px-6">
-        <h2 className="text-4xl font-black text-center mb-16 text-slate-900">ประสบการณ์การทำงาน</h2>
+        <h2 className="text-4xl font-black text-center mb-16 text-slate-900">{t.experience.title}</h2>
         <div className="space-y-12">
           {experiences.map((exp, idx) => (
             <div key={idx} className="flex gap-6 group">
@@ -358,9 +333,9 @@ const MainPortfolio = () => {
                 </span>
                 <span className="text-blue-700 font-bold tracking-wide uppercase text-xs">Current Focus</span>
               </div>
-              <h3 className="text-2xl font-black text-slate-900 mb-2">Freelance Content Creator & AI Innovation Learner</h3>
-              <p className="text-blue-600 font-bold mb-4">Present • Self-Employed</p>
-              <p className="text-slate-600 italic leading-relaxed text-lg">"มุ่งมั่นศึกษาและพัฒนาทักษะด้าน AI Innovation อย่างต่อเนื่อง พร้อมรับงานสร้างสรรค์คอนเทนต์ที่ผสมผสานเทคโนโลยีใหม่ๆ"</p>
+              <h3 className="text-2xl font-black text-slate-900 mb-2">{t.experience.timeline[6].title}</h3>
+              <p className="text-blue-600 font-bold mb-4">{t.experience.timeline[6].period} • {t.experience.timeline[6].company}</p>
+              <p className="text-slate-600 italic leading-relaxed text-lg">"{t.experience.timeline[6].desc}"</p>
             </div>
           </div>
         </div>
@@ -370,16 +345,16 @@ const MainPortfolio = () => {
       <footer id="contact" className="bg-slate-900 text-white py-20 px-6">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
           <div className="space-y-8">
-            <h2 className="text-2xl md:text-4xl font-black leading-tight text-center md:text-left">อยากให้ผมเป็นส่วนนึงของการเติบโต<br /><span className="text-blue-500">ช่องทางติดต่อ</span></h2>
+            <h2 className="text-2xl md:text-4xl font-black leading-tight text-center md:text-left">{t.resume.contact}</h2>
             <div className="space-y-4">
               <a href="tel:0831840662" className="flex items-center gap-4 text-xl hover:text-blue-400 transition-colors"><Phone /> 083-184-0662</a>
               <a href="tel:0831840662" className="flex items-center gap-4 text-xl hover:text-blue-400 transition-colors"><Phone /> 090-973-0775</a>
               <a href="mailto:suanranger129@gmail.com" className="flex items-center gap-4 text-xl hover:text-blue-400 transition-colors"><Mail /> suanranger129@gmail.com</a>
-              <p className="flex items-center gap-4 text-xl text-slate-400"><MapPin /> นนทบุรี, ประเทศไทย</p>
+              <p className="flex items-center gap-4 text-xl text-slate-400"><MapPin /> {t.resume.location}</p>
             </div>
           </div>
           <div className="bg-white/5 p-10 rounded-[3rem] text-center space-y-4 backdrop-blur-sm">
-            <p className="text-slate-400">ขอบคุณที่เยี่ยมชมประวัติการทำงานของผมครับ</p>
+            <p className="text-slate-400">Thanks for visiting my portfolio.</p>
             <p className="text-xs text-slate-600 font-bold uppercase tracking-widest">© 2025 PORNPON.P - DIGITAL PORTFOLIO</p>
           </div>
         </div>

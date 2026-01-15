@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
-import { Phone, Mail, MapPin, GraduationCap, Briefcase, Code, Brain, Star, CheckCircle2, ArrowLeft, FileText, Image, Download } from 'lucide-react';
+import { ArrowLeft, Phone, Mail, MapPin, Download, ExternalLink, Award, Sparkles, Brain, Cpu, Code, Star, Video, Camera } from 'lucide-react';
+import { useLanguage } from './LanguageContext';
 import React, { useRef } from 'react';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
@@ -7,6 +8,7 @@ import profileImage from './assets/profile.jpg';
 
 const Resume = () => {
     const resumeRef = useRef(null);
+    const { t } = useLanguage();
 
     const handleDownload = async (type) => {
         const element = resumeRef.current;
@@ -47,67 +49,70 @@ const Resume = () => {
 
     const experiences = [
         {
-            title: "Freelance & Learning",
-            company: "Current Focus (Present)",
-            period: "2025 - Present",
+            title: t.resume.experience.freelance.title,
+            company: t.resume.experience.freelance.company,
+            period: t.resume.experience.freelance.period,
             responsibilities: [
-                "ศึกษาค้นคว้าด้าน AI Innovation และติตตามเทรนด์เทคโนโลยีใหม่ๆ (AI Agents, RAG)",
-                "รับงาน Content Creator อิสระ และทดลองนำ AI มาประยุกต์ใช้ในกระบวนการผลิตสื่อ",
-                "พัฒนาทักษะการเขียนโค้ด (Coding) เพื่อสร้าง AI Tools สำหรับใช้งานส่วนตัว"
+                t.resume.experience.freelance.responsibility1,
+                t.resume.experience.freelance.responsibility2,
+                t.resume.experience.freelance.responsibility3
             ]
         },
         {
-            title: "Assistant Manager",
-            company: "Hostpital Feelgood Club",
-            period: "2025 (6 Months)",
+            title: t.resume.experience.assistantManager.title,
+            company: t.resume.experience.assistantManager.company,
+            period: t.resume.experience.assistantManager.period,
             responsibilities: [
-                "ดูแลบริหารจัดการภาพรวมการดำเนินงานของร้านให้ราบรื่น",
-                "บริหารจัดการและมอบหมายหน้าที่ให้ทีม Service, Security และทีม Host (PR)",
-                "ทำหน้าที่ MC ควบคุมลำดับกิจกรรมและบรรยากาศทั้งหมดภายในร้าน",
-                "บริหารจัดการความสัมพันธ์ลูกค้า (CRM) และแก้ไขปัญหาเฉพาะหน้าอย่างมีประสิทธิภาพ"
+                t.resume.experience.assistantManager.responsibility1,
+                t.resume.experience.assistantManager.responsibility2,
+                t.resume.experience.assistantManager.responsibility3,
+                t.resume.experience.assistantManager.responsibility4
             ]
         },
         {
-            title: "Event Project Coordinator",
-            company: "Joe Luxury Car Service",
-            period: "2024 (1 Year)",
+            title: t.resume.experience.eventCoordinator.title,
+            company: t.resume.experience.eventCoordinator.company,
+            period: t.resume.experience.eventCoordinator.period,
             responsibilities: [
-                "วางแผนและบริหารจัดการทรัพยากร (บุคคล, ยานพาหนะ, เวลา) ให้สอดคล้องกับความต้องการ",
-                "ดูแลประสานงานระหว่างทีมภาคสนามและลูกค้ากลุ่ม VIP โดยตรง",
-                "แก้ไขปัญหาเฉพาะหน้าด้วยความรวดเร็วและรักษามาตรฐานการบริการ",
-                "สื่อสารและตอบสนองความต้องการเบื้องต้นของลูกค้าในฐานะตัวแทนทีม"
+                t.resume.experience.eventCoordinator.responsibility1,
+                t.resume.experience.eventCoordinator.responsibility2,
+                t.resume.experience.eventCoordinator.responsibility3,
+                t.resume.experience.eventCoordinator.responsibility4
             ]
         },
         {
-            title: "Content Creator",
-            company: "Saint Thonglor Clinic (Permanent)",
-            period: "2020 - 2022",
+            title: t.resume.experience.contentCreatorPermanent.title,
+            company: t.resume.experience.contentCreatorPermanent.company,
+            period: t.resume.experience.contentCreatorPermanent.period,
             responsibilities: [
-                "วางแผนกลยุทธ์คอนเทนต์รายวัน รายสัปดาห์ และรายเดือน",
-                "ประสานงานร่วมกับทีมแพทย์และทีม Digital Marketing ภายนอกเพื่อสร้างสรรค์เนื้อหา",
-                "ควบคุมการผลิตคอนเทนต์ให้เป็นไปตามภาพลักษณ์ของแบรนด์"
+                t.resume.experience.contentCreatorPermanent.responsibility1,
+                t.resume.experience.contentCreatorPermanent.responsibility2,
+                t.resume.experience.contentCreatorPermanent.responsibility3
             ]
         },
         {
-            title: "Content Creator",
-            company: "U-Turn Shop (Part-Time)",
-            period: "2020 - 2022",
+            title: t.resume.experience.contentCreatorPartTime.title,
+            company: t.resume.experience.contentCreatorPartTime.company,
+            period: t.resume.experience.contentCreatorPartTime.period,
             responsibilities: [
-                "วางแผนและผลิตสื่อวิดีโอ/ภาพนิ่งสำหรับโปรโมทสินค้า",
-                "ให้คำปรึกษาและดูแลแนวทางการตอบแชทของทีม Admin",
-                "ประสานงานร่วมกับทีมช่างเพื่อผลิตคอนเทนต์เจาะลึกทางเทคนิค"
+                t.resume.experience.contentCreatorPartTime.responsibility1,
+                t.resume.experience.contentCreatorPartTime.responsibility2,
+                t.resume.experience.contentCreatorPartTime.responsibility3
             ]
         },
         {
-            title: "Editor",
-            company: "Punnisa Clinic (Contract)",
-            period: "2019 (1 Year)",
+            title: t.resume.experience.editorContract.title,
+            company: t.resume.experience.editorContract.company,
+            period: t.resume.experience.editorContract.period,
             responsibilities: [
-                "รับผิดชอบการผลิตและตัดต่อคอนเทนต์วิดีโอและภาพเคลื่อนไหวทั้งหมด",
-                "สร้างสรรค์สื่อเพื่อสนับสนุนแคมเปญการตลาดของคลินิก"
+                t.resume.experience.editorContract.responsibility1,
+                t.resume.experience.editorContract.responsibility2
             ]
         }
     ];
+
+    // Resume data structure aligned with Portfolio.jsx structure for consistency if needed,
+    // but here we primarily use the translation object for static text.
 
     const hardSkills = ["Photoshop", "Premiere Pro", "After Effects", "Illustrator", "CapCut", "Canva", "Tiktok", "Reels", "Shorts"];
     const aiSkills = [
@@ -123,10 +128,10 @@ const Resume = () => {
             <div className="max-w-5xl mx-auto mb-6 flex justify-between items-center">
                 <div className="flex gap-4">
                     <Link to="/" className="inline-flex items-center gap-2 text-[#475569] hover:text-[#2563eb] font-bold transition-colors bg-[#ffffff] px-4 py-2 rounded-xl shadow-sm border border-[#f1f5f9]">
-                        <ArrowLeft size={18} /> หน้าหลัก
+                        <ArrowLeft size={18} /> {t.nav.home}
                     </Link>
                     <Link to="/portfolio" className="inline-flex items-center gap-2 text-slate-600 hover:text-blue-600 font-bold transition-colors bg-white px-4 py-2 rounded-xl shadow-sm border border-slate-100">
-                        <Briefcase size={18} /> Portfolio
+                        <Briefcase size={18} /> {t.nav.portfolio}
                     </Link>
                 </div>
                 <div className="text-xl font-black tracking-tighter text-[#2563eb] hidden sm:block">PORNPON.T</div>
@@ -140,21 +145,21 @@ const Resume = () => {
                             {/* Profile Image with Fallback */}
                             <img
                                 src={profileImage}
-                                alt="พรพล ธนสุวรรณธาร"
+                                alt={t.resume.profileAlt}
                                 className="w-full h-full object-cover"
                                 onError={(e) => {
                                     e.target.src = "https://via.placeholder.com/150?text=Profile";
                                 }}
                             />
                         </div>
-                        <h1 className="text-2xl font-bold tracking-wide">พรพล ธนสุวรรณธาร</h1>
-                        <p className="text-[#60a5fa] font-medium mt-1 uppercase text-sm tracking-wider">Assistant Manager & Content Specialist</p>
+                        <h1 className="text-2xl font-bold tracking-wide">{t.resume.name}</h1>
+                        <p className="text-[#60a5fa] font-medium mt-1 uppercase text-sm tracking-wider">{t.resume.title}</p>
                     </div>
 
                     {/* Download Buttons */}
                     <div className="flex flex-col gap-3 mb-8" data-html2canvas-ignore="true">
                         <p className="text-xs text-[#94a3b8] font-bold uppercase tracking-wider text-center flex items-center justify-center gap-1">
-                            <Download size={12} /> Download Resume
+                            <Download size={12} /> {t.resume.downloadResume}
                         </p>
                         <div className="flex gap-3 justify-center">
                             <button onClick={() => handleDownload('pdf')} className="flex-1 bg-[#2563eb] hover:bg-[#1d4ed8] text-[#ffffff] px-3 py-2 rounded-lg text-sm font-bold flex items-center justify-center gap-2 transition-all hover:-translate-y-0.5 shadow-lg shadow-[#1e3a8a80] cursor-pointer">
@@ -169,37 +174,37 @@ const Resume = () => {
                     <div className="space-y-6">
                         <section>
                             <h2 className="text-lg font-semibold border-b border-[#334155] pb-2 mb-3 flex items-center gap-2">
-                                <Phone size={18} className="text-[#60a5fa]" /> ติดต่อ
+                                <Phone size={18} className="text-[#60a5fa]" /> {t.resume.contact}
                             </h2>
                             <div className="space-y-2 text-sm text-[#cbd5e1]">
                                 <div className="space-y-2 text-sm text-[#cbd5e1]">
                                     <p className="flex items-center gap-2"><Phone size={14} className="text-[#64748b]" /> 083-184-0662</p>
                                     <p className="flex items-center gap-2"><Phone size={14} className="text-[#64748b]" /> 090-973-0775</p>
                                     <p className="flex items-center gap-2"><Mail size={14} className="text-[#64748b]" /> suanranger129@gmail.com</p>
-                                    <p className="flex items-center gap-2"><MapPin size={14} className="text-[#64748b]" /> นนทบุรี, ประเทศไทย</p>
+                                    <p className="flex items-center gap-2"><MapPin size={14} className="text-[#64748b]" /> {t.resume.location}</p>
                                 </div>
                             </div>
                         </section>
 
                         <section>
                             <h2 className="text-lg font-semibold border-b border-[#334155] pb-2 mb-3 flex items-center gap-2">
-                                <GraduationCap size={18} className="text-[#60a5fa]" /> การศึกษา
+                                <GraduationCap size={18} className="text-[#60a5fa]" /> {t.resume.education}
                             </h2>
                             <div className="space-y-4 text-sm text-[#cbd5e1]">
                                 <div>
-                                    <p className="font-bold text-[#ffffff]">ปริญญาตรี นิเทศศาสตร์ (โฆษณา)</p>
-                                    <p>มหาวิทยาลัยรังสิต</p>
+                                    <p className="font-bold text-[#ffffff]">{t.resume.bachelorDegree}</p>
+                                    <p>{t.resume.rungsitUniversity}</p>
                                 </div>
                                 <div>
-                                    <p className="font-bold text-[#ffffff]">มัธยมศึกษา</p>
-                                    <p>โรงเรียนสวนกุหลาบวิทยาลัย</p>
+                                    <p className="font-bold text-[#ffffff]">{t.resume.highSchool}</p>
+                                    <p>{t.resume.suankularb}</p>
                                 </div>
                             </div>
                         </section>
 
                         <section>
                             <h2 className="text-lg font-semibold border-b border-[#334155] pb-2 mb-3 flex items-center gap-2">
-                                <Brain size={18} className="text-[#60a5fa]" /> AI & Future Skills
+                                <Brain size={18} className="text-[#60a5fa]" /> {t.resume.aiFutureSkills}
                             </h2>
                             <div className="flex flex-wrap gap-2">
                                 {aiSkills.map(skill => (

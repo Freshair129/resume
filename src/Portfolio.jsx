@@ -1,8 +1,11 @@
 import { Link } from 'react-router-dom';
 import { ArrowLeft, ExternalLink, Heart, Eye, MessageCircle, Share2, Play, Github, Code, Camera, X, ZoomIn } from 'lucide-react';
+import { ArrowLeft, ExternalLink, Heart, Eye, MessageCircle, Share2, Play, Github, Code, Camera, X, ZoomIn } from 'lucide-react';
 import { useState, useEffect } from 'react';
+import { useLanguage } from './LanguageContext';
 
 const Portfolio = () => {
+    const { t } = useLanguage();
     // 📢 CONFIGURATION: Add your social media links here!
     // Types: 'youtube', 'tiktok', 'facebook', 'instagram'
     const socialWorks = [
@@ -143,19 +146,19 @@ const Portfolio = () => {
             {/* Header */}
             <div className="max-w-6xl mx-auto mb-10 flex justify-between items-center">
                 <Link to="/" className="inline-flex items-center gap-2 text-slate-600 hover:text-blue-600 font-bold transition-colors bg-white px-5 py-3 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md">
-                    <ArrowLeft size={20} /> กลับหน้าหลัก
+                    <ArrowLeft size={20} /> {t.nav.backToHome}
                 </Link>
-                <h1 className="text-3xl font-black text-slate-900 tracking-tight">
-                    SOCIAL <span className="text-blue-600">PORTFOLIO</span>
+                <h1 className="text-3xl font-black text-slate-900 tracking-tight text-right md:text-left uppercase">
+                    {t.portfolio.title} <span className="text-blue-600">{t.portfolio.titleHighlight}</span>
                 </h1>
             </div>
 
             {/* Intro */}
             <div className="max-w-6xl mx-auto mb-12 text-center">
                 <p className="text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed">
-                    ผลงานจริงบน Social Media ที่พิสูจน์ด้วยยอด Engagement
+                    {t.portfolio.subtitle}
                     <br />
-                    <span className="text-sm text-slate-400 font-medium mt-2 block">(Click to view original posts with real-time stats)</span>
+                    <span className="text-sm text-slate-400 font-medium mt-2 block">{t.portfolio.clickToView}</span>
                 </p>
             </div>
 
@@ -223,13 +226,13 @@ const Portfolio = () => {
             </div>
 
             {/* Gallery Section */}
-            <div className="max-w-7xl mx-auto mt-24">
+            <div id="gallery" className="max-w-7xl mx-auto mt-24">
                 <div className="text-center mb-12">
-                    <h2 className="text-3xl md:text-5xl font-black text-slate-900 tracking-tighter flex items-center justify-center gap-3">
+                    <h2 className="text-3xl md:text-5xl font-black text-slate-900 tracking-tighter flex items-center justify-center gap-3 uppercase">
                         <Camera size={40} className="text-blue-600" />
-                        PHOTOGRAPHY <span className="text-slate-300">GALLERY</span>
+                        {t.portfolio.galleryTitle} <span className="text-slate-300">{t.portfolio.galleryTitleHighlight}</span>
                     </h2>
-                    <p className="text-slate-500 mt-4 text-lg">รวมภาพผลงานการถ่ายภาพและเบื้องหลังการทำงาน</p>
+                    <p className="text-slate-500 mt-4 text-lg">{t.portfolio.galleryDesc}</p>
                 </div>
 
                 <div className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6 px-4">
@@ -262,9 +265,9 @@ const Portfolio = () => {
             {/* CTA */}
             <div className="max-w-6xl mx-auto mt-20 text-center bg-blue-600 rounded-[3rem] p-12 text-white shadow-2xl shadow-blue-900/50 relative overflow-hidden">
                 <div className="relative z-10">
-                    <h2 className="text-3xl md:text-4xl font-black mb-6">พร้อมสร้างผลลัพธ์แบบนี้ให้แบรนด์คุณ?</h2>
+                    <h2 className="text-3xl md:text-4xl font-black mb-6">{t.portfolio.ctaTitle}</h2>
                     <Link to="/resume" className="inline-block bg-white text-blue-600 px-8 py-4 rounded-full font-bold text-lg hover:bg-blue-50 transition-all shadow-lg hover:shadow-xl hover:-translate-y-1">
-                        ดูประวัติการทำงาน (Resume)
+                        {t.portfolio.ctaButton}
                     </Link>
                 </div>
                 <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-tr from-blue-600 to-indigo-600"></div>
