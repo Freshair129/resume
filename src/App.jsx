@@ -148,22 +148,6 @@ const MainPortfolio = () => {
         </div>
       </section>
 
-      {/* Current Focus Section */}
-      <section className="bg-slate-900 py-10 border-y border-slate-800">
-        <div className="max-w-7xl mx-auto px-6 text-center">
-          <div className="inline-flex items-center gap-3 px-6 py-3 bg-blue-600/10 rounded-full border border-blue-500/20">
-            <span className="relative flex h-3 w-3">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-3 w-3 bg-blue-500"></span>
-            </span>
-            <span className="text-blue-300 font-bold tracking-wide uppercase text-sm">Target Focus</span>
-          </div>
-          <h2 className="text-2xl md:text-3xl font-bold text-white mt-6 leading-relaxed max-w-3xl mx-auto">
-            "ปัจจุบันกำลังศึกษา <span className="text-blue-400">AI Innovation</span> และเป็น <span className="text-blue-400">Freelance Content Creator</span>"
-          </h2>
-        </div>
-      </section>
-
       {/* Skills & Showcase Section */}
       <section id="skills" className="bg-slate-50 py-24">
         <div className="max-w-7xl mx-auto px-6">
@@ -314,6 +298,27 @@ const MainPortfolio = () => {
               </div>
             </div>
           ))}
+
+          {/* Current Focus Timeline Entry */}
+          <div className="flex gap-6 group">
+            <div className="flex flex-col items-center">
+              <div className="w-12 h-12 bg-blue-600 border-2 border-blue-600 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-blue-200">
+                <Sparkles size={24} className="animate-pulse" />
+              </div>
+            </div>
+            <div className="pb-4">
+              <div className="inline-flex items-center gap-3 px-4 py-2 bg-blue-50 rounded-full border border-blue-100 mb-4">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+                </span>
+                <span className="text-blue-700 font-bold tracking-wide uppercase text-xs">Current Focus</span>
+              </div>
+              <h3 className="text-2xl font-black text-slate-900 mb-2">Freelance Content Creator & AI Innovation Learner</h3>
+              <p className="text-blue-600 font-bold mb-4">Present • Self-Employed</p>
+              <p className="text-slate-600 italic leading-relaxed text-lg">"มุ่งมั่นศึกษาและพัฒนาทักษะด้าน AI Innovation อย่างต่อเนื่อง พร้อมรับงานสร้างสรรค์คอนเทนต์ที่ผสมผสานเทคโนโลยีใหม่ๆ"</p>
+            </div>
+          </div>
         </div>
       </section>
 
