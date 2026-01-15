@@ -3,6 +3,7 @@ import { Phone, Mail, MapPin, GraduationCap, Briefcase, Code, Brain, Star, Check
 import React, { useRef } from 'react';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
+import profileImage from './assets/profile.jpg';
 
 const Resume = () => {
     const resumeRef = useRef(null);
@@ -42,7 +43,6 @@ const Resume = () => {
     };
 
     // ข้อมูลรูปภาพ (ในสภาพแวดล้อมจริงคุณสามารถเปลี่ยน path รูปภาพได้ที่นี่)
-    const profileImage = "https://i.postimg.cc/tTGwsnXb/518287125-10228728079362270-6514242073905598389-n.jpg";
     // หมายเหตุ: สำหรับรูปที่คุณอัปโหลด ระบบจะแสดงผลผ่านไฟล์ต้นฉบับที่คุณแนบมา
 
     const experiences = [
