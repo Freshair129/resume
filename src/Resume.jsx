@@ -1,9 +1,9 @@
-import React from 'react';
-import { Phone, Mail, MapPin, GraduationCap, Briefcase, Code, Brain, Star, CheckCircle2 } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Phone, Mail, MapPin, GraduationCap, Briefcase, Code, Brain, Star, CheckCircle2, ArrowLeft } from 'lucide-react';
 
 const Resume = () => {
     // ข้อมูลรูปภาพ (ในสภาพแวดล้อมจริงคุณสามารถเปลี่ยน path รูปภาพได้ที่นี่)
-    const profileImage = "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1000&auto=format&fit=crop";
+    const profileImage = https://i.postimg.cc/tTGwsnXb/518287125-10228728079362270-6514242073905598389-n.jpg;
     // หมายเหตุ: สำหรับรูปที่คุณอัปโหลด ระบบจะแสดงผลผ่านไฟล์ต้นฉบับที่คุณแนบมา
 
     const experiences = [
@@ -69,6 +69,11 @@ const Resume = () => {
 
     return (
         <div className="min-h-screen bg-slate-50 py-10 px-4 sm:px-6 lg:px-8 font-sans text-slate-800">
+            <div className="max-w-5xl mx-auto mb-6">
+                <Link to="/" className="inline-flex items-center gap-2 text-slate-600 hover:text-blue-600 font-bold transition-colors bg-white px-4 py-2 rounded-xl shadow-sm border border-slate-100">
+                    <ArrowLeft size={18} /> กลับหน้าหลัก
+                </Link>
+            </div>
             <div className="max-w-5xl mx-auto bg-white shadow-2xl rounded-2xl overflow-hidden flex flex-col md:flex-row">
 
                 {/* Left Column / Sidebar */}
