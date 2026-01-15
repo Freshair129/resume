@@ -18,7 +18,7 @@ export const th = {
         viewResume: "ดู Resume",
         viewPortfolio: "ดู Portfolio",
         aiSpecialist: "AI Specialist",
-        agenticRag: "Agentic RAG"
+        agenticRag: "AI Developer"
     },
     skills: {
         badge: "Skills & Abilities",
@@ -197,7 +197,7 @@ export const en = {
         viewResume: "View Resume",
         viewPortfolio: "View Portfolio",
         aiSpecialist: "AI Specialist",
-        agenticRag: "Agentic RAG"
+        agenticRag: "AI Developer"
     },
     skills: {
         badge: "Skills & Abilities",
