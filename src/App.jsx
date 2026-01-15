@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {
   Phone, Mail, MapPin, GraduationCap, Briefcase, Code, Brain, Star,
-  CheckCircle2, ChevronRight, Menu, X, Cpu, Check, Camera, Video, Users, Car
+  CheckCircle2, ChevronRight, Menu, X, Cpu, Check, Camera, Video, Users, Car, FileText, ExternalLink
 } from 'lucide-react';
 
 const App = () => {
@@ -72,6 +72,9 @@ const App = () => {
             <a href="#home" className="text-sm font-medium hover:text-blue-600 transition-colors">หน้าหลัก</a>
             <a href="#skills" className="text-sm font-medium hover:text-blue-600 transition-colors">ทักษะ</a>
             <a href="#experience" className="text-sm font-medium hover:text-blue-600 transition-colors">ประสบการณ์</a>
+            <a href="https://github.com/Freshair129/resume" target="_blank" rel="noopener noreferrer" className="text-sm font-bold text-slate-900 hover:text-blue-600 transition-colors flex items-center gap-1">
+              Resume <ExternalLink size={14} />
+            </a>
             <a href="#contact" className="bg-blue-600 text-white px-5 py-2 rounded-full text-sm font-bold hover:bg-blue-700 shadow-lg shadow-blue-200 transition-all hover:-translate-y-0.5">จ้างงานผม</a>
           </div>
           <button className="md:hidden text-slate-900" onClick={() => setIsMenuOpen(!isMenuOpen)}>
@@ -85,6 +88,7 @@ const App = () => {
             <a href="#home" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>หน้าหลัก</a>
             <a href="#skills" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>ทักษะ</a>
             <a href="#experience" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>ประสบการณ์</a>
+            <a href="https://github.com/Freshair129/resume" target="_blank" rel="noopener noreferrer" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>Resume</a>
             <a href="#contact" className="bg-blue-600 text-white p-4 rounded-2xl text-center font-black" onClick={() => setIsMenuOpen(false)}>จ้างงานผม</a>
           </div>
         )}
@@ -107,6 +111,9 @@ const App = () => {
             <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
               <a href="#experience" className="bg-slate-900 text-white px-8 py-4 rounded-2xl font-bold flex items-center justify-center gap-2 shadow-xl shadow-slate-200 hover:bg-slate-800 transition-all hover:-translate-y-1">
                 ดูประสบการณ์ <ChevronRight size={18} />
+              </a>
+              <a href="https://github.com/Freshair129/resume" target="_blank" rel="noopener noreferrer" className="bg-white text-slate-900 border-2 border-slate-900 px-8 py-4 rounded-2xl font-bold flex items-center justify-center gap-2 shadow-xl shadow-slate-100 hover:bg-slate-50 transition-all hover:-translate-y-1">
+                ดู Resume <FileText size={18} />
               </a>
             </div>
           </div>
