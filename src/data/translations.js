@@ -11,7 +11,7 @@ export const th = {
         backToPortfolio: "กลับหน้า Portfolio"
     },
     chatbot: {
-        welcomeMessage: "สวัสดีครับ! ผมคือ AI Assistant ของบอสครับ ยินดีที่ได้รู้จักนะครับ! รบกวนแจ้งชื่อของคุณและบริษัทให้ผมทราบนิดนึงได้ไหมครับ? ผมจะได้เก็บบทสนทนาไว้ให้คุณ และเตรียมข้อมูลที่เหมาะกับคุณที่สุดให้ครับ 😊",
+        welcomeMessage: "สวัสดีค่ะ! อีวา (EVA) เองค่ะ ผู้ช่วยดิจิทัลของบอส มีอะไรให้ช่วยไหมคะ? ✨",
         placeholder: "พิมพ์คำถามของคุณ...",
         send: "ส่ง",
         errorMessage: "ขออภัยครับ เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง 😅",
@@ -197,7 +197,7 @@ export const en = {
         backToPortfolio: "Back to Portfolio"
     },
     chatbot: {
-        welcomeMessage: "Hi! I'm Boss's AI Assistant. Nice to meet you! Could you please tell me your name and company? I'll save our conversation for you and prepare the most relevant info for your needs! 😊",
+        welcomeMessage: "Hi! I'm EVA, Boss's AI partner. Nice to meet you! ✨ May I catch your name and company? (So I can remember you and prepare the best info for you!) 😊",
         placeholder: "Type your question...",
         send: "Send",
         errorMessage: "Sorry, an error occurred. Please try again 😅",

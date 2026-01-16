@@ -1,0 +1,391 @@
+project_info:
+  name: "Full System Architecture Diagram"
+  date: "2026-01-02"
+  status: "VALIDATED - Complete Architecture with All Components"
+  source: "Validated against ARCHITECTURE_FLOW_VALIDATED.md"
+  description: "Integrated System architecture from Input to internal physiological/memory processing."
+
+layers:
+  user_layer:
+    components:
+      - id: UserIn
+        name: "User Input"
+      - id: UserOut
+        name: "Final Response"
+
+  orchestration_layer:
+    components:
+      - id: Orch
+        name: "Main Orchestrator"
+        file: "orchestrator/chunking_orchestrator.py"
+        role: "System conductor"
+        responsibility: "Manages dual-phase flow, error handling, logging"
+      - id: CIN
+        name: "Context Injection Node - CIN"
+        file: "orchestrator/cin.py"
+        role: "Dual-phase context builder"
+        responsibility: "Phase 1: Quick context (fast), Phase 2: Deep context (accurate)"
+      - id: LLMBridge
+        name: "LLM Bridge - Gemini API"
+        file: "operation_system/llm_bridge.py"
+        role: "Gemini API integration"
+        responsibility: "Function calling support, bilingual handling"
+
+  dual_phase_loop:
+    phases:
+      - id: P1
+        name: "Phase 1: Perception"
+        description: "LLM Analyzes Intent/Emotion"
+        weighting: "N/A (Deterministic trigger)"
+        speed: "<100ms"
+      - id: FnCall
+        name: "Function Call"
+        function: "sync_biocognitive_state()"
+        description: "Bridge to Gap"
+      - id: Gap
+        name: "The Gap"
+        description: "Real-time Processing (Outside LLM)"
+        weighting: "100% embodied processing"
+        speed: "~500ms"
+      - id: P2
+        name: "Phase 2: Reasoning"
+        description: "LLM generates response with deep context"
+        weighting: "40% Persona + 60% Physio-State"
+    critical_rule: "This is ONE LLM inference, not two separate API calls. The LLM pauses during The Gap and resumes with function result."
+
+  gap_processing:
+    physiological_system:
+      frequency: "30Hz Streaming"
+      flow: "HPA -> Circadian -> Endocrine -> Blood -> Receptor -> ANS"
+      components:
+        - name: "HPA Axis Regulator"
+          file: "physio_core/"
+          input: "stimulus_vector"
+          output: "Modulated stimulus"
+          role: "Stress modulation (HPA Axis)"
+        - name: "Circadian Controller"
+          file: "physio_core/"
+          input: "Modulated stimulus"
+          output: "Time-adjusted stimulus"
+          role: "Circadian rhythm effects"
+        - name: "Endocrine System"
+          file: "physio_core/Endocrine System/"
+          input: "Stimulus"
+          output: "Hormone secretion (pg)"
+          role: "Hormone production from glands"
+        - name: "Blood Engine"
+          file: "physio_core/Circulation & Blood/"
+          input: "Hormones (pg)"
+          output: "Blood concentration"
+          role: "Transport, clearance, half-life decay"
+        - name: "Receptor Engine"
+          file: "physio_core/receptor/"
+          input: "Blood hormones"
+          output: "Neural signals"
+          role: "Signal transduction (hormones -> neural)"
+        - name: "Autonomic Nervous System (ANS)"
+          file: "physio_core/autonomic/"
+          input: "Neural signals"
+          output: "ANS state (Sympathetic/Para)"
+          role: "Final autonomic integration"
+
+    embodiment_pipeline:
+      flow: "Receptor -> EVA Matrix -> Artifact Qualia"
+      components:
+        - name: "EVA Matrix"
+          file: "eva_matrix/eva_matrix_engine.py"
+          input: "Receptor signals"
+          output: "9D psychological state"
+          role: "Converts neural signals to 9 dimensions"
+        - name: "Artifact Qualia"
+          file: "Artifact_Qualia/Artifact_Qualia.py"
+          input: "EVA Matrix state"
+          output: "Phenomenological experience"
+          role: "Generates qualia for the llm (intensity, tone, coherence, depth, 5D texture)"
+
+    memory_retrieval:
+      system: "Agentic-RaG(Hept-Stream RAG)"
+      file: "agentic_rag.py" # Inferred from subsequent table, though listed as planned
+      streams:
+        - name: "Narrative Stream"
+          purpose: "Storyline continuity"
+          query_method: "Sequential episode chains"
+        - name: "Salience Stream"
+          purpose: "High-impact memories"
+          query_method: "High RI score"
+        - name: "Sensory Stream"
+          purpose: "Sensory-rich memories"
+          query_method: "Qualia texture match"
+        - name: "Intuition Stream"
+          purpose: "Pattern recognition"
+          query_method: "Semantic graph patterns"
+        - name: "Emotion Stream"
+          purpose: "Memories matching current body state"
+          query_method: "Physio-congruent match"
+          critical_note: "Matches current ANS state + hormone levels with past episodes using cosine similarity (threshold: 70%)"
+        - name: "Temporal Stream"
+          purpose: "Temporal context"
+          query_method: "Time-based + recency bias"
+        - name: "Reflection Stream"
+          purpose: "Self-awareness"
+          query_method: "Meta-cognitive insights"
+      cin_phase_2: "Deep Context Building"
+
+  memory_storage:
+    system: "Memory & Soul Passport (MSP)"
+    components:
+      - name: "Resonance Memory System (RMS)"
+        file: "Resonance_Memory_System/rms_v6.py"
+        role: "Emotional Texture Encoding"
+        details: "Adds core_color, resonance_textures (5D), Trauma detection"
+      - name: "MSP Authority"
+        file: "/msp.py"
+        role: "Persistence Layer"
+  storage_structure:
+  episodic: # 01: EPISODIC MEMORY (Interaction Logs)
+    enabled: true
+    description: "Chronological recording of interactions."
+    classification: "short_term_to_long_term"
+    path: "consciousness/01_episodic_memory"
+    data_source: "Memory & Soul Passport (MSP)"
+    schema_config:
+      enabled: true
+      schema_file: "schema/Episodic_Memory_Schema_v2.json"
+      validation: "strict"
+    subfolders:
+      unified: "episodes"
+      llm_only: "episodes_llm"
+      user_only: "episodes_user"
+      schema: "schema"
+    naming_convention:
+      pattern: "{episodic_id}.json"
+    formats:
+      unified_file: { filename: "episodes/{id}.json", desc: "Full log" }
+      stream_log: { filename: "episodic_log.jsonl", desc: "Append-only" }
+      index: { filename: "Episodic_memory_index.json", desc: "Search index" }
+
+  semantic: # 02: SEMANTIC MEMORY (Knowledge & Concepts)
+    enabled: true
+    description: "Extracted concepts and hypotheses."
+    classification: "conceptual_knowledge"
+    path: "consciousness/02_semantic_memory"
+    data_source: "CIN (Context Injection Node) / Meta-Cognition"
+    schema_config:
+      enabled: true
+      schema_file: "schema/Semantic_Memory_Schema_v2.json"
+    formats:
+      main_storage: { filename: "Semantic_memory.json", desc: "Core KB" }
+      index: { filename: "Semantic_memory_index.json", desc: "Concept index" }
+
+  sensory: # 03: SENSORY MEMORY (Perception Data)
+    enabled: true
+    description: "Raw perceptual snapshots."
+    classification: "raw_perception"
+    path: "consciousness/03_sensory_memory"
+    data_source: "Artifact_Qualia (Phenomenology Core)"
+    schema_config:
+      enabled: true
+      schema_file: "schema/Sensory_Memory_Schema_v2.json"
+    formats:
+      main_storage: { filename: "Sensory_memory.json", desc: "Perception IDs" }
+      artifacts: { filename: "artifacts/", desc: "Raw blobs" }
+
+  session: # 04: SESSION MEMORY (Short-term context)
+    enabled: true
+    description: "Active context, compressed to Core every 8 sessions."
+    classification: "active_context"
+    path: "consciousness/04_session_Memory"
+    schema_config:
+      enabled: true
+      schema_file: "schema/Session_Memory_Schema.json"
+    naming_convention:
+      pattern: "{develop_id}_{sphere_seq}_{core_seq}_{session_seq}.json"
+    formats:
+      active_session: { filename: "session_active.json", desc: "Live state" }
+      session_index: { filename: "session_index.json", desc: "History index" }
+
+  core: # 05: CORE MEMORY (Long-term identity)
+    enabled: true
+    description: "Landmark identity extracted from interaction cycles."
+    classification: "identity_and_principles"
+    path: "consciousness/05_Core_memory"
+    schema_config:
+      enabled: true
+      schema_file: "schema/Core_Memory_Schema.json"
+    naming_convention:
+      pattern: "{develop_id}_{sphere_seq}_{core_seq}.json"
+    formats:
+      core_memory: { filename: "{id}.json", desc: "Extracted landmarks" }
+      core_index: { filename: "core_index.json", desc: "Index" }
+
+  sphere: # 06: SPHERE MEMORY (Social & Environmental)
+    enabled: true
+    description: "Social and environmental mapping."
+    path: "consciousness/06_sphere_memory"
+    schema_config:
+      enabled: true
+      schema_file: "schema/Sphere_Memory_Schema.json"
+    formats:
+      social: { filename: "social_sphere.json", desc: "Relationships" }
+      environmental: { filename: "environmental_sphere.json", desc: "Maps" }
+
+  user_profile: # 07: USER PROFILE (Modeling)
+    enabled: true
+    description: "User modeling and persistent identity."
+    path: "consciousness/07_user_profile"
+    schema_config:
+      enabled: true
+      schema_file: "schema/User_Profile_Schema.json"
+    formats:
+      profile: { filename: "user_profile.json", desc: "Persistent identity" }
+      preferences: { filename: "user_preferences.json", desc: "Settings" }
+
+  state: # 08: STATE STORAGE (Active bio-cognitive)
+    enabled: true
+    description: "Real-time bio-cognitive metrics."
+    path: "consciousness/08_state_storage"
+    schema_config:
+      enabled: true
+      schema_file: "schema/State_Storage_Schema.json"
+    formats:
+      active_state: { filename: "active_state.json", desc: "Hormone/Matrix levels" }
+      eva_matrix: { filename: "eva_matrix_state.json", desc: "Psy State" }
+
+  context: # 09: CONTEXT STORAGE (Working buffers)
+    enabled: true
+    description: "Working buffers for active reasoning."
+    path: "consciousness/09_context_storage"
+    schema_config:
+      enabled: true
+      schema_file: "schema/Context_Storage_Schema.json"
+    formats:
+      working_context: { filename: "working_context.json", desc: "Reasoning window" }
+
+  archival: # 10: ARCHIVAL STORAGE (Cold/Backup)
+    enabled: true
+    description: "Inactive backup for auditing and fallback."
+    classification: "cold_storage"
+    path: "consciousness/10_archival_memory_storage"
+    hierarchy_rules:
+      sessions_to_core: 8
+      cores_to_sphere: 8
+      max_spheres: 8
+    path_template: "sphere_{sphere_seq}/core_{core_seq}/session_{session_seq}"
+    naming_convention:
+      pattern: "{module_folder}/{module_filename}"
+      example: "sphere_1/core_01/session_01/episodic_memory/episodic_log.jsonl"
+    formats:
+      session_snapshot:
+        description: "Full hierarchical backup of modules 01-09."
+        mapping: "Preserves internal subfolders (e.g., episodic_memory/episodes/)"
+
+
+  identity_layer: # 11: IDENTITY LAYER (Soul & Persona)
+    name: "Soul & Persona"
+    components:
+      - name: "Prompt Rule Layer (PMT)"
+        location: "orchestrator/PMT_PromptRuleLayer/"
+        format: "YAML/Markdown"
+        role: "Framework for identity constraints"
+      - name: "Soul"
+        location: "orchestrator/PMT_PromptRuleLayer/Identity/soul.md"
+        develop_id: "THA-01-S003"
+        role: "Core identity document"
+      - name: "Persona"
+        location: "orchestrator/PMT_PromptRuleLayer/Identity/persona.yaml"
+        name: "EVA"
+        role: "Personality definition"
+
+data_flows:
+  phase_1_perception:
+    type: "Deterministic - Fast"
+    steps:
+      - "User Input -> CIN Phase 1"
+      - "CIN Phase 1 input: Physio Baseline, Recent History, context summary, session goal, Quick Keyword Recall, Persona/Soul Identity, user profile, PMT Rules"
+      - "CIN Phase 1 -> LLM Bridge"
+      - "LLM Bridge -> LLM analyzes intent/emotion -> Extracts stimulus_vector + tags"
+      - "LLM -> Function Call: sync_biocognitive_state(stimulus_vector, tags)"
+  
+  the_gap_processing:
+    type: "Real-time Processing"
+    steps:
+      - "Function Call Triggers -> Physiological Pipeline (HPA->Circ->Endo->Blood->Receptor->ANS)"
+      - "Also -> EVA Matrix -> Artifact Qualia"
+      - "Result: Updated Physio State"
+      - "Simultaneous -> Memory Retrieval (HeptStreamRAG)"
+      - "Query 7 Streams based on tags + physio state"
+      - "CIN Phase 2 aggregates: embodied_sensation, physio_metrics, memory_matches"
+      - "Return function result to LLM"
+
+  phase_2_reasoning:
+    type: "Embodied Response"
+    steps:
+      - "Function Result -> LLM"
+      - "LLM Reflective Reasoning: Integrate body state, Recall relevant memories, Constraint application"
+      - "Generate Embodied Response: Text (Bilingual), Context summary, Tags"
+      - "Output to User"
+
+  persistence_flow:
+    steps:
+      - "LLM Response -> RMS (Encodes emotional texture, Trauma detection)"
+      - "RMS -> MSP Authority"
+      - "MSP Authority splits and saves to: episodic/EVA_EP{n}.json, episodes_user/, episodes_llm/, episodic_log.jsonl, Session memory"
+
+system_rules:
+  - "One LLM Inference Only: Not two separate API calls. LLM pauses during The Gap."
+  - "Physiology First, Cognition Later: Body state updates BEFORE cognitive reasoning (60% Physio > 40% Persona)."
+  - "CIN Never Summarizes: Context summary MUST come from LLM (Phase 2)."
+  - "MSP Primacy: All memory retrieval goes through Agentic-RaG. MSP is ONLY authority for writes."
+  - "One-Way Data Flow: Stimulus -> Endocrine -> ... -> MSP. No backwards writes."
+  - "Context Continuity: context_id stays constant across both phases."
+
+performance:
+  metrics:
+    phase_1_speed: "<100ms"
+    the_gap_speed: "~500ms"
+    total_latency: "~600ms"
+    episode_split_io_reduction: "62%"
+    episode_id_length: "9-12 chars"
+    session_memory_compression_ratio: "8:1"
+
+component_status_table:
+  - component: "CIN"
+    status: "❌ Planned"
+    path: "orchestrator/cin.py"
+  - component: "HeptStreamRAG"
+    status: "❌ Planned"
+    path: "services/hept_stream_rag.py"
+  - component: "MSP Client"
+    status: "❌ Planned"
+    path: "services/msp_client.py"
+  - component: "PhysioController"
+    status: "❌ Planned"
+    path: "physio_core/physio_controller.py"
+  - component: "EVA Matrix"
+    status: "❌ Planned"
+    path: "eva_matrix/eva_matrix_engine.py"
+  - component: "Artifact Qualia"
+    status: "❌ Planned"
+    path: "Artifact_Qualia/Artifact_Qualia.py"
+  - component: "RMS"
+    status: "❌ Planned"
+    path: "Resonance_Memory_System/rms_v6.py"
+  - component: "Main Orchestrator"
+    status: "❌ Planned"
+    path: "orchestrator/chunking_orchestrator.py"
+  - component: "LLM Bridge"
+    status: "❌ Planned"
+    path: "services/llm_bridge.py"
+
+validation:
+  validated_against: "docs/ARCHITECTURE_FLOW_VALIDATED.md"
+  date: "2026-01-02"
+  validator: "Claude Sonnet 4.5"
+  status: "ACCURATE"
+
+version_history:
+  - version: "v2.0"
+    date: "2026-01-02"
+    details: "Complete revision with all components"
+  - version: "v1.0"
+    details: "Initial simplified diagram"

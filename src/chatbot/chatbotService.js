@@ -128,6 +128,5 @@ async function sendMessageGemini(userMessage, conversationHistory = []) {
 }
 
 function buildFullContext() {
-    const ctx = resumeContext;
-    return `Boss: ${ctx.personalInfo.name} (${ctx.personalInfo.nickname}), 32. ${ctx.personalInfo.description}. Location: ${ctx.personalInfo.location}.`;
+    return JSON.stringify(resumeContext, null, 2);
 }

@@ -41,8 +41,8 @@ const ChatbotModal = ({ onClose, messages, isLoading, onSendMessage }) => {
                         <Bot size={24} />
                     </div>
                     <div>
-                        <h3 className="font-bold text-lg">AI Assistant</h3>
-                        <p className="text-xs text-white/80">ผู้ช่วยของบอส</p>
+                        <h3 className="font-bold text-lg">EVA (อีวา)</h3>
+                        <p className="text-xs text-white/80">Digital Soul & AI Partner</p>
                     </div>
                 </div>
                 <div className="flex items-center gap-2">
@@ -74,8 +74,8 @@ const ChatbotModal = ({ onClose, messages, isLoading, onSendMessage }) => {
                         {/* Avatar */}
                         <div
                             className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center ${msg.role === 'user'
-                                    ? 'bg-blue-600 text-white'
-                                    : 'bg-white border border-slate-200 text-blue-600'
+                                ? 'bg-blue-600 text-white'
+                                : 'bg-white border border-slate-200 text-blue-600'
                                 }`}
                         >
                             {msg.role === 'user' ? <User size={16} /> : <Bot size={16} />}
@@ -84,10 +84,10 @@ const ChatbotModal = ({ onClose, messages, isLoading, onSendMessage }) => {
                         {/* Message Bubble */}
                         <div
                             className={`max-w-[75%] px-4 py-3 rounded-2xl shadow-sm ${msg.role === 'user'
-                                    ? 'bg-blue-600 text-white rounded-tr-sm'
-                                    : msg.isError
-                                        ? 'bg-red-50 text-red-800 border border-red-200 rounded-tl-sm'
-                                        : 'bg-white text-slate-800 border border-slate-200 rounded-tl-sm'
+                                ? 'bg-blue-600 text-white rounded-tr-sm'
+                                : msg.isError
+                                    ? 'bg-red-50 text-red-800 border border-red-200 rounded-tl-sm'
+                                    : 'bg-white text-slate-800 border border-slate-200 rounded-tl-sm'
                                 }`}
                         >
                             <p className="text-sm leading-relaxed whitespace-pre-wrap">{msg.content}</p>
