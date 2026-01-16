@@ -34,8 +34,8 @@ async function sendMessageGemini(userMessage, conversationHistory = []) {
     const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
     if (!apiKey) throw new Error('Gemini API key missing');
 
-    // Using v1 for gemini-3-flash which appeared in user rate limits
-    const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1/models/gemini-3-flash:generateContent';
+    // Using gemini-2.5-flash (Balanced stability and performance for 2026)
+    const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent';
 
     try {
         const fullPrompt = `${systemPrompt}\n\nContext:\n${buildFullContext()}`;
