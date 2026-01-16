@@ -15,7 +15,7 @@ export function useChatbot() {
             setMessages([{
                 id: Date.now(),
                 role: 'bot',
-                content: t.chatbot?.welcomeMessage || 'สวัสดีครับ! ผมคือ AI Assistant ของบอส มีคำถามอะไรเกี่ยวกับประวัติการทำงานหรือผลงานไหมครับ?'
+                content: t.chatbot?.welcomeMessage || 'สวัสดีครับ! ผมคือ AI Assistant ของบอสครับ ยินดีที่ได้รู้จักนะครับ! รบกวนแจ้งชื่อของคุณและบริษัทให้ผมทราบนิดนึงได้ไหมครับ? ผมจะได้ดึงข้อมูลและเตรียมคำตอบที่เหมาะกับคุณที่สุดให้ครับ 😊'
             }]);
         }
     }, [messages.length, t.chatbot]);
@@ -33,7 +33,16 @@ export function useChatbot() {
     const sendUserMessage = useCallback(async (userMessage) => {
         if (!userMessage.trim()) return;
 
-        // Add user message
+        // Detect Identity (Very simple regex for "Name จาก Company")
+        // This will be improved to handle separate inputs or LLM-based extraction
+        const identityMatch = userMessage.match(/(?:ชื่อ|ผม|ดิฉัน)\s*(\S+)\s*(?:จาก|บริษัท)\s*(\S+)/i);
+        if (identityMatch) {
+            const name = identityMatch[1];
+            const company = identityMatch[2];
+            sessionStorage.setItem('eva_user_name', name);
+            sessionStorage.setItem('eva_user_company', company);
+        }
+
         const userMsg = {
             id: Date.now(),
             role: 'user',
@@ -45,7 +54,10 @@ export function useChatbot() {
         setError(null);
 
         try {
-            // Prepare conversation history (exclude welcome message)
+            const userName = sessionStorage.getItem('eva_user_name');
+            const userCompany = sessionStorage.getItem('eva_user_company');
+
+            // Prepare conversation history
             const history = messages
                 .filter(msg => msg.role !== 'bot' || msg.id !== messages[0]?.id)
                 .map(msg => ({
@@ -53,8 +65,8 @@ export function useChatbot() {
                     content: msg.content
                 }));
 
-            // Get bot response
-            const botResponse = await sendMessage(userMessage, history);
+            // Get bot response with identity context
+            const botResponse = await sendMessage(userMessage, history, { name: userName, company: userCompany });
 
             // Add bot message
             const botMsg = {

@@ -148,6 +148,10 @@ const MainPortfolio = () => {
                 {t.hero.viewPortfolio} <ExternalLink size={18} />
               </Link>
             </div>
+            <p className="text-sm text-slate-500 font-medium animate-in fade-in slide-in-from-left duration-1000 delay-500">
+              <Sparkles size={14} className="inline mr-1 text-blue-600 animate-pulse" />
+              {t.chatbot.hint}
+            </p>
           </div>
           <div className="flex-1 relative">
             <div className="w-64 h-64 md:w-96 md:h-96 mx-auto relative z-10 group">

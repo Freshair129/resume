@@ -11,10 +11,11 @@ export const th = {
         backToPortfolio: "กลับหน้า Portfolio"
     },
     chatbot: {
-        welcomeMessage: "สวัสดีครับ! ผมคือ AI Assistant ของบอส มีคำถามอะไรเกี่ยวกับประวัติการทำงานหรือผลงานไหมครับ?",
+        welcomeMessage: "สวัสดีครับ! ผมคือ AI Assistant ของบอสครับ ยินดีที่ได้รู้จักนะครับ! รบกวนแจ้งชื่อของคุณและบริษัทให้ผมทราบนิดนึงได้ไหมครับ? ผมจะได้เก็บบทสนทนาไว้ให้คุณ และเตรียมข้อมูลที่เหมาะกับคุณที่สุดให้ครับ 😊",
         placeholder: "พิมพ์คำถามของคุณ...",
         send: "ส่ง",
-        errorMessage: "ขออภัยครับ เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง 😅"
+        errorMessage: "ขออภัยครับ เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง 😅",
+        hint: "คุยกับ EVA AI ที่บอสสร้างเองได้ที่นี่!"
     },
     hero: {
         available: "Available for Work",
@@ -196,10 +197,11 @@ export const en = {
         backToPortfolio: "Back to Portfolio"
     },
     chatbot: {
-        welcomeMessage: "Hi! I'm Boss's AI Assistant. Do you have any questions about his work experience or portfolio?",
+        welcomeMessage: "Hi! I'm Boss's AI Assistant. Nice to meet you! Could you please tell me your name and company? I'll save our conversation for you and prepare the most relevant info for your needs! 😊",
         placeholder: "Type your question...",
         send: "Send",
-        errorMessage: "Sorry, an error occurred. Please try again 😅"
+        errorMessage: "Sorry, an error occurred. Please try again 😅",
+        hint: "Chat with EVA AI, my self-made assistant!"
     },
     hero: {
         available: "Available for Work",
