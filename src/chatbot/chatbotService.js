@@ -71,8 +71,8 @@ async function sendMessageGemini(userMessage, conversationHistory = []) {
         throw new Error('No API configuration available. Please configure either EVA backend or Gemini API key.');
     }
 
-    // Using gemini-3-flash-preview (user requested)
-    const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent';
+    // Using gemini-2.0-flash-exp (confirmed working - user has access)
+    const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent';
 
     try {
         // Build simple context
