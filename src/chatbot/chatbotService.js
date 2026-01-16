@@ -34,8 +34,8 @@ async function sendMessageGemini(userMessage, conversationHistory = []) {
     const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
     if (!apiKey) throw new Error('Gemini API key missing');
 
-    // Using gemini-2.5-flash (Balanced stability and performance for 2026)
-    const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent';
+    // Using gemini-2.0-flash-exp - Confirmed working in user's rate limits (9/10 usage)
+    const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent';
 
     try {
         const fullPrompt = `${systemPrompt}\n\nContext:\n${buildFullContext()}`;
@@ -70,7 +70,16 @@ async function sendMessageGemini(userMessage, conversationHistory = []) {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 contents,
-                generationConfig: { temperature: 0.7, maxOutputTokens: 300 }
+                generationConfig: {
+                    temperature: 0.7,
+                    maxOutputTokens: 350
+                },
+                safetySettings: [
+                    { category: "HARM_CATEGORY_HARASSMENT", threshold: "BLOCK_NONE" },
+                    { category: "HARM_CATEGORY_HATE_SPEECH", threshold: "BLOCK_NONE" },
+                    { category: "HARM_CATEGORY_SEXUALLY_EXPLICIT", threshold: "BLOCK_NONE" },
+                    { category: "HARM_CATEGORY_DANGEROUS_CONTENT", threshold: "BLOCK_NONE" }
+                ]
             })
         });
 
