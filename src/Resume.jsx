@@ -178,7 +178,7 @@ const Resume = () => {
                             </h2>
                             <div className="space-y-2 text-sm text-[#cbd5e1]">
                                 <div className="space-y-2 text-sm text-[#cbd5e1]">
-                                    <p className="flex items-center gap-2"><Phone size={14} className="text-[#64748b]" /> 083-184-0662</p>
+                                    <p className="flex items-center gap-2"><Phone size={14} className="text-[#64748b]" /> 093-184-0662</p>
                                     <p className="flex items-center gap-2"><Phone size={14} className="text-[#64748b]" /> 090-973-0775</p>
                                     <p className="flex items-center gap-2"><Mail size={14} className="text-[#64748b]" /> suanranger129@gmail.com</p>
                                     <p className="flex items-center gap-2"><MapPin size={14} className="text-[#64748b]" /> {t.resume.location}</p>

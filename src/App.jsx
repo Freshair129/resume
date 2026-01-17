@@ -353,8 +353,8 @@ const MainPortfolio = () => {
           <div className="space-y-8">
             <h2 className="text-2xl md:text-4xl font-black leading-tight text-center md:text-left">{t.resume.contact}</h2>
             <div className="space-y-4">
-              <a href="tel:0831840662" className="flex items-center gap-4 text-xl hover:text-blue-400 transition-colors"><Phone /> 083-184-0662</a>
-              <a href="tel:0831840662" className="flex items-center gap-4 text-xl hover:text-blue-400 transition-colors"><Phone /> 090-973-0775</a>
+              <a href="tel:0931840662" className="flex items-center gap-4 text-xl hover:text-blue-400 transition-colors"><Phone /> 093-184-0662</a>
+              <a href="tel:0909730775" className="flex items-center gap-4 text-xl hover:text-blue-400 transition-colors"><Phone /> 090-973-0775</a>
               <a href="mailto:suanranger129@gmail.com" className="flex items-center gap-4 text-xl hover:text-blue-400 transition-colors"><Mail /> suanranger129@gmail.com</a>
               <p className="flex items-center gap-4 text-xl text-slate-400"><MapPin /> {t.resume.location}</p>
             </div>
