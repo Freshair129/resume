@@ -1,3 +1,4 @@
+import { inject } from '@vercel/analytics';
 import { StrictMode, Component } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
@@ -42,6 +43,8 @@ class ErrorBoundary extends Component {
     return this.props.children;
   }
 }
+
+inject();
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
