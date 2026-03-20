@@ -116,10 +116,11 @@ const Resume = () => {
 
     const hardSkills = ["Photoshop", "Premiere Pro", "After Effects", "Illustrator", "CapCut", "Canva", "Tiktok", "Reels", "Shorts"];
     const aiSkills = [
-        "VS Code", "Antigravity", "Claude Code", "Gemini CLI", "Ollama", "LM Studio", "AnythingLLM",
-        "ChatGPT", "Gemini", "Maus", "Claude", "Poe",
+        "Claude", "Gemini", "OpenAI", "Qwen 3.0", "Manus", "Ollama (Local)",
+        "NotebookLM", "Flow",
         "Prompt Engineering", "Context Engineering", "Agentic RAG"
     ];
+    const manageTools = ["Notion", "Trello", "Google Workspace"];
     const coreCompetencies = ["Video Editor", "Creative", "Photography", "Motion Graphic", "Song Writer", "Coding", "English (Read/Write/Speak)"];
     const softSkills = ["Communication", "Teamwork", "Crisis Solving", "Growth Mindset", "Management", "Adaptability", "Work Smart"];
 
@@ -210,6 +211,19 @@ const Resume = () => {
                                 {aiSkills.map(skill => (
                                     <span key={skill} className="bg-[#2563eb33] text-[#93c5fd] px-2 py-1 rounded text-[11px] border border-[#3b82f64d]">
                                         {skill}
+                                    </span>
+                                ))}
+                            </div>
+                        </section>
+
+                        <section>
+                            <h2 className="text-lg font-semibold border-b border-[#334155] pb-2 mb-3 flex items-center gap-2">
+                                <Briefcase size={18} className="text-[#60a5fa]" /> Management Tools
+                            </h2>
+                            <div className="flex flex-wrap gap-2">
+                                {manageTools.map(tool => (
+                                    <span key={tool} className="bg-[#7c3aed33] text-[#c4b5fd] px-2 py-1 rounded text-[11px] border border-[#7c3aed4d]">
+                                        {tool}
                                     </span>
                                 ))}
                             </div>
