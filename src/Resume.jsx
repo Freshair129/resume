@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Phone, Mail, MapPin, Download, ExternalLink, Award, Sparkles, Brain, Cpu, Code, Star, Video, Camera, Briefcase, Image as ImageIcon, FileText, GraduationCap, CheckCircle2 } from 'lucide-react';
+import { ArrowLeft, Phone, Mail, MapPin, Download, ExternalLink, Award, Sparkles, Brain, Cpu, Code, Star, Video, Camera, Briefcase, Image as ImageIcon, FileText, GraduationCap, CheckCircle2, Github } from 'lucide-react';
 import { useLanguage } from './LanguageContext';
 import React, { useRef } from 'react';
 import html2canvas from 'html2canvas';
@@ -114,7 +114,7 @@ const Resume = () => {
     // Resume data structure aligned with Portfolio.jsx structure for consistency if needed,
     // but here we primarily use the translation object for static text.
 
-    const hardSkills = ["Photoshop", "Premiere Pro", "After Effects", "Illustrator", "Figma", "CapCut", "Canva", "Tiktok", "Reels", "Shorts"];
+    const hardSkills = ["Photoshop", "Premiere Pro", "After Effects", "Illustrator", "Figma", "CapCut", "Canva", "Tiktok", "Reels", "Shorts", "GitHub"];
     const aiSkills = [
         "Claude", "Gemini", "OpenAI", "Qwen 3.0", "Manus", "Ollama (Local)",
         "NotebookLM", "Flow",
@@ -211,6 +211,7 @@ const Resume = () => {
                                     <p className="flex items-center gap-2"><Phone size={14} className="text-[#64748b]" /> 090-973-0775</p>
                                     <p className="flex items-center gap-2"><Mail size={14} className="text-[#64748b]" /> suanranger129@gmail.com</p>
                                     <p className="flex items-center gap-2"><MapPin size={14} className="text-[#64748b]" /> {t.resume.location}</p>
+                                    <p className="flex items-center gap-2"><Github size={14} className="text-[#64748b]" /> <a href="https://github.com/Freshair129" target="_blank" rel="noopener noreferrer" className="text-[#93c5fd] hover:text-white transition-colors">github.com/Freshair129</a></p>
                                 </div>
                             </div>
                         </section>
