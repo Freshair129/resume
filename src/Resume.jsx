@@ -288,6 +288,19 @@ const Resume = () => {
 
                 {/* Right Column / Content */}
                 <div className="md:w-2/3 p-8 lg:p-12">
+                    <section className="mb-8">
+                        <div className="bg-gradient-to-r from-[#0f172a] to-[#1e3a8a] border border-[#3b82f6] rounded-xl p-5">
+                            <p className="text-[#60a5fa] font-bold text-xs uppercase tracking-widest mb-2">What Makes Me Different</p>
+                            <p className="text-[#e2e8f0] text-sm leading-relaxed font-medium">
+                                นักการตลาดที่ Build ได้จริง — จุดแข็งที่หายากในวงการ
+                            </p>
+                            <p className="text-[#94a3b8] text-sm leading-relaxed mt-1">
+                                คนที่เขียนโค้ดเป็นส่วนใหญ่ไม่เข้าใจ marketing pipeline — คนทำ marketing ส่วนใหญ่ก็ build ระบบเองไม่ได้
+                                ผมเข้าใจทั้งสองด้าน: ตั้งแต่ ad creative, campaign strategy จนถึง revenue attribution
+                                และสามารถ build ระบบ production จริงที่รันทั้งหมดนั้นได้ด้วยตัวเอง
+                            </p>
+                        </div>
+                    </section>
                     <section className="mb-10">
                         <h2 className="text-2xl font-bold text-[#0f172a] flex items-center gap-3 mb-6">
                             <Briefcase className="text-[#2563eb]" /> ประสบการณ์การทำงาน
@@ -366,7 +379,7 @@ const Resume = () => {
                     <div className="mt-12 pt-8 border-t border-[#f1f5f9]">
                         <div className="bg-[#eff6ff] border-l-4 border-[#3b82f6] p-4 rounded-r-lg">
                             <p className="text-[#475569] text-xs italic">
-                                "ด้วยพื้นฐานงานสาย Content Production กว่า 4 ปี ผสมผสานกับประสบการณ์บริหารจัดการทีมและการนำ AI มาปรับใช้ ผมพร้อมที่จะยกระดับการทำงานให้มีประสิทธิภาพและสร้างสรรค์ผลลัพธ์ที่จับต้องได้ให้กับองค์กร"
+                                "จุดแข็งของผมไม่ใช่แค่รู้การตลาด หรือแค่ vibe code ได้ — แต่เข้าใจ pipeline ทั้งหมดตั้งแต่ ad creative จนถึง revenue attribution และสามารถ build ระบบ production จริงที่รันทั้งหมดนั้นได้ด้วยตัวเอง คนที่เข้าใจการตลาดและ build production system ได้ในเวลาเดียวกัน — นั่นคือผม"
                             </p>
                         </div>
                     </div>
