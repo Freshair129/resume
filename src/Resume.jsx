@@ -114,13 +114,13 @@ const Resume = () => {
     // Resume data structure aligned with Portfolio.jsx structure for consistency if needed,
     // but here we primarily use the translation object for static text.
 
-    const hardSkills = ["Photoshop", "Premiere Pro", "After Effects", "Illustrator", "CapCut", "Canva", "Tiktok", "Reels", "Shorts"];
+    const hardSkills = ["Photoshop", "Premiere Pro", "After Effects", "Illustrator", "Figma", "CapCut", "Canva", "Tiktok", "Reels", "Shorts"];
     const aiSkills = [
         "Claude", "Gemini", "OpenAI", "Qwen 3.0", "Manus", "Ollama (Local)",
         "NotebookLM", "Flow",
         "Prompt Engineering", "Context Engineering", "Agentic RAG"
     ];
-    const manageTools = ["Notion", "Trello", "Google Workspace"];
+    const manageTools = ["Notion", "Trello", "Slack", "Google Workspace"];
     const coreCompetencies = ["Video Editor", "Creative", "Photography", "Motion Graphic", "Song Writer", "Coding", "English (Read/Write/Speak)"];
     const softSkills = ["Communication", "Teamwork", "Crisis Solving", "Growth Mindset", "Management", "Adaptability", "Work Smart"];
 
