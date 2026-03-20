@@ -11,8 +11,9 @@ import { useLanguage } from './LanguageContext';
 import Resume from './Resume';
 import Portfolio from './Portfolio';
 import Gallery from './Gallery';
-import ProjectDemo from './ProjectDemo'; // Import Gallery
-import ChatbotWidget from './chatbot/ChatbotWidget'; // Import Chatbot
+import ProjectDemo from './ProjectDemo';
+import ChatbotWidget from './chatbot/ChatbotWidget';
+import ProjectsSection from './ProjectsSection';
 import heroBg from './assets/hero-bg.jpg';
 import img02 from './assets/02.jpg';
 import img03 from './assets/03.jpg';
@@ -21,12 +22,9 @@ import img05 from './assets/05.jpg';
 import img06 from './assets/06.jpg';
 
 const ImageSlider = () => {
-  const images = [
-    img02, img03, img04, img05, img06
-  ];
+  const images = [img02, img03, img04, img05, img06];
   const [currentIndex, setCurrentIndex] = useState(0);
   const nextIndex = (currentIndex + 1) % images.length;
-
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % images.length);
@@ -36,24 +34,13 @@ const ImageSlider = () => {
 
   return (
     <>
-      {/* Background "Next" Card */}
       <div className="absolute inset-0 w-full h-full rounded-[3rem] rotate-6 group-hover:rotate-3 transition-transform duration-500 overflow-hidden shadow-2xl bg-slate-100 z-0">
-        <img
-          src={images[nextIndex]}
-          alt="Next Slide"
-          className="w-full h-full object-cover opacity-90 blur-[1px] brightness-75 transition-all duration-500 group-hover:opacity-100 group-hover:blur-0 group-hover:brightness-100"
-        />
+        <img src={images[nextIndex]} alt="Next Slide" className="w-full h-full object-cover opacity-90 blur-[1px] brightness-75 transition-all duration-500 group-hover:opacity-100 group-hover:blur-0 group-hover:brightness-100" />
       </div>
-
-      {/* Foreground "Current" Slider */}
       <div className="absolute inset-0 w-full h-full rounded-[3rem] -rotate-3 group-hover:rotate-0 transition-transform duration-500 border-4 border-white shadow-2xl overflow-hidden bg-white z-10">
         {images.map((img, index) => (
-          <img
-            key={index}
-            src={img}
-            alt={`Slide ${index}`}
-            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${index === currentIndex ? 'opacity-100' : 'opacity-0'
-              }`}
+          <img key={index} src={img} alt={`Slide ${index}`}
+            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${index === currentIndex ? 'opacity-100' : 'opacity-0'}`}
           />
         ))}
       </div>
@@ -88,13 +75,14 @@ const MainPortfolio = () => {
   return (
     <div className="min-h-screen bg-white selection:bg-blue-100 selection:text-blue-900">
       {/* Navigation */}
-      <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white/80 backdrop-blur-md shadow-md py-3' : 'bg-transparent py-5'} `}>
+      <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white/80 backdrop-blur-md shadow-md py-3' : 'bg-transparent py-5'}`}>
         <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
           <div className="text-xl font-black tracking-tighter text-blue-600">PORNPON.T</div>
           <div className="hidden md:flex space-x-8 items-center">
             <a href="#home" className="text-sm font-medium hover:text-blue-600 transition-colors">{t.nav.home}</a>
             <a href="#skills" className="text-sm font-medium hover:text-blue-600 transition-colors">{t.nav.skills}</a>
             <a href="#experience" className="text-sm font-medium hover:text-blue-600 transition-colors">{t.nav.experience}</a>
+            <a href="#projects" className="text-sm font-medium hover:text-blue-600 transition-colors">Projects</a>
             <Link to="/portfolio" className="text-sm font-medium hover:text-blue-600 transition-colors">{t.nav.portfolio}</Link>
             <Link to="/gallery" className="text-sm font-medium hover:text-blue-600 transition-colors">{t.nav.gallery}</Link>
             <Link to="/resume" className="text-sm font-bold text-slate-900 hover:text-blue-600 transition-colors flex items-center gap-1">
@@ -109,13 +97,12 @@ const MainPortfolio = () => {
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
-
-        {/* Mobile Menu */}
         {isMenuOpen && (
           <div className="md:hidden absolute top-full left-0 w-full bg-white border-b border-slate-100 p-6 flex flex-col gap-4 shadow-xl animate-in slide-in-from-top duration-300">
             <a href="#home" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>{t.nav.home}</a>
             <a href="#skills" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>{t.nav.skills}</a>
             <a href="#experience" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>{t.nav.experience}</a>
+            <a href="#projects" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>Projects</a>
             <Link to="/portfolio" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>{t.nav.portfolio}</Link>
             <Link to="/gallery" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>{t.nav.gallery}</Link>
             <Link to="/resume" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>{t.nav.resume}</Link>
@@ -135,12 +122,8 @@ const MainPortfolio = () => {
               <span className="flex h-2 w-2 rounded-full bg-blue-600 animate-pulse"></span>
               {t.hero.available}
             </div>
-            <h1 className="text-4xl md:text-6xl font-black leading-tight text-slate-900">
-              {t.hero.name}
-            </h1>
-            <p className="text-xl text-slate-600 max-w-xl mx-auto md:mx-0 leading-relaxed">
-              {t.hero.desc}
-            </p>
+            <h1 className="text-4xl md:text-6xl font-black leading-tight text-slate-900">{t.hero.name}</h1>
+            <p className="text-xl text-slate-600 max-w-xl mx-auto md:mx-0 leading-relaxed">{t.hero.desc}</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
               <Link to="/resume" className="bg-slate-900 text-white px-8 py-4 rounded-2xl font-bold flex items-center justify-center gap-2 shadow-xl shadow-slate-200 hover:bg-slate-800 transition-all hover:-translate-y-1">
                 {t.hero.viewResume} <FileText size={18} />
@@ -158,21 +141,17 @@ const MainPortfolio = () => {
                 <Download size={14} /> TH (Word)
               </a>
             </div>
-            <p className="text-sm text-slate-500 font-medium animate-in fade-in slide-in-from-left duration-1000 delay-500">
-              <Sparkles size={14} className="inline mr-1 text-blue-600 animate-pulse" />
-              {t.chatbot.hint}
+            <p className="text-sm text-slate-500 font-medium">
+              <Sparkles size={14} className="inline mr-1 text-blue-600 animate-pulse" /> {t.chatbot.hint}
             </p>
           </div>
           <div className="flex-1 relative">
             <div className="w-64 h-64 md:w-96 md:h-96 mx-auto relative z-10 group">
-              {/* Image Slider handles both background and foreground */}
               <ImageSlider />
             </div>
             <div className="absolute -bottom-4 -right-4 md:bottom-10 md:-right-10 bg-white p-6 rounded-3xl shadow-2xl z-20 animate-bounce-slow">
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-blue-600 rounded-2xl flex items-center justify-center text-white">
-                  <Brain size={24} />
-                </div>
+                <div className="w-12 h-12 bg-blue-600 rounded-2xl flex items-center justify-center text-white"><Brain size={24} /></div>
                 <div className="text-left">
                   <div className="text-xs text-slate-400 font-bold uppercase">AI Specialist</div>
                   <div className="text-lg font-black text-slate-900">Agentic RAG</div>
@@ -183,118 +162,66 @@ const MainPortfolio = () => {
         </div>
       </section>
 
-      {/* Skills & Showcase Section */}
+      {/* Skills Section */}
       <section id="skills" className="bg-slate-50 py-24">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col lg:flex-row gap-12 items-start">
-
-            {/* Left Column: Image */}
             <div className="lg:w-1/3 w-full sticky top-24">
               <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl group border-8 border-white bg-white">
-                <img
-                  src={heroBg}
-                  alt="Profile Highlight"
-                  className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
-                />
+                <img src={heroBg} alt="Profile Highlight" className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-8">
                   <p className="text-white text-lg font-bold italic">"Crafting excellence."</p>
                 </div>
               </div>
             </div>
-
-            {/* Right Column: Skills */}
             <div className="lg:w-2/3 w-full space-y-8">
               <div className="mb-8">
                 <div className="inline-flex items-center gap-2 bg-blue-100 text-blue-700 px-4 py-1.5 rounded-full text-sm font-bold mb-4">
                   <Brain size={16} /> {t.skills.badge}
                 </div>
-                <h2 className="text-3xl md:text-5xl font-black text-slate-900 leading-tight">
-                  {t.skills.title}
-                </h2>
+                <h2 className="text-3xl md:text-5xl font-black text-slate-900 leading-tight">{t.skills.title}</h2>
               </div>
-
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* AI Innovation Card */}
                 <div className="bg-slate-900 text-white p-8 rounded-[2rem] shadow-xl hover:-translate-y-1 transition-all duration-300">
-                  <div className="flex items-center gap-3 mb-6">
-                    <div className="p-3 bg-blue-600 rounded-2xl"><Cpu /></div>
-                    <h3 className="text-xl font-bold">AI Innovation</h3>
-                  </div>
+                  <div className="flex items-center gap-3 mb-6"><div className="p-3 bg-blue-600 rounded-2xl"><Cpu /></div><h3 className="text-xl font-bold">AI Innovation</h3></div>
                   <div className="space-y-4">
-                    {[
-                      { name: "Prompt Engineering", level: "Advanced" },
-                      { name: "Context Engineering", level: "Intermediate" },
-                      { name: "Agentic RAG", level: "Intermediate" },
-                      { name: "AI Marketing", level: "Basic" },
-                      { name: "Data Analysis", level: "Basic" }
-                    ].map(s => (
+                    {[{name:"Prompt Engineering",level:"Advanced"},{name:"Context Engineering",level:"Intermediate"},{name:"Agentic RAG",level:"Intermediate"},{name:"AI Marketing",level:"Basic"},{name:"Data Analysis",level:"Basic"}].map(s => (
                       <div key={s.name} className="flex justify-between items-center py-2 border-b border-slate-700/50 last:border-0">
                         <span className="text-slate-300 font-medium">{s.name}</span>
-                        <span className={`px - 3 py - 1 rounded - full text - [10px] font - black uppercase tracking - wider ${s.level === 'Specialist' ? 'bg-blue-500 text-white shadow-lg shadow-blue-500/30' :
-                          'bg-slate-700 text-slate-300'
-                          } `}>
-                          {s.level}
-                        </span>
+                        <span className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider ${s.level==='Specialist'?'bg-blue-500 text-white shadow-lg shadow-blue-500/30':'bg-slate-700 text-slate-300'}`}>{s.level}</span>
                       </div>
                     ))}
                   </div>
                 </div>
-
                 {/* Tools Card */}
                 <div className="bg-white p-8 rounded-[2rem] shadow-lg border border-slate-100 hover:-translate-y-1 transition-all duration-300">
-                  <div className="flex items-center gap-3 mb-6 text-slate-900">
-                    <div className="p-3 bg-slate-100 rounded-2xl"><Code /></div>
-                    <h3 className="text-xl font-bold">Tools & Media</h3>
-                  </div>
+                  <div className="flex items-center gap-3 mb-6 text-slate-900"><div className="p-3 bg-slate-100 rounded-2xl"><Code /></div><h3 className="text-xl font-bold">Tools & Media</h3></div>
                   <div className="space-y-4">
-                    {[
-                      { name: "Photoshop", level: "Specialist" },
-                      { name: "Premiere Pro", level: "Advanced" },
-                      { name: "Canva", level: "Advanced" },
-                      { name: "NotebookLM", level: "Intermediate" },
-                      { name: "Google Sheets", level: "Basic" },
-                      { name: "Illustrator", level: "Basic" },
-                      { name: "After Effects", level: "Basic" }
-                    ].map(s => (
+                    {[{name:"Photoshop",level:"Specialist"},{name:"Premiere Pro",level:"Advanced"},{name:"Canva",level:"Advanced"},{name:"NotebookLM",level:"Intermediate"},{name:"Google Sheets",level:"Basic"},{name:"Illustrator",level:"Basic"},{name:"After Effects",level:"Basic"}].map(s => (
                       <div key={s.name} className="flex justify-between items-center py-2 border-b border-slate-100 last:border-0">
                         <span className="text-slate-700 font-bold text-sm">{s.name}</span>
-                        <span className={`px - 3 py - 1 rounded - full text - [10px] font - black uppercase tracking - wider ${s.level === 'Specialist' ? 'bg-blue-600 text-white shadow-md shadow-blue-200' :
-                          s.level === 'Advanced' ? 'bg-blue-50 text-blue-600 border border-blue-100' :
-                            'bg-slate-100 text-slate-500'
-                          } `}>
-                          {s.level}
-                        </span>
+                        <span className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider ${s.level==='Specialist'?'bg-blue-600 text-white shadow-md shadow-blue-200':s.level==='Advanced'?'bg-blue-50 text-blue-600 border border-blue-100':'bg-slate-100 text-slate-500'}`}>{s.level}</span>
                       </div>
                     ))}
                   </div>
                 </div>
-
-                {/* AI Tools & Code Gen Card */}
+                {/* AI Tools Card */}
                 <div className="bg-white p-8 rounded-[2rem] shadow-lg border border-slate-100 hover:-translate-y-1 transition-all duration-300">
-                  <div className="flex items-center gap-3 mb-6 text-slate-900">
-                    <div className="p-3 bg-slate-100 rounded-2xl"><Bot /></div>
-                    <h3 className="text-xl font-bold">AI Tools & Code Gen</h3>
-                  </div>
+                  <div className="flex items-center gap-3 mb-6 text-slate-900"><div className="p-3 bg-slate-100 rounded-2xl"><Bot /></div><h3 className="text-xl font-bold">AI Tools & Code Gen</h3></div>
                   <div className="flex flex-wrap gap-2">
-                    {[
-                      "VS Code", "Antigravity", "Claude Code", "Gemini CLI", "Ollama", "LM Studio", "AnythingLLM",
-                      "ChatGPT", "Gemini", "Maus", "Claude", "Poe"
-                    ].map(s => (
+                    {["VS Code","Antigravity","Claude Code","Gemini CLI","Ollama","LM Studio","AnythingLLM","ChatGPT","Gemini","Maus","Claude","Poe"].map(s => (
                       <span key={s} className="px-3 py-1 bg-purple-50 text-purple-700 rounded-full text-xs font-bold border border-purple-100">{s}</span>
                     ))}
                   </div>
                 </div>
-
                 {/* Core Skills Card */}
                 <div className="bg-white p-8 rounded-[2rem] shadow-lg border border-slate-100 hover:-translate-y-1 transition-all duration-300">
                   <div className="flex flex-col gap-6">
                     <div>
-                      <div className="flex items-center gap-3 mb-6 text-slate-900">
-                        <div className="p-3 bg-slate-100 rounded-2xl"><Star /></div>
-                        <h3 className="text-xl font-bold">Core Skills</h3>
-                      </div>
+                      <div className="flex items-center gap-3 mb-6 text-slate-900"><div className="p-3 bg-slate-100 rounded-2xl"><Star /></div><h3 className="text-xl font-bold">Core Skills</h3></div>
                       <div className="flex flex-wrap gap-2">
-                        {["Video Editor", "Creative", "Photography", "Motion Graphic", "Song Writer", "Coding", "English (Read/Write/Speak)", "Communication", "Teamwork", "Crisis Solving", "Growth Mindset", "Management", "Adaptability", "Work Smart"].map(s => (
+                        {["Video Editor","Creative","Photography","Motion Graphic","Song Writer","Coding","English (Read/Write/Speak)","Communication","Teamwork","Crisis Solving","Growth Mindset","Management","Adaptability","Work Smart"].map(s => (
                           <span key={s} className="px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-xs font-bold border border-blue-100">{s}</span>
                         ))}
                       </div>
@@ -333,8 +260,6 @@ const MainPortfolio = () => {
               </div>
             </div>
           ))}
-
-          {/* Current Focus Timeline Entry */}
           <div className="flex gap-6 group">
             <div className="flex flex-col items-center">
               <div className="w-12 h-12 bg-blue-600 border-2 border-blue-600 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-blue-200">
@@ -343,10 +268,7 @@ const MainPortfolio = () => {
             </div>
             <div className="pb-4">
               <div className="inline-flex items-center gap-3 px-4 py-2 bg-blue-50 rounded-full border border-blue-100 mb-4">
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
-                </span>
+                <span className="relative flex h-2 w-2"><span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span><span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span></span>
                 <span className="text-blue-700 font-bold tracking-wide uppercase text-xs">Current Focus</span>
               </div>
               <h3 className="text-2xl font-black text-slate-900 mb-2">{t.experience.timeline[6].title}</h3>
@@ -356,6 +278,9 @@ const MainPortfolio = () => {
           </div>
         </div>
       </section>
+
+      {/* Projects Section */}
+      <ProjectsSection />
 
       {/* Contact Section */}
       <footer id="contact" className="bg-slate-900 text-white py-20 px-6">
@@ -389,8 +314,6 @@ const App = () => {
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/demo" element={<ProjectDemo />} />
       </Routes>
-
-      {/* AI Chatbot Widget */}
       <ChatbotWidget />
     </Router>
   );
