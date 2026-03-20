@@ -5,7 +5,7 @@ import {
 import {
   Phone, Mail, MapPin, GraduationCap, Briefcase, Code, Brain, Star,
   CheckCircle2, ChevronRight, Menu, X, Cpu, Check, Camera, Video, Users, Car, FileText, ExternalLink,
-  Bot, Sparkles, Globe
+  Bot, Sparkles, Globe, Download
 } from 'lucide-react';
 import { useLanguage } from './LanguageContext';
 import Resume from './Resume';
@@ -147,6 +147,15 @@ const MainPortfolio = () => {
               <Link to="/portfolio" className="bg-white text-slate-900 border-2 border-slate-900 px-8 py-4 rounded-2xl font-bold flex items-center justify-center gap-2 shadow-xl shadow-slate-100 hover:bg-slate-50 transition-all hover:-translate-y-1">
                 {t.hero.viewPortfolio} <ExternalLink size={18} />
               </Link>
+            </div>
+            <div className="flex flex-wrap gap-3 justify-center md:justify-start items-center pt-2">
+              <span className="text-xs text-slate-400 font-bold uppercase tracking-widest">Download Resume:</span>
+              <a href="/Resume_EN.docx" download="Pornpon_Resume_EN.docx" className="inline-flex items-center gap-2 bg-slate-100 hover:bg-blue-50 hover:text-blue-600 text-slate-600 px-4 py-2 rounded-xl text-sm font-bold border border-slate-200 hover:border-blue-200 transition-all hover:-translate-y-0.5">
+                <Download size={14} /> EN (Word)
+              </a>
+              <a href="/Resume_TH.docx" download="Pornpon_Resume_TH.docx" className="inline-flex items-center gap-2 bg-slate-100 hover:bg-blue-50 hover:text-blue-600 text-slate-600 px-4 py-2 rounded-xl text-sm font-bold border border-slate-200 hover:border-blue-200 transition-all hover:-translate-y-0.5">
+                <Download size={14} /> TH (Word)
+              </a>
             </div>
             <p className="text-sm text-slate-500 font-medium animate-in fade-in slide-in-from-left duration-1000 delay-500">
               <Sparkles size={14} className="inline mr-1 text-blue-600 animate-pulse" />
