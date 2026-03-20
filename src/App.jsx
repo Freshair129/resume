@@ -14,6 +14,7 @@ import Gallery from './Gallery';
 import ProjectDemo from './ProjectDemo';
 import ChatbotWidget from './chatbot/ChatbotWidget';
 import ProjectsSection from './ProjectsSection';
+import PresentationSection from './PresentationSection';
 import heroBg from './assets/hero-bg.jpg';
 import img02 from './assets/02.jpg';
 import img03 from './assets/03.jpg';
@@ -281,6 +282,9 @@ const MainPortfolio = () => {
 
       {/* Projects Section */}
       <ProjectsSection />
+
+      {/* Presentation Section */}
+      <PresentationSection />
 
       {/* Contact Section */}
       <footer id="contact" className="bg-slate-900 text-white py-20 px-6">
