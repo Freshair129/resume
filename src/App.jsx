@@ -10,7 +10,8 @@ import {
 import { useLanguage } from './LanguageContext';
 import Resume from './Resume';
 import Portfolio from './Portfolio';
-import Gallery from './Gallery'; // Import Gallery
+import Gallery from './Gallery';
+import ProjectDemo from './ProjectDemo'; // Import Gallery
 import ChatbotWidget from './chatbot/ChatbotWidget'; // Import Chatbot
 import heroBg from './assets/hero-bg.jpg';
 import img02 from './assets/02.jpg';
@@ -386,6 +387,7 @@ const App = () => {
         <Route path="/resume" element={<Resume />} />
         <Route path="/portfolio" element={<Portfolio />} />
         <Route path="/gallery" element={<Gallery />} />
+        <Route path="/demo" element={<ProjectDemo />} />
       </Routes>
 
       {/* AI Chatbot Widget */}

@@ -124,6 +124,7 @@ const Resume = () => {
     const coreCompetencies = ["Video Editor", "Creative", "Photography", "Motion Graphic", "Song Writer", "Coding", "English (Read/Write/Speak)"];
     const softSkills = ["Communication", "Teamwork", "Crisis Solving", "Growth Mindset", "Management", "Adaptability", "Work Smart"];
 
+    const BASE = "https://resume-ecru-five-15.vercel.app";
     const projects = [
         {
             title: "EVA — Embodied Virtual Agent",
@@ -136,7 +137,9 @@ const Resume = () => {
                 "8 decoupled microservices: MSP, RMS, CIM, CNS, PhysioCore, IdentityManager...",
                 "WebSocket real-time chat UI with live emotional state visualization"
             ],
-            tags: ["Personal Project", "AI Architecture", "Solo Build"]
+            tags: ["Personal Project", "AI Architecture", "Solo Build"],
+            demoUrl: BASE + "/demo#eva",
+            demoLabel: "Project Overview"
         },
         {
             title: "V School CRM v2 — Cooking School Management",
@@ -149,7 +152,9 @@ const Resume = () => {
                 "Meta Ads analytics: ROAS, campaign attribution, chat-first revenue split",
                 "QStash + Upstash Redis — zero local infra, Vercel-native deployment"
             ],
-            tags: ["Full-Stack", "CRM / POS", "Solo Build"]
+            tags: ["Full-Stack", "CRM / POS", "Solo Build"],
+            demoUrl: BASE + "/demo#vschool",
+            demoLabel: "Project Overview"
         }
     ];
     return (
@@ -366,11 +371,30 @@ const Resume = () => {
                                             </li>
                                         ))}
                                     </ul>
-                                    <div className="flex flex-wrap gap-2">
+                                    <div className="flex flex-wrap gap-2 mb-4">
                                         {proj.tags.map(tag => (
                                             <span key={tag} className="bg-[#eff6ff] text-[#2563eb] px-2 py-0.5 rounded text-[11px] font-semibold border border-[#bfdbfe]">{tag}</span>
                                         ))}
                                     </div>
+                                    {proj.demoUrl && (
+                                        <div className="flex items-center gap-4 pt-3 border-t border-[#f1f5f9]">
+                                            <div className="flex flex-col gap-1">
+                                                <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Scan for Demo</p>
+                                                <img
+                                                    src={`https://api.qrserver.com/v1/create-qr-code/?size=72x72&data=${encodeURIComponent(proj.demoUrl)}&bgcolor=ffffff&color=1A2B4A&margin=4`}
+                                                    alt="QR Demo"
+                                                    className="w-[72px] h-[72px] rounded-lg border border-[#e2e8f0]"
+                                                />
+                                            </div>
+                                            <div>
+                                                <a href={proj.demoUrl} target="_blank" rel="noopener noreferrer"
+                                                   className="inline-flex items-center gap-1.5 bg-[#1A2B4A] text-white px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-[#2a3b5a] transition-colors">
+                                                    {proj.demoLabel} →
+                                                </a>
+                                                <p className="text-slate-400 text-[10px] mt-1">{proj.demoUrl.replace("https://","")}</p>
+                                            </div>
+                                        </div>
+                                    )}
                                 </div>
                             ))}
                         </div>
