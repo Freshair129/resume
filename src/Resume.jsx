@@ -120,7 +120,7 @@ const Resume = () => {
         "NotebookLM", "Flow",
         "Prompt Engineering", "Context Engineering", "Agentic RAG"
     ];
-    const manageTools = ["Notion", "Trello", "Slack", "Google Workspace"];
+    const manageTools = ["Notion", "Trello", "Slack", "Google Workspace", "HubSpot", "ChocoCRM"];
     const coreCompetencies = ["Video Editor", "Creative", "Photography", "Motion Graphic", "Song Writer", "Coding", "English (Read/Write/Speak)"];
     const softSkills = ["Communication", "Teamwork", "Crisis Solving", "Growth Mindset", "Management", "Adaptability", "Work Smart"];
 
