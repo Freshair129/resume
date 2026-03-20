@@ -124,6 +124,34 @@ const Resume = () => {
     const coreCompetencies = ["Video Editor", "Creative", "Photography", "Motion Graphic", "Song Writer", "Coding", "English (Read/Write/Speak)"];
     const softSkills = ["Communication", "Teamwork", "Crisis Solving", "Growth Mindset", "Management", "Adaptability", "Work Smart"];
 
+    const projects = [
+        {
+            title: "EVA — Embodied Virtual Agent",
+            version: "v9.7.0 Epoch: Reflex",
+            stack: "Python 3.13 / FastAPI / Vue.js / ChromaDB / Agentic RAG",
+            description: "Bio-inspired AI architecture implementing Resonance Intelligence — a single-inference LLM system with hormone simulation (PhysioCore), emotional state matrix, and 8-8-8 episodic memory governance. Built solo from scratch.",
+            highlights: [
+                "7-stream Agentic RAG + GraphRAG for deep context recall",
+                "Bio-Digital Gap: LLM pauses, hormone cascade fires, resumes same mental state",
+                "8 decoupled microservices: MSP, RMS, CIM, CNS, PhysioCore, IdentityManager...",
+                "WebSocket real-time chat UI with live emotional state visualization"
+            ],
+            tags: ["Personal Project", "AI Architecture", "Solo Build"]
+        },
+        {
+            title: "V School CRM v2 — Cooking School Management",
+            version: "v1.1.0 Production",
+            stack: "Next.js 14 / PostgreSQL / Prisma / Upstash / Meta Graph API",
+            description: "Full-stack CRM rebuilt from scratch for a Japanese cooking school — unified FB+LINE inbox, revenue attribution, FEFO stock system, POS, and Slip OCR payment verification via Gemini Vision.",
+            highlights: [
+                "186 unit tests, Slip OCR with confidence threshold 0.80",
+                "Real-time stock deduction with FEFO lot tracking",
+                "Meta Ads analytics: ROAS, campaign attribution, chat-first revenue split",
+                "QStash + Upstash Redis — zero local infra, Vercel-native deployment"
+            ],
+            tags: ["Full-Stack", "CRM / POS", "Solo Build"]
+        }
+    ];
     return (
         <div className="min-h-screen bg-[#f8fafc] py-10 px-4 sm:px-6 lg:px-8 font-sans text-[#1e293b]">
             <div className="max-w-5xl mx-auto mb-6 flex justify-between items-center">
@@ -298,6 +326,37 @@ const Resume = () => {
                                 <div key={skill} className="bg-[#ffffff] border border-[#e2e8f0] p-3 rounded-lg flex items-center gap-3 shadow-sm hover:shadow-md hover:border-[#bfdbfe] transition-all">
                                     <div className="w-2 h-2 bg-[#3b82f6] rounded-full"></div>
                                     <span className="font-semibold text-[#334155] text-sm">{skill}</span>
+                                </div>
+                            ))}
+                        </div>
+                    </section>
+
+                    <section className="mt-10">
+                        <h2 className="text-2xl font-bold text-[#0f172a] flex items-center gap-3 mb-6">
+                            <Cpu className="text-[#2563eb]" /> Personal Projects
+                        </h2>
+                        <div className="space-y-5">
+                            {projects.map((proj, idx) => (
+                                <div key={idx} className="bg-[#f8fafc] border border-[#e2e8f0] rounded-xl p-5 hover:border-[#bfdbfe] hover:shadow-md transition-all">
+                                    <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-1 gap-2">
+                                        <h3 className="text-lg font-bold text-[#1e293b] leading-tight">{proj.title}</h3>
+                                        <span className="text-xs font-bold text-[#7c3aed] bg-[#f5f3ff] px-3 py-1 rounded-full whitespace-nowrap">{proj.version}</span>
+                                    </div>
+                                    <p className="text-[#2563eb] text-xs font-mono mb-2">{proj.stack}</p>
+                                    <p className="text-[#475569] text-sm mb-3 leading-relaxed">{proj.description}</p>
+                                    <ul className="space-y-1 mb-3">
+                                        {proj.highlights.map((h, i) => (
+                                            <li key={i} className="flex gap-2 text-sm text-[#475569]">
+                                                <span className="text-[#3b82f6] font-bold">-&gt;</span>
+                                                <span>{h}</span>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                    <div className="flex flex-wrap gap-2">
+                                        {proj.tags.map(tag => (
+                                            <span key={tag} className="bg-[#eff6ff] text-[#2563eb] px-2 py-0.5 rounded text-[11px] font-semibold border border-[#bfdbfe]">{tag}</span>
+                                        ))}
+                                    </div>
                                 </div>
                             ))}
                         </div>
