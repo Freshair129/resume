@@ -1,0 +1,1682 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pornpon T. — Marketer who builds</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #12121a;
+            --bg-card: #16161f;
+            --bg-card-hover: #1c1c28;
+            --accent: #6366f1;
+            --accent-light: #818cf8;
+            --accent-glow: rgba(99, 102, 241, 0.15);
+            --green: #22c55e;
+            --green-glow: rgba(34, 197, 94, 0.15);
+            --cyan: #06b6d4;
+            --cyan-glow: rgba(6, 182, 212, 0.15);
+            --orange: #f59e0b;
+            --orange-glow: rgba(245, 158, 11, 0.15);
+            --pink: #ec4899;
+            --pink-glow: rgba(236, 72, 153, 0.15);
+            --text-primary: #e4e4e7;
+            --text-secondary: #a1a1aa;
+            --text-muted: #71717a;
+            --border: #27272a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* ===== NOISE TEXTURE ===== */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* ===== NAVIGATION ===== */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1rem 2rem;
+            background: rgba(10, 10, 15, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        nav .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .logo {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--accent-light);
+        }
+
+        nav .logo span {
+            color: var(--text-muted);
+        }
+
+        nav .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        nav .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: color 0.2s;
+            letter-spacing: 0.02em;
+        }
+
+        nav .nav-links a:hover {
+            color: var(--accent-light);
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 6rem 2rem 4rem;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 50%, var(--accent-glow) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 30%, var(--cyan-glow) 0%, transparent 40%);
+            animation: float 20s ease-in-out infinite;
+            z-index: 0;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(30px, -30px) rotate(1deg); }
+            66% { transform: translate(-20px, 20px) rotate(-1deg); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            text-align: center;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.4rem 1rem;
+            background: var(--accent-glow);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 100px;
+            font-size: 0.8rem;
+            color: var(--accent-light);
+            font-weight: 500;
+            margin-bottom: 2rem;
+            letter-spacing: 0.05em;
+        }
+
+        .hero-badge .dot {
+            width: 6px;
+            height: 6px;
+            background: var(--green);
+            border-radius: 50%;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.03em;
+        }
+
+        .hero h1 .gradient {
+            background: linear-gradient(135deg, var(--accent-light), var(--cyan), var(--green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero .subtitle {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 2.5rem;
+            font-weight: 400;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.75rem;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.25s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-light);
+            transform: translateY(-2px);
+            box-shadow: 0 0 30px rgba(99, 102, 241, 0.3);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--accent);
+            background: var(--accent-glow);
+            transform: translateY(-2px);
+        }
+
+        /* ===== SECTIONS ===== */
+        section {
+            position: relative;
+            z-index: 1;
+            padding: 6rem 2rem;
+        }
+
+        .section-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--accent-light);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 0.75rem;
+        }
+
+        .section-title {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .section-desc {
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin-bottom: 3rem;
+            font-size: 1rem;
+        }
+
+        /* ===== ABOUT ===== */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .about-text {
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+
+        .about-text p {
+            margin-bottom: 1rem;
+        }
+
+        .about-text strong {
+            color: var(--text-primary);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            border-color: var(--accent);
+            background: var(--bg-card-hover);
+            transform: translateY(-3px);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .stat-number.purple { color: var(--accent-light); }
+        .stat-number.green { color: var(--green); }
+        .stat-number.cyan { color: var(--cyan); }
+        .stat-number.orange { color: var(--orange); }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 0.25rem;
+        }
+
+        /* ===== PROJECTS ===== */
+        .project-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+        }
+
+        .project-card.crm::before {
+            background: linear-gradient(90deg, var(--accent), var(--cyan));
+        }
+
+        .project-card.agent::before {
+            background: linear-gradient(90deg, var(--pink), var(--orange));
+        }
+
+        .project-card:hover {
+            border-color: var(--accent);
+            background: var(--bg-card-hover);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .project-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.4rem 0.9rem;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .project-link:hover {
+            border-color: var(--accent);
+            color: var(--accent-light);
+            background: var(--accent-glow);
+        }
+
+        .project-desc {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .project-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .feature .icon {
+            color: var(--green);
+            font-size: 0.9rem;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tag {
+            padding: 0.3rem 0.75rem;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--text-muted);
+            transition: all 0.2s;
+        }
+
+        .tag:hover {
+            border-color: var(--accent);
+            color: var(--accent-light);
+        }
+
+        /* ===== SKILLS ===== */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-category {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.75rem;
+            transition: all 0.3s ease;
+        }
+
+        .skill-category:hover {
+            border-color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .skill-category h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .skill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+        }
+
+        .skill-item {
+            padding: 0.3rem 0.7rem;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 6px;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        /* ===== APPROACH ===== */
+        .approach-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .approach-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .approach-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .approach-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .approach-card h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .approach-card p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        /* ===== TIMELINE ===== */
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--accent), var(--cyan), var(--green));
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-left: 1.5rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.35rem;
+            top: 0.4rem;
+            width: 10px;
+            height: 10px;
+            background: var(--accent);
+            border-radius: 50%;
+            border: 2px solid var(--bg-primary);
+            box-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        .timeline-date {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--accent-light);
+            margin-bottom: 0.25rem;
+        }
+
+        .timeline-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .timeline-desc {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        /* ===== CONTACT ===== */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 1rem;
+        }
+
+        .contact-card {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.25rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            text-decoration: none;
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .contact-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-3px);
+            background: var(--bg-card-hover);
+        }
+
+        .contact-icon {
+            font-size: 1.5rem;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--accent-glow);
+            border-radius: 10px;
+            flex-shrink: 0;
+        }
+
+        .contact-info .label {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .contact-info .value {
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            position: relative;
+            z-index: 1;
+            padding: 3rem 2rem;
+            text-align: center;
+            border-top: 1px solid var(--border);
+        }
+
+        footer p {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        footer .heart {
+            color: var(--pink);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        .hero-3d-left, .hero-3d-right {
+            transition: transform 0.3s ease-out;
+        }
+        .crm-thumb:hover {
+            border-color: var(--accent) !important;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        @media (max-width: 768px) {
+            nav .nav-links { display: none; }
+            .about-grid { grid-template-columns: 1fr; }
+            .approach-grid { grid-template-columns: 1fr; }
+            .project-features { grid-template-columns: 1fr; }
+            .hero { padding-top: 5rem; }
+            .hero-3d-left, .hero-3d-right { display: none; }
+        }
+        @media (max-width: 1400px) and (min-width: 769px) {
+            .hero-3d-left, .hero-3d-right { opacity: 0.2 !important; }
+            .hero-3d-left > div, .hero-3d-right > div { transform: scale(0.75) rotateY(20deg) !important; }
+        }
+
+        /* ===== SCROLL ANIMATION ===== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav>
+    <div class="nav-inner">
+        <div class="logo">pornpon<span>.dev</span></div>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#journey">Journey</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+    <!-- 3D CRM UI Mock (Left) -->
+    <div style="position: absolute; left: 2%; top: 15%; perspective: 1200px; z-index: 0; opacity: 0.35; pointer-events: none;" class="hero-3d-left">
+        <div style="transform: rotateY(25deg) rotateX(5deg); width: 420px; border-radius: 12px; overflow: hidden; box-shadow: 0 30px 80px rgba(0,0,0,0.5); border: 1px solid var(--border);">
+            <!-- Browser bar -->
+            <div style="background: #1a1a24; padding: 0.5rem 0.75rem; display: flex; align-items: center; gap: 0.4rem; border-bottom: 1px solid var(--border);">
+                <span style="width: 8px; height: 8px; border-radius: 50%; background: #ef4444;"></span>
+                <span style="width: 8px; height: 8px; border-radius: 50%; background: #f59e0b;"></span>
+                <span style="width: 8px; height: 8px; border-radius: 50%; background: #22c55e;"></span>
+                <span style="flex: 1; margin-left: 0.5rem; background: #0f0f17; border-radius: 4px; padding: 0.2rem 0.5rem; font-size: 0.55rem; color: var(--text-muted); font-family: 'JetBrains Mono', monospace;">crmapp-pi.vercel.app</span>
+            </div>
+            <!-- CRM Dashboard Mock -->
+            <div style="background: #0f0f17; padding: 1rem;">
+                <!-- Sidebar + Content -->
+                <div style="display: grid; grid-template-columns: 60px 1fr; gap: 0.5rem;">
+                    <!-- Sidebar -->
+                    <div style="display: flex; flex-direction: column; gap: 0.4rem;">
+                        <div style="width: 36px; height: 36px; background: var(--accent); border-radius: 8px; margin: 0 auto;"></div>
+                        <div style="width: 28px; height: 28px; background: #1e1e2e; border-radius: 6px; margin: 0 auto;"></div>
+                        <div style="width: 28px; height: 28px; background: #1e1e2e; border-radius: 6px; margin: 0 auto;"></div>
+                        <div style="width: 28px; height: 28px; background: #1e1e2e; border-radius: 6px; margin: 0 auto;"></div>
+                        <div style="width: 28px; height: 28px; background: rgba(34,197,94,0.2); border-radius: 6px; margin: 0 auto;"></div>
+                    </div>
+                    <!-- Main content -->
+                    <div>
+                        <!-- Stats row -->
+                        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.4rem; margin-bottom: 0.6rem;">
+                            <div style="background: #1e1e2e; border-radius: 6px; padding: 0.5rem;">
+                                <div style="font-size: 0.5rem; color: var(--text-muted);">Revenue</div>
+                                <div style="font-size: 0.75rem; font-weight: 700; color: var(--green);">฿128,450</div>
+                            </div>
+                            <div style="background: #1e1e2e; border-radius: 6px; padding: 0.5rem;">
+                                <div style="font-size: 0.5rem; color: var(--text-muted);">Customers</div>
+                                <div style="font-size: 0.75rem; font-weight: 700; color: var(--cyan);">342</div>
+                            </div>
+                            <div style="background: #1e1e2e; border-radius: 6px; padding: 0.5rem;">
+                                <div style="font-size: 0.5rem; color: var(--text-muted);">ROAS</div>
+                                <div style="font-size: 0.75rem; font-weight: 700; color: var(--orange);">4.2x</div>
+                            </div>
+                        </div>
+                        <!-- Chart mock -->
+                        <div style="background: #1e1e2e; border-radius: 6px; padding: 0.5rem; margin-bottom: 0.5rem; height: 70px; display: flex; align-items: flex-end; gap: 3px;">
+                            <div style="width: 100%; height: 30%; background: var(--accent); border-radius: 2px 2px 0 0; opacity: 0.6;"></div>
+                            <div style="width: 100%; height: 50%; background: var(--accent); border-radius: 2px 2px 0 0; opacity: 0.7;"></div>
+                            <div style="width: 100%; height: 35%; background: var(--accent); border-radius: 2px 2px 0 0; opacity: 0.6;"></div>
+                            <div style="width: 100%; height: 70%; background: var(--accent); border-radius: 2px 2px 0 0; opacity: 0.8;"></div>
+                            <div style="width: 100%; height: 60%; background: var(--accent); border-radius: 2px 2px 0 0; opacity: 0.7;"></div>
+                            <div style="width: 100%; height: 85%; background: var(--accent); border-radius: 2px 2px 0 0;"></div>
+                            <div style="width: 100%; height: 90%; background: var(--cyan); border-radius: 2px 2px 0 0;"></div>
+                        </div>
+                        <!-- Inbox mock -->
+                        <div style="background: #1e1e2e; border-radius: 6px; padding: 0.4rem;">
+                            <div style="font-size: 0.5rem; color: var(--text-muted); margin-bottom: 0.3rem;">Unified Inbox</div>
+                            <div style="display: flex; align-items: center; gap: 0.3rem; padding: 0.25rem; background: #262636; border-radius: 4px; margin-bottom: 0.2rem;">
+                                <div style="width: 16px; height: 16px; background: #1877f2; border-radius: 50%; flex-shrink: 0;"></div>
+                                <div><div style="font-size: 0.45rem; color: var(--text-primary);">Somchai K.</div><div style="font-size: 0.4rem; color: var(--text-muted);">สนใจคอร์สซูชิครับ</div></div>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 0.3rem; padding: 0.25rem; background: #262636; border-radius: 4px;">
+                                <div style="width: 16px; height: 16px; background: #06c755; border-radius: 50%; flex-shrink: 0;"></div>
+                                <div><div style="font-size: 0.45rem; color: var(--text-primary);">Nisa P.</div><div style="font-size: 0.4rem; color: var(--text-muted);">โอนแล้วค่ะ ส่งสลิปมา</div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3D EVA Neural Visualization (Right) -->
+    <div style="position: absolute; right: 2%; top: 12%; perspective: 1200px; z-index: 0; opacity: 0.35; pointer-events: none;" class="hero-3d-right">
+        <div style="transform: rotateY(-20deg) rotateX(8deg); width: 400px;">
+            <!-- EVA Terminal -->
+            <div style="border-radius: 12px; overflow: hidden; box-shadow: 0 30px 80px rgba(0,0,0,0.5); border: 1px solid var(--border);">
+                <!-- Terminal bar -->
+                <div style="background: #1a1a24; padding: 0.5rem 0.75rem; display: flex; align-items: center; gap: 0.4rem; border-bottom: 1px solid var(--border);">
+                    <span style="width: 8px; height: 8px; border-radius: 50%; background: #ef4444;"></span>
+                    <span style="width: 8px; height: 8px; border-radius: 50%; background: #f59e0b;"></span>
+                    <span style="width: 8px; height: 8px; border-radius: 50%; background: #22c55e;"></span>
+                    <span style="flex: 1; margin-left: 0.5rem; font-size: 0.55rem; color: var(--text-muted); font-family: 'JetBrains Mono', monospace;">EVA — Embodied Virtual Agent v9.7.0</span>
+                </div>
+                <!-- EVA Content -->
+                <div style="background: #0a0a12; padding: 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.55rem; line-height: 1.6;">
+                    <!-- Neural state visualization -->
+                    <div style="color: var(--pink); margin-bottom: 0.4rem;">PhysioCore [30Hz] ━━━━━━━━━━━━</div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.2rem 1rem; margin-bottom: 0.6rem;">
+                        <div><span style="color: var(--text-muted);">Cortisol</span> <span style="color: var(--orange);">▓▓▓░░░░</span> <span style="color: var(--orange);">0.38</span></div>
+                        <div><span style="color: var(--text-muted);">Dopamine</span> <span style="color: var(--green);">▓▓▓▓▓░░</span> <span style="color: var(--green);">0.72</span></div>
+                        <div><span style="color: var(--text-muted);">Oxytocin</span> <span style="color: var(--pink);">▓▓▓▓░░░</span> <span style="color: var(--pink);">0.61</span></div>
+                        <div><span style="color: var(--text-muted);">Serotonin</span> <span style="color: var(--cyan);">▓▓▓▓▓▓░</span> <span style="color: var(--cyan);">0.85</span></div>
+                    </div>
+                    <div style="color: var(--accent-light); margin-bottom: 0.3rem;">EVA Matrix [9D] ━━━━━━━━━━━━</div>
+                    <div style="margin-bottom: 0.6rem;">
+                        <span style="color: var(--text-muted);">stress:</span><span style="color: var(--orange);"> 0.22</span>
+                        <span style="color: var(--text-muted);"> warmth:</span><span style="color: var(--pink);"> 0.78</span>
+                        <span style="color: var(--text-muted);"> drive:</span><span style="color: var(--green);"> 0.65</span>
+                        <span style="color: var(--text-muted);"> clarity:</span><span style="color: var(--cyan);"> 0.81</span>
+                    </div>
+                    <div style="color: var(--green); margin-bottom: 0.3rem;">Artifact Qualia ━━━━━━━━━━━━</div>
+                    <div style="margin-bottom: 0.6rem;">
+                        <div><span style="color: var(--text-muted);">intensity:</span> <span style="color: var(--text-primary);">0.64</span> <span style="color: var(--text-muted);">tone:</span> <span style="color: var(--green);">warm</span></div>
+                        <div><span style="color: var(--text-muted);">coherence:</span> <span style="color: var(--text-primary);">0.89</span> <span style="color: var(--text-muted);">depth:</span> <span style="color: var(--text-primary);">0.71</span></div>
+                    </div>
+                    <!-- Chat -->
+                    <div style="border-top: 1px solid var(--border); padding-top: 0.5rem; margin-top: 0.3rem;">
+                        <div style="color: var(--cyan); margin-bottom: 0.3rem;">Resonance Bus [4ch] ━━━━━━━━━</div>
+                        <div style="color: var(--text-muted);">bus:physical</div>
+                        <div style="padding: 0.3rem 0.5rem; background: rgba(236,72,153,0.1); border-left: 2px solid var(--pink); border-radius: 0 4px 4px 0; margin: 0.2rem 0;">
+                            <span style="color: var(--pink);">EVA:</span> <span style="color: var(--text-secondary);">สวัสดีค่ะ รู้สึกอบอุ่นใจที่ได้คุยด้วย</span>
+                        </div>
+                        <div style="color: var(--text-muted); margin-top: 0.3rem;">memory_color: <span style="display: inline-block; width: 10px; height: 10px; background: linear-gradient(135deg, #ec4899, #8b5cf6); border-radius: 2px; vertical-align: middle;"></span> #E84FA0</div>
+                        <div style="color: var(--text-muted);">RMS: intensity=0.64, trauma=false</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="hero-content">
+        <div class="hero-badge">
+            <span class="dot"></span>
+            Open to opportunities
+        </div>
+        <h1>
+            <span style="font-size: 0.5em; font-weight: 400; color: var(--text-secondary); display: block; margin-bottom: 0.5rem;">Pornpon Thansuvanthanan</span>
+            Marketer who <span class="gradient">builds</span>
+        </h1>
+        <p class="subtitle">
+            นักการตลาด 6+ ปี ที่สร้าง Production CRM และ Cognitive AI Agent ได้ด้วยตัวเอง<br>
+            เพราะเชื่อว่าถ้าเข้าใจ pipeline ทั้งหมด ก็สร้างระบบที่รันมันได้
+        </p>
+        <div class="hero-buttons">
+            <a href="#projects" class="btn btn-primary">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                View Projects
+            </a>
+            <a href="https://github.com/Freshair129" target="_blank" class="btn btn-outline">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                GitHub
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- About -->
+<section id="about">
+    <div class="section-inner reveal">
+        <div class="section-label">// about</div>
+        <h2 class="section-title">โค้ดทุกบรรทัด มาจากการใช้งานจริง</h2>
+        <div class="about-grid">
+            <div class="about-text">
+                <p>
+                    โปรแกรมเมอร์เขียนโค้ดได้ แต่เขาเขียนตาม requirement ที่คนอื่นบอก
+                    — ถ้า requirement ไม่ชัด ระบบที่ได้ก็ไม่ตรงกับการใช้งานจริง
+                </p>
+                <p>
+                    ผมทำการตลาดมา <strong>6 ปี</strong> — ยิง Ad, ดู ROAS,
+                    คุยกับลูกค้าใน inbox, ปิดการขาย, ทำคอนเทนต์, บริหารทีม
+                    พอผมสร้าง CRM ทุกฟีเจอร์ที่ใส่ไป
+                    <strong>มันไม่ได้มาจาก spec แต่มาจากปัญหาที่เจอกับมือ</strong>
+                </p>
+                <p>
+                    Unified Inbox เพราะเคยสลับแชท FB กับ LINE จนหลุด
+                    ROAS Dashboard เพราะเคยนั่งดึงตัวเลขจาก Ads Manager เองทุกเช้า
+                    Slip OCR เพราะเคยตรวจสลิปลูกค้าวันละหลายสิบใบ
+                    — นี่คือสิ่งที่โปรแกรมเมอร์ที่ไม่เคยทำตลาดจะนึกไม่ถึง
+                </p>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number purple">6+</div>
+                    <div class="stat-label">Years in Marketing</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number green">9</div>
+                    <div class="stat-label">Repos / 7 Versions (EVA)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number cyan">95+</div>
+                    <div class="stat-label">API Endpoints (CRM)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number orange">44+</div>
+                    <div class="stat-label">Architecture Decision Records</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Work Experience -->
+<section id="experience" style="background: var(--bg-secondary);">
+    <div class="section-inner">
+        <div class="section-label reveal">// experience</div>
+        <h2 class="section-title reveal">ประสบการณ์การทำงาน</h2>
+        <p class="section-desc reveal">6+ ปี ในสาย Marketing, Content Creation และ Operations</p>
+
+        <div style="display: grid; gap: 1.5rem;">
+            <div class="project-card reveal" style="margin-bottom: 0;">
+                <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 0.5rem;">
+                    <h3 style="font-size: 1.15rem; font-weight: 600;">Freelance Presenter & AI Consultant</h3>
+                    <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--accent-light);">ม.ค.–ก.พ. 2569</span>
+                </div>
+                <p style="color: var(--text-muted); font-size: 0.85rem; margin: 0.25rem 0 0.75rem;">V School Food Institute</p>
+                <div class="project-features" style="margin-bottom: 0;">
+                    <div class="feature"><span class="icon">&#10003;</span> นำเสนอหลักสูตรอาหารญี่ปุ่นแก่นักเรียน</div>
+                    <div class="feature"><span class="icon">&#10003;</span> สร้าง AI Workflow (Claude + Gemini) สำหรับ content</div>
+                    <div class="feature"><span class="icon">&#10003;</span> จัดทำ Pitch Deck และ Data Dashboard</div>
+                </div>
+            </div>
+
+            <div class="project-card reveal" style="margin-bottom: 0;">
+                <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 0.5rem;">
+                    <h3 style="font-size: 1.15rem; font-weight: 600;">Assistant Manager</h3>
+                    <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--accent-light);">มิ.ย.–ธ.ค. 2568</span>
+                </div>
+                <p style="color: var(--text-muted); font-size: 0.85rem; margin: 0.25rem 0 0.75rem;">Hospital Feelgood Club</p>
+                <div class="project-features" style="margin-bottom: 0;">
+                    <div class="feature"><span class="icon">&#10003;</span> บริหารการปฏิบัติงาน จัดการพนักงาน ดูแลแขก</div>
+                    <div class="feature"><span class="icon">&#10003;</span> วางแผนอีเวนต์ โปรโมชัน ปฏิทินโซเชียลมีเดีย</div>
+                    <div class="feature"><span class="icon">&#10003;</span> จัดซื้อสต็อก ดูแลความสัมพันธ์ผู้จัดจำหน่าย</div>
+                </div>
+            </div>
+
+            <div class="project-card reveal" style="margin-bottom: 0;">
+                <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 0.5rem;">
+                    <h3 style="font-size: 1.15rem; font-weight: 600;">Marketing & Content Creator</h3>
+                    <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--accent-light);">2565–2568 (3 ปี)</span>
+                </div>
+                <p style="color: var(--text-muted); font-size: 0.85rem; margin: 0.25rem 0 0.75rem;">U-Turn Shop (Big Bike)</p>
+                <div class="project-features" style="margin-bottom: 0;">
+                    <div class="feature"><span class="icon">&#10003;</span> Meta Ads campaigns — ติดตาม ROAS, ปรับ Creative</div>
+                    <div class="feature"><span class="icon">&#10003;</span> ผลิต Photo/Video สำหรับ FB, IG, TikTok, YouTube Shorts</div>
+                    <div class="feature"><span class="icon">&#10003;</span> Organic Reach ผ่าน Reels และ Behind-the-Scenes</div>
+                </div>
+            </div>
+
+            <div class="project-card reveal" style="margin-bottom: 0;">
+                <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 0.5rem;">
+                    <h3 style="font-size: 1.15rem; font-weight: 600;">Marketing & Content Creator</h3>
+                    <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--accent-light);">2562–2565 (3 ปี)</span>
+                </div>
+                <p style="color: var(--text-muted); font-size: 0.85rem; margin: 0.25rem 0 0.75rem;">Saint Thonglor Clinic (คลินิกศัลยกรรมความงาม)</p>
+                <div class="project-features" style="margin-bottom: 0;">
+                    <div class="feature"><span class="icon">&#10003;</span> คอนเทนต์ Before/After, Reels แพทย์ตอบคำถาม</div>
+                    <div class="feature"><span class="icon">&#10003;</span> Paid Social กำหนดกลุ่มเป้าหมาย Medical Aesthetic</div>
+                    <div class="feature"><span class="icon">&#10003;</span> Influencer Partnership และ Patient Testimonials</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Projects (Side Projects) -->
+<section id="projects">
+    <div class="section-inner">
+        <div class="section-label reveal">// side projects</div>
+        <h2 class="section-title reveal">โปรเจคส่วนตัว — สร้างนอกเวลางาน</h2>
+        <p class="section-desc reveal">ทุกโปรเจคเป็น side project สร้างคนเดียว โดยใช้ AI เป็นเครื่องมือ</p>
+
+        <!-- CRM v1 Project -->
+        <div class="project-card reveal" style="--card-color: var(--green);">
+            <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg, var(--green), var(--cyan));"></div>
+            <div class="project-header">
+                <h3 class="project-title">V School CRM v1 (Data Hub)</h3>
+                <div class="project-links">
+                    <a href="https://github.com/Freshair129/data_hub" target="_blank" class="project-link">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                        Source
+                    </a>
+                </div>
+            </div>
+            <p class="project-desc">
+                CRM v1 — monorepo foundation สร้างใน <strong style="color:var(--green)">~1 เดือน</strong> (8 ก.พ. - 7 มี.ค. 2026)
+                ระบบ CRM แรกของ V School พร้อม 23 ADRs ที่เป็นรากฐานสถาปัตยกรรมทั้งหมด
+            </p>
+            <div class="project-features">
+                <div class="feature"><span class="icon">&#10003;</span> Facebook Business Suite Integration + Playwright admin attribution</div>
+                <div class="feature"><span class="icon">&#10003;</span> Real-time chat sync via SSE + Redis pub/sub</div>
+                <div class="feature"><span class="icon">&#10003;</span> Google Gemini AI — sentiment analysis + business insights</div>
+                <div class="feature"><span class="icon">&#10003;</span> SlipOK bank transfer verification</div>
+                <div class="feature"><span class="icon">&#10003;</span> LINE Messaging API integration</div>
+                <div class="feature"><span class="icon">&#10003;</span> BullMQ async job queue processing</div>
+                <div class="feature"><span class="icon">&#10003;</span> 23 Architecture Decision Records</div>
+                <div class="feature"><span class="icon">&#10003;</span> Hybrid DB adapter (JSON + PostgreSQL)</div>
+                <div class="feature"><span class="icon">&#10003;</span> Team KPI tracking + staff performance auditing</div>
+            </div>
+            <div class="tech-tags">
+                <span class="tag">Next.js 14</span>
+                <span class="tag">React 18</span>
+                <span class="tag">Prisma</span>
+                <span class="tag">PostgreSQL</span>
+                <span class="tag">Supabase</span>
+                <span class="tag">Redis</span>
+                <span class="tag">BullMQ</span>
+                <span class="tag">Playwright</span>
+                <span class="tag">Google Gemini</span>
+                <span class="tag">LINE API</span>
+                <span class="tag">Meta Graph API</span>
+                <span class="tag">SSE</span>
+                <span class="tag">Docker</span>
+            </div>
+        </div>
+
+        <!-- CRM v2 Project -->
+        <div class="project-card crm reveal">
+            <div class="project-header">
+                <h3 class="project-title">V School CRM v2</h3>
+                <div class="project-links">
+                    <a href="https://github.com/Freshair129/crmapp" target="_blank" class="project-link">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                        Source
+                    </a>
+                    <a href="https://crmapp-pi.vercel.app/" target="_blank" class="project-link">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                        Live Demo
+                    </a>
+                </div>
+            </div>
+            <p class="project-desc">
+                ระบบ CRM ครบวงจรสำหรับโรงเรียนสอนทำอาหาร — สร้างใน <strong style="color:var(--cyan)">12 วัน</strong> (8-20 มี.ค. 2026)
+                จัดการลูกค้า, การตลาด, การขาย, คอร์สเรียน, สต็อกครัว และ HR ในระบบเดียว พร้อม AI integration
+            </p>
+            <!-- Demo Credentials -->
+            <div style="display: inline-flex; align-items: center; gap: 0.75rem; padding: 0.6rem 1rem; background: var(--accent-glow); border: 1px solid rgba(99,102,241,0.3); border-radius: 8px; margin-bottom: 1.25rem; flex-wrap: wrap;">
+                <span style="font-size: 0.75rem; color: var(--accent-light); font-weight: 600;">Demo Login:</span>
+                <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--text-primary); background: rgba(255,255,255,0.05); padding: 0.2rem 0.5rem; border-radius: 4px;">Username: Guest</span>
+                <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--text-primary); background: rgba(255,255,255,0.05); padding: 0.2rem 0.5rem; border-radius: 4px;">Password: 123456789</span>
+            </div>
+
+            <!-- CRM Screenshots Gallery -->
+            <div style="margin-bottom: 1.5rem;">
+                <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.75rem; font-weight: 600;">Screenshots จากระบบจริง:</div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 0.5rem;">
+                    <div style="cursor: pointer; border-radius: 8px; overflow: hidden; border: 1px solid var(--border); transition: all 0.3s;" class="crm-thumb" onclick="document.getElementById('crm-lightbox').style.display='flex'; document.getElementById('crm-lightbox-img').src='crm_dashboard.png';">
+                        <img src="crm_dashboard.png" alt="Dashboard" style="width: 100%; height: 80px; object-fit: cover; display: block;">
+                        <div style="padding: 0.3rem; text-align: center; font-size: 0.55rem; color: var(--text-muted); background: var(--bg-card);">Dashboard</div>
+                    </div>
+                    <div style="cursor: pointer; border-radius: 8px; overflow: hidden; border: 1px solid var(--border); transition: all 0.3s;" class="crm-thumb" onclick="document.getElementById('crm-lightbox').style.display='flex'; document.getElementById('crm-lightbox-img').src='crm_inbox.png';">
+                        <img src="crm_inbox.png" alt="Unified Inbox" style="width: 100%; height: 80px; object-fit: cover; display: block;">
+                        <div style="padding: 0.3rem; text-align: center; font-size: 0.55rem; color: var(--text-muted); background: var(--bg-card);">Unified Inbox</div>
+                    </div>
+                    <div style="cursor: pointer; border-radius: 8px; overflow: hidden; border: 1px solid var(--border); transition: all 0.3s;" class="crm-thumb" onclick="document.getElementById('crm-lightbox').style.display='flex'; document.getElementById('crm-lightbox-img').src='crm_customers.png';">
+                        <img src="crm_customers.png" alt="Customers 360" style="width: 100%; height: 80px; object-fit: cover; display: block;">
+                        <div style="padding: 0.3rem; text-align: center; font-size: 0.55rem; color: var(--text-muted); background: var(--bg-card);">Customers 360</div>
+                    </div>
+                    <div style="cursor: pointer; border-radius: 8px; overflow: hidden; border: 1px solid var(--border); transition: all 0.3s;" class="crm-thumb" onclick="document.getElementById('crm-lightbox').style.display='flex'; document.getElementById('crm-lightbox-img').src='crm_pos.png';">
+                        <img src="crm_pos.png" alt="POS" style="width: 100%; height: 80px; object-fit: cover; display: block;">
+                        <div style="padding: 0.3rem; text-align: center; font-size: 0.55rem; color: var(--text-muted); background: var(--bg-card);">POS System</div>
+                    </div>
+                    <div style="cursor: pointer; border-radius: 8px; overflow: hidden; border: 1px solid var(--border); transition: all 0.3s;" class="crm-thumb" onclick="document.getElementById('crm-lightbox').style.display='flex'; document.getElementById('crm-lightbox-img').src='crm_stock.png';">
+                        <img src="crm_stock.png" alt="Kitchen Stock" style="width: 100%; height: 80px; object-fit: cover; display: block;">
+                        <div style="padding: 0.3rem; text-align: center; font-size: 0.55rem; color: var(--text-muted); background: var(--bg-card);">Kitchen Stock</div>
+                    </div>
+                    <div style="cursor: pointer; border-radius: 8px; overflow: hidden; border: 1px solid var(--border); transition: all 0.3s;" class="crm-thumb" onclick="document.getElementById('crm-lightbox').style.display='flex'; document.getElementById('crm-lightbox-img').src='crm_notification.png';">
+                        <img src="crm_notification.png" alt="Daily Report" style="width: 100%; height: 80px; object-fit: cover; object-position: center top; display: block;">
+                        <div style="padding: 0.3rem; text-align: center; font-size: 0.55rem; color: var(--text-muted); background: var(--bg-card);">LINE Daily Report</div>
+                    </div>
+                    <div style="cursor: pointer; border-radius: 8px; overflow: hidden; border: 1px solid var(--border); transition: all 0.3s;" class="crm-thumb" onclick="document.getElementById('crm-lightbox').style.display='flex'; document.getElementById('crm-lightbox-img').src='crm_campaign.png';">
+                        <img src="crm_campaign.png" alt="Campaign Tracking" style="width: 100%; height: 80px; object-fit: cover; display: block;">
+                        <div style="padding: 0.3rem; text-align: center; font-size: 0.55rem; color: var(--text-muted); background: var(--bg-card);">Campaign Tracking</div>
+                    </div>
+                    <div style="cursor: pointer; border-radius: 8px; overflow: hidden; border: 1px solid var(--border); transition: all 0.3s;" class="crm-thumb" onclick="document.getElementById('crm-lightbox').style.display='flex'; document.getElementById('crm-lightbox-img').src='crm_notify.png';">
+                        <img src="crm_notify.png" alt="Notification Center" style="width: 100%; height: 80px; object-fit: cover; display: block;">
+                        <div style="padding: 0.3rem; text-align: center; font-size: 0.55rem; color: var(--text-muted); background: var(--bg-card);">Notification Center</div>
+                    </div>
+                    <div style="cursor: pointer; border-radius: 8px; overflow: hidden; border: 1px solid var(--border); transition: all 0.3s;" class="crm-thumb" onclick="document.getElementById('crm-lightbox').style.display='flex'; document.getElementById('crm-lightbox-img').src='crm_course.png';">
+                        <img src="crm_course.png" alt="Course Creation" style="width: 100%; height: 80px; object-fit: cover; display: block;">
+                        <div style="padding: 0.3rem; text-align: center; font-size: 0.55rem; color: var(--text-muted); background: var(--bg-card);">Course Creation</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-features">
+                <div class="feature"><span class="icon">&#10003;</span> Unified Inbox — Facebook Messenger + LINE</div>
+                <div class="feature"><span class="icon">&#10003;</span> Cross-platform Identity Resolution (4 channels)</div>
+                <div class="feature"><span class="icon">&#10003;</span> Facebook Ads Sync + ROAS Calculation</div>
+                <div class="feature"><span class="icon">&#10003;</span> POS System + Bank Slip OCR (Gemini AI)</div>
+                <div class="feature"><span class="icon">&#10003;</span> Kitchen Stock Management (FEFO tracking)</div>
+                <div class="feature"><span class="icon">&#10003;</span> Course Scheduling + Student Enrollment</div>
+                <div class="feature"><span class="icon">&#10003;</span> 6-tier RBAC (Guest to Developer)</div>
+                <div class="feature"><span class="icon">&#10003;</span> Rule-based Notification Engine (LINE push)</div>
+                <div class="feature"><span class="icon">&#10003;</span> 23 Database Models, 95+ API Endpoints</div>
+                <div class="feature"><span class="icon">&#10003;</span> 186+ Test Cases (Vitest)</div>
+                <div class="feature"><span class="icon">&#10003;</span> 44 Architecture Decision Records</div>
+                <div class="feature"><span class="icon">&#10003;</span> Creative Fatigue Detection for Ads</div>
+            </div>
+            <div class="tech-tags">
+                <span class="tag">Next.js 14</span>
+                <span class="tag">React 18</span>
+                <span class="tag">Prisma</span>
+                <span class="tag">PostgreSQL</span>
+                <span class="tag">Supabase</span>
+                <span class="tag">Redis</span>
+                <span class="tag">QStash</span>
+                <span class="tag">Google Gemini</span>
+                <span class="tag">Facebook Graph API</span>
+                <span class="tag">LINE API</span>
+                <span class="tag">Playwright</span>
+                <span class="tag">NextAuth</span>
+                <span class="tag">TailwindCSS</span>
+                <span class="tag">Recharts</span>
+                <span class="tag">Docker</span>
+                <span class="tag">Vercel</span>
+                <span class="tag">Cloudflare Tunnel</span>
+            </div>
+        </div>
+
+        <!-- Agent Project -->
+        <div class="project-card agent reveal">
+            <div class="project-header">
+                <h3 class="project-title">EVA — Agentic Cognitive AI</h3>
+                <div class="project-links">
+                    <a href="https://github.com/Freshair129/agentic_agent" target="_blank" class="project-link">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                        Source
+                    </a>
+                </div>
+            </div>
+            <p class="project-desc">
+                AI Agent ที่มี "อารมณ์" และ "ความทรงจำ" เหมือนมนุษย์ — พัฒนามา <strong style="color:var(--orange)">~5 เดือน</strong> (ต.ค. 2568 – มี.ค. 2569)
+                ผ่านมา 9 repos, 7 versions เริ่มจากศูนย์จนได้ระบบที่จำลองฮอร์โมน 23 ชนิด, ดึงความทรงจำจาก 7 มิติ, มี phenomenological experience tracking
+            </p>
+            <div class="project-features">
+                <div class="feature"><span class="icon">&#10003;</span> 23 Neurochemical Simulation (30Hz update)</div>
+                <div class="feature"><span class="icon">&#10003;</span> 7-Stream Affective RAG (35% emotion weight)</div>
+                <div class="feature"><span class="icon">&#10003;</span> Memory & Soul Passport Engine (75KB)</div>
+                <div class="feature"><span class="icon">&#10003;</span> 9-Phase Boot Sequence</div>
+                <div class="feature"><span class="icon">&#10003;</span> 3-Phase Cognitive Flow (Perception → Reasoning → Persistence)</div>
+                <div class="feature"><span class="icon">&#10003;</span> Resonance Bus (pub/sub, 6 channels)</div>
+                <div class="feature"><span class="icon">&#10003;</span> Consciousness vs Memory separation</div>
+                <div class="feature"><span class="icon">&#10003;</span> Trauma-protected Memory Encoding</div>
+                <div class="feature"><span class="icon">&#10003;</span> 9D Psychological State Space (EVA Matrix)</div>
+                <div class="feature"><span class="icon">&#10003;</span> Artifact Qualia — subjective experience tracking</div>
+                <div class="feature"><span class="icon">&#10003;</span> 20+ JSON Schemas for inter-module contracts</div>
+                <div class="feature"><span class="icon">&#10003;</span> Registry-Centric YAML Governance</div>
+            </div>
+            <div class="tech-tags">
+                <span class="tag">Python</span>
+                <span class="tag">FastAPI</span>
+                <span class="tag">React 19</span>
+                <span class="tag">Google Gemini</span>
+                <span class="tag">Ollama</span>
+                <span class="tag">WebSocket</span>
+                <span class="tag">Vector DB</span>
+                <span class="tag">Graph Knowledge</span>
+                <span class="tag">Vite</span>
+                <span class="tag">TailwindCSS</span>
+                <span class="tag">Framer Motion</span>
+            </div>
+        </div>
+        <!-- DLT Video Project -->
+        <div class="project-card reveal" style="margin-bottom: 0;">
+            <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg, var(--cyan), var(--green));"></div>
+            <div class="project-header">
+                <h3 class="project-title">วิดีโออบรมใบอนุญาตขับรถ — กรมการขนส่งทางบก</h3>
+            </div>
+            <p class="project-desc">
+                ตัดต่อและผลิตวิดีโออบรมสอบใบขับขี่อย่างเป็นทางการ
+                <strong style="color:var(--green)">ใช้งานจริงในทุกศูนย์สอบทั่วประเทศไทย</strong>
+                — รับผิดชอบ Post-Production ทั้งหมด
+            </p>
+            <div class="project-features">
+                <div class="feature"><span class="icon">&#10003;</span> ใช้งานจริงในศูนย์สอบกรมการขนส่งทางบกทั่วประเทศ</div>
+                <div class="feature"><span class="icon">&#10003;</span> ตัดต่อ, ปรับสี, Motion Graphics, มิกซ์เสียง</div>
+            </div>
+            <div class="tech-tags">
+                <span class="tag">Premiere Pro</span>
+                <span class="tag">After Effects</span>
+                <span class="tag">Motion Graphics</span>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- Skills -->
+<section id="skills">
+    <div class="section-inner">
+        <div class="section-label reveal">// skills</div>
+        <h2 class="section-title reveal">What I bring to the table</h2>
+        <div class="skills-grid">
+            <div class="skill-category reveal">
+                <h3>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--pink)" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+                    Marketing & Content (6+ yrs)
+                </h3>
+                <div class="skill-list">
+                    <span class="skill-item">Content Strategy</span>
+                    <span class="skill-item">Meta Ads / ROAS</span>
+                    <span class="skill-item">Brand Storytelling</span>
+                    <span class="skill-item">Copywriting</span>
+                    <span class="skill-item">Video Production</span>
+                    <span class="skill-item">Motion Graphics</span>
+                    <span class="skill-item">Photography</span>
+                    <span class="skill-item">Community Management</span>
+                </div>
+            </div>
+            <div class="skill-category reveal">
+                <h3>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent-light)" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                    System Design (Side Projects)
+                </h3>
+                <div class="skill-list">
+                    <span class="skill-item">Database Schema Design</span>
+                    <span class="skill-item">API Architecture</span>
+                    <span class="skill-item">Pub/Sub Patterns</span>
+                    <span class="skill-item">RBAC Systems</span>
+                    <span class="skill-item">Event-Driven Architecture</span>
+                </div>
+            </div>
+            <div class="skill-category reveal">
+                <h3>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+                    AI & LLM Integration
+                </h3>
+                <div class="skill-list">
+                    <span class="skill-item">Prompt Engineering</span>
+                    <span class="skill-item">RAG Architecture</span>
+                    <span class="skill-item">Multi-Agent Orchestration</span>
+                    <span class="skill-item">Google Gemini</span>
+                    <span class="skill-item">Claude / Anthropic</span>
+                    <span class="skill-item">Tool Use / Function Calling</span>
+                    <span class="skill-item">OCR with AI Vision</span>
+                </div>
+            </div>
+            <div class="skill-category reveal">
+                <h3>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                    Frontend & UI
+                </h3>
+                <div class="skill-list">
+                    <span class="skill-item">React / Next.js</span>
+                    <span class="skill-item">TailwindCSS</span>
+                    <span class="skill-item">Framer Motion</span>
+                    <span class="skill-item">Recharts</span>
+                    <span class="skill-item">Responsive Design</span>
+                    <span class="skill-item">HTML / CSS</span>
+                </div>
+            </div>
+            <div class="skill-category reveal">
+                <h3>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+                    Backend & Data
+                </h3>
+                <div class="skill-list">
+                    <span class="skill-item">PostgreSQL</span>
+                    <span class="skill-item">Prisma ORM</span>
+                    <span class="skill-item">FastAPI (Python)</span>
+                    <span class="skill-item">Redis</span>
+                    <span class="skill-item">Supabase</span>
+                    <span class="skill-item">REST API Design</span>
+                    <span class="skill-item">WebSocket</span>
+                </div>
+            </div>
+            <div class="skill-category reveal">
+                <h3>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--pink)" stroke-width="2"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
+                    Platform Integrations
+                </h3>
+                <div class="skill-list">
+                    <span class="skill-item">Facebook Graph API</span>
+                    <span class="skill-item">LINE Messaging API</span>
+                    <span class="skill-item">Facebook Ads API</span>
+                    <span class="skill-item">Google Sheets API</span>
+                    <span class="skill-item">Webhook Design</span>
+                    <span class="skill-item">OAuth / Auth</span>
+                </div>
+            </div>
+            <div class="skill-category reveal">
+                <h3>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent-light)" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                    DevOps & Workflow
+                </h3>
+                <div class="skill-list">
+                    <span class="skill-item">Docker</span>
+                    <span class="skill-item">Vercel</span>
+                    <span class="skill-item">Cloudflare Tunnel</span>
+                    <span class="skill-item">Git / GitHub</span>
+                    <span class="skill-item">CI/CD</span>
+                    <span class="skill-item">Testing (Vitest/Pytest)</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Approach -->
+<section style="background: var(--bg-secondary);">
+    <div class="section-inner">
+        <div class="section-label reveal">// approach</div>
+        <h2 class="section-title reveal">How I build things</h2>
+        <p class="section-desc reveal">ผมใช้วิธีการทำงานแบบ AI-Augmented Development</p>
+        <!-- Phase 1 -->
+        <h3 style="font-size: 0.85rem; color: var(--accent-light); font-family: 'JetBrains Mono', monospace; margin-bottom: 1rem;" class="reveal">Phase 1 — Early Development</h3>
+        <div class="approach-grid">
+            <div class="approach-card reveal">
+                <div class="approach-icon">&#9881;</div>
+                <h3>ChatGPT</h3>
+                <p>วางแผน เขียนเอกสาร ออกแบบโครงสร้างระบบ database schema, API design, data flow</p>
+            </div>
+            <div class="approach-card reveal">
+                <div class="approach-icon">&#9889;</div>
+                <h3>Gemini</h3>
+                <p>เขียนโค้ด สร้าง components, APIs, utilities ตาม architecture ที่ออกแบบไว้</p>
+            </div>
+            <div class="approach-card reveal">
+                <div class="approach-icon">&#128296;</div>
+                <h3>VS Code</h3>
+                <p>ประกอบร่างทุกชิ้นส่วน — เชื่อมต่อ ปรับแก้ ทำให้ระบบทำงานร่วมกันได้จริง</p>
+            </div>
+        </div>
+
+        <!-- Phase 2 -->
+        <h3 style="font-size: 0.85rem; color: var(--cyan); font-family: 'JetBrains Mono', monospace; margin: 2rem 0 1rem;" class="reveal">Phase 2 — Scaling Up (ความซับซ้อนเพิ่มขึ้น → เลิกใช้ BullMQ, ปรับทีม AI)</h3>
+        <div class="approach-grid">
+            <div class="approach-card reveal">
+                <div class="approach-icon">&#129504;</div>
+                <h3>Claude Code</h3>
+                <p><strong style="color:var(--accent-light)">Lead Dev</strong> — ตัดสินใจด้าน architecture, เขียน ADRs, code review, production hardening, สั่งงาน agent อื่น</p>
+            </div>
+            <div class="approach-card reveal">
+                <div class="approach-icon">&#127756;</div>
+                <h3>Antigravity</h3>
+                <p><strong style="color:var(--cyan)">Senior Dev</strong> — complex backend, database optimization, bug audit, feature implementation</p>
+            </div>
+            <div class="approach-card reveal">
+                <div class="approach-icon">&#9889;</div>
+                <h3>Gemini CLI</h3>
+                <p><strong style="color:var(--green)">Worker</strong> — boilerplate, helpers, unit tests (ใช้โควต้า Pro Pack เพื่อประหยัด token Claude)</p>
+            </div>
+        </div>
+
+        <!-- Phase 3 -->
+        <h3 style="font-size: 0.85rem; color: var(--orange); font-family: 'JetBrains Mono', monospace; margin: 2rem 0 1rem;" class="reveal">Phase 3 — Sprint to MVP (19 มี.ค. 2026)</h3>
+        <div class="approach-grid">
+            <div class="approach-card reveal" style="border-color: var(--orange); background: var(--orange-glow);">
+                <div class="approach-icon">&#128640;</div>
+                <h3>Claude Max x5</h3>
+                <p>อัปเกรดเป็น <strong style="color:var(--orange)">Claude Max $100/mo (5x capacity)</strong> เพื่อเร่งสร้าง MVP — ตัดสินใจลงทุนเมื่อเห็นว่าระบบใกล้ production-ready</p>
+            </div>
+            <div class="approach-card reveal">
+                <div class="approach-icon">&#127756;</div>
+                <h3>Antigravity</h3>
+                <p>Senior Dev — ทำงานคู่กับ Claude Max เต็มสปีด</p>
+            </div>
+            <div class="approach-card reveal">
+                <div class="approach-icon">&#9889;</div>
+                <h3>Gemini CLI</h3>
+                <p>Worker — งาน routine ทั้งหมด ประหยัด Claude token สำหรับงาน critical</p>
+            </div>
+        </div>
+
+        <!-- Tools Summary -->
+        <div style="margin-top: 3rem;">
+            <h3 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 1.5rem; color: var(--text-secondary);" class="reveal">All tools in my stack</h3>
+            <div style="display: flex; flex-wrap: wrap; gap: 0.75rem;" class="reveal">
+                <span class="tag" style="padding: 0.5rem 1rem; font-size: 0.85rem;">ChatGPT — Planning & Docs</span>
+                <span class="tag" style="padding: 0.5rem 1rem; font-size: 0.85rem;">Google Gemini — Coding & AI</span>
+                <span class="tag" style="padding: 0.5rem 1rem; font-size: 0.85rem;">Claude Code — Lead Architect</span>
+                <span class="tag" style="padding: 0.5rem 1rem; font-size: 0.85rem;">Antigravity — Senior Agent</span>
+                <span class="tag" style="padding: 0.5rem 1rem; font-size: 0.85rem;">VS Code — Early Assembly</span>
+                <span class="tag" style="padding: 0.5rem 1rem; font-size: 0.85rem;">Git & GitHub</span>
+                <span class="tag" style="padding: 0.5rem 1rem; font-size: 0.85rem;">Docker</span>
+                <span class="tag" style="padding: 0.5rem 1rem; font-size: 0.85rem;">Vercel</span>
+                <span class="tag" style="padding: 0.5rem 1rem; font-size: 0.85rem;">Supabase</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Journey — Dual Timeline -->
+<section id="journey">
+    <div class="section-inner">
+        <div class="section-label reveal">// journey</div>
+        <h2 class="section-title reveal">My path</h2>
+        <p class="section-desc reveal">งานประจำ (กลางวัน) กับ Side Project (หลังเลิกงาน) วิ่งคู่ขนานกัน</p>
+
+        <!-- Dual Timeline -->
+        <div style="display: grid; grid-template-columns: 1fr 60px 1fr; gap: 0; position: relative;" class="reveal">
+
+            <!-- Column Headers -->
+            <div style="text-align: center; padding: 0.75rem; margin-bottom: 1.5rem; background: var(--accent-glow); border: 1px solid rgba(99,102,241,0.3); border-radius: 8px;">
+                <div style="font-size: 0.7rem; color: var(--accent-light); text-transform: uppercase; letter-spacing: 0.1em;">Day Job</div>
+                <div style="font-size: 0.8rem; font-weight: 600;">Marketing & Content</div>
+            </div>
+            <div></div>
+            <div style="text-align: center; padding: 0.75rem; margin-bottom: 1.5rem; background: var(--green-glow); border: 1px solid rgba(34,197,94,0.3); border-radius: 8px;">
+                <div style="font-size: 0.7rem; color: var(--green); text-transform: uppercase; letter-spacing: 0.1em;">After Hours</div>
+                <div style="font-size: 0.8rem; font-weight: 600;">Side Projects</div>
+            </div>
+
+            <!-- === BEFORE OVERLAP === -->
+
+            <!-- ~15 yr ago — spans both -->
+            <div style="grid-column: 1 / -1; text-align: center; padding: 1rem; margin-bottom: 0.5rem;">
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--text-muted);">~15 years ago</div>
+                <div style="font-weight: 600; font-size: 0.9rem; margin-top: 0.25rem;">HTML & C + ป.ตรี นิเทศศาสตร์ ม.รังสิต</div>
+                <div style="color: var(--text-muted); font-size: 0.75rem;">พื้นฐานโครงสร้าง / มัธยม สวนกุหลาบ</div>
+            </div>
+
+            <!-- 2562-2565 -->
+            <div style="padding: 1rem; border-right: 2px solid var(--accent); text-align: right;">
+                <div style="font-weight: 600; color: var(--accent-light);">Saint Thonglor Clinic</div>
+                <div style="color: var(--text-muted); font-size: 0.75rem;">Content Creator (3 ปี)</div>
+                <div style="color: var(--text-muted); font-size: 0.7rem;">Before/After, Paid Social, Influencer</div>
+            </div>
+            <div style="display: flex; align-items: center; justify-content: center;">
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; color: var(--text-muted); writing-mode: horizontal-tb;">62–65</div>
+            </div>
+            <div style="padding: 1rem; border-left: 2px solid var(--border); display: flex; align-items: center; color: var(--text-muted); font-size: 0.75rem; font-style: italic;">—</div>
+
+            <!-- 2565-2568 -->
+            <div style="padding: 1rem; border-right: 2px solid var(--accent); text-align: right;">
+                <div style="font-weight: 600; color: var(--accent-light);">U-Turn Shop (Big Bike)</div>
+                <div style="color: var(--text-muted); font-size: 0.75rem;">Marketing & Content (3 ปี)</div>
+                <div style="color: var(--text-muted); font-size: 0.7rem;">Meta Ads, ROAS, FB/IG/TikTok/YT</div>
+            </div>
+            <div style="display: flex; align-items: center; justify-content: center;">
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; color: var(--text-muted);">65–68</div>
+            </div>
+            <div style="padding: 1rem; border-left: 2px solid var(--border); display: flex; align-items: center; color: var(--text-muted); font-size: 0.75rem; font-style: italic;">—</div>
+
+            <!-- มิ.ย.–ก.ย. 68 -->
+            <div style="padding: 1rem; border-right: 2px solid var(--accent); text-align: right;">
+                <div style="font-weight: 600; color: var(--accent-light);">Hospital Feelgood</div>
+                <div style="color: var(--text-muted); font-size: 0.75rem;">Asst. Manager</div>
+                <div style="color: var(--text-muted); font-size: 0.7rem;">บริหารงาน, อีเวนต์, โซเชียล</div>
+            </div>
+            <div style="display: flex; align-items: center; justify-content: center;">
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; color: var(--text-muted);">มิ.ย.68</div>
+            </div>
+            <div style="padding: 1rem; border-left: 2px solid var(--border); display: flex; align-items: center; color: var(--text-muted); font-size: 0.75rem; font-style: italic;">—</div>
+
+            <!-- === OVERLAP STARTS — ต.ค. 68 === -->
+
+            <div style="padding: 1rem; border-right: 2px solid var(--accent); text-align: right;">
+                <div style="color: var(--text-muted); font-size: 0.75rem;">Feelgood (ต่อ)</div>
+            </div>
+            <div style="display: flex; align-items: center; justify-content: center; position: relative;">
+                <div style="width: 12px; height: 12px; background: var(--orange); border-radius: 50%; box-shadow: 0 0 10px var(--orange); z-index: 2;"></div>
+                <div style="position: absolute; top: -8px; font-family: 'JetBrains Mono', monospace; font-size: 0.55rem; color: var(--orange); white-space: nowrap;">ต.ค.68</div>
+            </div>
+            <div style="padding: 1rem; border-left: 2px solid var(--green);">
+                <div style="font-weight: 600; color: var(--text-secondary);">Genesis + Genesis01</div>
+                <div style="color: var(--text-muted); font-size: 0.7rem;">EVA เริ่มต้น — blueprint, schemas</div>
+            </div>
+
+            <!-- พ.ย. 68 -->
+            <div style="padding: 1rem; border-right: 2px solid var(--accent); text-align: right;">
+                <div style="color: var(--text-muted); font-size: 0.75rem;">Feelgood (ต่อ)</div>
+            </div>
+            <div style="display: flex; align-items: center; justify-content: center;">
+                <div style="width: 8px; height: 8px; background: var(--accent-light); border-radius: 50;"></div>
+            </div>
+            <div style="padding: 1rem; border-left: 2px solid var(--green);">
+                <div style="font-weight: 600; color: var(--accent-light);">eva-dream-engine</div>
+                <div style="color: var(--text-muted); font-size: 0.7rem;">Python ครั้งแรก</div>
+            </div>
+
+            <!-- ธ.ค. 68 — Breakthrough -->
+            <div style="padding: 1rem; border-right: 2px solid var(--accent); text-align: right;">
+                <div style="color: var(--text-muted); font-size: 0.75rem;">Feelgood (สิ้นสุด)</div>
+            </div>
+            <div style="display: flex; align-items: center; justify-content: center; position: relative;">
+                <div style="width: 14px; height: 14px; background: var(--orange); border-radius: 50%; box-shadow: 0 0 15px var(--orange); z-index: 2;"></div>
+                <div style="position: absolute; top: -8px; font-family: 'JetBrains Mono', monospace; font-size: 0.55rem; color: var(--orange); white-space: nowrap;">ธ.ค.68</div>
+            </div>
+            <div style="padding: 1rem; border-left: 2px solid var(--orange); background: rgba(245,158,11,0.05); border-radius: 0 8px 8px 0;">
+                <div style="font-weight: 700; color: var(--orange);">EVA v5.0 → v7.0</div>
+                <div style="color: var(--text-muted); font-size: 0.7rem;">Breakthrough — PK/PD models, 14 subsystems, 9D Matrix</div>
+            </div>
+
+            <!-- ม.ค. 69 -->
+            <div style="padding: 1rem; border-right: 2px solid var(--accent); text-align: right;">
+                <div style="font-weight: 600; color: var(--accent-light);">V School (Freelance)</div>
+                <div style="color: var(--text-muted); font-size: 0.7rem;">Presenter & AI Consultant</div>
+            </div>
+            <div style="display: flex; align-items: center; justify-content: center;">
+                <div style="width: 8px; height: 8px; background: var(--green); border-radius: 50%;"></div>
+            </div>
+            <div style="padding: 1rem; border-left: 2px solid var(--green);">
+                <div style="font-weight: 600; color: var(--green);">EVA_Core → Bus → agentic_agent</div>
+                <div style="color: var(--text-muted); font-size: 0.7rem;">Production refactor, Consciousness, v9.7.0</div>
+            </div>
+
+            <!-- ก.พ. 69 -->
+            <div style="padding: 1rem; border-right: 2px solid var(--accent); text-align: right;">
+                <div style="color: var(--text-muted); font-size: 0.75rem;">V School (ต่อ)</div>
+            </div>
+            <div style="display: flex; align-items: center; justify-content: center;">
+                <div style="width: 8px; height: 8px; background: var(--green); border-radius: 50%;"></div>
+            </div>
+            <div style="padding: 1rem; border-left: 2px solid var(--green);">
+                <div style="font-weight: 600; color: var(--green);">CRM v1 (Data Hub)</div>
+                <div style="color: var(--text-muted); font-size: 0.7rem;">FB Business Suite, Playwright, BullMQ, 23 ADRs</div>
+            </div>
+
+            <!-- มี.ค. 69 -->
+            <div style="padding: 1rem; border-right: 2px solid var(--border); text-align: right; color: var(--text-muted); font-size: 0.75rem; font-style: italic; display: flex; align-items: center; justify-content: flex-end;">—</div>
+            <div style="display: flex; align-items: center; justify-content: center;">
+                <div style="width: 8px; height: 8px; background: var(--green); border-radius: 50%;"></div>
+            </div>
+            <div style="padding: 1rem; border-left: 2px solid var(--green);">
+                <div style="font-weight: 600; color: var(--green);">CRM v2 — Rewrite 12 วัน</div>
+                <div style="color: var(--text-muted); font-size: 0.7rem;">95+ APIs, 23 models, 186 tests, 44 ADRs</div>
+            </div>
+
+            <!-- 19 มี.ค. -->
+            <div style="padding: 1rem; border-right: 2px solid var(--border); text-align: right; color: var(--text-muted); font-size: 0.75rem; font-style: italic; display: flex; align-items: center; justify-content: flex-end;">—</div>
+            <div style="display: flex; align-items: center; justify-content: center; position: relative;">
+                <div style="width: 14px; height: 14px; background: var(--orange); border-radius: 50%; box-shadow: 0 0 15px var(--orange); z-index: 2;"></div>
+                <div style="position: absolute; top: -8px; font-family: 'JetBrains Mono', monospace; font-size: 0.55rem; color: var(--orange); white-space: nowrap;">19 มี.ค.</div>
+            </div>
+            <div style="padding: 1rem; border-left: 2px solid var(--orange); background: rgba(245,158,11,0.05); border-radius: 0 8px 8px 0;">
+                <div style="font-weight: 700; color: var(--orange);">Claude Max x5 ($100/mo)</div>
+                <div style="color: var(--text-muted); font-size: 0.7rem;">ลงทุนเร่งปิด MVP → production shipped</div>
+            </div>
+
+            <!-- Now — spans both -->
+            <div style="grid-column: 1 / -1; text-align: center; padding: 1.5rem 1rem; margin-top: 0.5rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px;">
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--cyan);">Now</div>
+                <div style="font-weight: 600; font-size: 1rem; margin-top: 0.25rem;">Looking for the next challenge</div>
+                <div style="color: var(--text-muted); font-size: 0.8rem;">พร้อมเรียนรู้จากคนที่เก่งกว่าและเติบโตไปด้วยกัน</div>
+            </div>
+        </div>
+
+        <!-- EVA Version Details (Collapsible) -->
+        <div style="margin-top: 3rem;">
+            <h3 style="font-size: 1rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-secondary);" class="reveal">EVA Evolution — รายละเอียดแต่ละ version (กดเปิดดูได้)</h3>
+            <div style="display: grid; gap: 0.75rem;" class="reveal">
+                <details style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; border-left: 3px solid var(--text-muted); overflow: hidden;"><summary style="padding: 1rem 1.25rem; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap;"><strong style="font-size: 0.9rem;">Genesis</strong><span style="font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--text-muted);">26 ต.ค. 2568</span></summary><div style="padding: 0 1.25rem 1rem;"><div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.4rem;"><strong style="color: var(--text-secondary);">Stack:</strong> JSON schemas, Markdown, GitHub CI/CD</div><div style="font-size: 0.75rem; color: var(--text-muted);"><strong style="color: var(--text-secondary);">Features:</strong> ไฟล์ .rar เดียว — Genesis System Prompt, Emotion Formation Rules, Learning Loop, Imprint Node Schema v8, Parameter Dictionary, Memory Nodes</div></div></details>
+                <details style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; border-left: 3px solid var(--text-muted); overflow: hidden;"><summary style="padding: 1rem 1.25rem; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap;"><strong style="font-size: 0.9rem;">Genesis01 — Blueprint</strong><span style="font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--text-muted);">26 ต.ค. 2568</span></summary><div style="padding: 0 1.25rem 1rem;"><div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.4rem;"><strong style="color: var(--text-secondary);">Stack:</strong> JSON, Markdown, Gemini Pro</div><div style="font-size: 0.75rem; color: var(--text-muted);"><strong style="color: var(--text-secondary);">Features:</strong> 6 Runtime Components (Affective Event Bus, Emotion Engine 120ms/iter, Regulation Kernel, Memory Coupler, Oversight Supervisor, External Context Daemon), 8 Emotions, 5-Layer Parameters, Drift Detection, Context Anchoring</div></div></details>
+                <details style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; border-left: 3px solid var(--accent-light); overflow: hidden;"><summary style="padding: 1rem 1.25rem; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap;"><strong style="font-size: 0.9rem;">eva-dream-engine</strong><span style="font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--text-muted);">4 พ.ย. 2568</span></summary><div style="padding: 0 1.25rem 1rem;"><div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.4rem;"><strong style="color: var(--text-secondary);">Stack:</strong> Python 100%, requests, python-dotenv</div><div style="font-size: 0.75rem; color: var(--text-muted);"><strong style="color: var(--text-secondary);">Features:</strong> GitHub REST API v3, Automated file upload agent, CLI interface — Python ครั้งแรก</div></div></details>
+                <details style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; border-left: 3px solid var(--accent-light); overflow: hidden;"><summary style="padding: 1rem 1.25rem; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap;"><strong style="font-size: 0.9rem;">EVA v5.0 — First Real System</strong><span style="font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--text-muted);">2 ธ.ค. 2568</span></summary><div style="padding: 0 1.25rem 1rem;"><div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.4rem;"><strong style="color: var(--text-secondary);">Stack:</strong> Python 86.3%, HTML 13.7%, dataclasses, math</div><div style="font-size: 0.75rem; color: var(--text-muted);"><strong style="color: var(--text-secondary);">Features:</strong> EHMS Medical Grade (22 hormones, 27.9KB), RI Engine 6-layer, StateHash S3, 30+ Stimuli, 4 Reflex Rules, EVA Septad (7-axis), 3-tier Memory, 8→8→8 Consolidation, RZ Machine Conscience, Dark Mode Dashboard</div></div></details>
+                <details style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; border-left: 3px solid var(--orange); overflow: hidden;"><summary style="padding: 1rem 1.25rem; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap;"><strong style="font-size: 0.9rem;">EVA 7.0 — Breakthrough</strong><span style="font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--orange);">19 ธ.ค. 2568</span></summary><div style="padding: 0 1.25rem 1rem;"><div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.4rem;"><strong style="color: var(--text-secondary);">Stack:</strong> Python 3.9+, Gemini, NumPy, PyYAML, Docker, ~9,000 LOC + ~1,600 tests</div><div style="font-size: 0.75rem; color: var(--text-muted);"><strong style="color: var(--text-secondary);">14 Subsystems:</strong> EHM, ESS (PK/PD + Hill model), EVA Matrix 9D, Artifact Qualia 5D, RMS v6, RI 4D, RIM v2, CIN v6, MSP (5-phase validation), GKS, Pulse Engine (5 modes), Two-Phase Orchestrator, LLM Bridge, EVA Tool — 23 neurochemicals (half-lives 10s–24h), 25+ YAML specs</div></div></details>
+                <details style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; border-left: 3px solid var(--cyan); overflow: hidden;"><summary style="padding: 1rem 1.25rem; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap;"><strong style="font-size: 0.9rem;">EVA_Core (v9.1.0)</strong><span style="font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--text-muted);">30 ธ.ค. 2568</span></summary><div style="padding: 0 1.25rem 1rem;"><div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.4rem;"><strong style="color: var(--text-secondary);">Stack:</strong> Python, Gemini + Ollama, Rich CLI, 197 files</div><div style="font-size: 0.75rem; color: var(--text-muted);"><strong style="color: var(--text-secondary);">New:</strong> 3-Phase Flow (Perception → THE GAP [PhysioCore ∥ RAG] → Reasoning 60/40), Resonance Bus 4-ch, CIM token budgets, 7-stream Agentic RAG, PhysioCore 6-stage, "Feel before think"</div></div></details>
+                <details style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; border-left: 3px solid var(--cyan); overflow: hidden;"><summary style="padding: 1rem 1.25rem; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap;"><strong style="font-size: 0.9rem;">EVA-Bus (v8.1)</strong><span style="font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--text-muted);">4 ม.ค. 2569</span></summary><div style="padding: 0 1.25rem 1rem;"><div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.4rem;"><strong style="color: var(--text-secondary);">Stack:</strong> Python, YAML/JSON contracts, Microservices</div><div style="font-size: 0.75rem; color: var(--text-muted);"><strong style="color: var(--text-secondary);">New:</strong> 10-tier Consciousness, EVA Matrix v8.1 (force-based physics), Artifact Qualia 5D, MSP State Registry, PhysioCore 2,818 LOC, Contract system — "Physiology First, Cognition Later"</div></div></details>
+                <details style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; border-left: 3px solid var(--green); box-shadow: 0 0 15px var(--green-glow); overflow: hidden;"><summary style="padding: 1rem 1.25rem; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap;"><strong style="font-size: 0.9rem;">agentic_agent (v9.7.0) — Current</strong><span style="font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--green);">13 ม.ค. 2569</span></summary><div style="padding: 0 1.25rem 1rem;"><div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.4rem;"><strong style="color: var(--text-secondary);">Stack:</strong> Python 92%, JS 5%, FastAPI, React 19, Vite, TailwindCSS, Gemini + Ollama, WebSocket, ChromaDB</div><div style="font-size: 0.75rem; color: var(--text-muted);"><strong style="color: var(--text-secondary);">Final:</strong> 8 Microservices, 9-Phase Boot, 3-Phase Cognitive Flow, Registry-Centric Governance, 44+ ADRs, WebSocket real-time chat + live emotion, Multi-user sessions, 27KB developer guide</div></div></details>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact -->
+<section id="contact" style="background: var(--bg-secondary);">
+    <div class="section-inner">
+        <div class="section-label reveal">// contact</div>
+        <h2 class="section-title reveal">Let's connect</h2>
+        <p class="section-desc reveal">สนใจร่วมงานหรือพูดคุย ติดต่อได้เลยครับ</p>
+        <div class="contact-grid reveal">
+            <a href="https://github.com/Freshair129" target="_blank" class="contact-card">
+                <div class="contact-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="var(--text-primary)"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                </div>
+                <div class="contact-info">
+                    <div class="label">GitHub</div>
+                    <div class="value">Freshair129</div>
+                </div>
+            </a>
+            <a href="mailto:suanranger129@gmail.com" class="contact-card">
+                <div class="contact-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-primary)" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                </div>
+                <div class="contact-info">
+                    <div class="label">Email</div>
+                    <div class="value">suanranger129@gmail.com</div>
+                </div>
+            </a>
+            <a href="tel:0931840662" class="contact-card">
+                <div class="contact-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-primary)" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                </div>
+                <div class="contact-info">
+                    <div class="label">Phone</div>
+                    <div class="value">093-184-0662</div>
+                </div>
+            </a>
+            <a href="https://resume-ecru-five-15.vercel.app" target="_blank" class="contact-card">
+                <div class="contact-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-primary)" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                </div>
+                <div class="contact-info">
+                    <div class="label">Full Resume</div>
+                    <div class="value">resume-ecru-five-15.vercel.app</div>
+                </div>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- CRM Lightbox -->
+<div id="crm-lightbox" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 9999; align-items: center; justify-content: center; cursor: pointer; backdrop-filter: blur(10px);" onclick="this.style.display='none';">
+    <img id="crm-lightbox-img" src="" alt="CRM Screenshot" style="max-width: 90%; max-height: 90%; border-radius: 12px; box-shadow: 0 20px 60px rgba(0,0,0,0.5);">
+    <div style="position: absolute; top: 1.5rem; right: 1.5rem; color: white; font-size: 1.5rem; font-weight: 700; cursor: pointer;">&#10005;</div>
+</div>
+
+<!-- Footer -->
+<footer>
+    <p>Built with <span class="heart">&#9829;</span> and AI — &copy; 2026 Pornpon Thansuvanthanan</p>
+</footer>
+
+<!-- Scroll Animation Script -->
+<script>
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Parallax mouse tracking for hero 3D elements
+    const heroSection = document.querySelector('.hero');
+    const leftPanel = document.querySelector('.hero-3d-left');
+    const rightPanel = document.querySelector('.hero-3d-right');
+
+    if (heroSection && leftPanel && rightPanel) {
+      heroSection.addEventListener('mousemove', (e) => {
+        const rect = heroSection.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5;  // -0.5 to 0.5
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+
+        // Left panel moves opposite to mouse (parallax depth)
+        leftPanel.style.transform = `translate(${x * -20}px, ${y * -15}px)`;
+        // Right panel moves with mouse but less
+        rightPanel.style.transform = `translate(${x * 15}px, ${y * -12}px)`;
+      });
+
+      heroSection.addEventListener('mouseleave', () => {
+        leftPanel.style.transform = 'translate(0, 0)';
+        rightPanel.style.transform = 'translate(0, 0)';
+      });
+    }
+
+    // Navbar scroll effect
+    let lastScroll = 0;
+    window.addEventListener('scroll', () => {
+        const nav = document.querySelector('nav');
+        const currentScroll = window.pageYOffset;
+        if (currentScroll > 100) {
+            nav.style.padding = '0.6rem 2rem';
+        } else {
+            nav.style.padding = '1rem 2rem';
+        }
+        lastScroll = currentScroll;
+    });
+
+    // Smooth scroll for nav links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

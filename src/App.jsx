@@ -125,13 +125,16 @@ const MainPortfolio = () => {
             </div>
             <h1 className="text-4xl md:text-6xl font-black leading-tight text-slate-900">{t.hero.name}</h1>
             <p className="text-xl text-slate-600 max-w-xl mx-auto md:mx-0 leading-relaxed">{t.hero.desc}</p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start flex-wrap">
               <Link to="/resume" className="bg-slate-900 text-white px-8 py-4 rounded-2xl font-bold flex items-center justify-center gap-2 shadow-xl shadow-slate-200 hover:bg-slate-800 transition-all hover:-translate-y-1">
                 {t.hero.viewResume} <FileText size={18} />
               </Link>
               <Link to="/portfolio" className="bg-white text-slate-900 border-2 border-slate-900 px-8 py-4 rounded-2xl font-bold flex items-center justify-center gap-2 shadow-xl shadow-slate-100 hover:bg-slate-50 transition-all hover:-translate-y-1">
                 {t.hero.viewPortfolio} <ExternalLink size={18} />
               </Link>
+              <a href="/marketing/" target="_blank" rel="noopener noreferrer" className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-8 py-4 rounded-2xl font-bold flex items-center justify-center gap-2 shadow-xl shadow-purple-200 hover:from-indigo-700 hover:to-purple-700 transition-all hover:-translate-y-1">
+                {language === 'th' ? 'Marketing Portfolio' : 'Marketing Portfolio'} <Cpu size={18} />
+              </a>
             </div>
             <div className="flex flex-wrap gap-3 justify-center md:justify-start items-center pt-2">
               <span className="text-xs text-slate-400 font-bold uppercase tracking-widest">Download Resume:</span>
