@@ -133,7 +133,7 @@ const MainPortfolio = () => {
                 {t.hero.viewPortfolio} <ExternalLink size={18} />
               </Link>
               <a href="/marketing/" target="_blank" rel="noopener noreferrer" className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-8 py-4 rounded-2xl font-bold flex items-center justify-center gap-2 shadow-xl shadow-purple-200 hover:from-indigo-700 hover:to-purple-700 transition-all hover:-translate-y-1">
-                {language === 'th' ? 'Marketing Portfolio' : 'Marketing Portfolio'} <Cpu size={18} />
+                {language === 'th' ? 'Marketing Tech Portfolio' : 'Marketing Tech Portfolio'} <Cpu size={18} />
               </a>
             </div>
             <div className="flex flex-wrap gap-3 justify-center md:justify-start items-center pt-2">
