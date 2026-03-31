@@ -1144,71 +1144,6 @@
                 การเปลี่ยนผ่านจาก Internal Tool สู่ธุรกิจ SaaS ที่ครบครันที่สุดในไทย ด้วยสถาปัตยกรรม <strong style="color:var(--cyan)">Multi-Tenant</strong> ออกแบบสถาปัตยกรรมใหม่หมดด้วย Next.js 14 App Router, Supabase (PostgreSQL) และ AI อัตโนมัติด้วย Gemini 2.0 Flash
             </p>
 
-            <!-- Tech Stack Table -->
-            <div style="margin-bottom: 1.5rem; overflow-x: auto;">
-                <table style="width: 100%; border-collapse: collapse; font-size: 0.65rem; color: var(--text-secondary); border: 1px solid var(--border);">
-                    <thead>
-                        <tr style="background: var(--bg-card); border-bottom: 1px solid var(--border);">
-                            <th style="padding: 0.4rem; text-align: left; border-right: 1px solid var(--border);">Layer</th>
-                            <th style="padding: 0.4rem; text-align: left; border-right: 1px solid var(--border);">Technology</th>
-                            <th style="padding: 0.4rem; text-align: left;">หมายเหตุ</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr style="border-bottom: 1px solid var(--border);">
-                            <td style="padding: 0.3rem 0.4rem; border-right: 1px solid var(--border);"><strong>Framework</strong></td>
-                            <td style="padding: 0.3rem 0.4rem; border-right: 1px solid var(--border);">Next.js 14 (App Router)</td>
-                            <td style="padding: 0.3rem 0.4rem;">SSR + API routes in one repo</td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid var(--border);">
-                            <td style="padding: 0.3rem 0.4rem; border-right: 1px solid var(--border);"><strong>Language</strong></td>
-                            <td style="padding: 0.3rem 0.4rem; border-right: 1px solid var(--border);">JavaScript (JSX)</td>
-                            <td style="padding: 0.3rem 0.4rem;">ไม่ใช่ TypeScript ยกเว้น <code>db.ts</code></td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid var(--border);">
-                            <td style="padding: 0.3rem 0.4rem; border-right: 1px solid var(--border);"><strong>Database</strong></td>
-                            <td style="padding: 0.3rem 0.4rem; border-right: 1px solid var(--border);">PostgreSQL via Supabase</td>
-                            <td style="padding: 0.3rem 0.4rem;">Prisma ORM</td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid var(--border);">
-                            <td style="padding: 0.3rem 0.4rem; border-right: 1px solid var(--border);"><strong>Cache / Queue</strong></td>
-                            <td style="padding: 0.3rem 0.4rem; border-right: 1px solid var(--border);">Upstash Redis + QStash</td>
-                            <td style="padding: 0.3rem 0.4rem;">Serverless-friendly</td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid var(--border);">
-                            <td style="padding: 0.3rem 0.4rem; border-right: 1px solid var(--border);"><strong>Realtime</strong></td>
-                            <td style="padding: 0.3rem 0.4rem; border-right: 1px solid var(--border);">Pusher (Channels)</td>
-                            <td style="padding: 0.3rem 0.4rem;">inbox new-message events</td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid var(--border);">
-                            <td style="padding: 0.3rem 0.4rem; border-right: 1px solid var(--border);"><strong>Auth</strong></td>
-                            <td style="padding: 0.3rem 0.4rem; border-right: 1px solid var(--border);">NextAuth.js v4</td>
-                            <td style="padding: 0.3rem 0.4rem;">JWT session, bcrypt password</td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid var(--border);">
-                            <td style="padding: 0.3rem 0.4rem; border-right: 1px solid var(--border);"><strong>Styling</strong></td>
-                            <td style="padding: 0.3rem 0.4rem; border-right: 1px solid var(--border);">Tailwind CSS</td>
-                            <td style="padding: 0.3rem 0.4rem;">+ Framer Motion animations</td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid var(--border);">
-                            <td style="padding: 0.3rem 0.4rem; border-right: 1px solid var(--border);"><strong>Charts</strong></td>
-                            <td style="padding: 0.3rem 0.4rem; border-right: 1px solid var(--border);">Recharts</td>
-                            <td style="padding: 0.3rem 0.4rem;">marketing dashboard</td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid var(--border);">
-                            <td style="padding: 0.3rem 0.4rem; border-right: 1px solid var(--border);"><strong>Deployment</strong></td>
-                            <td style="padding: 0.3rem 0.4rem; border-right: 1px solid var(--border);">Vercel</td>
-                            <td style="padding: 0.3rem 0.4rem;">Edge + Serverless Functions</td>
-                        </tr>
-                        <tr>
-                            <td style="padding: 0.3rem 0.4rem; border-right: 1px solid var(--border);"><strong>AI/LLM</strong></td>
-                            <td style="padding: 0.3rem 0.4rem; border-right: 1px solid var(--border);">Gemini 2.0 Flash</td>
-                            <td style="padding: 0.3rem 0.4rem;">compose, ask AI, daily brief</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
             <!-- Demo Credentials -->
             <div style="display: inline-flex; align-items: center; gap: 0.75rem; padding: 0.6rem 1rem; background: var(--accent-glow); border: 1px solid rgba(99,102,241,0.3); border-radius: 8px; margin-bottom: 1.25rem; flex-wrap: wrap;">
                 <span style="font-size: 0.75rem; color: var(--accent-light); font-weight: 600;">Demo Login:</span>
@@ -1287,6 +1222,72 @@
                 <div class="feature"><span class="icon">&#10003;</span> Framer Motion — High-end animations & smooth micro-interactions</div>
                 <div class="feature"><span class="icon">&#10003;</span> Meta Ad Policy Flag Report — AI-powered compliance check for Facebook Ads</div>
             </div>
+
+            <!-- Tech Stack Table -->
+            <div style="margin-top: 1.5rem; margin-bottom: 1.5rem; overflow-x: auto;">
+                <table style="width: 100%; border-collapse: collapse; font-size: 0.65rem; color: var(--text-secondary); border: 1px solid var(--border);">
+                    <thead>
+                        <tr style="background: var(--bg-card); border-bottom: 1px solid var(--border);">
+                            <th style="padding: 0.4rem; text-align: left; border-right: 1px solid var(--border);">Layer</th>
+                            <th style="padding: 0.4rem; text-align: left; border-right: 1px solid var(--border);">Technology</th>
+                            <th style="padding: 0.4rem; text-align: left;">หมายเหตุ</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="border-bottom: 1px solid var(--border);">
+                            <td style="padding: 0.3rem 0.4rem; border-right: 1px solid var(--border);"><strong>Framework</strong></td>
+                            <td style="padding: 0.3rem 0.4rem; border-right: 1px solid var(--border);">Next.js 14 (App Router)</td>
+                            <td style="padding: 0.3rem 0.4rem;">SSR + API routes in one repo</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border);">
+                            <td style="padding: 0.3rem 0.4rem; border-right: 1px solid var(--border);"><strong>Language</strong></td>
+                            <td style="padding: 0.3rem 0.4rem; border-right: 1px solid var(--border);">JavaScript (JSX)</td>
+                            <td style="padding: 0.3rem 0.4rem;">ไม่ใช่ TypeScript ยกเว้น <code>db.ts</code></td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border);">
+                            <td style="padding: 0.3rem 0.4rem; border-right: 1px solid var(--border);"><strong>Database</strong></td>
+                            <td style="padding: 0.3rem 0.4rem; border-right: 1px solid var(--border);">PostgreSQL via Supabase</td>
+                            <td style="padding: 0.3rem 0.4rem;">Prisma ORM</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border);">
+                            <td style="padding: 0.3rem 0.4rem; border-right: 1px solid var(--border);"><strong>Cache / Queue</strong></td>
+                            <td style="padding: 0.3rem 0.4rem; border-right: 1px solid var(--border);">Upstash Redis + QStash</td>
+                            <td style="padding: 0.3rem 0.4rem;">Serverless-friendly</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border);">
+                            <td style="padding: 0.3rem 0.4rem; border-right: 1px solid var(--border);"><strong>Realtime</strong></td>
+                            <td style="padding: 0.3rem 0.4rem; border-right: 1px solid var(--border);">Pusher (Channels)</td>
+                            <td style="padding: 0.3rem 0.4rem;">inbox new-message events</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border);">
+                            <td style="padding: 0.3rem 0.4rem; border-right: 1px solid var(--border);"><strong>Auth</strong></td>
+                            <td style="padding: 0.3rem 0.4rem; border-right: 1px solid var(--border);">NextAuth.js v4</td>
+                            <td style="padding: 0.3rem 0.4rem;">JWT session, bcrypt password</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border);">
+                            <td style="padding: 0.3rem 0.4rem; border-right: 1px solid var(--border);"><strong>Styling</strong></td>
+                            <td style="padding: 0.3rem 0.4rem; border-right: 1px solid var(--border);">Tailwind CSS</td>
+                            <td style="padding: 0.3rem 0.4rem;">+ Framer Motion animations</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border);">
+                            <td style="padding: 0.3rem 0.4rem; border-right: 1px solid var(--border);"><strong>Charts</strong></td>
+                            <td style="padding: 0.3rem 0.4rem; border-right: 1px solid var(--border);">Recharts</td>
+                            <td style="padding: 0.3rem 0.4rem;">marketing dashboard</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border);">
+                            <td style="padding: 0.3rem 0.4rem; border-right: 1px solid var(--border);"><strong>Deployment</strong></td>
+                            <td style="padding: 0.3rem 0.4rem; border-right: 1px solid var(--border);">Vercel</td>
+                            <td style="padding: 0.3rem 0.4rem;">Edge + Serverless Functions</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 0.3rem 0.4rem; border-right: 1px solid var(--border);"><strong>AI/LLM</strong></td>
+                            <td style="padding: 0.3rem 0.4rem; border-right: 1px solid var(--border);">Gemini 2.0 Flash</td>
+                            <td style="padding: 0.3rem 0.4rem;">compose, ask AI, daily brief</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
             <div class="tech-tags">
                 <span class="tag">Next.js 14</span>
                 <span class="tag">Prisma</span>
