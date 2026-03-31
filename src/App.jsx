@@ -317,6 +317,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<MainPortfolio />} />
         <Route path="/resume" element={<Resume />} />
+        <Route path="/resume/:variantSlug" element={<Resume />} />
         <Route path="/portfolio" element={<Portfolio />} />
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/demo" element={<ProjectDemo />} />

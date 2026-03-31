@@ -1,14 +1,17 @@
-import { Link } from 'react-router-dom';
-import { ArrowLeft, Phone, Mail, MapPin, Download, ExternalLink, Award, Sparkles, Brain, Cpu, Code, Star, Video, Camera, Briefcase, Image as ImageIcon, FileText, GraduationCap, CheckCircle2, Github } from 'lucide-react';
+import { Link, useParams } from 'react-router-dom';
+import { ArrowLeft, Phone, Mail, MapPin, Download, ExternalLink, Award, Sparkles, Brain, Cpu, Code, Star, Video, Camera, Briefcase, Image as ImageIcon, FileText, GraduationCap, CheckCircle2, Target } from 'lucide-react';
 import { useLanguage } from './LanguageContext';
 import React, { useRef } from 'react';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import profileImage from './assets/profile.jpg';
+import { resumeVariants, allExperiences } from './data/resumeVariants';
 
 const Resume = () => {
     const resumeRef = useRef(null);
-    const { t } = useLanguage();
+    const { t, language } = useLanguage();
+    const { variantSlug } = useParams();
+    const variant = resumeVariants[variantSlug] || resumeVariants.default;
 
     const handleDownload = async (type) => {
         const element = resumeRef.current;
@@ -47,116 +50,38 @@ const Resume = () => {
     // ข้อมูลรูปภาพ (ในสภาพแวดล้อมจริงคุณสามารถเปลี่ยน path รูปภาพได้ที่นี่)
     // หมายเหตุ: สำหรับรูปที่คุณอัปโหลด ระบบจะแสดงผลผ่านไฟล์ต้นฉบับที่คุณแนบมา
 
-    const experiences = [
-        {
-            title: t.resume.experience.freelance.title,
-            company: t.resume.experience.freelance.company,
-            period: t.resume.experience.freelance.period,
-            responsibilities: [
-                t.resume.experience.freelance.responsibility1,
-                t.resume.experience.freelance.responsibility2,
-                t.resume.experience.freelance.responsibility3
-            ]
-        },
-        {
-            title: t.resume.experience.assistantManager.title,
-            company: t.resume.experience.assistantManager.company,
-            period: t.resume.experience.assistantManager.period,
-            responsibilities: [
-                t.resume.experience.assistantManager.responsibility1,
-                t.resume.experience.assistantManager.responsibility2,
-                t.resume.experience.assistantManager.responsibility3,
-                t.resume.experience.assistantManager.responsibility4
-            ]
-        },
-        {
-            title: t.resume.experience.eventCoordinator.title,
-            company: t.resume.experience.eventCoordinator.company,
-            period: t.resume.experience.eventCoordinator.period,
-            responsibilities: [
-                t.resume.experience.eventCoordinator.responsibility1,
-                t.resume.experience.eventCoordinator.responsibility2,
-                t.resume.experience.eventCoordinator.responsibility3,
-                t.resume.experience.eventCoordinator.responsibility4
-            ]
-        },
-        {
-            title: t.resume.experience.contentCreatorPermanent.title,
-            company: t.resume.experience.contentCreatorPermanent.company,
-            period: t.resume.experience.contentCreatorPermanent.period,
-            responsibilities: [
-                t.resume.experience.contentCreatorPermanent.responsibility1,
-                t.resume.experience.contentCreatorPermanent.responsibility2,
-                t.resume.experience.contentCreatorPermanent.responsibility3
-            ]
-        },
-        {
-            title: t.resume.experience.contentCreatorPartTime.title,
-            company: t.resume.experience.contentCreatorPartTime.company,
-            period: t.resume.experience.contentCreatorPartTime.period,
-            responsibilities: [
-                t.resume.experience.contentCreatorPartTime.responsibility1,
-                t.resume.experience.contentCreatorPartTime.responsibility2,
-                t.resume.experience.contentCreatorPartTime.responsibility3
-            ]
-        },
-        {
-            title: t.resume.experience.editorContract.title,
-            company: t.resume.experience.editorContract.company,
-            period: t.resume.experience.editorContract.period,
-            responsibilities: [
-                t.resume.experience.editorContract.responsibility1,
-                t.resume.experience.editorContract.responsibility2
-            ]
+    // Build experience list from variant config
+    const resolveExperience = (key) => {
+        const entry = allExperiences[key];
+        if (!entry) return null;
+        if (entry.useTranslation) {
+            const tr = t.resume.experience[entry.translationKey];
+            if (!tr) return null;
+            const responsibilities = [];
+            for (let i = 1; i <= 10; i++) {
+                if (tr[`responsibility${i}`]) responsibilities.push(tr[`responsibility${i}`]);
+            }
+            return { key, title: tr.title, company: tr.company, period: tr.period, responsibilities };
         }
-    ];
+        return { key, title: entry.title, company: entry.company, period: entry.period, responsibilities: [...entry.responsibilities] };
+    };
+
+    const experiences = variant.experienceOrder
+        .map(resolveExperience)
+        .filter(Boolean);
 
     // Resume data structure aligned with Portfolio.jsx structure for consistency if needed,
     // but here we primarily use the translation object for static text.
 
-    const hardSkills = ["Photoshop", "Premiere Pro", "After Effects", "Illustrator", "Figma", "CapCut", "Canva", "Tiktok", "Reels", "Shorts", "GitHub"];
+    const hardSkills = ["Photoshop", "Premiere Pro", "After Effects", "Illustrator", "CapCut", "Canva", "Tiktok", "Reels", "Shorts"];
     const aiSkills = [
-        "Claude", "Gemini", "OpenAI", "Qwen 3.0", "Manus", "Ollama (Local)",
-        "NotebookLM", "Flow",
+        "VS Code", "Antigravity", "Claude Code", "Gemini CLI", "Ollama", "LM Studio", "AnythingLLM",
+        "ChatGPT", "Gemini", "Maus", "Claude", "Poe",
         "Prompt Engineering", "Context Engineering", "Agentic RAG"
     ];
-    const manageTools = ["Notion", "Trello", "Slack", "Google Workspace", "HubSpot", "ChocoCRM"];
     const coreCompetencies = ["Video Editor", "Creative", "Photography", "Motion Graphic", "Song Writer", "Coding", "English (Read/Write/Speak)"];
     const softSkills = ["Communication", "Teamwork", "Crisis Solving", "Growth Mindset", "Management", "Adaptability", "Work Smart"];
 
-    const BASE = "https://resume-ecru-five-15.vercel.app";
-    const projects = [
-        {
-            title: "EVA — Embodied Virtual Agent",
-            version: "v9.7.0 Epoch: Reflex",
-            stack: "Python 3.13 / FastAPI / Vue.js / ChromaDB / Agentic RAG",
-            description: "Bio-inspired AI architecture implementing Resonance Intelligence — a single-inference LLM system with hormone simulation (PhysioCore), emotional state matrix, and 8-8-8 episodic memory governance. Built solo from scratch.",
-            highlights: [
-                "7-stream Agentic RAG + GraphRAG for deep context recall",
-                "Bio-Digital Gap: LLM pauses, hormone cascade fires, resumes same mental state",
-                "8 decoupled microservices: MSP, RMS, CIM, CNS, PhysioCore, IdentityManager...",
-                "WebSocket real-time chat UI with live emotional state visualization"
-            ],
-            tags: ["Personal Project", "AI Architecture", "Solo Build"],
-            demoUrl: BASE + "/demo#eva",
-            demoLabel: "Project Overview"
-        },
-        {
-            title: "V School CRM v2 — Cooking School Management",
-            version: "v1.1.0 Production",
-            stack: "Next.js 14 / PostgreSQL / Prisma / Upstash / Meta Graph API",
-            description: "Full-stack CRM rebuilt from scratch for a Japanese cooking school — unified FB+LINE inbox, revenue attribution, FEFO stock system, POS, and Slip OCR payment verification via Gemini Vision.",
-            highlights: [
-                "186 unit tests, Slip OCR with confidence threshold 0.80",
-                "Real-time stock deduction with FEFO lot tracking",
-                "Meta Ads analytics: ROAS, campaign attribution, chat-first revenue split",
-                "QStash + Upstash Redis — zero local infra, Vercel-native deployment"
-            ],
-            tags: ["Full-Stack", "CRM / POS", "Solo Build"],
-            demoUrl: BASE + "/demo#vschool",
-            demoLabel: "Project Overview"
-        }
-    ];
     return (
         <div className="min-h-screen bg-[#f8fafc] py-10 px-4 sm:px-6 lg:px-8 font-sans text-[#1e293b]">
             <div className="max-w-5xl mx-auto mb-6 flex justify-between items-center">
@@ -187,8 +112,18 @@ const Resume = () => {
                             />
                         </div>
                         <h1 className="text-2xl font-bold tracking-wide">{t.resume.name}</h1>
-                        <p className="text-[#60a5fa] font-medium mt-1 uppercase text-sm tracking-wider">{t.resume.title}</p>
+                        <p className="text-[#60a5fa] font-medium mt-1 uppercase text-sm tracking-wider">
+                            {variant.titleOverride ? variant.titleOverride[language] || variant.titleOverride.en : t.resume.title}
+                        </p>
                     </div>
+
+                    {/* Tailored-for badge */}
+                    {variant.label && (
+                        <div className="flex items-center justify-center gap-2 mb-4 bg-[#1e3a5f] text-[#93c5fd] px-4 py-2 rounded-xl text-xs font-bold" data-html2canvas-ignore="true">
+                            <Target size={14} />
+                            <span>Tailored for {variant.roleName || variant.label}</span>
+                        </div>
+                    )}
 
                     {/* Download Buttons */}
                     <div className="flex flex-col gap-3 mb-8" data-html2canvas-ignore="true">
@@ -196,9 +131,15 @@ const Resume = () => {
                             <Download size={12} /> {t.resume.downloadResume}
                         </p>
                         <div className="flex gap-3 justify-center">
-                            <button onClick={() => handleDownload('pdf')} className="flex-1 bg-[#2563eb] hover:bg-[#1d4ed8] text-[#ffffff] px-3 py-2 rounded-lg text-sm font-bold flex items-center justify-center gap-2 transition-all hover:-translate-y-0.5 shadow-lg shadow-[#1e3a8a80] cursor-pointer">
-                                <FileText size={16} /> PDF
-                            </button>
+                            {variant.downloadFile ? (
+                                <a href={variant.downloadFile} download className="flex-1 bg-[#2563eb] hover:bg-[#1d4ed8] text-[#ffffff] px-3 py-2 rounded-lg text-sm font-bold flex items-center justify-center gap-2 transition-all hover:-translate-y-0.5 shadow-lg shadow-[#1e3a8a80] cursor-pointer">
+                                    <FileText size={16} /> DOCX
+                                </a>
+                            ) : (
+                                <button onClick={() => handleDownload('pdf')} className="flex-1 bg-[#2563eb] hover:bg-[#1d4ed8] text-[#ffffff] px-3 py-2 rounded-lg text-sm font-bold flex items-center justify-center gap-2 transition-all hover:-translate-y-0.5 shadow-lg shadow-[#1e3a8a80] cursor-pointer">
+                                    <FileText size={16} /> PDF
+                                </button>
+                            )}
                             <button onClick={() => handleDownload('jpg')} className="flex-1 bg-[#334155] hover:bg-[#475569] text-[#ffffff] px-3 py-2 rounded-lg text-sm font-bold flex items-center justify-center gap-2 transition-all hover:-translate-y-0.5 shadow-lg shadow-[#0f172a80] cursor-pointer">
                                 <ImageIcon size={16} /> JPG
                             </button>
@@ -216,7 +157,6 @@ const Resume = () => {
                                     <p className="flex items-center gap-2"><Phone size={14} className="text-[#64748b]" /> 090-973-0775</p>
                                     <p className="flex items-center gap-2"><Mail size={14} className="text-[#64748b]" /> suanranger129@gmail.com</p>
                                     <p className="flex items-center gap-2"><MapPin size={14} className="text-[#64748b]" /> {t.resume.location}</p>
-                                    <p className="flex items-center gap-2"><Github size={14} className="text-[#64748b]" /> <a href="https://github.com/Freshair129" target="_blank" rel="noopener noreferrer" className="text-[#93c5fd] hover:text-white transition-colors">github.com/Freshair129</a></p>
                                 </div>
                             </div>
                         </section>
@@ -252,19 +192,6 @@ const Resume = () => {
 
                         <section>
                             <h2 className="text-lg font-semibold border-b border-[#334155] pb-2 mb-3 flex items-center gap-2">
-                                <Briefcase size={18} className="text-[#60a5fa]" /> Management Tools
-                            </h2>
-                            <div className="flex flex-wrap gap-2">
-                                {manageTools.map(tool => (
-                                    <span key={tool} className="bg-[#7c3aed33] text-[#c4b5fd] px-2 py-1 rounded text-[11px] border border-[#7c3aed4d]">
-                                        {tool}
-                                    </span>
-                                ))}
-                            </div>
-                        </section>
-
-                        <section>
-                            <h2 className="text-lg font-semibold border-b border-[#334155] pb-2 mb-3 flex items-center gap-2">
                                 <CheckCircle2 size={18} className="text-[#60a5fa]" /> Core Competencies
                             </h2>
                             <div className="flex flex-wrap gap-2">
@@ -293,28 +220,29 @@ const Resume = () => {
 
                 {/* Right Column / Content */}
                 <div className="md:w-2/3 p-8 lg:p-12">
-                    <section className="mb-8">
-                        <div className="bg-gradient-to-r from-[#0f172a] to-[#1e3a8a] border border-[#3b82f6] rounded-xl p-5">
-                            <p className="text-[#60a5fa] font-bold text-xs uppercase tracking-widest mb-2">What Makes Me Different</p>
-                            <p className="text-[#e2e8f0] text-sm leading-relaxed font-medium">
-                                นักการตลาดที่ Build ได้จริง — จุดแข็งที่หายากในวงการ
+                    {/* About Me - variant override */}
+                    {variant.aboutOverride && (
+                        <section className="mb-8">
+                            <h2 className="text-2xl font-bold text-[#0f172a] flex items-center gap-3 mb-4">
+                                <Star className="text-[#2563eb]" /> {t.resume.aboutMe || 'About Me'}
+                            </h2>
+                            <p className="text-[#475569] text-sm leading-relaxed bg-[#f8fafc] p-4 rounded-xl border border-[#e2e8f0]">
+                                {variant.aboutOverride[language] || variant.aboutOverride.en}
                             </p>
-                            <p className="text-[#94a3b8] text-sm leading-relaxed mt-1">
-                                คนที่เขียนโค้ดเป็นส่วนใหญ่ไม่เข้าใจ marketing pipeline — คนทำ marketing ส่วนใหญ่ก็ build ระบบเองไม่ได้
-                                ผมเข้าใจทั้งสองด้าน: ตั้งแต่ ad creative, campaign strategy จนถึง revenue attribution
-                                และสามารถ build ระบบ production จริงที่รันทั้งหมดนั้นได้ด้วยตัวเอง
-                            </p>
-                        </div>
-                    </section>
+                        </section>
+                    )}
+
                     <section className="mb-10">
                         <h2 className="text-2xl font-bold text-[#0f172a] flex items-center gap-3 mb-6">
                             <Briefcase className="text-[#2563eb]" /> ประสบการณ์การทำงาน
                         </h2>
                         <div className="space-y-8 relative before:absolute before:left-[17px] before:top-2 before:bottom-2 before:w-0.5 before:bg-[#f1f5f9]">
-                            {experiences.map((exp, index) => (
-                                <div key={index} className="relative pl-10">
-                                    <div className="absolute left-0 top-1.5 w-[36px] h-[36px] bg-[#ffffff] border-2 border-[#2563eb] rounded-full flex items-center justify-center z-10 shadow-sm">
-                                        <div className="w-2 h-2 bg-[#2563eb] rounded-full"></div>
+                            {experiences.map((exp, index) => {
+                                const isEmphasized = variant.emphasisKeys?.includes(exp.key);
+                                return (
+                                <div key={index} className={`relative pl-10 ${isEmphasized ? 'bg-[#eff6ff] -mx-3 px-3 pl-[52px] py-3 rounded-xl border border-[#bfdbfe]' : ''}`}>
+                                    <div className={`absolute ${isEmphasized ? 'left-3' : 'left-0'} top-1.5 w-[36px] h-[36px] bg-[#ffffff] border-2 ${isEmphasized ? 'border-[#2563eb] shadow-md shadow-blue-200' : 'border-[#2563eb]'} rounded-full flex items-center justify-center z-10 shadow-sm`}>
+                                        <div className={`w-2 h-2 ${isEmphasized ? 'bg-[#2563eb]' : 'bg-[#2563eb]'} rounded-full`}></div>
                                     </div>
                                     <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-1">
                                         <h3 className="text-xl font-bold text-[#1e293b] leading-tight">{exp.title}</h3>
@@ -332,7 +260,8 @@ const Resume = () => {
                                         ))}
                                     </ul>
                                 </div>
-                            ))}
+                                );
+                            })}
                         </div>
                     </section>
 
@@ -350,60 +279,13 @@ const Resume = () => {
                         </div>
                     </section>
 
-                    <section className="mt-10">
-                        <h2 className="text-2xl font-bold text-[#0f172a] flex items-center gap-3 mb-6">
-                            <Cpu className="text-[#2563eb]" /> Personal Projects
-                        </h2>
-                        <div className="space-y-5">
-                            {projects.map((proj, idx) => (
-                                <div key={idx} className="bg-[#f8fafc] border border-[#e2e8f0] rounded-xl p-5 hover:border-[#bfdbfe] hover:shadow-md transition-all">
-                                    <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-1 gap-2">
-                                        <h3 className="text-lg font-bold text-[#1e293b] leading-tight">{proj.title}</h3>
-                                        <span className="text-xs font-bold text-[#7c3aed] bg-[#f5f3ff] px-3 py-1 rounded-full whitespace-nowrap">{proj.version}</span>
-                                    </div>
-                                    <p className="text-[#2563eb] text-xs font-mono mb-2">{proj.stack}</p>
-                                    <p className="text-[#475569] text-sm mb-3 leading-relaxed">{proj.description}</p>
-                                    <ul className="space-y-1 mb-3">
-                                        {proj.highlights.map((h, i) => (
-                                            <li key={i} className="flex gap-2 text-sm text-[#475569]">
-                                                <span className="text-[#3b82f6] font-bold">-&gt;</span>
-                                                <span>{h}</span>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                    <div className="flex flex-wrap gap-2 mb-4">
-                                        {proj.tags.map(tag => (
-                                            <span key={tag} className="bg-[#eff6ff] text-[#2563eb] px-2 py-0.5 rounded text-[11px] font-semibold border border-[#bfdbfe]">{tag}</span>
-                                        ))}
-                                    </div>
-                                    {proj.demoUrl && (
-                                        <div className="flex items-center gap-4 pt-3 border-t border-[#f1f5f9]">
-                                            <div className="flex flex-col gap-1">
-                                                <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Scan for Demo</p>
-                                                <img
-                                                    src={`https://api.qrserver.com/v1/create-qr-code/?size=72x72&data=${encodeURIComponent(proj.demoUrl)}&bgcolor=ffffff&color=1A2B4A&margin=4`}
-                                                    alt="QR Demo"
-                                                    className="w-[72px] h-[72px] rounded-lg border border-[#e2e8f0]"
-                                                />
-                                            </div>
-                                            <div>
-                                                <a href={proj.demoUrl} target="_blank" rel="noopener noreferrer"
-                                                   className="inline-flex items-center gap-1.5 bg-[#1A2B4A] text-white px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-[#2a3b5a] transition-colors">
-                                                    {proj.demoLabel} →
-                                                </a>
-                                                <p className="text-slate-400 text-[10px] mt-1">{proj.demoUrl.replace("https://","")}</p>
-                                            </div>
-                                        </div>
-                                    )}
-                                </div>
-                            ))}
-                        </div>
-                    </section>
-
                     <div className="mt-12 pt-8 border-t border-[#f1f5f9]">
                         <div className="bg-[#eff6ff] border-l-4 border-[#3b82f6] p-4 rounded-r-lg">
                             <p className="text-[#475569] text-xs italic">
-                                "จุดแข็งของผมไม่ใช่แค่รู้การตลาด หรือแค่ vibe code ได้ — แต่เข้าใจ pipeline ทั้งหมดตั้งแต่ ad creative จนถึง revenue attribution และสามารถ build ระบบ production จริงที่รันทั้งหมดนั้นได้ด้วยตัวเอง คนที่เข้าใจการตลาดและ build production system ได้ในเวลาเดียวกัน — นั่นคือผม"
+                                {language === 'th'
+                                    ? '"ด้วยพื้นฐานงานสาย Content Production กว่า 4 ปี ผสมผสานกับประสบการณ์บริหารจัดการทีมและการนำ AI มาปรับใช้ ผมพร้อมที่จะยกระดับการทำงานให้มีประสิทธิภาพและสร้างสรรค์ผลลัพธ์ที่จับต้องได้ให้กับองค์กร"'
+                                    : '"With 4+ years in Content Production combined with team management experience and AI integration skills, I am ready to elevate organizational productivity and deliver tangible results."'
+                                }
                             </p>
                         </div>
                     </div>
