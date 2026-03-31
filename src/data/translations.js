@@ -127,7 +127,9 @@ export const th = {
         downloadResume: "Download Resume",
         university: "มหาวิทยาลัยรังสิต",
         degree: "ปริญญาตรี นิเทศศาสตร์ (โฆษณา)",
-        school: "โรงเรียนสวนกุหลาบวิทยาลัย",        experience: {
+        school: "โรงเรียนสวนกุหลาบวิทยาลัย",
+        education: "การศึกษา",
+        experience: {
             vSchool: {
                 title: "ผู้ช่วยผู้จัดการฝ่ายการตลาด",
                 company: "V School Food Institute",
@@ -326,7 +328,9 @@ export const en = {
         downloadResume: "Download Resume",
         university: "Rangsit University",
         degree: "Bachelor of Communication Arts (Advertising)",
-        school: "Suankularb Wittayalai School",        experience: {
+        school: "Suankularb Wittayalai School",
+        education: "Education",
+        experience: {
             vSchool: {
                 title: "Assistant Marketing Manager",
                 company: "V School Food Institute",
