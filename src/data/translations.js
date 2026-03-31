@@ -20,14 +20,13 @@ export const th = {
     hero: {
         available: "Available for Work",
         name: "พรพล ธนสุวรรณธาร",
-        role: "Assistant Manager & Digital Content Specialist",
+        role: "Assistant Marketing Manager & Digital Content Specialist",
         desc: "สวัสดีครับ ผม บอส ครับ อายุ 32 ปี มีประสบการณ์การทำงานที่หลากหลายและครอบคลุม ทั้งในสายงาน Production จนไปถึง Management และปัจจุบันกำลังศึกษาและพัฒนา Future Skill ด้าน AI Innovation เพื่อนำเทคโนโลยี AI มาลดต้นทุนและเพิ่มการผลิตให้องค์กรครับ",
         viewResume: "ดู Resume",
         viewPortfolio: "ดู Portfolio",
         aiSpecialist: "AI Specialist",
         agenticRag: "AI Developer"
-    },
-    skills: {
+    },    skills: {
         badge: "Skills & Abilities",
         title: "ทักษะและความสามารถ",
         aiInnovation: "AI Innovation",
@@ -40,53 +39,58 @@ export const th = {
         title: "ประสบการณ์การทำงาน",
         timeline: [
             {
-                title: "Assistant Manager",
-                company: "Hostpital Feelgood Club",
-                period: "2025 (6 Months)",
+                title: "ผู้ช่วยผู้จัดการฝ่ายการตลาด",
+                company: "V School Food Institute",
+                period: "ม.ค. - มี.ค. 2026",
                 type: "Full-Time",
-                desc: "ดูแลภาพรวมของร้านและเป็น MC ควบคุมกิจกรรมทั้งหมด จัดแจงงานให้กับทีม Service, ทีมการ์ด และทีม Host (PR) รวมถึงทำ CRM และแก้ปัญหาเฉพาะหน้าให้แก่ลูกค้า"
+                desc: "วางแผนกลยุทธ์การตลาดและบริหารจัดการทีม เริ่มสร้างระบบ Zuri CRM เพื่อพัฒนาการบริหารความสัมพันธ์ลูกค้าขององค์กร"
             },
             {
-                title: "Event Project Coordinator",
-                company: "Joe Luxury Car Service",
-                period: "2024 (1 Year)",
-                type: "Contract",
-                desc: "รับผิดชอบดูแลประสานงานทีมภาคสนามและลูกค้า VIP วางแผนจัดการทรัพยากร (คน, รถ, เวลา) และทำหน้าที่เป็นตัวแทนทีมในการติดต่อสื่อสารตอบสนองความต้องการลูกค้า"
+                title: "รองผู้จัดการ",
+                company: "Hospital Feel Good Club",
+                period: "2024 - 2025",
+                type: "Full-Time",
+                desc: "เริ่มจาก Host/PR แบบ Freelance (ศุกร์-เสาร์) ช่วงทำงานปีสุดท้ายที่ Saint Thonglor → ลาออกมาทำ Full-time → เลื่อนตำแหน่งเป็นรองผู้จัดการ 6 เดือน → ลาออก ธ.ค. 2025 ดูแลบริหารจัดการร้าน, จัดการวิกฤต (เจรจากับตำรวจขณะตรวจค้น), นำทีมตรวจสารเสพติดประจำเดือน, บริหาร CRM โดยตรง"
+            },            {
+                title: "Operations Manager",
+                company: "Joe Luxury Car Service (ธุรกิจครอบครัว)",
+                period: "2024",
+                type: "Full-Time",
+                desc: "บริการเช่ารถ Alphard พร้อมคนขับ บริหารจัดการกำลังคน วางแผนเส้นทาง จัดตารางรถหลายคันและรถพาร์ทเนอร์ ดูแลขบวนรถและประสานงานทีมรักษาความปลอดภัย VIP ขับรถด้วยตนเองในงานที่ต้องการบุคลิกดีและสื่อสารภาษาอังกฤษ"
             },
             {
-                title: "Content Creator",
+                title: "Marketing & Content Creator",
                 company: "Saint Thonglor Clinic",
-                period: "2020 - 2022",
-                type: "Permanent",
-                desc: "วางแผนคอนเทนต์รายวัน/สัปดาห์/เดือน วางแผนถ่ายทำ ประสานงานกับทีมแพทย์และทีม Digital Marketing ภายนอกเพื่อให้ผลงานออกมาตรงตามเป้าหมาย"
+                period: "2020 - 2023",
+                type: "Full-Time",
+                desc: "วางแผนคอนเทนต์รายวัน/สัปดาห์/เดือน วางแผนถ่ายทำ ประสานงานกับทีมแพทย์และทีม Digital Marketing ภายนอกเพื่อให้ผลงานออกมาตรงตามเป้าหมาย (บริษัทแม่-ลูกร่วมกับ U-Turn Shop)"
             },
             {
-                title: "Content Creator",
+                title: "Marketing & Content Creator",
                 company: "U-Turn Shop",
-                period: "2020 - 2022",
-                type: "Part-Time",
-                desc: "วางแผนคอนเทนต์และถ่ายทำสื่อโปรโมทสินค้า ประสานงานร่วมกับทีมช่าง รวมถึงดูแลและให้คำปรึกษาแก่ทีม Admin เพื่อพัฒนาศักยภาพการบริการ"
+                period: "2020 - 2023",
+                type: "Freelance",
+                desc: "วางแผนคอนเทนต์และถ่ายทำสื่อโปรโมทสินค้า ประสานงานร่วมกับทีมช่าง รวมถึงดูแลและให้คำปรึกษาแก่ทีม Admin (บริษัทในเครือเดียวกับ Saint Thonglor Clinic)"
             },
             {
+                title: "Freelance",
+                company: "อิสระ",
+                period: "2019 - 2020",
+                type: "Freelance",
+                desc: "รับงานถ่ายภาพ ถ่ายวิดีโอ ออกแบบกราฟิก และตัดต่อวิดีโอ"
+            },            {
                 title: "Editor",
                 company: "Punnisa Clinic",
-                period: "2019 (1 Year)",
+                period: "2019",
                 type: "Contract",
-                desc: "รับผิดชอบการตัดต่อและสร้างสรรค์คอนเทนต์ภาพเคลื่อนไหว (Motion Content) ทั้งหมดของคลินิก เพื่อสื่อสารแบรนด์ผ่านช่องทางดิจิทัล"
+                desc: "งานแรกหลังจบการศึกษา รับผิดชอบการตัดต่อและสร้างสรรค์คอนเทนต์ภาพเคลื่อนไหว (Motion Content) ทั้งหมดของคลินิก เพื่อสื่อสารแบรนด์ผ่านช่องทางดิจิทัล"
             },
             {
-                title: "Freelance & Learning",
-                company: "Self-Employed",
-                period: "2018 - Present",
-                type: "Freelance",
-                desc: "พัฒนาทักษะการตัดต่อวิดีโอ การถ่ายภาพ และศึกษาเทคโนโลยี AI (Generative AI, LLMs) เพื่อนำมาประยุกต์ใช้ในการสร้างสรรค์คอนเทนต์และเพิ่มประสิทธิภาพการทำงาน"
-            },
-            {
-                title: "Current Focus: AI Agent Architecture",
-                company: "Personal Research",
-                period: "Present",
-                type: "R&D",
-                desc: "กำลังศึกษาและพัฒนา EVA 9.4.0 (Advanced AI Agent) โดยเน้นเรื่อง Memory Systems, Consciousness Simulation และ Autonomous Task Execution บน GitHub"
+                title: "ผู้ช่วย PM",
+                company: "Veam Agency",
+                period: "ฝึกงาน (ปี 3 ม.รังสิต)",
+                type: "Internship",
+                desc: "ฝึกงานตำแหน่งผู้ช่วย Project Manager ระหว่างศึกษาชั้นปีที่ 3 ที่มหาวิทยาลัยรังสิต"
             }
         ]
     },
@@ -99,8 +103,7 @@ export const th = {
         galleryTitleHighlight: "GALLERY",
         galleryDesc: "รวมภาพผลงานการถ่ายภาพและเบื้องหลังการทำงาน",
         ctaTitle: "นี่คือส่วนนึงของผลงาน อยากดูผลงานด้านไหนเพิ่มเติม ติดต่อได้เลยครับ",
-        ctaButton: "ดูประวัติการทำงาน (Resume)",
-        categories: {
+        ctaButton: "ดูประวัติการทำงาน (Resume)",        categories: {
             all: "ทั้งหมด",
             graphic: "Motion Graphic",
             cinematic: "Cinematic & Motion",
@@ -115,7 +118,7 @@ export const th = {
         downloadPdf: "Download PDF",
         downloadJpg: "Download JPG",
         aboutMe: "About Me",
-        aboutDesc: "Assistant Manager และ Digital Content Creator ที่มีความเชี่ยวชาญด้านการบริหารจัดการทีมและการผลิตสื่อสร้างสรรค์ มีความสนใจอย่างลึกซึ้งในการนำ AI Technology มาประยุกต์ใช้เพื่อเพิ่มประสิทธิภาพการทำงาน (Productivity) และสร้างสรรค์นวัตกรรมใหม่ๆ",
+        aboutDesc: "Assistant Marketing Manager และ Digital Content Creator ที่มีความเชี่ยวชาญด้านการบริหารจัดการทีมและการผลิตสื่อสร้างสรรค์ มีความสนใจอย่างลึกซึ้งในการนำ AI Technology มาประยุกต์ใช้เพื่อเพิ่มประสิทธิภาพการทำงาน (Productivity) และสร้างสรรค์นวัตกรรมใหม่ๆ",
         toolsMedia: "Tools & Media",
         aiTools: "AI Tools & Code Gen",
         profileAlt: "พรพล ธนสุวรรณธาร",
@@ -124,56 +127,67 @@ export const th = {
         downloadResume: "Download Resume",
         university: "มหาวิทยาลัยรังสิต",
         degree: "ปริญญาตรี นิเทศศาสตร์ (โฆษณา)",
-        school: "โรงเรียนสวนกุหลาบวิทยาลัย",
-        experience: {
-            freelance: {
-                title: "Freelance & Learning",
-                company: "Current Focus (Present)",
-                period: "2025 - Present",
-                responsibility1: "ศึกษาค้นคว้าด้าน AI Innovation และติตตามเทรนด์เทคโนโลยีใหม่ๆ (AI Agents, RAG)",
-                responsibility2: "รับงาน Content Creator อิสระ และทดลองนำ AI มาประยุกต์ใช้ในกระบวนการผลิตสื่อ",
-                responsibility3: "พัฒนาทักษะการเขียนโค้ด (Coding) เพื่อสร้าง AI Tools สำหรับใช้งานส่วนตัว"
+        school: "โรงเรียนสวนกุหลาบวิทยาลัย",        experience: {
+            vSchool: {
+                title: "ผู้ช่วยผู้จัดการฝ่ายการตลาด",
+                company: "V School Food Institute",
+                period: "ม.ค. - มี.ค. 2026",
+                responsibility1: "วางแผนกลยุทธ์การตลาดและบริหารจัดการทีมการตลาด",
+                responsibility2: "เริ่มสร้างระบบ Zuri CRM เพื่อพัฒนาการบริหารความสัมพันธ์ลูกค้า",
+                responsibility3: "ประสานงานระหว่างฝ่ายการตลาดและฝ่ายปฏิบัติการเพื่อขับเคลื่อนแบรนด์"
             },
-            assistantManager: {
-                title: "Assistant Manager",
-                company: "Hostpital Feelgood Club",
-                period: "2025 (6 Months)",
-                responsibility1: "ดูแลบริหารจัดการภาพรวมการดำเนินงานของร้านให้ราบรื่น",
-                responsibility2: "บริหารจัดการและมอบหมายหน้าที่ให้ทีม Service, Security และทีม Host (PR)",
-                responsibility3: "ทำหน้าที่ MC ควบคุมลำดับกิจกรรมและบรรยากาศทั้งหมดภายในร้าน",
-                responsibility4: "บริหารจัดการความสัมพันธ์ลูกค้า (CRM) และแก้ไขปัญหาเฉพาะหน้าอย่างมีประสิทธิภาพ"
-            },
-            eventCoordinator: {
-                title: "Event Project Coordinator",
-                company: "Joe Luxury Car Service",
-                period: "2024 (1 Year)",
-                responsibility1: "วางแผนและบริหารจัดการทรัพยากร (บุคคล, ยานพาหนะ, เวลา) ให้สอดคล้องกับความต้องการ",
-                responsibility2: "ดูแลประสานงานระหว่างทีมภาคสนามและลูกค้ากลุ่ม VIP โดยตรง",
-                responsibility3: "แก้ไขปัญหาเฉพาะหน้าด้วยความรวดเร็วและรักษามาตรฐานการบริการ",
-                responsibility4: "สื่อสารและตอบสนองความต้องการเบื้องต้นของลูกค้าในฐานะตัวแทนทีม"
+            deputyManager: {
+                title: "รองผู้จัดการ",
+                company: "Hospital Feel Good Club",
+                period: "2024 - ธ.ค. 2025",
+                responsibility1: "เริ่มจาก Host/PR แบบ Freelance (ศุกร์-เสาร์) ช่วงทำงานปีสุดท้ายที่ Saint Thonglor → ลาออกมาทำ Full-time → เลื่อนตำแหน่งเป็นรองผู้จัดการ",
+                responsibility2: "จัดการวิกฤต: เจรจากับตำรวจขณะเข้าตรวจค้นร้าน",
+                responsibility3: "นำทีมตรวจสารเสพติดประจำเดือน (Compliance)",
+                responsibility4: "บริหาร CRM โดยตรง ดูแลความสัมพันธ์ลูกค้าแบบ Hands-on"
+            },            operationsManager: {
+                title: "Operations Manager",
+                company: "Joe Luxury Car Service (ธุรกิจครอบครัว)",
+                period: "2024",
+                responsibility1: "บริหารจัดการกำลังคน วางแผนเส้นทาง จัดตารางรถหลายคันและรถพาร์ทเนอร์",
+                responsibility2: "ดูแลขบวนรถและประสานงานทีมรักษาความปลอดภัย VIP",
+                responsibility3: "ขับรถด้วยตนเองในงานที่ต้องการบุคลิกดีและสื่อสารภาษาอังกฤษ",
+                responsibility4: "บริการเช่ารถ Alphard พร้อมคนขับ ดูแลการปฏิบัติงานทั้งระบบ"
             },
             contentCreatorPermanent: {
-                title: "Content Creator",
-                company: "Saint Thonglor Clinic (Permanent)",
-                period: "2020 - 2022",
+                title: "Marketing & Content Creator",
+                company: "Saint Thonglor Clinic (Full-Time)",
+                period: "2020 - 2023",
                 responsibility1: "วางแผนกลยุทธ์คอนเทนต์รายวัน รายสัปดาห์ และรายเดือน",
                 responsibility2: "ประสานงานร่วมกับทีมแพทย์และทีม Digital Marketing ภายนอกเพื่อสร้างสรรค์เนื้อหา",
                 responsibility3: "ควบคุมการผลิตคอนเทนต์ให้เป็นไปตามภาพลักษณ์ของแบรนด์"
             },
             contentCreatorPartTime: {
-                title: "Content Creator",
-                company: "U-Turn Shop (Part-Time)",
-                period: "2020 - 2022",
+                title: "Marketing & Content Creator",
+                company: "U-Turn Shop (Freelance ประจำ)",
+                period: "2020 - 2023",
                 responsibility1: "วางแผนและผลิตสื่อวิดีโอ/ภาพนิ่งสำหรับโปรโมทสินค้า",
                 responsibility2: "ให้คำปรึกษาและดูแลแนวทางการตอบแชทของทีม Admin",
-                responsibility3: "ประสานงานร่วมกับทีมช่างเพื่อผลิตคอนเทนต์เจาะลึกทางเทคนิค"
+                responsibility3: "ประสานงานร่วมกับทีมช่างเพื่อผลิตคอนเทนต์เจาะลึกทางเทคนิค (บริษัทในเครือ Saint Thonglor)"
+            },            freelance: {
+                title: "Freelance",
+                company: "อิสระ",
+                period: "2019 - 2020",
+                responsibility1: "รับงานถ่ายภาพ ถ่ายวิดีโอ ออกแบบกราฟิก และตัดต่อวิดีโอ",
+                responsibility2: "พัฒนาทักษะด้านการผลิตสื่อครบวงจรก่อนเข้าทำงานประจำ"
             },
             editorContract: {
                 title: "Editor",
                 company: "Punnisa Clinic (Contract)",
-                period: "2019 (1 Year)",
-                responsibility1: "รับผิดชอบการผลิตและตัดต่อคอนเทนต์วิดีโอและภาพเคลื่อนไหวทั้งหมด",
+                period: "2019",
+                responsibility1: "งานแรกหลังจบการศึกษา รับผิดชอบการผลิตและตัดต่อคอนเทนต์วิดีโอและภาพเคลื่อนไหวทั้งหมด",
                 responsibility2: "สร้างสรรค์สื่อเพื่อสนับสนุนแคมเปญการตลาดของคลินิก"
+            },
+            internship: {
+                title: "ผู้ช่วย PM",
+                company: "Veam Agency (Internship)",
+                period: "ฝึกงาน (ปี 3 ม.รังสิต)",
+                responsibility1: "ฝึกงานตำแหน่งผู้ช่วย Project Manager",
+                responsibility2: "เรียนรู้กระบวนการทำงานจริงในเอเจนซี่โฆษณา"
             }
         },
         bachelorDegree: "ปริญญาตรี นิเทศศาสตร์ (โฆษณา)",
@@ -183,7 +197,6 @@ export const th = {
         aiFutureSkills: "AI & Future Skills"
     }
 };
-
 export const en = {
     nav: {
         home: "Home",
@@ -206,14 +219,13 @@ export const en = {
     hero: {
         available: "Available for Work",
         name: "Pornpon Thanasuwanthat",
-        role: "Assistant Manager & Digital Content Specialist",
+        role: "Assistant Marketing Manager & Digital Content Specialist",
         desc: "Hi, I'm Boss, 32 years old. I have diverse experience across Production and Management roles. Currently developing Future Skills in AI Innovation to leverage AI technology for cost reduction and productivity enhancement in organizations.",
         viewResume: "View Resume",
         viewPortfolio: "View Portfolio",
         aiSpecialist: "AI Specialist",
         agenticRag: "AI Developer"
-    },
-    skills: {
+    },    skills: {
         badge: "Skills & Abilities",
         title: "Skills & Abilities",
         aiInnovation: "AI Innovation",
@@ -226,53 +238,58 @@ export const en = {
         title: "Work Experience",
         timeline: [
             {
-                title: "Assistant Manager",
-                company: "Hostpital Feelgood Club",
-                period: "2025 (6 Months)",
+                title: "Assistant Marketing Manager",
+                company: "V School Food Institute",
+                period: "Jan - Mar 2026",
                 type: "Full-Time",
-                desc: "Oversaw store operations/events as MC. Managed Service, Guard, and Host teams. Handled CRM and immediate on-site problem solving for customers."
+                desc: "Planned marketing strategies and managed the marketing team. Started building the Zuri CRM system to improve customer relationship management."
             },
             {
-                title: "Event Project Coordinator",
-                company: "Joe Luxury Car Service",
-                period: "2024 (1 Year)",
-                type: "Contract",
-                desc: "Coordinated field teams and VIP clients. Planned resources (manpower, vehicles, time) and acted as the primary communication hub for client requirements."
+                title: "Deputy Manager",
+                company: "Hospital Feel Good Club",
+                period: "2024 - 2025",
+                type: "Full-Time",
+                desc: "Started as freelance Host/PR (Fri-Sat) during final year at Saint Thonglor → Quit to go full-time → Promoted to Deputy Manager for 6 months → Resigned Dec 2025. Key achievements: crisis management (negotiated with police during inspections), compliance (led monthly drug testing), hands-on CRM."
+            },            {
+                title: "Operations Manager",
+                company: "Joe Luxury Car Service (Family Business)",
+                period: "2024",
+                type: "Full-Time",
+                desc: "Alphard rental with driver service. Managed manpower, route planning, multi-vehicle and partner vehicle scheduling, convoy operations, and VIP security team coordination. Drove personally for jobs requiring good appearance and English communication."
             },
             {
-                title: "Content Creator",
+                title: "Marketing & Content Creator",
                 company: "Saint Thonglor Clinic",
-                period: "2020 - 2022",
-                type: "Permanent",
-                desc: "Planned daily/monthly content and filming schedules. Coordinated with medical teams and external Digital Marketing agencies to achieve targets."
+                period: "2020 - 2023",
+                type: "Full-Time",
+                desc: "Planned daily/weekly/monthly content and filming schedules. Coordinated with medical teams and external Digital Marketing agencies. Parent-subsidiary company with U-Turn Shop."
             },
             {
-                title: "Content Creator",
+                title: "Marketing & Content Creator",
                 company: "U-Turn Shop",
-                period: "2020 - 2022",
-                type: "Part-Time",
-                desc: "Planned and filmed product promo content. Coordinated with technician teams and consulted the Admin team to improve service potential."
+                period: "2020 - 2023",
+                type: "Freelance",
+                desc: "Planned and filmed product promo content. Coordinated with technician teams and consulted the Admin team. Subsidiary company of Saint Thonglor Clinic."
             },
             {
+                title: "Freelance",
+                company: "Self-Employed",
+                period: "2019 - 2020",
+                type: "Freelance",
+                desc: "Photography, videography, graphic design, and video editing."
+            },            {
                 title: "Editor",
                 company: "Punnisa Clinic",
-                period: "2019 (1 Year)",
+                period: "2019",
                 type: "Contract",
-                desc: "Responsible for editing all motion content for the clinic to communicate the brand identity through digital channels."
+                desc: "First job after graduation. Responsible for editing all motion content for the clinic to communicate the brand identity through digital channels."
             },
             {
-                title: "Freelance & Learning",
-                company: "Self-Employed",
-                period: "2018 - Present",
-                type: "Freelance",
-                desc: "Developing skills in video editing, photography, and researching AI technologies (Generative AI, LLMs) to apply in content creation and workflow optimization."
-            },
-            {
-                title: "Current Focus: AI Agent Architecture",
-                company: "Personal Research",
-                period: "Present",
-                type: "R&D",
-                desc: "Studying and developing EVA 9.4.0 (Advanced AI Agent), focusing on Memory Systems, Consciousness Simulation, and Autonomous Task Execution on GitHub."
+                title: "Assistant PM",
+                company: "Veam Agency",
+                period: "Internship (Year 3, Rangsit University)",
+                type: "Internship",
+                desc: "Internship as Assistant Project Manager during 3rd year at Rangsit University."
             }
         ]
     },
@@ -285,8 +302,7 @@ export const en = {
         galleryTitleHighlight: "GALLERY",
         galleryDesc: "A collection of photography works and behind-the-scenes moments.",
         ctaTitle: "This is just a part of my portfolio. Want to see more work? Feel free to contact me!",
-        ctaButton: "View Resume",
-        categories: {
+        ctaButton: "View Resume",        categories: {
             all: "All Works",
             graphic: "Motion Graphic",
             cinematic: "Cinematic & Motion",
@@ -301,7 +317,7 @@ export const en = {
         downloadPdf: "Download PDF",
         downloadJpg: "Download JPG",
         aboutMe: "About Me",
-        aboutDesc: "Assistant Manager and Digital Content Creator specializing in team management and creative media production. Deeply interested in applying AI Technology to enhance productivity and generate innovative solutions.",
+        aboutDesc: "Assistant Marketing Manager and Digital Content Creator specializing in team management and creative media production. Deeply interested in applying AI Technology to enhance productivity and generate innovative solutions.",
         toolsMedia: "Tools & Media",
         aiTools: "AI Tools & Code Gen",
         profileAlt: "Pornpon Thanasuwanthat",
@@ -310,56 +326,67 @@ export const en = {
         downloadResume: "Download Resume",
         university: "Rangsit University",
         degree: "Bachelor of Communication Arts (Advertising)",
-        school: "Suankularb Wittayalai School",
-        experience: {
-            freelance: {
-                title: "Freelance & Learning",
-                company: "Current Focus (Present)",
-                period: "2025 - Present",
-                responsibility1: "Researching AI Innovation and tracking new technology trends (AI Agents, RAG).",
-                responsibility2: "Freelance Content Creator utilizing AI to optimize media production workflows.",
-                responsibility3: "Developing coding skills to build personal AI Tools."
+        school: "Suankularb Wittayalai School",        experience: {
+            vSchool: {
+                title: "Assistant Marketing Manager",
+                company: "V School Food Institute",
+                period: "Jan - Mar 2026",
+                responsibility1: "Planned marketing strategies and managed the marketing team.",
+                responsibility2: "Started building the Zuri CRM system for customer relationship management.",
+                responsibility3: "Coordinated between marketing and operations departments to drive brand growth."
             },
-            assistantManager: {
-                title: "Assistant Manager",
-                company: "Hostpital Feelgood Club",
-                period: "2025 (6 Months)",
-                responsibility1: "Oversaw overall store operations for smooth execution.",
-                responsibility2: "Managed and assigned duties to Service, Security, and Host (PR) teams.",
-                responsibility3: "Served as MC controlling event sequences and overall atmosphere.",
-                responsibility4: "Managed CRM and effectively handled immediate customer issues."
-            },
-            eventCoordinator: {
-                title: "Event Project Coordinator",
-                company: "Joe Luxury Car Service",
-                period: "2024 (1 Year)",
-                responsibility1: "Planned and managed resources (manpower, vehicles, time) to meet requirements.",
-                responsibility2: "Coordinated directly between field teams and VIP clients.",
-                responsibility3: "Resolved immediate issues quickly while maintaining service standards.",
-                responsibility4: "Communicated and responded to initial client needs as a team representative."
+            deputyManager: {
+                title: "Deputy Manager",
+                company: "Hospital Feel Good Club",
+                period: "2024 - Dec 2025",
+                responsibility1: "Started as freelance Host/PR (Fri-Sat) during final year at Saint Thonglor → Quit to go full-time → Promoted to Deputy Manager.",
+                responsibility2: "Crisis management: negotiated with police during club inspections.",
+                responsibility3: "Compliance: led monthly drug testing for all staff.",
+                responsibility4: "Hands-on CRM: direct customer relationship management."
+            },            operationsManager: {
+                title: "Operations Manager",
+                company: "Joe Luxury Car Service (Family Business)",
+                period: "2024",
+                responsibility1: "Managed manpower, route planning, multi-vehicle and partner vehicle scheduling.",
+                responsibility2: "Coordinated convoy operations and VIP security teams.",
+                responsibility3: "Drove personally for jobs requiring good appearance and English communication.",
+                responsibility4: "Alphard rental with driver service — managed full operations."
             },
             contentCreatorPermanent: {
-                title: "Content Creator",
-                company: "Saint Thonglor Clinic (Permanent)",
-                period: "2020 - 2022",
+                title: "Marketing & Content Creator",
+                company: "Saint Thonglor Clinic (Full-Time)",
+                period: "2020 - 2023",
                 responsibility1: "Planned daily, weekly, and monthly content strategies.",
                 responsibility2: "Coordinated with medical teams and external Digital Marketing agencies.",
                 responsibility3: "Controlled content production to align with brand image."
             },
             contentCreatorPartTime: {
-                title: "Content Creator",
-                company: "U-Turn Shop (Part-Time)",
-                period: "2020 - 2022",
+                title: "Marketing & Content Creator",
+                company: "U-Turn Shop (Regular Freelance)",
+                period: "2020 - 2023",
                 responsibility1: "Planned and produced video/still media for product promotion.",
                 responsibility2: "Consulted and guided the Admin team on chat response guidelines.",
-                responsibility3: "Coordinated with technician teams to produce in-depth technical content."
+                responsibility3: "Coordinated with technician teams to produce in-depth technical content (subsidiary of Saint Thonglor Clinic)."
+            },            freelance: {
+                title: "Freelance",
+                company: "Self-Employed",
+                period: "2019 - 2020",
+                responsibility1: "Photography, videography, graphic design, and video editing.",
+                responsibility2: "Developed comprehensive media production skills before joining full-time roles."
             },
             editorContract: {
                 title: "Editor",
                 company: "Punnisa Clinic (Contract)",
-                period: "2019 (1 Year)",
-                responsibility1: "Responsible for editing all video and motion content.",
+                period: "2019",
+                responsibility1: "First job after graduation. Responsible for editing all video and motion content.",
                 responsibility2: "Created media to support clinic marketing campaigns."
+            },
+            internship: {
+                title: "Assistant PM",
+                company: "Veam Agency (Internship)",
+                period: "Internship (Year 3, Rangsit University)",
+                responsibility1: "Internship as Assistant Project Manager.",
+                responsibility2: "Learned real-world agency workflow processes."
             }
         },
         bachelorDegree: "Bachelor of Communication Arts (Advertising)",
