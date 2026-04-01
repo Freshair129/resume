@@ -7,6 +7,8 @@ import {
   CheckCircle2, ChevronRight, Menu, X, Cpu, Check, Camera, Video, Users, Car, FileText, ExternalLink,
   Bot, Sparkles, Globe, Download
 } from 'lucide-react';
+import { Analytics } from "@vercel/analytics/react"
+import { SpeedInsights } from "@vercel/speed-insights/react"
 import { useLanguage } from './LanguageContext';
 import Resume from './Resume';
 import Portfolio from './Portfolio';
@@ -320,6 +322,8 @@ const App = () => {
         <Route path="/demo" element={<ProjectDemo />} />
       </Routes>
       <ChatbotWidget />
+      <Analytics />
+      <SpeedInsights />
     </Router>
   );
 };
