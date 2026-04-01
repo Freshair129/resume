@@ -163,16 +163,49 @@ const Resume = () => {
 
                         <section>
                             <h2 className="text-lg font-semibold border-b border-[#334155] pb-2 mb-3 flex items-center gap-2">
-                                <GraduationCap size={18} className="text-[#60a5fa]" /> {t.resume.education}
+                                <GraduationCap size={18} className="text-[#60a5fa]" /> {t.resume.education.title}
                             </h2>
                             <div className="space-y-4 text-sm text-[#cbd5e1]">
                                 <div>
-                                    <p className="font-bold text-[#ffffff]">{t.resume.bachelorDegree}</p>
-                                    <p>{t.resume.rungsitUniversity}</p>
+                                    <p className="font-bold text-[#ffffff]">{t.resume.education.university}</p>
+                                    <p>{t.resume.education.universityName}</p>
+                                </div>
+                                {t.resume.education.prevUniversity && (
+                                    <div>
+                                        <p className="font-bold text-[#ffffff]">{t.resume.education.prevUniversity}</p>
+                                        <p>{t.resume.education.prevUniversityName}</p>
+                                    </div>
+                                )}
+                                <div>
+                                    <p className="font-bold text-[#ffffff]">{t.resume.education.highschool}</p>
+                                    <p>{t.resume.education.highschoolName}</p>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section>
+                            <h2 className="text-lg font-semibold border-b border-[#334155] pb-2 mb-3 flex items-center gap-2">
+                                <Cpu size={18} className="text-[#60a5fa]" /> {t.resume.techStack.title}
+                            </h2>
+                            <div className="space-y-3 text-[11px] text-[#cbd5e1]">
+                                <div>
+                                    <p className="font-bold text-[#60a5fa] uppercase tracking-wider mb-1">Marketing</p>
+                                    <p>{t.resume.techStack.marketing}</p>
                                 </div>
                                 <div>
-                                    <p className="font-bold text-[#ffffff]">{t.resume.highSchool}</p>
-                                    <p>{t.resume.suankularb}</p>
+                                    <p className="font-bold text-[#60a5fa] uppercase tracking-wider mb-1">Design</p>
+                                    <p>{t.resume.techStack.design}</p>
+                                </div>
+                                <div>
+                                    <p className="font-bold text-[#60a5fa] uppercase tracking-wider mb-1">AI / Innovation</p>
+                                    <p>{t.resume.techStack.ai}</p>
+                                </div>
+                                <div>
+                                    <p className="font-bold text-[#60a5fa] uppercase tracking-wider mb-1">Office</p>
+                                    <p>{t.resume.techStack.office}</p>
+                                </div>
+                                <div className="mt-2 p-2 bg-[#1e3a5f] rounded-lg border border-[#3b82f633]">
+                                    <p className="italic text-[#93c5fd]">{t.resume.techStack.facebookDev}</p>
                                 </div>
                             </div>
                         </section>
