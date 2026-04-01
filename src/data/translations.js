@@ -43,7 +43,7 @@ export const th = {
                 company: "V School Food Institute",
                 period: "ม.ค. - มี.ค. 2026",
                 type: "Full-Time",
-                desc: "วางแผนกลยุทธ์การตลาด บริหารจัดการทีมและตาราง Content, ควบคุมทีม Graphic/VDO ให้ผลิตงานทันตามแพลน, คุมมาตรฐาน Brand CI & Guideline ทุกช่องทาง, ดูแลและผลักดันโปรเจกต์พิเศษ, จัดทำ Report/Dashboard เพื่อนำเสนอผู้บริหาร และสร้างระบบ Zuri: AI MarTech Ecosystem"
+                desc: "วางแผนกลยุทธ์การตลาด บริหารทีมและ Content CI, สร้างระบบ Zuri: AI MarTech Infrastructure ที่มีฟีเจอร์เด่นอย่าง AI KPI Assessment ประเมินประสิทธิภาพแอดมิน, Customer Insights & Journey และการสร้าง/เทรนโมเดล AI เพื่อตอบแชทลูกค้าโดยเฉพาะ"
             },
             {
                 title: "รองผู้จัดการ",
@@ -134,10 +134,10 @@ export const th = {
                 title: "ผู้ช่วยผู้จัดการฝ่ายการตลาด",
                 company: "V School Food Institute",
                 period: "ม.ค. - มี.ค. 2026",
-                responsibility1: "วางแผนกลยุทธ์ Marcom, คุมตาราง Content และบริหารทีม Graphic/VDO ให้ผลิตงานทันกำหนด",
-                responsibility2: "ออกแบบและสร้างระบบ Zuri: AI MarTech Ecosystem เพื่อยกระดับโครงสร้างพื้นฐานการตลาด",
-                responsibility3: "ควบคุมมาตรฐาน Brand CI & Guideline ทุกช่องทาง และทำ Report/Dashboard นำเสนอผู้บริหาร",
-                responsibility4: "ดูแลและผลักดันโปรเจกต์ที่ได้รับมอบหมายให้สำเร็จตามเป้าหมาย (KPI)"
+                responsibility1: "วางแผนกลยุทธ์ Marcom และบริหารจัดการทีม Marketing ภาพรวม",
+                responsibility2: "ออกแบบและสร้างระบบ Zuri: AI MarTech Ecosystem (Multi-Tenant) พร้อมฟีเจอร์ AI KPI Assessment สำหรับประเมินการทำงานแอดมิน",
+                responsibility3: "พัฒนา Customer Insight & Smart Journey Mapping และการเทรน AI เพื่อตอบแชทลูกค้าอัตโนมัติ",
+                responsibility4: "ดูแลมาตรฐาน Brand CI, ผลักดันโปรเจกต์สำคัญ และจัดทำ Dashboard รายงานต่อผู้บริหาร"
             },
             deputyManager: {
                 title: "รองผู้จัดการ",

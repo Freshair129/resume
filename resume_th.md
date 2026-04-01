@@ -51,11 +51,13 @@
 
 #### **Zuri: AI-Powered MarTech Ecosystem (V3)**
 *ไม่ใช่เพียงระบบ CRM แต่เป็นโครงสร้างพื้นฐานการตลาดอัจฉริยะ (Enterprise Infrastructure) ที่ประกอบด้วย:*
+*   **AI KPI & Admin Auditing**: ระบบประเมินประสิทธิภาพการตอบแชทของแอดมิน (KPI) อัตโนมัติด้วย AI เพื่อควบคุมมาตรฐานการบริการ
+*   **Customer Insight & Smart Journey**: วิเคราะห์ข้อมูลเชิงลึกลูกค้า (Insights) และติดตามเส้นทางพฤติกรรมลูกค้า (Customer Journey) เพื่อการวางแผนที่แม่นยำ
+*   **Custom AI Training**: พัฒนาและเทรนโมเดล AI เฉพาะทางเพื่อใช้ในการตอบแชทและให้ข้อมูลลูกค้าอย่างเป็นธรรมชาติ (Chat Automation)
 *   **AI Omnichannel Orchestration**: รับข้อความอัตโนมัติจากทุกช่องทาง (LINE/FB/WA) พร้อมระบบวิเคราะห์ Intent และร่างคำตอบด้วย **Gemini 2.0 Flash**
-*   **Automated Compliance Engine**: ระบบ AI ตรวจสอบความเสี่ยงของรูปภาพและข้อความโฆษณาตามนโยบาย Meta (ใช้สำหรับให้ Feedback ทีมวิจัยและ Agency เพื่อลดอัตราการโดนแบน)
-*   **Business Intelligence Dashboard**: ระบบแสดงผลข้อมูลการตลาดแบบ Real-time เพื่อการตัดสินใจเชิงกลยุทธ์ (Data-Driven)
-*   **AI Performance Alerts**: ระบบแจ้งเตือน Daily Report และ Ads Spend อัตโนมัติผ่าน LINE โดยใช้ AI สรุปผลงานรายวัน เพื่อการควบคุมงบประมาณและผลลัพธ์ที่แม่นยำ
-*   **Advanced Customer 360**: ระบบรวมตัวตนลูกค้าแบบ Cross-Platform (Identity Resolution)
+*   **Automated Compliance Engine**: ระบบ AI ตรวจสอบความเสี่ยงของรูปภาพและข้อความโฆษณาตามนโยบาย Meta (ใช้สำหรับให้ Feedback ทีมวิจัยและ Agency)
+*   **AI Performance Alerts**: ระบบแจ้งเตือน Daily Report และ Ads Spend อัตโนมัติผ่าน LINE พร้อมสรุปผลงานด้วย AI
+*   **Business Intelligence Dashboard**: ระบบแสดงผลข้อมูลการตลาดแบบ Real-time (Data-Driven Decision)
 
 ---
 
