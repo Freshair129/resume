@@ -134,6 +134,14 @@ export const th = {
             highschool: "มัธยมศึกษา",
             highschoolName: "โรงเรียนสวนกุหลาบวิทยาลัย"
         },
+        techStack: {
+            title: "เครื่องมือและเทคโนโลยี (Tech Stack)",
+            marketing: "Meta Ads, GA4, CRM & ERP tools, HubSpot, Power BI, Tableau, Salesforce, Line Notify",
+            design: "Adobe Creative Suite (PS, AI, PR, AE, AU, LR), Canva, Snitch, Figma, Flow",
+            ai: "OpenChat, Gemini, Claude (Claude Code / Cowork), Ollama, OpenClaw, Manus",
+            office: "Google Workspace",
+            facebookDev: "Facebook Developer (Business): Token Permission ระดับ Page & Ad Management (Graph API)"
+        },
         experience: {
             vSchool: {
                 title: "ผู้ช่วยผู้จัดการฝ่ายการตลาด",
@@ -336,6 +344,14 @@ export const en = {
             prevUniversityName: "Silpakorn University (Transferred)",
             highschool: "High School Diploma",
             highschoolName: "Suankularb Wittayalai School"
+        },
+        techStack: {
+            title: "Tech Stack & Tools",
+            marketing: "Meta Ads, GA4, CRM & ERP tools, HubSpot, Power BI, Tableau, Salesforce, Line Notify",
+            design: "Adobe Creative Suite (PS, AI, PR, AE, AU, LR), Canva, Snitch, Figma, Flow",
+            ai: "OpenChat, Gemini, Claude (Claude Code / Cowork), Ollama, OpenClaw, Manus",
+            office: "Google Workspace",
+            facebookDev: "Facebook Developer (Business): Token Permission for Page & Ad Management (Graph API)"
         },
         experience: {
             vSchool: {

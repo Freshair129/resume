@@ -1,11 +1,12 @@
 # พรพล ธนสุวรรณธาร (บอส)
 **Senior Marketing Communications & AI MarTech Strategist**
-📍 กรุงเทพฯ | 📞 09x-xxx-xxxx | ✉️ [อีเมลของคุณ]
+📍 กรุงเทพฯ | 📞 093-1840662 | ✉️ p.thanawork129@gmail.com
+
 
 ---
 
 ### **บทสรุปผู้บริหาร (Executive Summary)**
-นักการตลาดเชิงกลยุทธ์ที่มีประสบการณ์กว่า 5 ปี โดยมีความเชี่ยวชาญพิเศษในกลุ่ม **ธุรกิจความงามและเวชสำอาง (Aesthetics & Beauty)** กว่า 4 ปี มีทักษะโดดเด่นในการบริหารจัดการทีมในระดับผู้ช่วยผู้จัดการ (Assistant Manager) และรองผู้จัดการ (Deputy Manager) มีจุดแข็งที่หาตัวจับยากคือการผสานความเชี่ยวชาญด้าน **นิเทศศาสตร์ (การโฆษณา)** เข้ากับ **นวัตกรรม AI (MarTech)** เพื่อสร้างระบบการตลาดอัตโนมัติที่ช่วยลดต้นทุนและเพิ่มประสิทธิภาพการขาย (Productivity) ได้อย่างเห็นผลจริง
+นักการตลาดเชิงกลยุทธ์ที่มีประสบการณ์กว่า 4 ปี โดยมีความคุ้นเคยกับกลุ่ม **ธุรกิจความงามและเวชสำอาง (Aesthetics & Beauty)** มีทักษะโดดเด่นในการบริหารจัดการทีมในระดับผู้ช่วยผู้จัดการ (Assistant Manager) และรองผู้จัดการ (Deputy Manager) มีจุดแข็งที่จำเป็นสำหรับการตลาดยุคใหม่ คือการผสานความเชี่ยวชาญด้าน **นิเทศศาสตร์ (การโฆษณา)** เข้ากับ **นวัตกรรม AI (MarTech)** เพื่อสร้างระบบการตลาดอัตโนมัติที่ช่วยลดต้นทุนและเพิ่มประสิทธิภาพการขาย (Productivity) ได้อย่างเห็นผลจริง
 
 ### **ทักษะและความเชี่ยวชาญหลัก (Core Competencies)**
 *   **Brand Strategy & Marcom**: วางแผนสื่อสารการตลาดครบวงจร 360 องศา ทั้ง Online และ Offline (KV, VDO, PR, OOH)
@@ -14,6 +15,15 @@
 *   **Agency Management & Ad Compliance**: มีประสบการณ์บริหารจัดการและตรวจสอบประสิทธิภาพ (Audit) ทีม Agency ภายนอก โดยใช้ระบบ AI ที่พัฒนาขึ้นเองในการวิเคราะห์เนื้อหาตามนโยบาย Meta (Ad Policy) เพื่อป้องกันความเสี่ยงและรักษามาตรฐานของแบรนด์
 *   **Strategic Feedback & Quality Control**: ให้คำแนะนำเชิงเทคนิคกับ Agency Partner เพื่อให้ผลลัพธ์โฆษณาออกมาตรงตามค่าเป้าหมาย (KPI) และ Brand Direction ที่กำหนดไว้
 *   **High-Level Leadership**: บริหารจัดการทีมงานขนาดใหญ่ (60+ คน) และประสานงานร่วมกับ Outsource/Agency
+
+### **เครื่องมือและเทคโนโลยี (Tech Stack)**
+*   **Marketing**: Meta Ads, GA4, CRM & ERP tools, HubSpot, Power BI, Tableau, Salesforce, Line Notify
+*   **Design**: Adobe Creative Suite (PS, AI, PR, AE, AU, LR), Canva, Snitch, Figma, Flow
+*   **AI / Innovation**: OpenChat, Gemini, Claude (Claude Code / Cowork), Ollama, OpenClaw, Manus
+*   **Office**: Google Workspace
+
+> [!NOTE]
+> **Facebook Developer (Business)**: มี Token Permission ระดับ Page และ Ad Management สามารถดึงข้อมูลและวิเคราะห์โฆษณาผ่าน Graph API ของ Meta ได้โดยตรง
 
 ---
 
