@@ -77,7 +77,7 @@ export const th = {
                 company: "อิสระ",
                 period: "2019 - 2020",
                 type: "Freelance",
-                desc: "รับงานถ่ายภาพ ถ่ายวิดีโอ ออกแบบกราฟิก และตัดต่อวิดีโอ"
+                desc: "รับงานถ่ายภาพ ถ่ายวิดีโอ ออกแบบกราฟิก และตัดต่อวิดีโอ (งานรับปริญญา, งานแต่ง, งานบวช, Event, Private, Packshot, Studio)"
             },            {
                 title: "Editor",
                 company: "Punnisa Clinic",
@@ -174,8 +174,8 @@ export const th = {
                 title: "Freelance",
                 company: "อิสระ",
                 period: "2019 - 2020",
-                responsibility1: "รับงานถ่ายภาพ ถ่ายวิดีโอ ออกแบบกราฟิก และตัดต่อวิดีโอ",
-                responsibility2: "พัฒนาทักษะด้านการผลิตสื่อครบวงจรก่อนเข้าทำงานประจำ"
+                responsibility1: "รับงานถ่ายภาพ ถ่ายวิดีโอ ออกแบบกราฟิก และตัดต่อวิดีโอระดับมืออาชีพ",
+                responsibility2: "ครอบคลุมงานหลากหลายประเภท: งานรับปริญญา, งานแต่ง, งานบวช, Event, Private, Packshot และ Studio"
             },
             editorContract: {
                 title: "Editor",
