@@ -125,10 +125,15 @@ export const th = {
         name: "พรพล ธนสุวรรณธาร",
         title: "Assistant Marketing Manager  ·  AI-Powered Marketing",
         downloadResume: "Download Resume",
-        university: "มหาวิทยาลัยรังสิต",
-        degree: "ปริญญาตรี นิเทศศาสตร์ (โฆษณา)",
-        school: "โรงเรียนสวนกุหลาบวิทยาลัย",
-        education: "การศึกษา",
+        education: {
+            title: "การศึกษา",
+            university: "คณะนิเทศศาสตร์ (วิชาเอกการโฆษณา)",
+            universityName: "มหาวิทยาลัยรังสิต",
+            prevUniversity: "คณะเทคโนโลยีสารสนเทศและการสื่อสาร (ออกแบบ Animation)",
+            prevUniversityName: "มหาวิทยาลัยศิลปากร (ซิ่ว)",
+            highschool: "มัธยมศึกษา",
+            highschoolName: "โรงเรียนสวนกุหลาบวิทยาลัย"
+        },
         experience: {
             vSchool: {
                 title: "ผู้ช่วยผู้จัดการฝ่ายการตลาด",
@@ -193,10 +198,6 @@ export const th = {
                 responsibility2: "เรียนรู้กระบวนการทำงานจริงในเอเจนซี่โฆษณา"
             }
         },
-        bachelorDegree: "ปริญญาตรี นิเทศศาสตร์ (โฆษณา)",
-        rungsitUniversity: "มหาวิทยาลัยรังสิต",
-        highSchool: "มัธยมศึกษา",
-        suankularb: "โรงเรียนสวนกุหลาบวิทยาลัย",
         aiFutureSkills: "AI & Future Skills"
     }
 };
@@ -327,10 +328,15 @@ export const en = {
         name: "Pornpon Thanasuwanthat",
         title: "Assistant Marketing Manager  ·  AI-Powered Marketing",
         downloadResume: "Download Resume",
-        university: "Rangsit University",
-        degree: "Bachelor of Communication Arts (Advertising)",
-        school: "Suankularb Wittayalai School",
-        education: "Education",
+        education: {
+            title: "Education",
+            university: "Bachelor of Communication Arts (Advertising)",
+            universityName: "Rangsit University",
+            prevUniversity: "Faculty of ICT (Animation Design)",
+            prevUniversityName: "Silpakorn University (Transferred)",
+            highschool: "High School Diploma",
+            highschoolName: "Suankularb Wittayalai School"
+        },
         experience: {
             vSchool: {
                 title: "Assistant Marketing Manager",
@@ -394,10 +400,6 @@ export const en = {
                 responsibility2: "Learned real-world agency workflow processes."
             }
         },
-        bachelorDegree: "Bachelor of Communication Arts (Advertising)",
-        rungsitUniversity: "Rangsit University",
-        highSchool: "High School",
-        suankularb: "Suankularb Wittayalai School",
         aiFutureSkills: "AI & Future Skills"
     }
 };
