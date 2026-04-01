@@ -137,12 +137,9 @@ const MainPortfolio = () => {
               </a>
             </div>
             <div className="flex flex-wrap gap-3 justify-center md:justify-start items-center pt-2">
-              <span className="text-xs text-slate-400 font-bold uppercase tracking-widest">Download Resume:</span>
-              <a href="/Resume_EN.docx" download="Pornpon_Resume_EN.docx" className="inline-flex items-center gap-2 bg-slate-100 hover:bg-blue-50 hover:text-blue-600 text-slate-600 px-4 py-2 rounded-xl text-sm font-bold border border-slate-200 hover:border-blue-200 transition-all hover:-translate-y-0.5">
-                <Download size={14} /> EN (Word)
-              </a>
-              <a href="/Resume_TH.docx" download="Pornpon_Resume_TH.docx" className="inline-flex items-center gap-2 bg-slate-100 hover:bg-blue-50 hover:text-blue-600 text-slate-600 px-4 py-2 rounded-xl text-sm font-bold border border-slate-200 hover:border-blue-200 transition-all hover:-translate-y-0.5">
-                <Download size={14} /> TH (Word)
+              <span className="text-xs text-slate-400 font-bold uppercase tracking-widest">View/Download Resume:</span>
+              <a href="https://docs.google.com/document/d/1AfEhI64KNyYb7OiUyVC2792yKf29f9ch/edit" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-slate-100 hover:bg-blue-50 hover:text-blue-600 text-slate-600 px-4 py-2 rounded-xl text-sm font-bold border border-slate-200 hover:border-blue-200 transition-all hover:-translate-y-0.5">
+                <FileText size={14} /> Google Docs (Original)
               </a>
             </div>
             <p className="text-sm text-slate-500 font-medium">

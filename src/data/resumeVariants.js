@@ -54,7 +54,7 @@ export const resumeVariants = {
   default: {
     label: null,
     roleName: null,
-    downloadFile: null,
+    downloadFile: 'https://docs.google.com/document/d/1AfEhI64KNyYb7OiUyVC2792yKf29f9ch/edit',
     experienceOrder: defaultOrder,
     titleOverride: null,
     aboutOverride: null,

@@ -132,8 +132,14 @@ const Resume = () => {
                         </p>
                         <div className="flex gap-3 justify-center">
                             {variant.downloadFile ? (
-                                <a href={variant.downloadFile} download className="flex-1 bg-[#2563eb] hover:bg-[#1d4ed8] text-[#ffffff] px-3 py-2 rounded-lg text-sm font-bold flex items-center justify-center gap-2 transition-all hover:-translate-y-0.5 shadow-lg shadow-[#1e3a8a80] cursor-pointer">
-                                    <FileText size={16} /> DOCX
+                                <a 
+                                    href={variant.downloadFile} 
+                                    download={variant.downloadFile.startsWith('http') ? undefined : true}
+                                    target={variant.downloadFile.startsWith('http') ? "_blank" : undefined}
+                                    rel={variant.downloadFile.startsWith('http') ? "noopener noreferrer" : undefined}
+                                    className="flex-1 bg-[#2563eb] hover:bg-[#1d4ed8] text-[#ffffff] px-3 py-2 rounded-lg text-sm font-bold flex items-center justify-center gap-2 transition-all hover:-translate-y-0.5 shadow-lg shadow-[#1e3a8a80] cursor-pointer"
+                                >
+                                    <FileText size={16} /> {variant.downloadFile.startsWith('http') ? 'Original (Docs)' : 'DOCX'}
                                 </a>
                             ) : (
                                 <button onClick={() => handleDownload('pdf')} className="flex-1 bg-[#2563eb] hover:bg-[#1d4ed8] text-[#ffffff] px-3 py-2 rounded-lg text-sm font-bold flex items-center justify-center gap-2 transition-all hover:-translate-y-0.5 shadow-lg shadow-[#1e3a8a80] cursor-pointer">
