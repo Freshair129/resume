@@ -43,7 +43,7 @@ export const th = {
                 company: "V School Food Institute",
                 period: "ม.ค. - มี.ค. 2026",
                 type: "Full-Time",
-                desc: "วางแผนกลยุทธ์การตลาดและบริหารจัดการทีม เริ่มสร้างระบบ Zuri CRM เพื่อพัฒนาการบริหารความสัมพันธ์ลูกค้าขององค์กร"
+                desc: "วางแผนกลยุทธ์การตลาด บริหารจัดการทีมและตาราง Content, ควบคุมทีม Graphic/VDO ให้ผลิตงานทันตามแพลน, คุมมาตรฐาน Brand CI & Guideline ทุกช่องทาง, ดูแลและผลักดันโปรเจกต์พิเศษ, จัดทำ Report/Dashboard เพื่อนำเสนอผู้บริหาร และสร้างระบบ Zuri: AI MarTech Ecosystem"
             },
             {
                 title: "รองผู้จัดการ",
@@ -134,9 +134,10 @@ export const th = {
                 title: "ผู้ช่วยผู้จัดการฝ่ายการตลาด",
                 company: "V School Food Institute",
                 period: "ม.ค. - มี.ค. 2026",
-                responsibility1: "วางแผนกลยุทธ์การตลาดและบริหารจัดการทีมการตลาด",
-                responsibility2: "เริ่มสร้างระบบ Zuri CRM เพื่อพัฒนาการบริหารความสัมพันธ์ลูกค้า",
-                responsibility3: "ประสานงานระหว่างฝ่ายการตลาดและฝ่ายปฏิบัติการเพื่อขับเคลื่อนแบรนด์"
+                responsibility1: "วางแผนกลยุทธ์ Marcom, คุมตาราง Content และบริหารทีม Graphic/VDO ให้ผลิตงานทันกำหนด",
+                responsibility2: "ออกแบบและสร้างระบบ Zuri: AI MarTech Ecosystem เพื่อยกระดับโครงสร้างพื้นฐานการตลาด",
+                responsibility3: "ควบคุมมาตรฐาน Brand CI & Guideline ทุกช่องทาง และทำ Report/Dashboard นำเสนอผู้บริหาร",
+                responsibility4: "ดูแลและผลักดันโปรเจกต์ที่ได้รับมอบหมายให้สำเร็จตามเป้าหมาย (KPI)"
             },
             deputyManager: {
                 title: "รองผู้จัดการ",
