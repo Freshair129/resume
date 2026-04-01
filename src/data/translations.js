@@ -50,7 +50,7 @@ export const th = {
                 company: "Hospital Feel Good Club",
                 period: "2024 - ธ.ค. 2025",
                 type: "Full-Time",
-                desc: "เริ่มจาก Host/PR แบบ Freelance (ศุกร์-เสาร์) ช่วงทำงานปีสุดท้ายที่ Saint Thonglor → ลาออกมาทำ Full-time → เลื่อนตำแหน่งเป็นรองผู้จัดการ 6 เดือน → ลาออก ธ.ค. 2025 ดูแลบริหารจัดการทีม Service (จัดโซน/มอบหมายงาน/ตารางเวร/ประเมิน KPI), ดูแลทีม Host/PR กว่า 60 ชีวิต, ประสานงานเจ้าหน้าที่ท้องถิ่น, และเทรนนิ่งระบบ POS/CRM จาก Choco"
+                desc: "เริ่มจาก Host/PR แบบ Freelance (ศุกร์-เสาร์) ช่วงทำงานปีสุดท้ายที่ Saint Thonglor → ลาออกมาทำ Full-time → เลื่อนตำแหน่งเป็นรองผู้จัดการ 6 เดือน → ลาออก ธ.ค. 2025 ดูแลบริหารจัดการทีม Service และภาพรวม Operation หน้าร้านทั้งหมด (จัดโซน/มอบหมายงาน/ตารางเวร/ประเมิน KPI), ดูแลทีม Host/PR กว่า 60 ชีวิต, ทำหน้าที่ MC ดำเนินรายการอีเวนต์, ประสานงานเจ้าหน้าที่ท้องถิ่น, และเทรนนิ่งระบบ POS/CRM จาก Choco"
             },            {
                 title: "Operations Manager",
                 company: "Joe Luxury Car Service (ธุรกิจครอบครัว)",
@@ -142,8 +142,8 @@ export const th = {
                 title: "รองผู้จัดการ",
                 company: "Hospital Feel Good Club",
                 period: "2024 - ธ.ค. 2025",
-                responsibility1: "ดูแลทีม Service ทั้งระบบ: แบ่งโซน มอบหมายงาน จัดตารางวันหยุดและการเข้างาน พร้อมประเมิน KPI ทีมงาน",
-                responsibility2: "บริหารจัดการและดูแลทีม Host/PR รวมกว่า 60 ชีวิต",
+                responsibility1: "ดูแลทีม Service และบริหารจัดการ Operation หน้าร้านทั้งหมด: แบ่งโซน มอบหมายงาน จัดตารางเวร และประเมิน KPI",
+                responsibility2: "บริหารจัดการและดูแลทีม Host/PR รวมกว่า 60 ชีวิต พร้อมทำหน้าที่ MC โฟนไมค์ดำเนินรายการในอีเวนต์ต่างๆ",
                 responsibility3: "เป็นตัวกลางประสานงานกับเจ้าหน้าที่ท้องถิ่นและหน่วยงานที่เกี่ยวข้อง",
                 responsibility4: "รับผิดชอบการเทรนนิ่งระบบ POS, CRM และ Loyalty Program จาก Choco ให้แก่ทีมงาน"
             },            operationsManager: {
