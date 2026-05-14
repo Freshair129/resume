@@ -1,8 +1,11 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   X, Github, ExternalLink, Brain, Cpu, Shield, Zap,
   MessageSquare, Database, Layers, ArrowRight, Code2
 } from 'lucide-react';
+import { motion, AnimatePresence } from 'motion/react';
+import { Reveal, RevealGroup, RevealItem } from './MotionPrimitives';
+import { hoverLift } from './motion-variants';
 
 /* ─────────────────── Project Data ─────────────────── */
 const PROJECTS = [
@@ -70,23 +73,6 @@ const PROJECTS = [
   },
 ];
 
-/* ─────────────────── Scroll Reveal Hook ─────────────────── */
-function useScrollReveal(threshold = 0.15) {
-  const ref = useRef(null);
-  const [visible, setVisible] = useState(false);
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const obs = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) { setVisible(true); obs.disconnect(); } },
-      { threshold }
-    );
-    obs.observe(el);
-    return () => obs.disconnect();
-  }, [threshold]);
-  return [ref, visible];
-}
-
 /* ─────────────────── Case Study Modal ─────────────────── */
 function CaseStudyModal({ project, onClose }) {
   useEffect(() => {
@@ -101,14 +87,21 @@ function CaseStudyModal({ project, onClose }) {
   }, [onClose]);
 
   return (
-    <div
+    <motion.div
       className="fixed inset-0 z-[200] flex items-end md:items-center justify-center p-0 md:p-6"
       onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
       style={{ background: 'rgba(0,0,0,0.85)', backdropFilter: 'blur(8px)' }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.2 }}
     >
-      <div
-        className="relative w-full md:max-w-3xl max-h-[95vh] overflow-y-auto rounded-t-[2.5rem] md:rounded-[2.5rem] shadow-2xl"
-        style={{ background: '#0f172a', animation: 'slideUpModal 0.4s cubic-bezier(0.16,1,0.3,1) both' }}
+      <motion.div
+        className="relative w-full md:max-w-3xl max-h-[95vh] overflow-y-auto rounded-t-[2.5rem] md:rounded-[2.5rem] shadow-2xl bg-[#0f172a]"
+        initial={{ y: 60, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        exit={{ y: 60, opacity: 0 }}
+        transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
       >
         <div className={`relative bg-gradient-to-br ${project.modalGradient} p-8 pb-12 rounded-t-[2.5rem]`}>
           <button
@@ -172,27 +165,18 @@ function CaseStudyModal({ project, onClose }) {
             <Github size={20} /> View on GitHub <ExternalLink size={16} />
           </a>
         </div>
-      </div>
-      <style>{`
-        @keyframes slideUpModal {
-          from { transform: translateY(60px); opacity: 0; }
-          to   { transform: translateY(0);   opacity: 1; }
-        }
-      `}</style>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }
 
 /* ─────────────────── Project Card ─────────────────── */
-function ProjectCard({ project, index, onClick }) {
-  const [ref, visible] = useScrollReveal(0.1);
-  const isEven = index % 2 === 0;
+function ProjectCard({ project, onClick }) {
   return (
-    <div
-      ref={ref}
+    <motion.div
       onClick={onClick}
-      className={`group relative cursor-pointer overflow-hidden rounded-[2rem] shadow-xl transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl ${project.cardClass} ${visible ? 'opacity-100 translate-y-0' : `opacity-0 ${isEven ? '-translate-x-8' : 'translate-x-8'}`}`}
-      style={{ transitionDelay: `${index * 120}ms` }}
+      whileHover={hoverLift}
+      className={`group relative cursor-pointer overflow-hidden rounded-[2rem] shadow-xl transition-shadow duration-500 hover:shadow-2xl ${project.cardClass}`}
     >
       <div className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-500 rounded-[2rem]"
         style={{ background: `radial-gradient(circle at 50% 0%, ${project.accent}, transparent 70%)` }}
@@ -225,35 +209,35 @@ function ProjectCard({ project, index, onClick }) {
           </span>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
 /* ─────────────────── Main Section Export ─────────────────── */
 export default function ProjectsSection() {
   const [active, setActive] = useState(null);
-  const [headerRef, headerVisible] = useScrollReveal(0.2);
 
   return (
     <section id="projects" className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-6">
-        <div
-          ref={headerRef}
-          className={`text-center mb-16 transition-all duration-700 ${headerVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
-        >
+        <Reveal className="text-center mb-16">
           <div className="inline-flex items-center gap-2 bg-slate-100 text-slate-600 px-4 py-1.5 rounded-full text-sm font-bold mb-4">
             <Code2 size={16} /> Dev Projects
           </div>
-          <h2 className="text-4xl md:text-5xl font-black text-slate-900">Things I've Built</h2>
+          <h2 className="text-colossal-heading text-giant text-slate-900">Things I've Built</h2>
           <p className="text-slate-500 mt-4 max-w-lg mx-auto">ผลงาน Dev จริงที่สร้างเอง — คลิกเพื่อดูรายละเอียด</p>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {PROJECTS.map((p, i) => (
-            <ProjectCard key={p.id} project={p} index={i} onClick={() => setActive(p)} />
+        </Reveal>
+        <RevealGroup className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {PROJECTS.map((p) => (
+            <RevealItem key={p.id} className="h-full">
+              <ProjectCard project={p} onClick={() => setActive(p)} />
+            </RevealItem>
           ))}
-        </div>
+        </RevealGroup>
       </div>
-      {active && <CaseStudyModal project={active} onClose={() => setActive(null)} />}
+      <AnimatePresence>
+        {active && <CaseStudyModal project={active} onClose={() => setActive(null)} />}
+      </AnimatePresence>
     </section>
   );
 }
