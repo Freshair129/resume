@@ -1,5 +1,8 @@
 import { Presentation, Mic, Palette } from 'lucide-react';
+import { motion } from 'motion/react';
 import { useLanguage } from './LanguageContext';
+import { Reveal, RevealGroup, RevealItem } from './MotionPrimitives';
+import { hoverLift } from './motion-variants';
 import dimsumImg from './assets/dimsum.png';
 import mock1Img from './assets/pre_mock1.png';
 import mock2Img from './assets/pre_mock2.png';
@@ -55,12 +58,12 @@ const PresentationSection = () => {
     <section id="presentation" className="py-24 bg-slate-50">
       <div className="max-w-6xl mx-auto px-6">
         {/* Header */}
-        <div className="text-center mb-16">
+        <Reveal className="text-center mb-16">
           <div className="inline-flex items-center gap-2 bg-purple-50 text-purple-600 px-4 py-2 rounded-full text-sm font-bold mb-6">
             <Presentation size={16} />
             {language === 'th' ? 'ผลงานการนำเสนอ & ออกแบบ' : 'Presentation & Design Work'}
           </div>
-          <h2 className="text-4xl font-black text-slate-900 mb-4">
+          <h2 className="text-colossal-heading text-giant text-slate-900 mb-4">
             {language === 'th' ? 'ทำได้มากกว่าแค่โค้ด' : 'More Than Just Code'}
           </h2>
           <p className="text-slate-500 max-w-2xl mx-auto text-lg">
@@ -68,10 +71,10 @@ const PresentationSection = () => {
               ? 'นอกจากสร้างระบบได้แล้ว ผมยังมีทักษะด้านการนำเสนอ ออกแบบกราฟิก และผลิตสื่อจากประสบการณ์ทำงานจริงกว่า 6 ปี'
               : 'Beyond building systems, I bring 6+ years of presentation, graphic design, and media production skills from real-world experience'}
           </p>
-        </div>
+        </Reveal>
 
         {/* Skills Row */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+        <Reveal className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
           <div className="bg-white rounded-2xl p-6 border border-slate-200 hover:border-purple-300 hover:shadow-lg transition-all group">
             <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mb-4 group-hover:bg-purple-600 group-hover:text-white transition-all">
               <Mic size={24} className="text-purple-600 group-hover:text-white" />
@@ -113,10 +116,10 @@ const PresentationSection = () => {
                 : 'Executive pitch decks, data dashboards, analytics insights presentation'}
             </p>
           </div>
-        </div>
+        </Reveal>
 
         {/* Project Context */}
-        <div className="bg-white rounded-2xl border border-slate-200 p-8 mb-10">
+        <Reveal className="bg-white rounded-2xl border border-slate-200 p-8 mb-10">
           <div className="flex items-center gap-3 mb-4">
             <span className="text-3xl">🥟</span>
             <div>
@@ -137,41 +140,47 @@ const PresentationSection = () => {
             <span className="bg-cyan-50 text-cyan-600 px-3 py-1 rounded-full text-xs font-bold">Pricing Strategy</span>
             <span className="bg-pink-50 text-pink-600 px-3 py-1 rounded-full text-xs font-bold">Executive Dashboard</span>
           </div>
-        </div>
+        </Reveal>
 
         {/* Works Gallery */}
         <h3 className="text-2xl font-bold text-slate-900 mb-8 text-center">
           {language === 'th' ? 'ตัวอย่างผลงาน' : 'Sample Work'}
         </h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <RevealGroup className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {works.map((work) => (
-            <div key={work.id} className="bg-white rounded-2xl overflow-hidden border border-slate-200 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 group">
-              <div className="relative overflow-hidden">
-                <img
-                  src={work.image}
-                  alt={work.title}
-                  className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute top-3 right-3">
-                  <span className="bg-white/90 backdrop-blur-sm text-slate-700 px-3 py-1 rounded-full text-xs font-bold">
-                    {work.type}
-                  </span>
-                </div>
-              </div>
-              <div className="p-5">
-                <h4 className="font-bold text-slate-900 mb-2">{work.title}</h4>
-                <p className="text-slate-500 text-sm mb-4">{work.desc}</p>
-                <div className="flex flex-wrap gap-2">
-                  {work.tags.map((tag, idx) => (
-                    <span key={idx} className="bg-slate-100 text-slate-600 px-3 py-1 rounded-full text-xs font-medium">
-                      {tag}
+            <RevealItem key={work.id}>
+              <motion.div
+                whileHover={hoverLift}
+                className="bg-white rounded-2xl overflow-hidden border border-slate-200 hover:shadow-xl transition-shadow duration-300 group h-full"
+              >
+                <div className="relative overflow-hidden">
+                  <img
+                    src={work.image}
+                    alt={work.title}
+                    loading="lazy"
+                    className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute top-3 right-3">
+                    <span className="bg-white/90 backdrop-blur-sm text-slate-700 px-3 py-1 rounded-full text-xs font-bold">
+                      {work.type}
                     </span>
-                  ))}
+                  </div>
                 </div>
-              </div>
-            </div>
+                <div className="p-5">
+                  <h4 className="font-bold text-slate-900 mb-2">{work.title}</h4>
+                  <p className="text-slate-500 text-sm mb-4">{work.desc}</p>
+                  <div className="flex flex-wrap gap-2">
+                    {work.tags.map((tag, idx) => (
+                      <span key={idx} className="bg-slate-100 text-slate-600 px-3 py-1 rounded-full text-xs font-medium">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
+            </RevealItem>
           ))}
-        </div>
+        </RevealGroup>
       </div>
     </section>
   );

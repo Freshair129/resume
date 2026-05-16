@@ -1,54 +1,17 @@
 import { Link, useParams } from 'react-router-dom';
-import { ArrowLeft, Phone, Mail, MapPin, Download, ExternalLink, Award, Sparkles, Brain, Cpu, Code, Star, Video, Camera, Briefcase, Image as ImageIcon, FileText, GraduationCap, CheckCircle2, Target } from 'lucide-react';
+import { ArrowLeft, Phone, Mail, MapPin, Download, ExternalLink, Brain, Cpu, Code, Star, Briefcase, FileText, GraduationCap, CheckCircle2, Target } from 'lucide-react';
+import { motion } from 'motion/react';
 import { useLanguage } from './LanguageContext';
-import React, { useRef } from 'react';
-import html2canvas from 'html2canvas';
-import jsPDF from 'jspdf';
+import React from 'react';
 import profileImage from './assets/profile.jpg';
 import { resumeVariants, allExperiences } from './data/resumeVariants';
+import { RevealGroup, RevealItem } from './MotionPrimitives';
+import { tapPress } from './motion-variants';
 
 const Resume = () => {
-    const resumeRef = useRef(null);
     const { t, language } = useLanguage();
     const { variantSlug } = useParams();
     const variant = resumeVariants[variantSlug] || resumeVariants.default;
-
-    const handleDownload = async (type) => {
-        const element = resumeRef.current;
-        if (!element) return;
-
-        try {
-            const canvas = await html2canvas(element, {
-                scale: 2, // Improve quality
-                useCORS: true, // Handle cross-origin images
-                backgroundColor: '#ffffff'
-            });
-            const data = canvas.toDataURL('image/jpeg', 1.0);
-
-            if (type === 'jpg') {
-                const link = document.createElement('a');
-                link.href = data;
-                link.download = 'Pornpon_Resume.jpg';
-                link.click();
-            } else if (type === 'pdf') {
-                const pdf = new jsPDF('p', 'mm', 'a4');
-                const imgProps = pdf.getImageProperties(data);
-                const pdfWidth = pdf.internal.pageSize.getWidth();
-                const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-
-                // If height > A4, we might need multiple pages, but for now fit to width
-                // For a single page resume, this scales it nicely.
-                pdf.addImage(data, 'JPEG', 0, 0, pdfWidth, pdfHeight);
-                pdf.save('Pornpon_Resume.pdf');
-            }
-        } catch (error) {
-            console.error("Download failed:", error);
-            alert(`เกิดข้อผิดพลาดในการดาวน์โหลด: ${error.message}`);
-        }
-    };
-
-    // ข้อมูลรูปภาพ (ในสภาพแวดล้อมจริงคุณสามารถเปลี่ยน path รูปภาพได้ที่นี่)
-    // หมายเหตุ: สำหรับรูปที่คุณอัปโหลด ระบบจะแสดงผลผ่านไฟล์ต้นฉบับที่คุณแนบมา
 
     // Build experience list from variant config
     const resolveExperience = (key) => {
@@ -95,7 +58,12 @@ const Resume = () => {
                 </div>
                 <div className="text-xl font-black tracking-tighter text-[#2563eb] hidden sm:block">PORNPON.T</div>
             </div>
-            <div ref={resumeRef} className="max-w-5xl mx-auto bg-[#ffffff] shadow-2xl rounded-2xl overflow-hidden flex flex-col md:flex-row">
+            <motion.div
+                className="max-w-5xl mx-auto bg-[#ffffff] shadow-2xl rounded-2xl overflow-hidden flex flex-col md:flex-row"
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            >
 
                 {/* Left Column / Sidebar */}
                 <div className="md:w-1/3 bg-[#0f172a] text-[#ffffff] p-8">
@@ -111,7 +79,7 @@ const Resume = () => {
                                 }}
                             />
                         </div>
-                        <h1 className="text-2xl font-bold tracking-wide">{t.resume.name}</h1>
+                        <h1 className="text-colossal-heading text-3xl text-[#ffffff]">{t.resume.name}</h1>
                         <p className="text-[#60a5fa] font-medium mt-1 uppercase text-sm tracking-wider">
                             {variant.titleOverride ? variant.titleOverride[language] || variant.titleOverride.en : t.resume.title}
                         </p>
@@ -119,36 +87,41 @@ const Resume = () => {
 
                     {/* Tailored-for badge */}
                     {variant.label && (
-                        <div className="flex items-center justify-center gap-2 mb-4 bg-[#1e3a5f] text-[#93c5fd] px-4 py-2 rounded-xl text-xs font-bold" data-html2canvas-ignore="true">
+                        <div className="flex items-center justify-center gap-2 mb-4 bg-[#1e3a5f] text-[#93c5fd] px-4 py-2 rounded-xl text-xs font-bold">
                             <Target size={14} />
                             <span>Tailored for {variant.roleName || variant.label}</span>
                         </div>
                     )}
 
                     {/* Download Buttons */}
-                    <div className="flex flex-col gap-3 mb-8" data-html2canvas-ignore="true">
+                    <div className="flex flex-col gap-3 mb-8">
                         <p className="text-xs text-[#94a3b8] font-bold uppercase tracking-wider text-center flex items-center justify-center gap-1">
                             <Download size={12} /> {t.resume.downloadResume}
                         </p>
                         <div className="flex gap-3 justify-center">
-                            {variant.downloadFile ? (
-                                <a 
-                                    href={variant.downloadFile} 
-                                    download={variant.downloadFile.startsWith('http') ? undefined : true}
-                                    target={variant.downloadFile.startsWith('http') ? "_blank" : undefined}
-                                    rel={variant.downloadFile.startsWith('http') ? "noopener noreferrer" : undefined}
-                                    className="flex-1 bg-[#2563eb] hover:bg-[#1d4ed8] text-[#ffffff] px-3 py-2 rounded-lg text-sm font-bold flex items-center justify-center gap-2 transition-all hover:-translate-y-0.5 shadow-lg shadow-[#1e3a8a80] cursor-pointer"
+                            <motion.a
+                                whileHover={{ y: -2 }}
+                                whileTap={tapPress}
+                                href={variant.downloadFile}
+                                download={variant.downloadFile.startsWith('http') ? undefined : true}
+                                target={variant.downloadFile.startsWith('http') ? "_blank" : undefined}
+                                rel={variant.downloadFile.startsWith('http') ? "noopener noreferrer" : undefined}
+                                className="flex-1 bg-[#2563eb] hover:bg-[#1d4ed8] text-[#ffffff] px-3 py-2 rounded-lg text-sm font-bold flex items-center justify-center gap-2 transition-colors shadow-lg shadow-[#1e3a8a80] cursor-pointer"
+                            >
+                                <FileText size={16} /> {variant.downloadFile.includes('export?format=pdf') ? 'Download PDF' : 'DOCX'}
+                            </motion.a>
+                            {variant.viewFile && (
+                                <motion.a
+                                    whileHover={{ y: -2 }}
+                                    whileTap={tapPress}
+                                    href={variant.viewFile}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex-1 bg-[#334155] hover:bg-[#475569] text-[#ffffff] px-3 py-2 rounded-lg text-sm font-bold flex items-center justify-center gap-2 transition-colors shadow-lg shadow-[#0f172a80] cursor-pointer"
                                 >
-                                    <FileText size={16} /> {variant.downloadFile.startsWith('http') ? 'Original (Docs)' : 'DOCX'}
-                                </a>
-                            ) : (
-                                <button onClick={() => handleDownload('pdf')} className="flex-1 bg-[#2563eb] hover:bg-[#1d4ed8] text-[#ffffff] px-3 py-2 rounded-lg text-sm font-bold flex items-center justify-center gap-2 transition-all hover:-translate-y-0.5 shadow-lg shadow-[#1e3a8a80] cursor-pointer">
-                                    <FileText size={16} /> PDF
-                                </button>
+                                    <ExternalLink size={16} /> View in Docs
+                                </motion.a>
                             )}
-                            <button onClick={() => handleDownload('jpg')} className="flex-1 bg-[#334155] hover:bg-[#475569] text-[#ffffff] px-3 py-2 rounded-lg text-sm font-bold flex items-center justify-center gap-2 transition-all hover:-translate-y-0.5 shadow-lg shadow-[#0f172a80] cursor-pointer">
-                                <ImageIcon size={16} /> JPG
-                            </button>
                         </div>
                     </div>
 
@@ -275,11 +248,11 @@ const Resume = () => {
                         <h2 className="text-2xl font-bold text-[#0f172a] flex items-center gap-3 mb-6">
                             <Briefcase className="text-[#2563eb]" /> ประสบการณ์การทำงาน
                         </h2>
-                        <div className="space-y-8 relative before:absolute before:left-[17px] before:top-2 before:bottom-2 before:w-0.5 before:bg-[#f1f5f9]">
+                        <RevealGroup className="space-y-8 relative before:absolute before:left-[17px] before:top-2 before:bottom-2 before:w-0.5 before:bg-[#f1f5f9]">
                             {experiences.map((exp, index) => {
                                 const isEmphasized = variant.emphasisKeys?.includes(exp.key);
                                 return (
-                                <div key={index} className={`relative pl-10 ${isEmphasized ? 'bg-[#eff6ff] -mx-3 px-3 pl-[52px] py-3 rounded-xl border border-[#bfdbfe]' : ''}`}>
+                                <RevealItem key={index} className={`relative pl-10 ${isEmphasized ? 'bg-[#eff6ff] -mx-3 px-3 pl-[52px] py-3 rounded-xl border border-[#bfdbfe]' : ''}`}>
                                     <div className={`absolute ${isEmphasized ? 'left-3' : 'left-0'} top-1.5 w-[36px] h-[36px] bg-[#ffffff] border-2 ${isEmphasized ? 'border-[#2563eb] shadow-md shadow-blue-200' : 'border-[#2563eb]'} rounded-full flex items-center justify-center z-10 shadow-sm`}>
                                         <div className={`w-2 h-2 ${isEmphasized ? 'bg-[#2563eb]' : 'bg-[#2563eb]'} rounded-full`}></div>
                                     </div>
@@ -298,10 +271,10 @@ const Resume = () => {
                                             </li>
                                         ))}
                                     </ul>
-                                </div>
+                                </RevealItem>
                                 );
                             })}
-                        </div>
+                        </RevealGroup>
                     </section>
 
                     <section>
@@ -329,7 +302,7 @@ const Resume = () => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </motion.div>
         </div>
     );
 };

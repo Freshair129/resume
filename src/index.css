@@ -1,6 +1,27 @@
 @import "tailwindcss";
 
 @theme {
+    /* Fonts — IBM Plex Sans Thai handles both Thai + Latin safely */
+    --font-sans: "IBM Plex Sans Thai", ui-sans-serif, system-ui, sans-serif;
+    --font-display: "IBM Plex Sans Thai", ui-sans-serif, system-ui, sans-serif;
+
+    /* Colossal responsive type scale (clamp-based) */
+    --text-giant: clamp(2.25rem, 5vw, 3.75rem);
+    --text-giant--line-height: 1.05;
+    --text-mega: clamp(3rem, 8vw, 6rem);
+    --text-mega--line-height: 1;
+    --text-colossal: clamp(3.75rem, 12vw, 9rem);
+    --text-colossal--line-height: 0.95;
+
+    /* Display tracking */
+    --tracking-colossal: -0.04em;
+
+    /* Brand palette */
+    --color-brand: #2563eb;
+    --color-brand-dark: #1d4ed8;
+    --color-brand-light: #60a5fa;
+    --color-ink: #0f172a;
+
     @keyframes bounce-slow {
 
         0%,
@@ -19,5 +40,24 @@
 }
 
 body {
+    font-family: var(--font-sans);
     scroll-behavior: smooth;
+}
+
+/* Colossal display heading helper — oversized, tight, condensed */
+.text-colossal-heading {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: var(--tracking-colossal);
+    line-height: 0.95;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .animate-bounce-slow {
+        animation: none;
+    }
+
+    body {
+        scroll-behavior: auto;
+    }
 }

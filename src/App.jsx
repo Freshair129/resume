@@ -1,22 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
 import {
-  BrowserRouter as Router, Routes, Route, Link
+  BrowserRouter as Router, Routes, Route, Link, useLocation
 } from 'react-router-dom';
 import {
-  Phone, Mail, MapPin, GraduationCap, Briefcase, Code, Brain, Star,
-  CheckCircle2, ChevronRight, Menu, X, Cpu, Check, Camera, Video, Users, Car, FileText, ExternalLink,
+  Phone, Mail, MapPin, Code, Brain, Star,
+  Menu, X, Cpu, Camera, Video, Users, Car, FileText, ExternalLink,
   Bot, Sparkles, Globe, Download
 } from 'lucide-react';
+import { motion, AnimatePresence } from 'motion/react';
 import { Analytics } from "@vercel/analytics/react"
 import { SpeedInsights } from "@vercel/speed-insights/react"
 import { useLanguage } from './LanguageContext';
-import Resume from './Resume';
-import Portfolio from './Portfolio';
-import Gallery from './Gallery';
-import ProjectDemo from './ProjectDemo';
-import ChatbotWidget from './chatbot/ChatbotWidget';
-import ProjectsSection from './ProjectsSection';
-import PresentationSection from './PresentationSection';
+import { resumeVariants } from './data/resumeVariants';
+import { Reveal, RevealGroup, RevealItem } from './MotionPrimitives';
+import { staggerContainer, staggerItem, pageTransition, hoverLift, tapPress } from './motion-variants';
 import heroBg from './assets/hero-bg.jpg';
 import img02 from './assets/02.jpg';
 import img03 from './assets/03.jpg';
@@ -24,8 +21,28 @@ import img04 from './assets/04.jpg';
 import img05 from './assets/05.jpg';
 import img06 from './assets/06.jpg';
 
+const Resume = lazy(() => import('./Resume'));
+const Portfolio = lazy(() => import('./Portfolio'));
+const Gallery = lazy(() => import('./Gallery'));
+const ProjectDemo = lazy(() => import('./ProjectDemo'));
+const ChatbotWidget = lazy(() => import('./chatbot/ChatbotWidget'));
+const ProjectsSection = lazy(() => import('./ProjectsSection'));
+const PresentationSection = lazy(() => import('./PresentationSection'));
+
+const RESUME_VARIANT = 'content-coordinator';
+
+const RouteFallback = () => (
+  <div className="min-h-screen flex items-center justify-center bg-white">
+    <div className="w-10 h-10 border-4 border-brand/20 border-t-brand rounded-full animate-spin" />
+  </div>
+);
+
+const SectionFallback = () => <div className="py-24" />;
+
+const SLIDER_IMAGES = [img02, img03, img04, img05, img06];
+
 const ImageSlider = () => {
-  const images = [img02, img03, img04, img05, img06];
+  const images = SLIDER_IMAGES;
   const [currentIndex, setCurrentIndex] = useState(0);
   const nextIndex = (currentIndex + 1) % images.length;
   useEffect(() => {
@@ -33,7 +50,7 @@ const ImageSlider = () => {
       setCurrentIndex((prev) => (prev + 1) % images.length);
     }, 4000);
     return () => clearInterval(interval);
-  }, []);
+  }, [images.length]);
 
   return (
     <>
@@ -120,35 +137,53 @@ const MainPortfolio = () => {
       {/* Hero Section */}
       <section id="home" className="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden bg-white">
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center gap-12 relative z-10">
-          <div className="flex-1 text-center md:text-left space-y-6">
-            <div className="inline-flex items-center gap-2 bg-blue-50 text-blue-600 px-4 py-2 rounded-full text-sm font-bold">
+          <motion.div
+            className="flex-1 text-center md:text-left space-y-6"
+            variants={staggerContainer}
+            initial="hidden"
+            animate="show"
+          >
+            <motion.div variants={staggerItem} className="inline-flex items-center gap-2 bg-blue-50 text-blue-600 px-4 py-2 rounded-full text-sm font-bold">
               <span className="flex h-2 w-2 rounded-full bg-blue-600 animate-pulse"></span>
               {t.hero.available}
-            </div>
-            <h1 className="text-4xl md:text-6xl font-black leading-tight text-slate-900">{t.hero.name}</h1>
-            <p className="text-xl text-slate-600 max-w-xl mx-auto md:mx-0 leading-relaxed">{t.hero.desc}</p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start flex-wrap">
-              <Link to="/resume" className="bg-slate-900 text-white px-8 py-4 rounded-2xl font-bold flex items-center justify-center gap-2 shadow-xl shadow-slate-200 hover:bg-slate-800 transition-all hover:-translate-y-1">
-                {t.hero.viewResume} <FileText size={18} />
+            </motion.div>
+            <motion.h1 variants={staggerItem} className="text-colossal-heading text-mega text-slate-900">{t.hero.name}</motion.h1>
+            <motion.p variants={staggerItem} className="text-xl text-slate-600 max-w-xl mx-auto md:mx-0 leading-relaxed">{t.hero.desc}</motion.p>
+            <motion.div variants={staggerItem} className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start flex-wrap">
+              <motion.div whileHover={hoverLift} whileTap={tapPress}>
+                <Link to={`/resume/${RESUME_VARIANT}`} className="bg-slate-900 text-white px-8 py-4 rounded-2xl font-bold flex items-center justify-center gap-2 shadow-xl shadow-slate-200 hover:bg-slate-800 transition-colors">
+                  {t.hero.viewResume} <FileText size={18} />
+                </Link>
+              </motion.div>
+              <motion.a
+                whileHover={hoverLift}
+                whileTap={tapPress}
+                href={resumeVariants[RESUME_VARIANT].downloadFile}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-white text-slate-900 border-2 border-slate-900 px-8 py-4 rounded-2xl font-bold flex items-center justify-center gap-2 shadow-xl shadow-slate-100 hover:bg-slate-50 transition-colors"
+              >
+                {language === 'th' ? 'ดาวน์โหลด Resume (PDF)' : 'Download Resume (PDF)'} <Download size={18} />
+              </motion.a>
+            </motion.div>
+            <motion.div variants={staggerItem} className="flex flex-wrap gap-x-6 gap-y-2 justify-center md:justify-start items-center pt-1">
+              <Link to="/portfolio" className="inline-flex items-center gap-1.5 text-slate-700 font-bold hover:text-blue-600 transition-colors">
+                {t.hero.viewPortfolio} <ExternalLink size={16} />
               </Link>
-              <Link to="/portfolio" className="bg-white text-slate-900 border-2 border-slate-900 px-8 py-4 rounded-2xl font-bold flex items-center justify-center gap-2 shadow-xl shadow-slate-100 hover:bg-slate-50 transition-all hover:-translate-y-1">
-                {t.hero.viewPortfolio} <ExternalLink size={18} />
-              </Link>
-              <a href="/marketing/" target="_blank" rel="noopener noreferrer" className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-8 py-4 rounded-2xl font-bold flex items-center justify-center gap-2 shadow-xl shadow-purple-200 hover:from-indigo-700 hover:to-purple-700 transition-all hover:-translate-y-1">
-                {language === 'th' ? 'Marketing Tech Portfolio' : 'Marketing Tech Portfolio'} <Cpu size={18} />
+              <a href="/marketing/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-slate-500 text-sm font-bold hover:text-indigo-600 transition-colors">
+                Marketing Tech Portfolio <Cpu size={14} />
               </a>
-            </div>
-            <div className="flex flex-wrap gap-3 justify-center md:justify-start items-center pt-2">
-              <span className="text-xs text-slate-400 font-bold uppercase tracking-widest">View/Download Resume:</span>
-              <a href="https://docs.google.com/document/d/1AfEhI64KNyYb7OiUyVC2792yKf29f9ch/edit" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-slate-100 hover:bg-blue-50 hover:text-blue-600 text-slate-600 px-4 py-2 rounded-xl text-sm font-bold border border-slate-200 hover:border-blue-200 transition-all hover:-translate-y-0.5">
-                <FileText size={14} /> Google Docs (Original)
-              </a>
-            </div>
-            <p className="text-sm text-slate-500 font-medium">
+            </motion.div>
+            <motion.p variants={staggerItem} className="text-sm text-slate-500 font-medium">
               <Sparkles size={14} className="inline mr-1 text-blue-600 animate-pulse" /> {t.chatbot.hint}
-            </p>
-          </div>
-          <div className="flex-1 relative">
+            </motion.p>
+          </motion.div>
+          <motion.div
+            className="flex-1 relative"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+          >
             <div className="w-64 h-64 md:w-96 md:h-96 mx-auto relative z-10 group">
               <ImageSlider />
             </div>
@@ -161,7 +196,7 @@ const MainPortfolio = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -178,13 +213,13 @@ const MainPortfolio = () => {
               </div>
             </div>
             <div className="lg:w-2/3 w-full space-y-8">
-              <div className="mb-8">
+              <Reveal className="mb-8">
                 <div className="inline-flex items-center gap-2 bg-blue-100 text-blue-700 px-4 py-1.5 rounded-full text-sm font-bold mb-4">
                   <Brain size={16} /> {t.skills.badge}
                 </div>
-                <h2 className="text-3xl md:text-5xl font-black text-slate-900 leading-tight">{t.skills.title}</h2>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <h2 className="text-colossal-heading text-giant text-slate-900">{t.skills.title}</h2>
+              </Reveal>
+              <Reveal className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* AI Innovation Card */}
                 <div className="bg-slate-900 text-white p-8 rounded-[2rem] shadow-xl hover:-translate-y-1 transition-all duration-300">
                   <div className="flex items-center gap-3 mb-6"><div className="p-3 bg-blue-600 rounded-2xl"><Cpu /></div><h3 className="text-xl font-bold">AI Innovation</h3></div>
@@ -235,7 +270,7 @@ const MainPortfolio = () => {
                     </div>
                   </div>
                 </div>
-              </div>
+              </Reveal>
             </div>
           </div>
         </div>
@@ -243,10 +278,10 @@ const MainPortfolio = () => {
 
       {/* Experience Section */}
       <section id="experience" className="py-24 max-w-4xl mx-auto px-6">
-        <h2 className="text-4xl font-black text-center mb-16 text-slate-900">{t.experience.title}</h2>
-        <div className="space-y-12">
+        <Reveal as="h2" className="text-colossal-heading text-giant text-center mb-16 text-slate-900">{t.experience.title}</Reveal>
+        <RevealGroup className="space-y-12">
           {experiences.map((exp, idx) => (
-            <div key={idx} className="flex gap-6 group">
+            <RevealItem key={idx} className="flex gap-6 group">
               <div className="flex flex-col items-center">
                 <div className="w-12 h-12 bg-white border-2 border-slate-200 rounded-2xl flex items-center justify-center group-hover:bg-blue-600 group-hover:text-white transition-all shadow-lg text-slate-900">
                   <exp.IconComponent size={24} />
@@ -261,9 +296,9 @@ const MainPortfolio = () => {
                 <p className="text-blue-600 font-bold mb-4">{exp.company} • {exp.period}</p>
                 <p className="text-slate-600 italic leading-relaxed text-lg">"{exp.desc}"</p>
               </div>
-            </div>
+            </RevealItem>
           ))}
-          <div className="flex gap-6 group">
+          <RevealItem className="flex gap-6 group">
             <div className="flex flex-col items-center">
               <div className="w-12 h-12 bg-blue-600 border-2 border-blue-600 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-blue-200">
                 <Sparkles size={24} className="animate-pulse" />
@@ -278,15 +313,19 @@ const MainPortfolio = () => {
               <p className="text-blue-600 font-bold mb-4">{t.experience.timeline[6].period} • {t.experience.timeline[6].company}</p>
               <p className="text-slate-600 italic leading-relaxed text-lg">"{t.experience.timeline[6].desc}"</p>
             </div>
-          </div>
-        </div>
+          </RevealItem>
+        </RevealGroup>
       </section>
 
       {/* Projects Section */}
-      <ProjectsSection />
+      <Suspense fallback={<SectionFallback />}>
+        <ProjectsSection />
+      </Suspense>
 
       {/* Presentation Section */}
-      <PresentationSection />
+      <Suspense fallback={<SectionFallback />}>
+        <PresentationSection />
+      </Suspense>
 
       {/* Contact Section */}
       <footer id="contact" className="bg-slate-900 text-white py-20 px-6">
@@ -310,18 +349,40 @@ const MainPortfolio = () => {
   );
 };
 
+const Page = ({ children }) => (
+  <motion.div
+    variants={pageTransition}
+    initial="initial"
+    animate="animate"
+    exit="exit"
+  >
+    <Suspense fallback={<RouteFallback />}>{children}</Suspense>
+  </motion.div>
+);
+
+const AnimatedRoutes = () => {
+  const location = useLocation();
+  return (
+    <AnimatePresence mode="wait">
+      <Routes location={location} key={location.pathname}>
+        <Route path="/" element={<Page><MainPortfolio /></Page>} />
+        <Route path="/resume" element={<Page><Resume /></Page>} />
+        <Route path="/resume/:variantSlug" element={<Page><Resume /></Page>} />
+        <Route path="/portfolio" element={<Page><Portfolio /></Page>} />
+        <Route path="/gallery" element={<Page><Gallery /></Page>} />
+        <Route path="/demo" element={<Page><ProjectDemo /></Page>} />
+      </Routes>
+    </AnimatePresence>
+  );
+};
+
 const App = () => {
   return (
     <Router>
-      <Routes>
-        <Route path="/" element={<MainPortfolio />} />
-        <Route path="/resume" element={<Resume />} />
-        <Route path="/resume/:variantSlug" element={<Resume />} />
-        <Route path="/portfolio" element={<Portfolio />} />
-        <Route path="/gallery" element={<Gallery />} />
-        <Route path="/demo" element={<ProjectDemo />} />
-      </Routes>
-      <ChatbotWidget />
+      <AnimatedRoutes />
+      <Suspense fallback={null}>
+        <ChatbotWidget />
+      </Suspense>
       <Analytics />
       <SpeedInsights />
     </Router>
