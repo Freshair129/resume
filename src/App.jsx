@@ -204,7 +204,7 @@ const MainPortfolio = () => {
       <section id="skills" className="bg-slate-50 py-24">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col lg:flex-row gap-12 items-start">
-            <div className="lg:w-1/3 w-full sticky top-24">
+            <div className="lg:w-1/3 w-full lg:sticky top-24">
               <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl group border-8 border-white bg-white">
                 <img src={heroBg} alt="Profile Highlight" className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-8">
