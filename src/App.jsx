@@ -18,49 +18,10 @@ import ChatbotWidget from './chatbot/ChatbotWidget';
 import ProjectsSection from './ProjectsSection';
 import PresentationSection from './PresentationSection';
 import heroBg from './assets/hero-bg.jpg';
-import img02 from './assets/02.jpg';
-import img03 from './assets/03.jpg';
-import img04 from './assets/04.jpg';
-import img05 from './assets/05.jpg';
-import img06 from './assets/06.jpg';
-
-const ImageSlider = () => {
-  const images = [img02, img03, img04, img05, img06];
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const nextIndex = (currentIndex + 1) % images.length;
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % images.length);
-    }, 4000);
-    return () => clearInterval(interval);
-  }, []);
-
-  return (
-    <>
-      <div className="absolute inset-0 w-full h-full rounded-[3rem] rotate-6 group-hover:rotate-3 transition-transform duration-500 overflow-hidden shadow-2xl bg-slate-100 z-0">
-        <img src={images[nextIndex]} alt="Next Slide" className="w-full h-full object-cover opacity-90 blur-[1px] brightness-75 transition-all duration-500 group-hover:opacity-100 group-hover:blur-0 group-hover:brightness-100" />
-      </div>
-      <div className="absolute inset-0 w-full h-full rounded-[3rem] -rotate-3 group-hover:rotate-0 transition-transform duration-500 border-4 border-white shadow-2xl overflow-hidden bg-white z-10">
-        {images.map((img, index) => (
-          <img key={index} src={img} alt={`Slide ${index}`}
-            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${index === currentIndex ? 'opacity-100' : 'opacity-0'}`}
-          />
-        ))}
-      </div>
-    </>
-  );
-};
+import HeroReveal from './HeroReveal';
 
 const MainPortfolio = () => {
-  const { t, language, toggleLanguage } = useLanguage();
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  const { t } = useLanguage();
 
   const experienceIcons = [
     { IconComponent: Star, iconColor: "text-yellow-500" },
@@ -77,93 +38,8 @@ const MainPortfolio = () => {
 
   return (
     <div className="min-h-screen bg-white selection:bg-blue-100 selection:text-blue-900">
-      {/* Navigation */}
-      <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white/80 backdrop-blur-md shadow-md py-3' : 'bg-transparent py-5'}`}>
-        <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
-          <div className="text-xl font-black tracking-tighter text-blue-600">PORNPON.T</div>
-          <div className="hidden md:flex space-x-8 items-center">
-            <a href="#home" className="text-sm font-medium hover:text-blue-600 transition-colors">{t.nav.home}</a>
-            <a href="#skills" className="text-sm font-medium hover:text-blue-600 transition-colors">{t.nav.skills}</a>
-            <a href="#experience" className="text-sm font-medium hover:text-blue-600 transition-colors">{t.nav.experience}</a>
-            <a href="#projects" className="text-sm font-medium hover:text-blue-600 transition-colors">Projects</a>
-            <Link to="/portfolio" className="text-sm font-medium hover:text-blue-600 transition-colors">{t.nav.portfolio}</Link>
-            <Link to="/gallery" className="text-sm font-medium hover:text-blue-600 transition-colors">{t.nav.gallery}</Link>
-            <Link to="/resume" className="text-sm font-bold text-slate-900 hover:text-blue-600 transition-colors flex items-center gap-1">
-              {t.nav.resume} <ExternalLink size={14} />
-            </Link>
-            <button onClick={toggleLanguage} className="flex items-center gap-1 bg-slate-100 px-3 py-1 rounded-full text-xs font-bold hover:bg-slate-200 transition-colors">
-              <Globe size={14} /> {language.toUpperCase()}
-            </button>
-            <a href="#contact" className="bg-blue-600 text-white px-5 py-2 rounded-full text-sm font-bold hover:bg-blue-700 shadow-lg shadow-blue-200 transition-all hover:-translate-y-0.5">{t.nav.hireMe}</a>
-          </div>
-          <button className="md:hidden text-slate-900" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
-        </div>
-        {isMenuOpen && (
-          <div className="md:hidden absolute top-full left-0 w-full bg-white border-b border-slate-100 p-6 flex flex-col gap-4 shadow-xl animate-in slide-in-from-top duration-300">
-            <a href="#home" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>{t.nav.home}</a>
-            <a href="#skills" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>{t.nav.skills}</a>
-            <a href="#experience" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>{t.nav.experience}</a>
-            <a href="#projects" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>Projects</a>
-            <Link to="/portfolio" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>{t.nav.portfolio}</Link>
-            <Link to="/gallery" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>{t.nav.gallery}</Link>
-            <Link to="/resume" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>{t.nav.resume}</Link>
-            <button onClick={() => { toggleLanguage(); setIsMenuOpen(false); }} className="flex items-center gap-2 text-lg font-bold">
-              <Globe size={20} /> {language === 'th' ? 'English' : 'ไทย'}
-            </button>
-            <a href="#contact" className="bg-blue-600 text-white p-4 rounded-2xl text-center font-black" onClick={() => setIsMenuOpen(false)}>{t.nav.hireMe}</a>
-          </div>
-        )}
-      </nav>
-
-      {/* Hero Section */}
-      <section id="home" className="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden bg-white">
-        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center gap-12 relative z-10">
-          <div className="flex-1 text-center md:text-left space-y-6">
-            <div className="inline-flex items-center gap-2 bg-blue-50 text-blue-600 px-4 py-2 rounded-full text-sm font-bold">
-              <span className="flex h-2 w-2 rounded-full bg-blue-600 animate-pulse"></span>
-              {t.hero.available}
-            </div>
-            <h1 className="text-4xl md:text-6xl font-black leading-tight text-slate-900">{t.hero.name}</h1>
-            <p className="text-xl text-slate-600 max-w-xl mx-auto md:mx-0 leading-relaxed">{t.hero.desc}</p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start flex-wrap">
-              <Link to="/resume" className="bg-slate-900 text-white px-8 py-4 rounded-2xl font-bold flex items-center justify-center gap-2 shadow-xl shadow-slate-200 hover:bg-slate-800 transition-all hover:-translate-y-1">
-                {t.hero.viewResume} <FileText size={18} />
-              </Link>
-              <Link to="/portfolio" className="bg-white text-slate-900 border-2 border-slate-900 px-8 py-4 rounded-2xl font-bold flex items-center justify-center gap-2 shadow-xl shadow-slate-100 hover:bg-slate-50 transition-all hover:-translate-y-1">
-                {t.hero.viewPortfolio} <ExternalLink size={18} />
-              </Link>
-              <a href="/marketing/" target="_blank" rel="noopener noreferrer" className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-8 py-4 rounded-2xl font-bold flex items-center justify-center gap-2 shadow-xl shadow-purple-200 hover:from-indigo-700 hover:to-purple-700 transition-all hover:-translate-y-1">
-                {language === 'th' ? 'Marketing Tech Portfolio' : 'Marketing Tech Portfolio'} <Cpu size={18} />
-              </a>
-            </div>
-            <div className="flex flex-wrap gap-3 justify-center md:justify-start items-center pt-2">
-              <span className="text-xs text-slate-400 font-bold uppercase tracking-widest">View/Download Resume:</span>
-              <a href="https://docs.google.com/document/d/1AfEhI64KNyYb7OiUyVC2792yKf29f9ch/edit" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-slate-100 hover:bg-blue-50 hover:text-blue-600 text-slate-600 px-4 py-2 rounded-xl text-sm font-bold border border-slate-200 hover:border-blue-200 transition-all hover:-translate-y-0.5">
-                <FileText size={14} /> Google Docs (Original)
-              </a>
-            </div>
-            <p className="text-sm text-slate-500 font-medium">
-              <Sparkles size={14} className="inline mr-1 text-blue-600 animate-pulse" /> {t.chatbot.hint}
-            </p>
-          </div>
-          <div className="flex-1 relative">
-            <div className="w-64 h-64 md:w-96 md:h-96 mx-auto relative z-10 group">
-              <ImageSlider />
-            </div>
-            <div className="absolute -bottom-4 -right-4 md:bottom-10 md:-right-10 bg-white p-6 rounded-3xl shadow-2xl z-20 animate-bounce-slow">
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-blue-600 rounded-2xl flex items-center justify-center text-white"><Brain size={24} /></div>
-                <div className="text-left">
-                  <div className="text-xs text-slate-400 font-bold uppercase">AI Specialist</div>
-                  <div className="text-lg font-black text-slate-900">Agentic RAG</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* Navigation + Premium Hero (spotlight reveal) */}
+      <HeroReveal />
 
       {/* Skills Section */}
       <section id="skills" className="bg-slate-50 py-24">

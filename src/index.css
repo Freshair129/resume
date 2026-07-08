@@ -1,6 +1,9 @@
 @import "tailwindcss";
 
 @theme {
+    --font-inter: "Inter", sans-serif;
+    --font-playfair: "Playfair Display", serif;
+
     @keyframes bounce-slow {
 
         0%,
@@ -20,4 +23,34 @@
 
 body {
     scroll-behavior: smooth;
+}
+
+/* ---- Premium hero (spotlight reveal) animations ---- */
+@keyframes heroReveal {
+    0% { opacity: 0; transform: translateY(28px); filter: blur(12px); }
+    100% { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+@keyframes heroFadeUp {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+@keyframes heroZoom {
+    0% { transform: scale(1.12); }
+    100% { transform: scale(1); }
+}
+@keyframes heroHintPulse {
+    0%, 100% { opacity: 0.35; }
+    50% { opacity: 0.9; }
+}
+.hero-anim {
+    opacity: 0;
+    animation-fill-mode: forwards;
+    animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+.hero-reveal { animation-name: heroReveal; animation-duration: 1.1s; }
+.hero-fade { animation-name: heroFadeUp; animation-duration: 1s; }
+.hero-zoom { animation: heroZoom 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+.hero-hint { animation: heroHintPulse 2.4s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) {
+    .hero-anim, .hero-zoom, .hero-hint { animation: none; opacity: 1; }
 }
