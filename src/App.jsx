@@ -5,7 +5,7 @@ import {
 import {
   Phone, Mail, MapPin, Code, Brain, Star,
   Menu, X, Cpu, Camera, Video, Users, Car, FileText, ExternalLink,
-  Bot, Sparkles, Globe, Download
+  Bot, Sparkles, Globe, Download, MousePointerClick
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Analytics } from "@vercel/analytics/react"
@@ -13,6 +13,7 @@ import { SpeedInsights } from "@vercel/speed-insights/react"
 import { useLanguage } from './LanguageContext';
 import { resumeVariants } from './data/resumeVariants';
 import { Reveal, RevealGroup, RevealItem } from './MotionPrimitives';
+import SpotlightReveal from './SpotlightReveal';
 import { staggerContainer, staggerItem, pageTransition, hoverLift, tapPress } from './motion-variants';
 import heroBg from './assets/hero-bg.jpg';
 import img02 from './assets/02.jpg';
@@ -20,6 +21,7 @@ import img03 from './assets/03.jpg';
 import img04 from './assets/04.jpg';
 import img05 from './assets/05.jpg';
 import img06 from './assets/06.jpg';
+import profileImg from './assets/profile.jpg';
 
 const Resume = lazy(() => import('./Resume'));
 const Portfolio = lazy(() => import('./Portfolio'));
@@ -185,7 +187,13 @@ const MainPortfolio = () => {
             transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
           >
             <div className="w-64 h-64 md:w-96 md:h-96 mx-auto relative z-10 group">
-              <ImageSlider />
+              <SpotlightReveal image={profileImg} className="w-full h-full">
+                <ImageSlider />
+              </SpotlightReveal>
+            </div>
+            <div className="hidden md:flex items-center gap-1.5 justify-center mt-3 text-slate-400 text-xs font-medium">
+              <MousePointerClick size={13} />
+              <span>{language === 'th' ? 'ปัดเมาส์เพื่อเผยอีกด้าน' : 'move your cursor to reveal'}</span>
             </div>
             <div className="absolute -bottom-4 -right-4 md:bottom-10 md:-right-10 bg-white p-6 rounded-3xl shadow-2xl z-20 animate-bounce-slow">
               <div className="flex items-center gap-4">
