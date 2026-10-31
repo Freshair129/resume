@@ -1,0 +1,155 @@
+diff --git a/src/lib.rs b/src/lib.rs
+index be10868..ce8ea01 100644
+--- a/src/lib.rs
++++ b/src/lib.rs
+@@ -16524,8 +16524,12 @@ impl Storage {
+         index: bool,
+         commit_seq: u64,
+     ) {
++        // K-Impact is derived from the current graph. Recompute only affected
++        // targets after the complete transaction, on live apply AND WAL replay.
++        let mut impact_targets = HashSet::new();
+         for node in &transaction.nodes {
+             let node_u32 = self.get_or_intern_id(&node.id);
++            impact_targets.insert(node.id.clone());
+             if let Some(embedding) = &node.embedding {
+                 self.replay_vector(
+                     &node.collection,
+@@ -16549,6 +16553,10 @@ impl Storage {
+             {
+                 continue;
+             }
++            if let Some(old) = self.edges.get(&Self::edge_key(&edge.id)) {
++                impact_targets.insert(old.to.clone());
++            }
++            impact_targets.insert(edge.to.clone());
+             let edge_key = self.index_edge_internal(&edge.id, &edge.from, &edge.to);
+             self.edges.insert(edge_key, edge.clone());
+         }
+@@ -16574,6 +16582,7 @@ impl Storage {
+                 commit_seq,
+             );
+         }
++        self.refresh_impacts(Some(impact_targets.into_iter().collect()));
+     }
+ 
+     /// The FRAME frontier: commit_seq of the last durable journal frame
+diff --git a/src/router.rs b/src/router.rs
+index 154d38f..0c66427 100644
+--- a/src/router.rs
++++ b/src/router.rs
+@@ -1398,6 +1398,10 @@ async fn version_handler() -> impl IntoResponse {
+         "engine_name": crate::ENGINE_NAME,
+         "version": crate::ENGINE_VERSION,
+         "schema_version": crate::SCHEMA_VERSION,
++        "build": {
++            "source_commit": option_env!("GENESIS_SOURCE_COMMIT"),
++            "profile": "portfolio-transaction-impact-v1",
++        },
+     }))
+ }
+ 
+diff --git a/tests/portfolio_transaction_impact_tests.rs b/tests/portfolio_transaction_impact_tests.rs
+new file mode 100644
+index 0000000..7495878
+--- /dev/null
++++ b/tests/portfolio_transaction_impact_tests.rs
+@@ -0,0 +1,98 @@
++use genesis_block_native::{GenesisTransaction, OpenOptions, Storage};
++use serde_json::json;
++use tempfile::TempDir;
++
++fn open(dir: &TempDir) -> Storage {
++    Storage::open(OpenOptions {
++        path: dir.path().to_string_lossy().into_owned(),
++        page_cache_mb: Some(16),
++        read_only: Some(false),
++        vector_dim: Some(384),
++        retention: None,
++    })
++    .unwrap()
++}
++
++fn commit(storage: &Storage, id: &str, nodes: serde_json::Value, edges: serde_json::Value) {
++    let input: GenesisTransaction = serde_json::from_value(json!({
++        "transaction_id": id, "expected_frontier": null, "relational": [],
++        "graph": {"nodes": nodes, "edges": edges}, "vectors": []
++    }))
++    .unwrap();
++    storage.commit_transaction(input).unwrap();
++}
++
++fn edge(to: &str) -> serde_json::Value {
++    json!([{"id":"support", "from":"evidence", "to":to, "rel":"SUPPORTED_BY"}])
++}
++
++fn seed(storage: &Storage) {
++    commit(
++        storage,
++        "nodes",
++        json!([
++            {"id":"a","labels":["Chunk"]}, {"id":"b","labels":["Chunk"]},
++            {"id":"evidence","labels":["Evidence"]}
++        ]),
++        json!([]),
++    );
++}
++
++fn impact(storage: &Storage, id: &str) -> f64 {
++    storage.node_view(id).unwrap().impact.unwrap()
++}
++
++#[test]
++fn committed_edges_change_native_impact_and_replay_is_stable() {
++    let dir = TempDir::new().unwrap();
++    let storage = open(&dir);
++    seed(&storage);
++    commit(&storage, "support-a", json!([]), edge("a"));
++    // USER tier .3 * .3 + one incoming edge .1 * .5 + active consistency .8 * .2.
++    assert!((impact(&storage, "a") - 0.30).abs() < 1e-9);
++    let frontier = storage.stable_frontier();
++    commit(&storage, "support-a", json!([]), edge("a"));
++    assert_eq!(storage.stable_frontier(), frontier);
++    assert!((impact(&storage, "a") - 0.30).abs() < 1e-9);
++    drop(storage);
++    assert!((impact(&open(&dir), "a") - 0.30).abs() < 1e-9);
++}
++
++#[test]
++fn replacing_an_edge_updates_both_old_and_new_targets() {
++    let dir = TempDir::new().unwrap();
++    let storage = open(&dir);
++    seed(&storage);
++    commit(&storage, "support-a", json!([]), edge("a"));
++    commit(&storage, "support-b", json!([]), edge("b"));
++    assert!((impact(&storage, "a") - 0.25).abs() < 1e-9);
++    assert!((impact(&storage, "b") - 0.30).abs() < 1e-9);
++}
++
++#[test]
++fn updating_a_supported_node_preserves_native_graph_influence() {
++    let dir = TempDir::new().unwrap();
++    let storage = open(&dir);
++    seed(&storage);
++    commit(&storage, "support-a", json!([]), edge("a"));
++    commit(
++        &storage,
++        "update-a",
++        json!([{"id":"a","labels":["Chunk"],"props":{"updated":true}}]),
++        json!([]),
++    );
++    assert!((impact(&storage, "a") - 0.30).abs() < 1e-9);
++}
++
++#[test]
++fn updating_a_formerly_supported_node_does_not_restore_initial_impact() {
++    let dir = TempDir::new().unwrap();
++    let storage = open(&dir);
++    seed(&storage);
++    commit(&storage, "support-a", json!([]), edge("a"));
++    commit(&storage, "move-to-b", json!([]), edge("b"));
++    commit(&storage, "update-a", json!([{"id":"a","labels":["Chunk"],"props":{"updated":true}}]), json!([]));
++    assert!((impact(&storage, "a") - 0.25).abs() < 1e-9);
++    drop(storage);
++    assert!((impact(&open(&dir), "a") - 0.25).abs() < 1e-9);
++}

@@ -1,0 +1,9 @@
+# Suppress historical secret values in ordinary Git diff views.
+.env -diff
+.env.local -diff
+
+# Markdown hard breaks and vendored license whitespace are intentional.
+*.md whitespace=-blank-at-eol
+server/pdf/fonts/OFL.txt whitespace=-blank-at-eol
+.gitattributes text eol=lf
+infra/genesis/patches/*.patch text eol=lf

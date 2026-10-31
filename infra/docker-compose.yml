@@ -1,0 +1,79 @@
+name: portfolio-intelligence
+services:
+  postgres:
+    image: postgres:17.6-bookworm@sha256:f3bd19c606e442c3d7bdfa8002e03fe260a1023351e0ea4598032022b68dd6e3
+    environment:
+      POSTGRES_USER: portfolio
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD}
+      POSTGRES_DB: portfolio
+    volumes: [postgres-data:/var/lib/postgresql/data]
+    healthcheck:
+      test: [CMD-SHELL, pg_isready -U portfolio]
+      interval: 5s
+      retries: 15
+    networks: [backend]
+    restart: unless-stopped
+  genesis:
+    image: portfolio-genesis:2527a864-portfolio-impact-v1
+    build:
+      context: ..
+      dockerfile: infra/genesis.Dockerfile
+    environment:
+      GENESIS_API_KEY: ${GENESIS_API_KEY:?set GENESIS_API_KEY}
+      GENESIS_DATA_DIR: /data
+      GENESIS_PORT: 3000
+    volumes: [genesis-data:/data]
+    networks: [backend]
+    restart: unless-stopped
+  migrate:
+    image: portfolio-api:local
+    build: &api-build
+      context: ..
+      dockerfile: infra/api.Dockerfile
+    environment: &api-env
+      DATABASE_URL: postgresql://portfolio:${POSTGRES_PASSWORD}@postgres:5432/portfolio
+      GENESIS_API_URL: http://genesis:3000
+      GENESIS_API_KEY: ${GENESIS_API_KEY}
+      OWNER_API_TOKEN: ${OWNER_API_TOKEN:?set OWNER_API_TOKEN}
+      MCP_API_TOKEN: ${MCP_API_TOKEN:?set MCP_API_TOKEN}
+      EMBEDDING_URL: ${EMBEDDING_URL:-}
+      EMBEDDING_API_KEY: ${EMBEDDING_API_KEY:-}
+      EMBEDDING_MODEL: ${EMBEDDING_MODEL:-}
+      EMBEDDING_DIMENSION: ${EMBEDDING_DIMENSION:-384}
+      OLLAMA_BASE_URL: ${OLLAMA_BASE_URL:-http://host.docker.internal:11434}
+      OLLAMA_CHAT_MODEL: ${OLLAMA_CHAT_MODEL:-}
+      GITHUB_WEBHOOK_SECRET: ${GITHUB_WEBHOOK_SECRET:-}
+      LINE_CHANNEL_SECRET: ${LINE_CHANNEL_SECRET:-}
+      LINE_CHANNEL_ACCESS_TOKEN: ${LINE_CHANNEL_ACCESS_TOKEN:-}
+      PUBLIC_ORIGIN: ${PUBLIC_ORIGIN:-http://localhost:3100}
+    depends_on:
+      postgres: {condition: service_healthy}
+    command: [node, scripts/migrate.mjs]
+    networks: [backend]
+  api:
+    image: portfolio-api:local
+    build: *api-build
+    environment: *api-env
+    ports: [127.0.0.1:3100:3100]
+    depends_on:
+      migrate: {condition: service_completed_successfully}
+    networks: [backend, outbound]
+    restart: unless-stopped
+  worker:
+    image: portfolio-api:local
+    build: *api-build
+    environment: *api-env
+    command: [node, server/workers/main.mjs]
+    depends_on:
+      migrate: {condition: service_completed_successfully}
+    networks: [backend, outbound]
+    restart: unless-stopped
+volumes:
+  postgres-data:
+  genesis-data:
+networks:
+  backend: {internal: true}
+  outbound:
+    ipam:
+      config:
+        - subnet: ${PORTFOLIO_OUTBOUND_SUBNET:-10.239.251.0/24}

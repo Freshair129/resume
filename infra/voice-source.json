@@ -1,0 +1,91 @@
+{
+  "repository": "https://github.com/Freshair129/Lalin-AI",
+  "commit": "d765e14664a73a936666759c13111325df25211d",
+  "files": [
+    {"path": "apps/api/app/__init__.py", "sha": "485f44ac21b2ee78a2ee1ed0ea584114a1c957c3"},
+    {
+      "path": "apps/api/app/voice_worker/__init__.py",
+      "sha": "31528486031b560749b568a19d3e36cb1872f172"
+    },
+    {
+      "path": "apps/api/app/voice_worker/__main__.py",
+      "sha": "93cbacbf9e9a5c6f3a93a151a3869d0f7b5f7a3d"
+    },
+    {
+      "path": "apps/api/app/voice_worker/admission.py",
+      "sha": "b78fde9a785970317a8a87eb24cc9dc28a0f878f"
+    },
+    {
+      "path": "apps/api/app/voice_worker/app.py",
+      "sha": "65b0b5ebd3d6965b7333bb2a81d6c20c95fe3301"
+    },
+    {
+      "path": "apps/api/app/voice_worker/auth.py",
+      "sha": "33b3bb868618f07ce6cfd98aaadf23e8225a782b"
+    },
+    {
+      "path": "apps/api/app/voice_worker/contract.py",
+      "sha": "e3af0a5df9dd582652b65320f7b5c2b30609015a"
+    },
+    {
+      "path": "apps/api/app/voice_worker/engine_f5.py",
+      "sha": "6b9db0850c6adcd293583e23b6f0e2332f89d073"
+    },
+    {
+      "path": "apps/api/app/voice_worker/engine_faster_whisper.py",
+      "sha": "fe00bcb6bf87a105b40baf360443b40169f81d79"
+    },
+    {
+      "path": "apps/api/app/voice_worker/engine_stub.py",
+      "sha": "5c6ad5043194f66d50942f9f50da210709af5199"
+    },
+    {
+      "path": "apps/api/app/voice_worker/errors.py",
+      "sha": "02fd933d860d57c7f1c2e6fb4e9675001208f010"
+    },
+    {
+      "path": "apps/api/app/voice_worker/metrics.py",
+      "sha": "6eb091da0b82bbe0df47d4ac3ec5bb60a5c6fdf6"
+    },
+    {
+      "path": "apps/api/app/voice_worker/profile.py",
+      "sha": "0474e20faa42789dc4e0405e4b59554185d45b96"
+    },
+    {
+      "path": "apps/api/app/voice_worker/receipts.py",
+      "sha": "659bc30882dc8911ee0dabff348bffad7c2ac58c"
+    },
+    {
+      "path": "apps/api/app/voice_worker/runtime.py",
+      "sha": "a88eb59c3a2ea3abfd12a3ac661d104304df66ba"
+    },
+    {
+      "path": "apps/api/app/voice_worker/schema.py",
+      "sha": "145e0b6db5a589e5afcfda429cecd73765e46d6f"
+    },
+    {
+      "path": "apps/api/app/voice_worker/settings.py",
+      "sha": "13f3667184d562d389256a9bb3ef93de93782810"
+    },
+    {
+      "path": "apps/api/app/voice_worker/status_gateway.py",
+      "sha": "b53fd94330b54e6ec5cc4182f956afb9d93ecc82"
+    },
+    {
+      "path": "apps/api/app/voice_worker/storage.py",
+      "sha": "ec34af4f3588d33a3a32441e99e8146b2b1bf788"
+    },
+    {
+      "path": "apps/api/app/voice_worker/supervisor.py",
+      "sha": "46bdda3d9df037086a55f65ddb32de8d1787426b"
+    },
+    {
+      "path": "apps/api/app/voice_worker/timeutil.py",
+      "sha": "eb9f0a78495018143410f4b0e6d7a0e639ce06e8"
+    },
+    {
+      "path": "apps/api/requirements-voice-worker-linux-cpu.lock.txt",
+      "sha": "f46057f815bd6e938aaaf4efa6d5d3f65a384051"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+# Explicit opt-in overlay. No host port, host VPN, subnet route or NET_ADMIN.
+services:
+  tailscale:
+    image: tailscale/tailscale:stable@sha256:519bf6f2c386992052216ea7e9391d5ace3a859d458f4f61bc8db8c58377eb7d
+    entrypoint: [tailscaled]
+    command: [--tun=userspace-networking, --state=/var/lib/tailscale/tailscaled.state, --socket=/var/run/tailscale/tailscaled.sock]
+    volumes: [tailscale-state:/var/lib/tailscale]
+    networks: [backend, outbound]
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    restart: unless-stopped
+  public-gateway:
+    image: node:24-bookworm-slim@sha256:c86ecead9e55a5210ac1727de38a4ca840bf03dcaf34dc9749addbf383b1920c
+    working_dir: /app
+    user: node
+    command: [node, server/public-bridge.mjs]
+    volumes:
+      - ../server/public:/app/server/public:ro
+      - ../server/public-bridge.mjs:/app/server/public-bridge.mjs:ro
+    environment:
+      KNOWLEDGE_API_ORIGIN: http://api:3100
+      PORTFOLIO_BRIDGE_TOKEN: ${PORTFOLIO_BRIDGE_TOKEN:?set a dedicated bridge token}
+    network_mode: service:tailscale
+    depends_on: [tailscale]
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    restart: unless-stopped
+volumes:
+  tailscale-state:

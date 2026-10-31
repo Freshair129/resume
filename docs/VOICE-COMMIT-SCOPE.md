@@ -1,0 +1,11 @@
+# Voice backend commit scope
+
+The owner authorized committing the necessary Knowledge API and Voice prerequisites separately from the Thai ASR repair. The foundation contains the shared approved-knowledge service, PostgreSQL schema/outbox, native Genesis adapter/build patch, Ollama integration, private Lalin/Windows speech adapters, exact public proxy, and their tests and deployment configuration. It retains the original frontend and Netlify dependency; the pending Portfolio redesign, GitHub inventory, content imports and Voice page routing are outside these commits. Voice capture utilities are included for lifecycle/PCM tests. The already-deployed Voice page is unchanged.
+
+The tracked legacy .env is removed without publishing its values; credentials and runtime/model data remain excluded. Existing historical exposure is not erased by this deletion. Configure fresh secrets through the ignored runtime files described in VOICE-SETUP.md. No services, databases or deployments are changed by these commits.
+
+The foundation uses the retained Small v4 profile. Most files match rollback API image sha256:6b7b89be154a3285f1048116aa2290448f377290c9bb8773cdad98966e415316. The retained Small profile, Linux model-volume preparation, final pre-Thai sizing notes and a compatible model downloader complete those prerequisites; this is a reviewed assembly, not a claim that the image itself contained every later Small file.
+
+The second commit adds only the Thai Small model/profile, trusted native glossary and applied-receipt check, exact project-name aliases after language detection, unedited-transcript verification and the synthetic evaluation/evidence. Reports in evidence/voice/thai-asr describe the observed deployed runtime and complete implementation worktree on 2026-10-31. Their historical 107-test result does not describe the smaller committed tree. Fresh commit-scoped checks are recorded separately in evidence/voice/commit-verification.md. Physical phone microphone/listening remains NOT_RUN.
+
+For a local check: npm ci, npm test, npm run build, then node scripts/security-check.mjs. Native PostgreSQL/Genesis and public speech tests require the separately configured real runtimes; skipped fixtures do not prove their acceptance.

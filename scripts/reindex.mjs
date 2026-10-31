@@ -1,0 +1,2 @@
+import { runtime } from '../server/runtime.mjs';
+const r=runtime();try{const rows=(await r.db.query("SELECT p.id FROM projects p JOIN publication_state ps ON ps.project_id=p.id WHERE p.approved AND p.visibility='public' AND NOT ps.revoked")).rows;for(const p of rows)console.log(JSON.stringify(await r.store.publish(p.id,{model:r.embeddings.model,dimension:r.embeddings.dimension})));}finally{await r.db.end();}

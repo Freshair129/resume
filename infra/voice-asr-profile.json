@@ -1,0 +1,68 @@
+{
+  "profile_id": "portfolio-asr",
+  "profile_revision": "small-cpu4-beam5-v4",
+  "kind": "asr",
+  "runtime_id": "portfolio-asr",
+  "physical_resource_id": "portfolio-cpu",
+  "device": "cpu",
+  "engine": "faster-whisper",
+  "engine_options": {
+    "compute_type": "int8",
+    "beam_size": 5,
+    "heartbeat_seconds": 0.25,
+    "warmup": true,
+    "vad_filter": true,
+    "vad_min_silence_ms": 700,
+    "vad_model_sha256": "4cbf549b8326f60f80f2536d9eefeb450a9abe83365a098031c89719f1be17d2",
+    "cpu_threads": 4
+  },
+  "languages": [
+    "th",
+    "en"
+  ],
+  "accepted_audio_formats": [
+    "audio/wav",
+    "audio/x-wav",
+    "audio/mpeg",
+    "audio/ogg",
+    "audio/flac",
+    "audio/mp4"
+  ],
+  "max_concurrency": 1,
+  "limits": {
+    "max_audio_bytes": 524288,
+    "max_audio_seconds": 15,
+    "max_text_code_points": 800,
+    "max_output_seconds": 60,
+    "speed_min": 1,
+    "speed_max": 1
+  },
+  "assets": [
+    {
+      "role": "config.json",
+      "path": "/models/config.json",
+      "sha256": "b55496ac7940a7ae47d2c01eab40edfd8701feec1229d9cce3b40014383fb828"
+    },
+    {
+      "role": "model.bin",
+      "path": "/models/model.bin",
+      "sha256": "3e305921506d8872816023e4c273e75d2419fb89b24da97b4fe7bce14170d671"
+    },
+    {
+      "role": "tokenizer.json",
+      "path": "/models/tokenizer.json",
+      "sha256": "fb7b63191e9bb045082c79fd742a3106a12c99513ab30df4a0d47fa6cb6fd0ab"
+    },
+    {
+      "role": "vocabulary.txt",
+      "path": "/models/vocabulary.txt",
+      "sha256": "34ce3fe1c5041027b3f8d42912270993f986dbc4bb34cf27f951e34a1e453913"
+    }
+  ],
+  "_model_source": {
+    "repository": "Systran/faster-whisper-small",
+    "revision": "536b0662742c02347bc0e980a01041f333bce120",
+    "cache_dir": "models-small",
+    "volume": "portfolio-intelligence_voice-small-models"
+  }
+}

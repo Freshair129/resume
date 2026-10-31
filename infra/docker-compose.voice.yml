@@ -1,0 +1,44 @@
+# Run after scripts/prepare-voice-worker.mjs and prepare-voice-assets.mjs.
+# Dedicated instance; never reuse another product's worker credentials or media.
+services:
+  voice-asr:
+    image: portfolio-voice-asr:d765e146
+    entrypoint: [python, /portfolio-entrypoint.py]
+    env_file: ../.runtime/voice-worker/worker.env
+    environment:
+      PYTHONPATH: /repo/apps/api
+      LALIN_VOICE_WORKER_PROFILE_PATH: /profile.json
+      LALIN_VOICE_WORKER_HOST: unix:/run/voice-worker/worker.sock
+      LALIN_VOICE_WORKER_PAYLOAD_TTL_HOURS: '0.008333333'
+      LALIN_VOICE_WORKER_RECEIPT_HORIZON_HOURS: '0.016666667'
+      LALIN_VOICE_WORKER_SOURCE_COMMIT: d765e14664a73a936666759c13111325df25211d
+      LALIN_VOICE_WORKER_ENGINE_HELLO_TIMEOUT_SECONDS: '120'
+    network_mode: none
+    cpus: 4
+    mem_limit: 4g
+    memswap_limit: 4g
+    pids_limit: 96
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    volumes:
+      - voice-models:/models:ro
+      - ./voice-asr-profile.json:/profile.json:ro
+      - ./voice-entrypoint.py:/portfolio-entrypoint.py:ro
+      - voice-socket:/run/voice-worker
+    tmpfs:
+      - /data:uid=10001,gid=10001,mode=0700,size=32m
+      - /tmp:uid=10001,gid=10001,mode=0700,size=32m
+    restart: unless-stopped
+  api:
+    env_file: ../.runtime/voice-worker/api.env
+    environment:
+      VOICE_WORKER_SOCKET: /run/voice-worker/worker.sock
+      VOICE_WORKER_REVISION: small-cpu4-beam5-v4
+    group_add: ['10001']
+    volumes: [voice-socket:/run/voice-worker:ro]
+volumes:
+  voice-socket:
+  voice-models:
+    name: portfolio-intelligence_voice-small-models
+    external: true

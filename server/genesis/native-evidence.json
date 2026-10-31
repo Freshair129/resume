@@ -1,0 +1,151 @@
+{
+  "observedAt": "2026-10-29T09:52:43.257Z",
+  "sourceCommit": "2527a8644f4be5d6c1e8722b24e71717e5ca9e4f",
+  "engineVersion": "0.2.10",
+  "build": {
+    "profile": "portfolio-transaction-impact-v1",
+    "source_commit": "2527a8644f4be5d6c1e8722b24e71717e5ca9e4f"
+  },
+  "patchSha256": "3d27264b4119f0b85abbd28d63658f243daaa14138d2ef21e9019250098908bf",
+  "binarySha256": "610676bfac9657db6cca55871a7aa8a6048c4126d8c035950dfc1f7981f5cf34",
+  "model": "bge-m3:latest",
+  "modelDigest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+  "dimension": 1024,
+  "corpus": "Synthetic bilingual fixture; not owner-approved portfolio content",
+  "textsSha256": "9b94f7cc59a8a6e17548fe29714d3c9c188b453a8114dcd3b337dbd569d2fdf9",
+  "baseline": [
+    {
+      "id": "portfolio:Chunk:en-source:native-v1",
+      "score": 1
+    },
+    {
+      "id": "portfolio:Chunk:th-supported:native-v1",
+      "score": 0.2727070450782776
+    },
+    {
+      "id": "portfolio:Chunk:unrelated-recipe:native-v1",
+      "score": -0.02403879165649414
+    }
+  ],
+  "graph": [
+    {
+      "id": "portfolio:Chunk:th-supported:native-v1",
+      "score": 0.6545414090156556
+    },
+    {
+      "id": "portfolio:Chunk:en-source:native-v1",
+      "score": 0.44
+    },
+    {
+      "id": "portfolio:Chunk:unrelated-recipe:native-v1",
+      "score": 0.23519224166870123
+    }
+  ],
+  "restartedGraph": [
+    {
+      "id": "portfolio:Chunk:th-supported:native-v1",
+      "score": 0.6545414090156556
+    },
+    {
+      "id": "portfolio:Chunk:en-source:native-v1",
+      "score": 0.44
+    },
+    {
+      "id": "portfolio:Chunk:unrelated-recipe:native-v1",
+      "score": 0.23519224166870123
+    }
+  ],
+  "graphRestartPassed": true,
+  "thai": [
+    {
+      "id": "portfolio:Chunk:th-supported:native-v1",
+      "score": 1
+    },
+    {
+      "id": "portfolio:Chunk:en-source:native-v1",
+      "score": 0.2727070450782776
+    },
+    {
+      "id": "portfolio:Chunk:unrelated-recipe:native-v1",
+      "score": -0.11696648597717285
+    }
+  ],
+  "coverage": {
+    "frontier_after": {
+      "frame": 33,
+      "txn": 33
+    },
+    "frontier_before": {
+      "frame": 33,
+      "txn": 33
+    },
+    "reports": [
+      {
+        "built_frontier": 0,
+        "collection": "default",
+        "extra_count": 0,
+        "indexed_count": 0,
+        "missing_count": 0,
+        "pending_count": 0,
+        "source_count": 0,
+        "source_frontier": 0,
+        "state": "READY",
+        "validated": true
+      },
+      {
+        "built_frontier": 9,
+        "collection": "portfolio_native_fixture",
+        "extra_count": 0,
+        "indexed_count": 3,
+        "missing_count": 0,
+        "pending_count": 0,
+        "source_count": 3,
+        "source_frontier": 9,
+        "state": "READY",
+        "validated": true
+      }
+    ]
+  },
+  "realEmbedding": true,
+  "crashRestartPassed": true,
+  "nativeAuthPassed": true,
+  "nodeEdgeProvenanceReadbackPassed": true,
+  "replayAfterRestartPassed": true,
+  "graphAblationPassed": true,
+  "graphBlocker": null,
+  "directEdgeDiagnostic": {
+    "liveRanking": [
+      {
+        "id": "portfolio:Chunk:th-supported:native-v1",
+        "score": 0.6545414090156556
+      },
+      {
+        "id": "portfolio:Chunk:en-source:native-v1",
+        "score": 0.44
+      },
+      {
+        "id": "portfolio:Chunk:unrelated-recipe:native-v1",
+        "score": 0.23519224166870123
+      }
+    ],
+    "afterCrashRanking": [
+      {
+        "id": "portfolio:Chunk:th-supported:native-v1",
+        "score": 0.6545414090156556
+      },
+      {
+        "id": "portfolio:Chunk:en-source:native-v1",
+        "score": 0.44
+      },
+      {
+        "id": "portfolio:Chunk:unrelated-recipe:native-v1",
+        "score": 0.23519224166870123
+      }
+    ],
+    "liveSupportedSourceRanksFirst": true,
+    "afterCrashSupportedSourceRanksFirst": true,
+    "adoptedByProductionAdapter": false
+  },
+  "physicalDeletion": "UNSUPPORTED",
+  "containerRestore": "NOT_RUN"
+}
