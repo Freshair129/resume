@@ -60,3 +60,42 @@ export async function fetchPublicData(path, { signal, fetcher = fetch } = {}) {
   if (!response.headers.get('content-type')?.includes('application/json')) throw new Error('unavailable');
   return response.json();
 }
+
+// Presentation of an already-authorized API response. Publication is enforced on the server.
+export function portfolioProjects(data) {
+  return Array.isArray(data?.projects) ? data.projects.filter(project =>
+    project && typeof project.slug === 'string' && /^[a-zA-Z0-9._-]+$/.test(project.slug) && typeof project.name === 'string'
+  ) : [];
+}
+
+export function filterPortfolioProjects(projects, { query = '', category = '', kind = '' } = {}) {
+  const needle = query.trim().toLocaleLowerCase();
+  return projects.filter(project =>
+    (!category || project.category === category) &&
+    (!kind || (kind === 'archived' ? project.archived : kind === 'fork' ? project.fork : !project.fork && !project.archived)) &&
+    (!needle || [project.name, project.repository, project.description, project.summary, project.language, ...(project.technologies || []), ...(project.topics || [])].filter(value => typeof value === 'string').join(' ').toLocaleLowerCase().includes(needle))
+  );
+}
+
+export function featuredPortfolioProjects(data) {
+  const projects = portfolioProjects(data);
+  if (Array.isArray(data?.featuredSlugs) && data.featuredSlugs.length) {
+    return [...new Set(data.featuredSlugs)].flatMap(slug => projects.find(project => project.slug === slug) || []).slice(0, 6);
+  }
+  return projects.filter(project => project.featured).slice(0, 6);
+}
+
+export function portfolioCategories(data) {
+  const projects = portfolioProjects(data);
+  const supplied = Array.isArray(data?.categories) ? data.categories : [];
+  return [...new Set(projects.map(project => project.category).filter(Boolean))].map(id => ({
+    id,
+    label: supplied.find(category => category.id === id)?.label || id.replace(/[-_]/g, ' '),
+    description: supplied.find(category => category.id === id)?.description || '',
+    count: projects.filter(project => project.category === id).length,
+  }));
+}
+
+export function publicEvidence(project) {
+  return Array.isArray(project?.evidence) ? project.evidence.filter(item => item && typeof item.label === 'string' && safePublicUrl(item.url)) : [];
+}

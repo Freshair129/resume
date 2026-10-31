@@ -4,20 +4,21 @@ import { ArrowDownToLine, ArrowRight, Camera, ExternalLink, Mail } from 'lucide-
 import { motion } from 'motion/react';
 import { useLanguage } from '../../LanguageContext';
 import { usePublicData } from './usePublicData';
-import ZuriLineLink from './ZuriLineLink';
 import { contactLinks, filterProjects, localized, resolveTrack, resumePdfUrl, resumeTracks, safePublicUrl } from './publicData.mjs';
 import profileImage from '../../assets/profile.jpg';
 import heroImage from '../../assets/gallery/66744889_10214371131447545_2533396217711296512_n.jpg';
+import { VerifiedContactLink } from './IntelligencePortfolio';
+import ZuriLineLink from './ZuriLineLink';
 
 const copy = {
   th: {
-    projects: 'สำรวจโปรเจกต์', resume: 'ดาวน์โหลดเรซูเม่ PDF', contact: 'ติดต่อ', ask: 'ถาม Zuri',
+    projects: 'สำรวจโปรเจกต์', resume: 'ดาวน์โหลดเรซูเม่ PDF', contact: 'ติดต่อ', ask: 'คุยกับ Zuri ผ่าน LINE',
     empty: 'กำลังเตรียมเนื้อหาที่ผ่านการอนุมัติ', emptyBody: 'ข้อมูลจะแสดงเมื่อเจ้าของตรวจสอบแหล่งอ้างอิงและอนุมัติการเผยแพร่แล้ว',
     unavailable: 'ยังโหลดข้อมูลที่เผยแพร่ไม่ได้', unavailableBody: 'บริการข้อมูลไม่พร้อมใช้งานชั่วคราว คุณยังเปิดเมนู ผลงานสื่อ และแกลเลอรีได้',
     retry: 'ลองใหม่', loading: 'กำลังโหลดข้อมูลที่เผยแพร่…', sources: 'หลักฐานและแหล่งอ้างอิง', view: 'อ่านกรณีศึกษา',
   },
   en: {
-    projects: 'Explore projects', resume: 'Download PDF resume', contact: 'Contact', ask: 'Ask Zuri',
+    projects: 'Explore projects', resume: 'Download PDF resume', contact: 'Contact', ask: 'Chat with Zuri on LINE',
     empty: 'Awaiting approved content', emptyBody: 'Content appears after the owner reviews its evidence and approves publication.',
     unavailable: 'Published content is unavailable', unavailableBody: 'The knowledge service is temporarily unavailable. Navigation, media work and the gallery remain accessible.',
     retry: 'Try again', loading: 'Loading published content…', sources: 'Evidence & sources', view: 'Read case study',
@@ -77,7 +78,7 @@ export function HomePage() {
       <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
         <p className="pk-eyebrow">PORTFOLIO INTELLIGENCE / AI AUTOMATION</p>
         <h1>{localized(profile?.headline, language) || <>AI Automation.<br /><span>Agentic Systems.</span></>}</h1>
-        <p className="pk-lead">{localized(profile?.summary, language) || (language === 'th' ? 'สำรวจงาน ระบบ และแนวคิดผ่านข้อมูลที่ตรวจสอบได้ พร้อม Zuri ผ่าน LINE ช่วยค้นหาแหล่งอ้างอิง' : 'Explore projects, systems and ideas through reviewed evidence, with Zuri on LINE to help you find the sources.')}</p>
+        <p className="pk-lead">{localized(profile?.summary, language) || (language === 'th' ? 'สำรวจงาน ระบบ และแนวคิดผ่านข้อมูลที่ตรวจสอบได้ พร้อม Zuri ช่วยค้นหาแหล่งอ้างอิงผ่าน LINE' : 'Explore projects, systems and ideas through reviewed evidence, with Zuri on LINE to help you find the sources.')}</p>
         <div className="pk-actions">
           <Link className="pk-button" to="/projects">{c.projects}<ArrowRight size={18} aria-hidden="true" /></Link>
           <a className="pk-button pk-button-light" href={resumePdfUrl('ai-automation', language)}><ArrowDownToLine size={18} aria-hidden="true" />{c.resume}</a>
@@ -177,7 +178,7 @@ export function AboutPage() {
 export function ContactPage() {
   const { language } = useCopy();
   const resource = usePublicData(`/api/profile?lang=${language}&track=ai-automation`);
-  return <section className="pk-container pk-section pk-reading"><p className="pk-eyebrow">CONTACT</p><h1 className="pk-page-title">{language === 'th' ? 'เริ่มต้นบทสนทนา' : 'Start a conversation'}</h1><p className="pk-lead">{language === 'th' ? 'ติดต่อผ่านช่องทางที่เจ้าของอนุมัติให้เผยแพร่ เพื่อพูดคุยเรื่องงานหรือโปรเจกต์' : 'Use the owner-approved public channels to discuss a role or project.'}</p><ResourceState resource={resource} /><ProfileContact profile={resource.data?.profile} /><p className="pk-muted">{language === 'th' ? 'Zuri ช่วยค้นหาข้อมูลได้ แต่ไม่เสนอราคา รับนัดหมาย หรือให้คำมั่นแทนเจ้าของผลงาน' : 'Zuri helps find information. It cannot quote fees, schedule meetings or make commitments on the owner’s behalf.'}</p></section>;
+  return <section className="pk-container pk-section pk-reading"><p className="pk-eyebrow">CONTACT</p><h1 className="pk-page-title">{language === 'th' ? 'เริ่มต้นบทสนทนา' : 'Start a conversation'}</h1><p className="pk-lead">{language === 'th' ? 'ติดต่อผ่านช่องทางที่เจ้าของอนุมัติให้เผยแพร่ เพื่อพูดคุยเรื่องงานหรือโปรเจกต์' : 'Use the owner-approved public channels to discuss a role or project.'}</p><div className="zuri-page-cta"><ZuriLineLink /></div><ResourceState resource={resource} />{resource.data?.profile && <ProfileContact profile={resource.data.profile} />}<VerifiedContactLink /><p className="pk-muted">{language === 'th' ? 'Zuri ช่วยค้นหาข้อมูลผลงานพร้อมแหล่งอ้างอิงใน LINE แต่ไม่เสนอราคา รับนัดหมาย หรือให้คำมั่นแทนเจ้าของผลงาน' : 'Zuri helps you explore the work with source links in LINE. It cannot quote fees, schedule meetings or make commitments on the owner’s behalf.'}</p></section>;
 }
 
 export function PrivacyPage() {

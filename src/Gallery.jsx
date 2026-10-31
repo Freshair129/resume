@@ -37,7 +37,7 @@ const Gallery = () => {
                     <ArrowLeft size={20} /> {t.nav.backToHome}
                 </Link>
                 <div className="flex gap-4">
-                    <Link to="/portfolio" className="inline-flex items-center gap-2 text-slate-600 hover:text-blue-600 font-bold transition-colors bg-white px-5 py-3 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md">
+                    <Link to="/media" className="inline-flex items-center gap-2 text-slate-600 hover:text-blue-600 font-bold transition-colors bg-white px-5 py-3 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md">
                         {t.nav.backToPortfolio}
                     </Link>
                 </div>

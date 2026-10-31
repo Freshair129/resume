@@ -1,0 +1,33 @@
+{
+  "createdAt": "2026-10-29T12:19:01.7521698Z",
+  "kind": "Original procedural artwork, not product screenshots",
+  "source": "src/features/portfolio/sculptureScene.js",
+  "renderer": "three@0.186.1",
+  "capturedProgress": [
+    0,
+    0.5,
+    1
+  ],
+  "assets": [
+    {
+      "file": "sculpture-0.webp",
+      "bytes": 73478,
+      "sha256": "0624cfb1ec8fa2de524a09b3dba8f174a5726b20beb6d06b71260b513764c684"
+    },
+    {
+      "file": "sculpture-1.webp",
+      "bytes": 73024,
+      "sha256": "a8d562c85214c596961f917057bdd0f921dcdd5effea18c2e4a47f61df9381c5"
+    },
+    {
+      "file": "sculpture-2.webp",
+      "bytes": 70928,
+      "sha256": "27e3540bc0227c58ad08ec6ced6a99c3d2b588069f469369a9e8b188dfb4a7fc"
+    },
+    {
+      "file": "sculpture-mobile.webp",
+      "bytes": 48066,
+      "sha256": "1643c8032d61b78db0abacbcfbb6e85839a34ee43121e87d7de9e3e1ef0d58cf"
+    }
+  ]
+}

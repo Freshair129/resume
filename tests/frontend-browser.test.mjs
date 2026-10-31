@@ -23,15 +23,16 @@ test('production frontend: canonical routes, empty/outage states, mobile LINE li
       if (outage) return route.fulfill({ status: 503, json: { error: 'unavailable' } });
       if (pathname === '/api/chat') return route.fulfill({ json: { answer: 'Evidence for this synthetic UI test.', citations: [{ title: 'Fixture source', url: 'https://example.com/evidence' }] } });
       if (pathname === '/api/profile') return route.fulfill({ json: { profile: null, experiences: [], skills: [], projects: [] } });
+      if (pathname === '/api/portfolio') return route.fulfill({ json: { status: 'available', projects: [], categories: [], featuredSlugs: [] } });
       if (pathname === '/api/projects/reviewed-fixture') return route.fulfill({ json: { ...project, documents: [{ id: 'source', path: 'README.md', sha: 'a'.repeat(40), url: 'https://example.com/evidence', text: 'Reviewed synthetic evidence.' }] } });
       return route.fulfill({ json: populated ? [project] : [] });
     });
     await page.goto(`${base}/?lang=en`);
     await page.getByText('Awaiting approved content', { exact: true }).waitFor();
     assert.equal(await page.locator('html').getAttribute('lang'), 'en');
-    assert.equal(await page.locator('a[href="/api/resume/ai-automation/en.pdf"]').count(), 1);
+    assert.equal(await page.locator('a[href="/api/resume/ai-automation/en.pdf"]').count(), 0, 'The homepage does not promise a complete resume while the biography is under review.');
     assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
-    const lineLink = page.locator('a.eva-launcher');
+    const lineLink = page.getByRole('link', { name: 'Chat with Zuri on LINE', exact: true });
     await lineLink.waitFor();
     const box = await lineLink.boundingBox();
     assert.ok(box.x >= 0 && box.x + box.width <= 320);

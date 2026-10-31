@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { contactLinks, fetchPublicData, filterProjects, localized, resolveTrack, resumePdfUrl, resumeTracks, safePublicUrl } from '../src/features/portfolio/publicData.mjs';
+import { contactLinks, fetchPublicData, featuredPortfolioProjects, filterPortfolioProjects, filterProjects, localized, portfolioCategories, portfolioProjects, publicEvidence, resolveTrack, resumePdfUrl, resumeTracks, safePublicUrl } from '../src/features/portfolio/publicData.mjs';
 
 test('public links reject executable schemes, credentials and disguised network paths', () => {
   for (const value of ['javascript:alert(1)', 'data:text/html,hello', '//evil.example', '/\\evil.example', 'https://user:password@example.com', 'https:\n//example.com', 'http://example.com']) assert.equal(safePublicUrl(value), null, value);
@@ -36,4 +36,21 @@ test('failed or HTML-fallback API responses cannot become public content', async
     return new Response('[]', { headers: { 'content-type': 'application/json' } });
   } });
   assert.deepEqual(result, []);
+});
+
+test('portfolio presentation uses only supplied records and preserves curated ordering', () => {
+  const source = { slug: 'source-fixture', name: 'Source fixture', category: 'data', featured: true, technologies: ['Rust'], description: 'Synthetic UI data only' };
+  const fork = { slug: 'fork-fixture', name: 'Fork fixture', category: 'agents', fork: true, language: 'TypeScript', summary: 'Synthetic orchestration test' };
+  const archived = { slug: 'archive-fixture', name: 'Archive fixture', category: 'data', archived: true };
+  const data = { status: 'available', categories: [{ id: 'data', label: 'Data systems' }], projects: [source, fork, archived, { name: 'Invalid', slug: '../not-a-route' }], featuredSlugs: ['fork-fixture', 'source-fixture', 'not-published', 'fork-fixture'] };
+  assert.deepEqual(portfolioProjects(null), []);
+  assert.deepEqual(portfolioProjects({ projects: 'not an array' }), []);
+  assert.deepEqual(portfolioProjects(data), [source, fork, archived]);
+  assert.deepEqual(featuredPortfolioProjects(data), [fork, source]);
+  assert.deepEqual(filterPortfolioProjects(portfolioProjects(data), { query: 'rust', category: 'data' }), [source]);
+  assert.deepEqual(filterPortfolioProjects(portfolioProjects(data), { kind: 'fork' }), [fork]);
+  assert.deepEqual(filterPortfolioProjects(portfolioProjects(data), { kind: 'archived' }), [archived]);
+  assert.deepEqual(filterPortfolioProjects(portfolioProjects(data), { kind: 'original' }), [source]);
+  assert.deepEqual(portfolioCategories(data).map(category => [category.id, category.label, category.count]), [['data', 'Data systems', 2], ['agents', 'agents', 1]]);
+  assert.deepEqual(publicEvidence({ evidence: [{ label: 'Unsafe', url: 'javascript:alert(1)' }, { label: 'Source', url: 'https://example.com/source' }] }), [{ label: 'Source', url: 'https://example.com/source' }]);
 });
