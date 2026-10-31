@@ -17,6 +17,7 @@ const ResumePage = lazy(() => import('./features/portfolio/PortfolioPages').then
 const AboutPage = lazy(() => import('./features/portfolio/PortfolioPages').then(module => ({ default: module.AboutPage })));
 const ContactPage = lazy(() => import('./features/portfolio/PortfolioPages').then(module => ({ default: module.ContactPage })));
 const PrivacyPage = lazy(() => import('./features/portfolio/PortfolioPages').then(module => ({ default: module.PrivacyPage })));
+const VoicePage = lazy(() => import('./features/voice/VoicePage'));
 const NotFoundPage = lazy(() => import('./features/portfolio/PortfolioPages').then(module => ({ default: module.NotFoundPage })));
 const ProjectDemo = import.meta.env.DEV ? lazy(() => import('./ProjectDemo')) : null;
 const ChatbotWidget = lazy(() => import('./chatbot/ChatbotWidget'));
@@ -35,7 +36,7 @@ function Site() {
   const menuButton = useRef(null);
   const { scrollYProgress } = useScroll();
   const location = useLocation();
-  const links = [['/portfolio', 'ผลงาน', 'Work'], ['/#about', 'เกี่ยวกับ', 'About']];
+  const links = [['/portfolio', 'ผลงาน', 'Work'], ['/#about', 'เกี่ยวกับ', 'About'], ['/voice', 'คุยด้วยเสียง', 'Voice']];
   useEffect(() => {
     if (!location.pathname.startsWith('/work/')) document.title = `${location.pathname === '/portfolio' ? 'Work in Context' : 'Intelligence in Motion'} | PORNPON`;
     if (location.hash) {
@@ -66,6 +67,7 @@ function Site() {
         <Route path="/about" element={<AboutPage />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/privacy" element={<PrivacyPage />} />
+        <Route path="/voice" element={<VoicePage />} />
         <Route path="/media" element={<LegacyNotice><Portfolio /></LegacyNotice>} />
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/demo" element={<LegacyNotice factual>{ProjectDemo && <ProjectDemo />}</LegacyNotice>} />
