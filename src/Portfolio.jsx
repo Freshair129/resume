@@ -114,7 +114,7 @@ const Portfolio = () => {
             embedUrl: "https://www.facebook.com/plugins/video.php?href=https://www.facebook.com/reel/371694187327344&show_text=false&t=0",
             stats: { views: "View on FB", likes: "View on FB" }
         },
-        {
+        ...(import.meta.env.DEV ? [{
             id: 12,
             type: 'github',
             category: 'ai', // Added category
@@ -122,7 +122,7 @@ const Portfolio = () => {
             url: "https://github.com/Freshair129/agentic_agent.git",
             description: "Advanced AI Agent Architecture (EVA 9.4.0) exploring consciousness, memory systems, and autonomous task execution.",
             stats: { views: "Code", likes: "Project" }
-        },
+        }] : []),
         {
             id: 13,
             type: 'youtube',

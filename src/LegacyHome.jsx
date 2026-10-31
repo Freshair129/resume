@@ -1,0 +1,361 @@
+import React, { useState, useEffect, lazy, Suspense } from 'react';
+import {
+  Link
+} from 'react-router-dom';
+import {
+  Phone, Mail, MapPin, Code, Brain, Star,
+  Menu, X, Cpu, Camera, Video, Users, Car, FileText, ExternalLink,
+  Bot, Sparkles, Globe, Download, MousePointerClick
+} from 'lucide-react';
+import { motion, AnimatePresence } from 'motion/react';
+
+
+import { useLanguage } from './LanguageContext';
+import { resumeVariants } from './data/resumeVariants';
+import { Reveal, RevealGroup, RevealItem } from './MotionPrimitives';
+import SpotlightReveal from './SpotlightReveal';
+import { staggerContainer, staggerItem, hoverLift, tapPress } from './motion-variants';
+import heroBg from './assets/hero-bg.jpg';
+import img02 from './assets/02.jpg';
+import img03 from './assets/03.jpg';
+import img04 from './assets/04.jpg';
+import img05 from './assets/05.jpg';
+import img06 from './assets/06.jpg';
+import profileImg from './assets/profile.jpg';
+
+
+
+
+
+
+const ProjectsSection = lazy(() => import('./ProjectsSection'));
+const PresentationSection = lazy(() => import('./PresentationSection'));
+
+const RESUME_VARIANT = 'content-coordinator';
+
+const RouteFallback = () => (
+  <div className="min-h-screen flex items-center justify-center bg-white">
+    <div className="w-10 h-10 border-4 border-brand/20 border-t-brand rounded-full animate-spin" />
+  </div>
+);
+
+const SectionFallback = () => <div className="py-24" />;
+
+const SLIDER_IMAGES = [img02, img03, img04, img05, img06];
+
+const ImageSlider = () => {
+  const images = SLIDER_IMAGES;
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const nextIndex = (currentIndex + 1) % images.length;
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % images.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, [images.length]);
+
+  return (
+    <>
+      <div className="absolute inset-0 w-full h-full rounded-[3rem] rotate-6 group-hover:rotate-3 transition-transform duration-500 overflow-hidden shadow-2xl bg-slate-100 z-0">
+        <img src={images[nextIndex]} alt="Next Slide" className="w-full h-full object-cover opacity-90 blur-[1px] brightness-75 transition-all duration-500 group-hover:opacity-100 group-hover:blur-0 group-hover:brightness-100" />
+      </div>
+      <div className="absolute inset-0 w-full h-full rounded-[3rem] -rotate-3 group-hover:rotate-0 transition-transform duration-500 border-4 border-white shadow-2xl overflow-hidden bg-white z-10">
+        {images.map((img, index) => (
+          <img key={index} src={img} alt={`Slide ${index}`}
+            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${index === currentIndex ? 'opacity-100' : 'opacity-0'}`}
+          />
+        ))}
+      </div>
+    </>
+  );
+};
+
+const MainPortfolio = () => {
+  const { t, language, toggleLanguage } = useLanguage();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 50);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const experienceIcons = [
+    { IconComponent: Star, iconColor: "text-yellow-500" },
+    { IconComponent: Car, iconColor: "text-blue-500" },
+    { IconComponent: Video, iconColor: "text-purple-500" },
+    { IconComponent: Users, iconColor: "text-orange-500" },
+    { IconComponent: Camera, iconColor: "text-teal-500" }
+  ];
+
+  const experiences = t.experience.timeline.slice(0, 5).map((exp, idx) => ({
+    ...exp,
+    ...(experienceIcons[idx] || { IconComponent: Star, iconColor: "text-gray-500" })
+  }));
+
+  return (
+    <div className="min-h-screen bg-white selection:bg-blue-100 selection:text-blue-900">
+      {/* Navigation */}
+      <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white/80 backdrop-blur-md shadow-md py-3' : 'bg-transparent py-5'}`}>
+        <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
+          <div className="text-xl font-black tracking-tighter text-blue-600">PORNPON.T</div>
+          <div className="hidden md:flex space-x-8 items-center">
+            <a href="#home" className="text-sm font-medium hover:text-blue-600 transition-colors">{t.nav.home}</a>
+            <a href="#skills" className="text-sm font-medium hover:text-blue-600 transition-colors">{t.nav.skills}</a>
+            <a href="#experience" className="text-sm font-medium hover:text-blue-600 transition-colors">{t.nav.experience}</a>
+            <a href="#projects" className="text-sm font-medium hover:text-blue-600 transition-colors">Projects</a>
+            <Link to="/portfolio" className="text-sm font-medium hover:text-blue-600 transition-colors">{t.nav.portfolio}</Link>
+            <Link to="/gallery" className="text-sm font-medium hover:text-blue-600 transition-colors">{t.nav.gallery}</Link>
+            <Link to="/resume" className="text-sm font-bold text-slate-900 hover:text-blue-600 transition-colors flex items-center gap-1">
+              {t.nav.resume} <ExternalLink size={14} />
+            </Link>
+            <button onClick={toggleLanguage} className="flex items-center gap-1 bg-slate-100 px-3 py-1 rounded-full text-xs font-bold hover:bg-slate-200 transition-colors">
+              <Globe size={14} /> {language.toUpperCase()}
+            </button>
+            <a href="#contact" className="bg-blue-600 text-white px-5 py-2 rounded-full text-sm font-bold hover:bg-blue-700 shadow-lg shadow-blue-200 transition-all hover:-translate-y-0.5">{t.nav.hireMe}</a>
+          </div>
+          <button className="md:hidden text-slate-900" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
+        {isMenuOpen && (
+          <div className="md:hidden absolute top-full left-0 w-full bg-white border-b border-slate-100 p-6 flex flex-col gap-4 shadow-xl animate-in slide-in-from-top duration-300">
+            <a href="#home" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>{t.nav.home}</a>
+            <a href="#skills" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>{t.nav.skills}</a>
+            <a href="#experience" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>{t.nav.experience}</a>
+            <a href="#projects" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>Projects</a>
+            <Link to="/portfolio" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>{t.nav.portfolio}</Link>
+            <Link to="/gallery" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>{t.nav.gallery}</Link>
+            <Link to="/resume" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>{t.nav.resume}</Link>
+            <button onClick={() => { toggleLanguage(); setIsMenuOpen(false); }} className="flex items-center gap-2 text-lg font-bold">
+              <Globe size={20} /> {language === 'th' ? 'English' : 'ไทย'}
+            </button>
+            <a href="#contact" className="bg-blue-600 text-white p-4 rounded-2xl text-center font-black" onClick={() => setIsMenuOpen(false)}>{t.nav.hireMe}</a>
+          </div>
+        )}
+      </nav>
+
+      {/* Hero Section */}
+      <section id="home" className="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden bg-white">
+        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center gap-12 relative z-10">
+          <motion.div
+            className="flex-1 text-center md:text-left space-y-6"
+            variants={staggerContainer}
+            initial="hidden"
+            animate="show"
+          >
+            <motion.div variants={staggerItem} className="inline-flex items-center gap-2 bg-blue-50 text-blue-600 px-4 py-2 rounded-full text-sm font-bold">
+              <span className="flex h-2 w-2 rounded-full bg-blue-600 animate-pulse"></span>
+              {t.hero.available}
+            </motion.div>
+            <motion.h1 variants={staggerItem} className="text-colossal-heading text-mega text-slate-900">{t.hero.name}</motion.h1>
+            <motion.p variants={staggerItem} className="text-xl text-slate-600 max-w-xl mx-auto md:mx-0 leading-relaxed">{t.hero.desc}</motion.p>
+            <motion.div variants={staggerItem} className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start flex-wrap">
+              <motion.div whileHover={hoverLift} whileTap={tapPress}>
+                <Link to={`/resume/${RESUME_VARIANT}`} className="bg-slate-900 text-white px-8 py-4 rounded-2xl font-bold flex items-center justify-center gap-2 shadow-xl shadow-slate-200 hover:bg-slate-800 transition-colors">
+                  {t.hero.viewResume} <FileText size={18} />
+                </Link>
+              </motion.div>
+              <motion.a
+                whileHover={hoverLift}
+                whileTap={tapPress}
+                href={resumeVariants[RESUME_VARIANT].downloadFile}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-white text-slate-900 border-2 border-slate-900 px-8 py-4 rounded-2xl font-bold flex items-center justify-center gap-2 shadow-xl shadow-slate-100 hover:bg-slate-50 transition-colors"
+              >
+                {language === 'th' ? 'ดาวน์โหลด Resume (PDF)' : 'Download Resume (PDF)'} <Download size={18} />
+              </motion.a>
+            </motion.div>
+            <motion.div variants={staggerItem} className="flex flex-wrap gap-x-6 gap-y-2 justify-center md:justify-start items-center pt-1">
+              <Link to="/portfolio" className="inline-flex items-center gap-1.5 text-slate-700 font-bold hover:text-blue-600 transition-colors">
+                {t.hero.viewPortfolio} <ExternalLink size={16} />
+              </Link>
+              <a href="/marketing/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-slate-500 text-sm font-bold hover:text-indigo-600 transition-colors">
+                Marketing Tech Portfolio <Cpu size={14} />
+              </a>
+            </motion.div>
+            <motion.p variants={staggerItem} className="text-sm text-slate-500 font-medium">
+              <Sparkles size={14} className="inline mr-1 text-blue-600 animate-pulse" /> {t.chatbot.hint}
+            </motion.p>
+          </motion.div>
+          <motion.div
+            className="flex-1 relative"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <div className="w-64 h-64 md:w-96 md:h-96 mx-auto relative z-10 group">
+              <SpotlightReveal image={profileImg} className="w-full h-full">
+                <ImageSlider />
+              </SpotlightReveal>
+            </div>
+            <div className="hidden md:flex items-center gap-1.5 justify-center mt-3 text-slate-400 text-xs font-medium">
+              <MousePointerClick size={13} />
+              <span>{language === 'th' ? 'ปัดเมาส์เพื่อเผยอีกด้าน' : 'move your cursor to reveal'}</span>
+            </div>
+            <div className="absolute -bottom-4 -right-4 md:bottom-10 md:-right-10 bg-white p-6 rounded-3xl shadow-2xl z-20 animate-bounce-slow">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 bg-blue-600 rounded-2xl flex items-center justify-center text-white"><Brain size={24} /></div>
+                <div className="text-left">
+                  <div className="text-xs text-slate-400 font-bold uppercase">AI Specialist</div>
+                  <div className="text-lg font-black text-slate-900">Agentic RAG</div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Skills Section */}
+      <section id="skills" className="bg-slate-50 py-24">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="flex flex-col lg:flex-row gap-12 items-start">
+            <div className="lg:w-1/3 w-full lg:sticky top-24">
+              <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl group border-8 border-white bg-white">
+                <img src={heroBg} alt="Profile Highlight" className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-8">
+                  <p className="text-white text-lg font-bold italic">"Crafting excellence."</p>
+                </div>
+              </div>
+            </div>
+            <div className="lg:w-2/3 w-full space-y-8">
+              <Reveal className="mb-8">
+                <div className="inline-flex items-center gap-2 bg-blue-100 text-blue-700 px-4 py-1.5 rounded-full text-sm font-bold mb-4">
+                  <Brain size={16} /> {t.skills.badge}
+                </div>
+                <h2 className="text-colossal-heading text-giant text-slate-900">{t.skills.title}</h2>
+              </Reveal>
+              <Reveal className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {/* AI Innovation Card */}
+                <div className="bg-slate-900 text-white p-8 rounded-[2rem] shadow-xl hover:-translate-y-1 transition-all duration-300">
+                  <div className="flex items-center gap-3 mb-6"><div className="p-3 bg-blue-600 rounded-2xl"><Cpu /></div><h3 className="text-xl font-bold">AI Innovation</h3></div>
+                  <div className="space-y-4">
+                    {[{name:"Prompt Engineering",level:"Advanced"},{name:"Context Engineering",level:"Intermediate"},{name:"Agentic RAG",level:"Intermediate"},{name:"AI Marketing",level:"Basic"},{name:"Data Analysis",level:"Basic"}].map(s => (
+                      <div key={s.name} className="flex justify-between items-center py-2 border-b border-slate-700/50 last:border-0">
+                        <span className="text-slate-300 font-medium">{s.name}</span>
+                        <span className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider ${s.level==='Specialist'?'bg-blue-500 text-white shadow-lg shadow-blue-500/30':'bg-slate-700 text-slate-300'}`}>{s.level}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                {/* Tools Card */}
+                <div className="bg-white p-8 rounded-[2rem] shadow-lg border border-slate-100 hover:-translate-y-1 transition-all duration-300">
+                  <div className="flex items-center gap-3 mb-6 text-slate-900"><div className="p-3 bg-slate-100 rounded-2xl"><Code /></div><h3 className="text-xl font-bold">Tools & Media</h3></div>
+                  <div className="space-y-4">
+                    {[{name:"Photoshop",level:"Specialist"},{name:"Premiere Pro",level:"Advanced"},{name:"Canva",level:"Advanced"},{name:"NotebookLM",level:"Intermediate"},{name:"Google Sheets",level:"Basic"},{name:"Illustrator",level:"Basic"},{name:"After Effects",level:"Basic"}].map(s => (
+                      <div key={s.name} className="flex justify-between items-center py-2 border-b border-slate-100 last:border-0">
+                        <span className="text-slate-700 font-bold text-sm">{s.name}</span>
+                        <span className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider ${s.level==='Specialist'?'bg-blue-600 text-white shadow-md shadow-blue-200':s.level==='Advanced'?'bg-blue-50 text-blue-600 border border-blue-100':'bg-slate-100 text-slate-500'}`}>{s.level}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                {/* AI Tools Card */}
+                <div className="bg-white p-8 rounded-[2rem] shadow-lg border border-slate-100 hover:-translate-y-1 transition-all duration-300">
+                  <div className="flex items-center gap-3 mb-6 text-slate-900"><div className="p-3 bg-slate-100 rounded-2xl"><Bot /></div><h3 className="text-xl font-bold">AI Tools & Code Gen</h3></div>
+                  <div className="flex flex-wrap gap-2">
+                    {["VS Code","Antigravity","Claude Code","Gemini CLI","Ollama","LM Studio","AnythingLLM","ChatGPT","Gemini","Maus","Claude","Poe"].map(s => (
+                      <span key={s} className="px-3 py-1 bg-purple-50 text-purple-700 rounded-full text-xs font-bold border border-purple-100">{s}</span>
+                    ))}
+                  </div>
+                </div>
+                {/* Core Skills Card */}
+                <div className="bg-white p-8 rounded-[2rem] shadow-lg border border-slate-100 hover:-translate-y-1 transition-all duration-300">
+                  <div className="flex flex-col gap-6">
+                    <div>
+                      <div className="flex items-center gap-3 mb-6 text-slate-900"><div className="p-3 bg-slate-100 rounded-2xl"><Star /></div><h3 className="text-xl font-bold">Core Skills</h3></div>
+                      <div className="flex flex-wrap gap-2">
+                        {["Video Editor","Creative","Photography","Motion Graphic","Song Writer","Coding","English (Read/Write/Speak)","Communication","Teamwork","Crisis Solving","Growth Mindset","Management","Adaptability","Work Smart"].map(s => (
+                          <span key={s} className="px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-xs font-bold border border-blue-100">{s}</span>
+                        ))}
+                      </div>
+                    </div>
+                    <div className="pt-6 border-t border-slate-100">
+                      <p className="font-bold text-slate-900 text-sm">{t.skills.education}</p>
+                      <p className="text-slate-500 text-sm">{t.skills.highSchool}</p>
+                    </div>
+                  </div>
+                </div>
+              </Reveal>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Experience Section */}
+      <section id="experience" className="py-24 max-w-4xl mx-auto px-6">
+        <Reveal as="h2" className="text-colossal-heading text-giant text-center mb-16 text-slate-900">{t.experience.title}</Reveal>
+        <RevealGroup className="space-y-12">
+          {experiences.map((exp, idx) => (
+            <RevealItem key={idx} className="flex gap-6 group">
+              <div className="flex flex-col items-center">
+                <div className="w-12 h-12 bg-white border-2 border-slate-200 rounded-2xl flex items-center justify-center group-hover:bg-blue-600 group-hover:text-white transition-all shadow-lg text-slate-900">
+                  <exp.IconComponent size={24} />
+                </div>
+                {idx !== experiences.length - 1 && <div className="w-0.5 h-full bg-slate-100 mt-4 group-hover:bg-blue-100"></div>}
+              </div>
+              <div className="pb-12">
+                <div className="flex flex-wrap items-center gap-3 mb-2">
+                  <h3 className="text-2xl font-bold group-hover:text-blue-600 transition-colors text-slate-900">{exp.title}</h3>
+                  <span className="text-[10px] font-black uppercase bg-slate-100 px-2 py-1 rounded text-slate-500">{exp.type}</span>
+                </div>
+                <p className="text-blue-600 font-bold mb-4">{exp.company} • {exp.period}</p>
+                <p className="text-slate-600 italic leading-relaxed text-lg">"{exp.desc}"</p>
+              </div>
+            </RevealItem>
+          ))}
+          <RevealItem className="flex gap-6 group">
+            <div className="flex flex-col items-center">
+              <div className="w-12 h-12 bg-blue-600 border-2 border-blue-600 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-blue-200">
+                <Sparkles size={24} className="animate-pulse" />
+              </div>
+            </div>
+            <div className="pb-4">
+              <div className="inline-flex items-center gap-3 px-4 py-2 bg-blue-50 rounded-full border border-blue-100 mb-4">
+                <span className="relative flex h-2 w-2"><span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span><span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span></span>
+                <span className="text-blue-700 font-bold tracking-wide uppercase text-xs">Current Focus</span>
+              </div>
+              <h3 className="text-2xl font-black text-slate-900 mb-2">{t.experience.timeline[6].title}</h3>
+              <p className="text-blue-600 font-bold mb-4">{t.experience.timeline[6].period} • {t.experience.timeline[6].company}</p>
+              <p className="text-slate-600 italic leading-relaxed text-lg">"{t.experience.timeline[6].desc}"</p>
+            </div>
+          </RevealItem>
+        </RevealGroup>
+      </section>
+
+      {/* Projects Section */}
+      <Suspense fallback={<SectionFallback />}>
+        <ProjectsSection />
+      </Suspense>
+
+      {/* Presentation Section */}
+      <Suspense fallback={<SectionFallback />}>
+        <PresentationSection />
+      </Suspense>
+
+      {/* Contact Section */}
+      <footer id="contact" className="bg-slate-900 text-white py-20 px-6">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+          <div className="space-y-8">
+            <h2 className="text-2xl md:text-4xl font-black leading-tight text-center md:text-left">{t.resume.contact}</h2>
+            <div className="space-y-4">
+              <a href="tel:0931840662" className="flex items-center gap-4 text-xl hover:text-blue-400 transition-colors"><Phone /> 093-184-0662</a>
+              <a href="tel:0909730775" className="flex items-center gap-4 text-xl hover:text-blue-400 transition-colors"><Phone /> 090-973-0775</a>
+              <a href="mailto:suanranger129@gmail.com" className="flex items-center gap-4 text-xl hover:text-blue-400 transition-colors"><Mail /> suanranger129@gmail.com</a>
+              <p className="flex items-center gap-4 text-xl text-slate-400"><MapPin /> {t.resume.location}</p>
+            </div>
+          </div>
+          <div className="bg-white/5 p-10 rounded-[3rem] text-center space-y-4 backdrop-blur-sm">
+            <p className="text-slate-400">Thanks for visiting my portfolio.</p>
+            <p className="text-xs text-slate-600 font-bold uppercase tracking-widest">© 2025 PORNPON.P - DIGITAL PORTFOLIO</p>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+};
+
+
+export default MainPortfolio;
