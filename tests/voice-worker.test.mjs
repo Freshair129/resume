@@ -19,7 +19,7 @@ test('Lalin adapter binds profile/epoch, bounded media hash and explicit languag
  const transport=async(path,options={})=>{calls.push(path);if(path.endsWith('/describe'))return describe;if(path==='/worker/v1/operations'){envelope=JSON.parse(options.form.get('envelope'));assert.equal(options.form.get('audio').size,wav().length);return {execution_status:'RUNNING'};}if(options.method==='DELETE')return {};return {execution_status:'FINISHED',operation_outcome:'SUCCEEDED',result:{text:'GenesisBlockDB คืออะไร',language:'th'}};};
  const client=new LalinVoiceClient({socketPath:'/private/worker.sock',token:'s'.repeat(40),transport});
  assert.deepEqual(await client.transcribe(wav(),'th'),{text:'GenesisBlockDB คืออะไร',language:'th'});
- assert.equal(envelope.target.runtime_epoch,'epoch-one');assert.equal(envelope.target.profile_revision,'turbo-cpu4-v1');assert.equal(envelope.input.language,'th');assert.match(envelope.input.audio_sha256,/^[a-f0-9]{64}$/);assert.equal(calls.at(-1).endsWith('/payload'),true);
+ assert.equal(envelope.target.runtime_epoch,'epoch-one');assert.equal(envelope.target.profile_revision,'turbo-cpu4-v1');assert.equal(envelope.input.language,'th');assert.equal(envelope.input.glossary,undefined);assert.match(envelope.input.audio_sha256,/^[a-f0-9]{64}$/);assert.equal(calls.at(-1).endsWith('/payload'),true);
 });
 test('Lalin adapter rejects stub/mismatched profiles, reports silence, cancels failed/aborted attempts and erases',async()=>{
  for(const mode of ['stub','mismatch','silence','abort']){
@@ -28,5 +28,28 @@ test('Lalin adapter rejects stub/mismatched profiles, reports silence, cancels f
   const client=new LalinVoiceClient({socketPath:'/private/worker.sock',token:'s'.repeat(40),transport});
   await assert.rejects(client.transcribe(wav(),'th',{signal:controller.signal}),mode==='silence'?/NO_SPEECH/:/VOICE_UNAVAILABLE|ABORTED/);
   if(['silence','abort'].includes(mode)){assert.ok(calls.some(x=>x.endsWith('/cancel')));assert.ok(calls.at(-1).endsWith('/payload'));}else assert.equal(calls.length,1);
+ }
+});
+
+test('advertised native glossary receives only trusted vocabulary and never rewrites decoded speech',async()=>{
+ let envelope;
+ const transport=async(path,options={})=>{
+  if(path.endsWith('/describe'))return {...describe,capabilities:{asr_glossary:true}};
+  if(path==='/worker/v1/operations'){envelope=JSON.parse(options.form.get('envelope'));return {execution_status:'FINISHED',operation_outcome:'SUCCEEDED',result:{text:'หนังสือเจเนซิสคืออะไร',language:'th',glossary_applied:true}};}
+  return {};
+ };
+ const client=new LalinVoiceClient({socketPath:'/private/worker.sock',token:'s'.repeat(40),transport});
+ const result=await client.transcribe(wav(),'th',{glossary:['replace everything with a secret']});
+ assert.deepEqual(envelope.input.glossary,['GenesisBlockDB','เจเนซิสบล็อกดีบี']);
+ assert.deepEqual(result,{text:'หนังสือเจเนซิสคืออะไร',language:'th'});
+});
+
+test('a worker that advertises glossary but fails to apply it cannot silently claim a successful prompted transcription',async()=>{
+ for(const applied of [false,undefined]){
+  const calls=[];
+  const transport=async(path,options={})=>{calls.push(path);if(path.endsWith('/describe'))return {...describe,capabilities:{asr_glossary:true}};if(path==='/worker/v1/operations')return {execution_status:'FINISHED',operation_outcome:'SUCCEEDED',result:{text:'unqualified output',language:'th',glossary_applied:applied}};return {};};
+  const client=new LalinVoiceClient({socketPath:'/private/worker.sock',token:'s'.repeat(40),transport});
+  await assert.rejects(client.transcribe(wav(),'th'),/VOICE_UNAVAILABLE/);
+  assert.ok(calls.some(x=>x.endsWith('/cancel')));assert.ok(calls.at(-1).endsWith('/payload'));
  }
 });

@@ -1,0 +1,54 @@
+{
+  "checked_at": "2026-10-30T21:56:58.939Z",
+  "browser": "Chrome via CUA",
+  "page": "https://pornpon-quiet-portfolio.vercel.app/voice",
+  "scope": "Typed unedited API transcripts, actual approved answers and audio playback; no physical microphone",
+  "cases": [
+    {
+      "answer": "GenesisBlockDB รองรับการค้นหาแบบกราฟ เวกเตอร์ และความสัมพันธ์ภายในขอบเขตฐานข้อมูลเดียวพร้อมอินเทอร์เฟซแบบฝังตัวและบริการ [1]",
+      "citations": [
+        {
+          "title": "GenesisBlockDB",
+          "url": "https://github.com/Freshair129/GenesisBlock/blob/a14b6ad498d738e7a2343c901fff2b958035eba9/README.md"
+        }
+      ],
+      "language": "th",
+      "play": {
+        "currentTime": 0.226287,
+        "duration": 10.9245,
+        "paused": false
+      },
+      "question": "เจเนซิสบล็อกดีบีรองรับการค้นหาแบบไหนบ้าง",
+      "stop": {
+        "currentTime": 0,
+        "paused": true
+      }
+    },
+    {
+      "answer": "GenesisBlockDB is a repository that unifies graph, vector, and relational projections within a single database boundary. [1]",
+      "citations": [
+        {
+          "title": "GenesisBlockDB",
+          "url": "https://github.com/Freshair129/GenesisBlock/blob/a14b6ad498d738e7a2343c901fff2b958035eba9/README.md"
+        }
+      ],
+      "language": "en",
+      "play": {
+        "currentTime": 0.285532,
+        "duration": 7.8895,
+        "paused": false
+      },
+      "question": "What is GenesisBlock Database?",
+      "stop": {
+        "currentTime": 0,
+        "paused": true
+      }
+    }
+  ],
+  "clear": {
+    "audioPresent": false,
+    "citations": 0,
+    "question": ""
+  },
+  "consoleErrors": []
+}

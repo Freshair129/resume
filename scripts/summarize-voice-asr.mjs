@@ -1,0 +1,12 @@
+import {readFile,writeFile} from 'node:fs/promises';
+const directory='docs/evidence/voice/thai-asr';
+const names=process.argv.slice(2);
+const normalize=text=>text.normalize('NFC').toLowerCase().replace(/genesis\s*block\s*(?:database|db)|เจเนซิส\s*บล็อก\s*ดี\s*บี/gu,'genesisblockdb').replace(/[^\p{L}\p{M}\p{N}]/gu,'');
+const entity=text=>normalize(text).includes('genesisblockdb');
+function distance(a,b){let row=Array.from({length:b.length+1},(_,i)=>i);for(let i=0;i<a.length;i++){const next=[i+1];for(let j=0;j<b.length;j++)next[j+1]=Math.min(next[j]+1,row[j+1]+1,row[j]+(a[i]===b[j]?0:1));row=next;}return row[b.length];}
+function cer(rows){if(rows.some(x=>x.error))return null;let edits=0,characters=0;for(const row of rows){const reference=Array.from(normalize(row.reference)),hypothesis=Array.from(normalize(row.text));edits+=distance(reference,hypothesis);characters+=reference.length;}return {edits,characters,rate:edits/characters};}
+const summary={scope:'Fixed OS-synthesized clips only; no human microphone or population-level accuracy claim',normalization:'NFC lowercase; punctuation/spacing removed. Only correct Thai phonetic spelling and English Genesis Block Database/DB are canonicalized for scoring. Product transcript is never modified by this evaluator.',reports:[]};
+for(const file of names){const report=JSON.parse(await readFile(`${directory}/${file}`,'utf8')),rows=report.checks,targets=rows.filter(x=>x.language==='th'&&x.entity),controls=rows.filter(x=>!x.empty&&!x.entity),speech=rows.filter(x=>!x.empty),times=rows.map(x=>x.elapsed_ms).sort((a,b)=>a-b);
+ summary.reports.push({file,glossary:report.glossary,checks:rows.length,transcribed:speech.filter(x=>!x.error).length,speech_cases:speech.length,thai_entity:{correct:targets.filter(x=>!x.error&&entity(x.text)).length,total:targets.length},false_entity_insertions:controls.filter(x=>!x.error&&entity(x.text)).map(x=>x.id),non_speech:rows.filter(x=>x.empty).map(x=>({id:x.id,rejected:x.error==='NO_SPEECH'})),thai_cer:cer(speech.filter(x=>x.language==='th')),thai_control_cer:cer(controls.filter(x=>x.language==='th')),english_cer:cer(speech.filter(x=>x.language==='en')),latency_ms:{p50:times[Math.floor(times.length/2)],max:Math.max(...times)},runtime_failures:rows.filter(x=>x.error&&x.error!=='NO_SPEECH').map(x=>({id:x.id,error:x.error}))});
+}
+await writeFile(`${directory}/comparison.json`,JSON.stringify(summary,null,2)+'\n');console.log(JSON.stringify(summary,null,2));

@@ -34,11 +34,11 @@ services:
     env_file: ../.runtime/voice-worker/api.env
     environment:
       VOICE_WORKER_SOCKET: /run/voice-worker/worker.sock
-      VOICE_WORKER_REVISION: small-cpu4-beam5-v4
+      VOICE_WORKER_REVISION: thai-small-cpu4-beam5-v5
     group_add: ['10001']
     volumes: [voice-socket:/run/voice-worker:ro]
 volumes:
   voice-socket:
   voice-models:
-    name: portfolio-intelligence_voice-small-models
+    name: portfolio-intelligence_voice-thai-small-models
     external: true

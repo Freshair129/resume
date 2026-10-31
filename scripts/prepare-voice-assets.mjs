@@ -11,7 +11,7 @@ await mkdir(directory,{recursive:true});
 async function digest(path){try{const hash=createHash('sha256');for await(const chunk of createReadStream(path))hash.update(chunk);return hash.digest('hex');}catch{return null;}}
 for(const asset of profile.assets){
  if(!/^[a-z_.]+$/.test(asset.role))throw Error('INVALID_ASSET');
- const origin=source;
+ const origin=source.asset_sources?.[asset.role]||source;
  if(!/^[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+$/.test(origin.repository)||!(/^[a-f0-9]{40}$/.test(origin.revision)||origin.revision==='main'))throw Error('INVALID_ASSET_SOURCE');
  const target=resolve(directory,asset.role);
  if(await digest(target)===asset.sha256){console.log(`${asset.role}: verified cache`);continue;}
@@ -21,4 +21,4 @@ for(const asset of profile.assets){
  if(await digest(target+'.partial')!==asset.sha256)throw Error('ASSET_HASH_MISMATCH');
  await rename(target+'.partial',target);console.log(`${asset.role}: downloaded and verified`);
 }
-await writeFile(resolve(root,'.runtime/voice-worker/model-receipt.json'),JSON.stringify({model:source.repository,revision:source.revision,assets:profile.assets.map(({role,sha256})=>({role,sha256,source:{repository:source.repository,revision:source.revision}}))},null,2)+'\n');
+await writeFile(resolve(root,'.runtime/voice-worker/model-receipt.json'),JSON.stringify({model:source.repository,revision:source.revision,assets:profile.assets.map(({role,sha256})=>({role,sha256,source:source.asset_sources?.[role]||{repository:source.repository,revision:source.revision}}))},null,2)+'\n');

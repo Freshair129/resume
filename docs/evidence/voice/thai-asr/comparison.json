@@ -1,0 +1,93 @@
+{
+  "scope": "Fixed OS-synthesized clips only; no human microphone or population-level accuracy claim",
+  "normalization": "NFC lowercase; punctuation/spacing removed. Only correct Thai phonetic spelling and English Genesis Block Database/DB are canonicalized for scoring. Product transcript is never modified by this evaluator.",
+  "reports": [
+    {
+      "file": "baseline-identified.json",
+      "glossary": [],
+      "checks": 12,
+      "transcribed": 10,
+      "speech_cases": 10,
+      "thai_entity": {
+        "correct": 0,
+        "total": 4
+      },
+      "false_entity_insertions": [],
+      "non_speech": [
+        {
+          "id": "silence",
+          "rejected": true
+        },
+        {
+          "id": "noise",
+          "rejected": true
+        }
+      ],
+      "thai_cer": {
+        "edits": 90,
+        "characters": 254,
+        "rate": 0.3543307086614173
+      },
+      "thai_control_cer": {
+        "edits": 30,
+        "characters": 127,
+        "rate": 0.23622047244094488
+      },
+      "english_cer": {
+        "edits": 0,
+        "characters": 42,
+        "rate": 0
+      },
+      "latency_ms": {
+        "p50": 2635,
+        "max": 2959
+      },
+      "runtime_failures": []
+    },
+    {
+      "file": "selected-identified.json",
+      "glossary": [
+        "GenesisBlockDB",
+        "เจเนซิสบล็อกดีบี"
+      ],
+      "checks": 12,
+      "transcribed": 10,
+      "speech_cases": 10,
+      "thai_entity": {
+        "correct": 4,
+        "total": 4
+      },
+      "false_entity_insertions": [],
+      "non_speech": [
+        {
+          "id": "silence",
+          "rejected": true
+        },
+        {
+          "id": "noise",
+          "rejected": true
+        }
+      ],
+      "thai_cer": {
+        "edits": 12,
+        "characters": 254,
+        "rate": 0.047244094488188976
+      },
+      "thai_control_cer": {
+        "edits": 12,
+        "characters": 127,
+        "rate": 0.09448818897637795
+      },
+      "english_cer": {
+        "edits": 0,
+        "characters": 42,
+        "rate": 0
+      },
+      "latency_ms": {
+        "p50": 2347,
+        "max": 3272
+      },
+      "runtime_failures": []
+    }
+  ]
+}

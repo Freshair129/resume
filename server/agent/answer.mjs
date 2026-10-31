@@ -19,6 +19,9 @@ export class AnswerService {
  async answer(message,lang,{signal}={}){
   signal?.throwIfAborted();
   lang=answerLanguage(message,lang);
+  // Exact spellings of the published project name, including spoken Thai.
+  // This normalizes the internal question only; ASR transcripts stay untouched.
+  message=message.replace(/เจเนซิส[ \t]*บล็อก[ \t]*ดี[ \t]*บี|\bgenesis[ \t]*block[ \t]*(?:database|db)\b/giu,'GenesisBlockDB');
   if(/(?:secret|private repo|\.env|salary|revenue|เงินเดือน|ข้อมูลลับ|รายได้)/i.test(message))return noEvidence(lang);
   // A source-code catalog cannot answer a personal resume request while the
   // owner has explicitly held that profile in review.

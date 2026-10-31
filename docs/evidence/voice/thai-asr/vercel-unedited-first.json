@@ -1,0 +1,39 @@
+{
+  "checked_at": "2026-10-30T21:50:04.498Z",
+  "base": "https://pornpon-quiet-portfolio.vercel.app",
+  "fixtures": "Windows SAPI synthetic input, no real microphone",
+  "answer_input": "Unedited ASR transcript",
+  "checks": [
+    {
+      "route": "/api/voice/transcribe?lang=th",
+      "status": 200,
+      "elapsed_ms": 7735,
+      "result": {
+        "text": "เจเนซิสบล็อกดีบีรองรับการค้นหาแบบไหนบ้าง",
+        "language": "th"
+      }
+    },
+    {
+      "route": "/api/voice/reply",
+      "status": 200,
+      "elapsed_ms": 8947,
+      "result": {
+        "answer": "ยังไม่มีข้อมูลที่ยืนยันได้ กรุณาดูโครงการที่เผยแพร่หรือหน้าติดต่อ",
+        "citations": [],
+        "confidence": "none",
+        "suggested_questions": [
+          "/projects",
+          "/contact"
+        ],
+        "status": "insufficient_evidence",
+        "audio_status": "available",
+        "audio": {
+          "mime_type": "audio/wav",
+          "bytes": 229460,
+          "duration_seconds": 4.7795,
+          "sha256": "806217f035115ea96bb60e97ab4c983072b0ab34772adc29622db2c6f51c9074"
+        }
+      }
+    }
+  ]
+}

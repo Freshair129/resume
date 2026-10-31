@@ -1,0 +1,38 @@
+{
+  "model": "Thaweewat/whisper-th-small-ct2",
+  "revision": "fe1f90dcade5fe4f6fa229047c7cf6d939bbb8bb",
+  "assets": [
+    {
+      "role": "config.json",
+      "sha256": "5f9ce7147a745b6c500fa69f5db677dbfa37f6aee1ece2d80489a8d11296a843",
+      "source": {
+        "repository": "Thaweewat/whisper-th-small-ct2",
+        "revision": "fe1f90dcade5fe4f6fa229047c7cf6d939bbb8bb"
+      }
+    },
+    {
+      "role": "model.bin",
+      "sha256": "9f7f57b43c61bb7397d384a2413a54f3df5583fd1aa2c868f991dd2e1dc0dbca",
+      "source": {
+        "repository": "Thaweewat/whisper-th-small-ct2",
+        "revision": "fe1f90dcade5fe4f6fa229047c7cf6d939bbb8bb"
+      }
+    },
+    {
+      "role": "vocabulary.json",
+      "sha256": "5ad28279db5e546349708b9a74736e2c018737ac5a600f1048f1f26c99b85b47",
+      "source": {
+        "repository": "Thaweewat/whisper-th-small-ct2",
+        "revision": "fe1f90dcade5fe4f6fa229047c7cf6d939bbb8bb"
+      }
+    },
+    {
+      "role": "tokenizer.json",
+      "sha256": "fb7b63191e9bb045082c79fd742a3106a12c99513ab30df4a0d47fa6cb6fd0ab",
+      "source": {
+        "repository": "Systran/faster-whisper-small",
+        "revision": "536b0662742c02347bc0e980a01041f333bce120"
+      }
+    }
+  ]
+}

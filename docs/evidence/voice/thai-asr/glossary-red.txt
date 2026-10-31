@@ -1,0 +1,51 @@
+✔ voice WAV accepts bounded PCM16 mono and rejects truncated, foreign format, extra bytes and duration overflow (2.6599ms)
+✔ Lalin adapter binds profile/epoch, bounded media hash and explicit language; erases successful payload (156.7309ms)
+✔ Lalin adapter rejects stub/mismatched profiles, reports silence, cancels failed/aborted attempts and erases (4.3056ms)
+✖ advertised native glossary receives only trusted vocabulary and never rewrites decoded speech (2.5197ms)
+✖ a worker that advertises glossary but fails to apply it cannot silently claim a successful prompted transcription (1.0559ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 3
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 333.6262
+
+✖ failing tests:
+
+test at tests\voice-worker.test.mjs:34:1
+✖ advertised native glossary receives only trusted vocabulary and never rewrites decoded speech (2.5197ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+  + undefined
+  - [
+  -   'GenesisBlockDB',
+  -   'การค้นหา'
+  - ]
+  
+      at TestContext.<anonymous> (file:///F:/resume/app/tests/voice-worker.test.mjs:43:9)
+      at async Test.run (node:internal/test_runner/test:1404:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:969:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: [ 'GenesisBlockDB', 'การค้นหา' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests\voice-worker.test.mjs:47:1
+✖ a worker that advertises glossary but fails to apply it cannot silently claim a successful prompted transcription (1.0559ms)
+  AssertionError [ERR_ASSERTION]: Missing expected rejection.
+      at async TestContext.<anonymous> (file:///F:/resume/app/tests/voice-worker.test.mjs:52:3)
+      at async Test.run (node:internal/test_runner/test:1404:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:969:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: /VOICE_UNAVAILABLE/,
+    operator: 'rejects',
+    diff: 'simple'
+  }

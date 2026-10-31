@@ -2,6 +2,8 @@ import http from 'node:http';
 import {createHash,randomUUID} from 'node:crypto';
 import {setTimeout as delay} from 'node:timers/promises';
 import {validateVoiceWav} from './wav.mjs';
+// Decoder spelling hints only: no answers, credentials or visitor-supplied text.
+const glossary=Object.freeze(['GenesisBlockDB','เจเนซิสบล็อกดีบี']);
 
 export class LalinVoiceClient {
  constructor({socketPath=process.env.VOICE_WORKER_SOCKET,token=process.env.VOICE_WORKER_TOKEN,profileRevision=process.env.VOICE_WORKER_REVISION||'turbo-cpu4-v1',transport}={}){
@@ -31,8 +33,10 @@ export class LalinVoiceClient {
    const description=await this.transport('/worker/v1/describe',{signal:combined});
    const profile=description.profiles?.find(x=>x.profile_id==='portfolio-asr'&&x.profile_revision===this.profileRevision&&x.kind==='asr');
    if(description.engine?.labeled_stub!==false||description.runtime_id!=='portfolio-asr'||description.physical_resource_id!=='portfolio-cpu'||!profile?.state?.ready||!profile.languages?.includes(language))throw Error('VOICE_UNAVAILABLE');
+   const prompted=description.capabilities?.asr_glossary===true;
    attempt=randomUUID();const start=Date.now();
    const envelope={contract_version:'1.0',invocation_id:randomUUID(),attempt_id:attempt,kind:'asr',target:{runtime_id:description.runtime_id,runtime_epoch:description.runtime_epoch,physical_resource_id:description.physical_resource_id,profile_id:profile.profile_id,profile_revision:profile.profile_revision},admission:{lease_id:randomUUID(),start_before:new Date(start+3000).toISOString(),deadline_at:new Date(start+18000).toISOString()},input:{language,audio_sha256:createHash('sha256').update(bytes).digest('hex'),audio_bytes:bytes.length,declared_mime_type:'audio/wav'}};
+   if(prompted)envelope.input.glossary=[...glossary];
    const form=new FormData();form.set('envelope',JSON.stringify(envelope));form.set('audio',new Blob([bytes],{type:'audio/wav'}),'question.wav');submitted=true;
    let status=await this.transport('/worker/v1/operations',{method:'POST',form,signal:combined});
    while(status.execution_status!=='FINISHED'&&status.execution_status!=='UNKNOWN'){
@@ -41,6 +45,7 @@ export class LalinVoiceClient {
    combined.throwIfAborted();
    if(status.operation_outcome!=='SUCCEEDED')throw Error(status.error?.code==='NO_SPEECH'?'NO_SPEECH':'VOICE_UNAVAILABLE');
    const text=status.result?.text;
+   if(prompted&&status.result?.glossary_applied!==true)throw Error('VOICE_UNAVAILABLE');
    if(typeof text!=='string'||!text.trim()||text.length>2000||status.result.language!==language)throw Error('VOICE_UNAVAILABLE');
    success=true;return {text:text.trim(),language};
   }finally{

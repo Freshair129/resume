@@ -1,0 +1,14 @@
+[
+ {"id":"th-original","language":"th","text":"เจเนซิสบล็อกดีบี รองรับการค้นหาแบบไหนบ้าง","reference":"GenesisBlockDB รองรับการค้นหาแบบไหนบ้าง","entity":true,"original":"question-th.wav"},
+ {"id":"th-definition","language":"th","text":"เจเนซิสบล็อกดีบี คืออะไร","reference":"GenesisBlockDB คืออะไร","entity":true},
+ {"id":"th-search","language":"th","text":"เจเนซิสบล็อกดีบี ค้นหาข้อมูลอย่างไร","reference":"GenesisBlockDB ค้นหาข้อมูลอย่างไร","entity":true},
+ {"id":"th-architecture","language":"th","text":"ช่วยอธิบายการออกแบบของเจเนซิสบล็อกดีบี","reference":"ช่วยอธิบายการออกแบบของ GenesisBlockDB","entity":true},
+ {"id":"th-portfolio","language":"th","text":"มีผลงานด้านปัญญาประดิษฐ์อะไรบ้าง","reference":"มีผลงานด้านปัญญาประดิษฐ์อะไรบ้าง","entity":false},
+ {"id":"th-contact","language":"th","text":"ต้องการติดต่อเจ้าของผลงานได้อย่างไร","reference":"ต้องการติดต่อเจ้าของผลงานได้อย่างไร","entity":false},
+ {"id":"th-genesis-other","language":"th","text":"หนังสือเจเนซิสเล่มนี้เกี่ยวกับอะไร","reference":"หนังสือเจเนซิสเล่มนี้เกี่ยวกับอะไร","entity":false},
+ {"id":"th-other-database","language":"th","text":"โพสต์เกรสใช้เก็บข้อมูลอะไร","reference":"โพสต์เกรสใช้เก็บข้อมูลอะไร","entity":false},
+ {"id":"en-original","language":"en","text":"What is Genesis Block Database?","reference":"What is GenesisBlockDB?","entity":true,"original":"question-en.wav"},
+ {"id":"en-contact","language":"en","text":"How can I contact the owner?","reference":"How can I contact the owner?","entity":false},
+ {"id":"silence","language":"th","empty":"silence"},
+ {"id":"noise","language":"th","empty":"noise"}
+]

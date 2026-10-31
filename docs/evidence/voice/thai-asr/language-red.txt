@@ -1,0 +1,31 @@
+✔ correct Thai phonetic and separated English project names reach retrieval and grounding as the same canonical project (6.5666ms)
+✔ Genesis books, blockchain references and other complete words are not renamed as GenesisBlockDB (0.3574ms)
+✔ project-name spelling aliases cannot bypass private-fact refusal (0.18ms)
+✖ a Thai project-name-only question keeps Thai automatic answer language after internal name normalization (2.3049ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 3
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 233.9612
+
+✖ failing tests:
+
+test at tests\answer-project-names.test.mjs:29:1
+✖ a Thai project-name-only question keeps Thai automatic answer language after internal name normalization (2.3049ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  'en' !== 'th'
+  
+      at TestContext.<anonymous> (file:///F:/resume/app/tests/answer-project-names.test.mjs:32:50)
+      at async Test.run (node:internal/test_runner/test:1404:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:969:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'en',
+    expected: 'th',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

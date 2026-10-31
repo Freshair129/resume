@@ -1,6 +1,6 @@
 {
   "profile_id": "portfolio-asr",
-  "profile_revision": "small-cpu4-beam5-v4",
+  "profile_revision": "thai-small-cpu4-beam5-v5",
   "kind": "asr",
   "runtime_id": "portfolio-asr",
   "physical_resource_id": "portfolio-cpu",
@@ -41,28 +41,34 @@
     {
       "role": "config.json",
       "path": "/models/config.json",
-      "sha256": "b55496ac7940a7ae47d2c01eab40edfd8701feec1229d9cce3b40014383fb828"
+      "sha256": "5f9ce7147a745b6c500fa69f5db677dbfa37f6aee1ece2d80489a8d11296a843"
     },
     {
       "role": "model.bin",
       "path": "/models/model.bin",
-      "sha256": "3e305921506d8872816023e4c273e75d2419fb89b24da97b4fe7bce14170d671"
+      "sha256": "9f7f57b43c61bb7397d384a2413a54f3df5583fd1aa2c868f991dd2e1dc0dbca"
+    },
+    {
+      "role": "vocabulary.json",
+      "path": "/models/vocabulary.json",
+      "sha256": "5ad28279db5e546349708b9a74736e2c018737ac5a600f1048f1f26c99b85b47"
     },
     {
       "role": "tokenizer.json",
       "path": "/models/tokenizer.json",
       "sha256": "fb7b63191e9bb045082c79fd742a3106a12c99513ab30df4a0d47fa6cb6fd0ab"
-    },
-    {
-      "role": "vocabulary.txt",
-      "path": "/models/vocabulary.txt",
-      "sha256": "34ce3fe1c5041027b3f8d42912270993f986dbc4bb34cf27f951e34a1e453913"
     }
   ],
   "_model_source": {
-    "repository": "Systran/faster-whisper-small",
-    "revision": "536b0662742c02347bc0e980a01041f333bce120",
-    "cache_dir": "models-small",
-    "volume": "portfolio-intelligence_voice-small-models"
+    "repository": "Thaweewat/whisper-th-small-ct2",
+    "revision": "fe1f90dcade5fe4f6fa229047c7cf6d939bbb8bb",
+    "cache_dir": "models-thai-small",
+    "volume": "portfolio-intelligence_voice-thai-small-models",
+    "asset_sources": {
+      "tokenizer.json": {
+        "repository": "Systran/faster-whisper-small",
+        "revision": "536b0662742c02347bc0e980a01041f333bce120"
+      }
+    }
   }
 }

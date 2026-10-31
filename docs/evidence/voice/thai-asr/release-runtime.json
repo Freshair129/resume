@@ -1,0 +1,34 @@
+{
+  "checked_at": "2026-10-30T21:59:41.041Z",
+  "production": "https://pornpon-quiet-portfolio.vercel.app/voice",
+  "frontend_deployment": "dpl_9eDy6fysoFKFVxmwS5Rkv9Y1Wjmk (unchanged; backend repair)",
+  "images": {
+    "api": "sha256:00e1b8a9dcca0e2b23956a1da05f3d9ca9a097053b41e9d9d13739e73d5ed59f",
+    "worker": "sha256:00e1b8a9dcca0e2b23956a1da05f3d9ca9a097053b41e9d9d13739e73d5ed59f",
+    "asr": "sha256:413269df40654d7590165e9f6ac4fe9b70c774fc745c687bfc2c0244a8beed78"
+  },
+  "profile_revision": "thai-small-cpu4-beam5-v5",
+  "model": {
+    "repository": "Thaweewat/whisper-th-small-ct2",
+    "revision": "fe1f90dcade5fe4f6fa229047c7cf6d939bbb8bb",
+    "cache_dir": "models-thai-small",
+    "volume": "portfolio-intelligence_voice-thai-small-models",
+    "asset_sources": {
+      "tokenizer.json": {
+        "repository": "Systran/faster-whisper-small",
+        "revision": "536b0662742c02347bc0e980a01041f333bce120"
+      }
+    }
+  },
+  "source_sha256": {
+    "server/voice/lalin.mjs": "caacfc1f1f052df4b781637ced436ddb5385de6c358087a3591a989f90a8ed52",
+    "server/agent/answer.mjs": "cb3586bbaf0b1ce8f31144a2e3a241e66cbdcc75ea839c39af1425f00b8307c6",
+    "infra/voice-asr-profile.json": "6d852618d323a805e53ca31dbcdc4c1828f192d99f71d8602832b79fe51f2051",
+    "infra/docker-compose.voice.yml": "45a34c23ea755707d12d3b6ae1ac865debf7b8a4c9731bcc7690d9d01adca14f",
+    "scripts/prepare-voice-assets.mjs": "3338182f4e4c2a44ec8ba2e4d4f96198f003ed2a890c5df92fc62fdc565e075c",
+    "scripts/stage-voice-model-volume.mjs": "3bceb05aee317f70c4ac170ac98c2000bf225ddf3e2f0edf4f3b2b089cd1fe1e"
+  },
+  "api_result": "PASS_WITH_NATIVE_LOCAL_TTS",
+  "browser_cases": 2,
+  "physical_microphone": "NOT_RUN"
+}

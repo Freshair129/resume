@@ -1,0 +1,68 @@
+
+> resume-web@0.0.0 build
+> vite build
+
+vite v7.3.1 building client environment for production...
+transforming...
+✓ 2182 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                                                 2.33 kB │ gzip:   0.87 kB
+dist/assets/05-Dgn1EBgq.jpg                                                    58.26 kB
+dist/assets/profile-CvhN43Qv.jpg                                               69.42 kB
+dist/assets/04-CFawOCbE.jpg                                                    72.94 kB
+dist/assets/45548061_10212839898647682_8986399754623647744_n-CqXisk-d.jpg      76.90 kB
+dist/assets/01-B0RcfeYb.jpg                                                    82.29 kB
+dist/assets/45491630_10212839899927714_9145685965484851200_n-RzttI3eT.jpg      87.03 kB
+dist/assets/hero-bg-D8jkbgVH.jpg                                              114.75 kB
+dist/assets/42491663_10212566490132640_7222709492226457600_n-C8hySg1P.jpg     119.37 kB
+dist/assets/72777067_10214996567643059_3888397496963039232_n-Df97_Pe9.jpg     121.90 kB
+dist/assets/81431587_10215536088410741_7603750379318149120_n-B6Md-3zo.jpg     137.32 kB
+dist/assets/493316585_10227428459272580_3474256092162314207_n-VuvFFca_.jpg    158.84 kB
+dist/assets/46517452_10212929843696252_415263289585434624_n-4hlxaJCB.jpg      159.95 kB
+dist/assets/181574626_10218908493518761_2079994618153293221_n-DpAfpvEN.jpg    170.37 kB
+dist/assets/495089043_10227498662547618_2035990719440303123_n-DfOuI00I.jpg    203.67 kB
+dist/assets/179774872_10218887506714104_3071799954470046725_n-BRK-rlzP.jpg    204.64 kB
+dist/assets/49673969_10213221183939576_7971522467460022272_n-B0HRmeM6.jpg     206.47 kB
+dist/assets/518144376_10228727809075513_326189957389409429_n-BEQv5WwH.jpg     212.35 kB
+dist/assets/517156634_10228731921018309_5386031154888349871_n-CA91jUeP.jpg    216.73 kB
+dist/assets/79436084_10215450282505647_4582367940304699392_n-Dx_VrwOz.jpg     227.61 kB
+dist/assets/494921974_10227589562300055_2659092010976507323_n-CFWt5lnu.jpg    228.78 kB
+dist/assets/03-BkTuqtso.jpg                                                   241.04 kB
+dist/assets/49344206_10213221259981477_7849613110708011008_n-DpwFZKWD.jpg     243.29 kB
+dist/assets/476443669_10226672390291328_611929148584749864_n-DNNFsy16.jpg     249.16 kB
+dist/assets/149769843_10218480775746084_1208786335948911704_n-DD-8bbvQ.jpg    252.78 kB
+dist/assets/78730371_10215341360742671_6505923315025051648_n-cfCDuj0y.jpg     257.35 kB
+dist/assets/502750192_10227834215696237_7403499365106794196_n-CB-u6BeU.jpg    258.97 kB
+dist/assets/02-DANn1lSa.jpg                                                   278.13 kB
+dist/assets/104392557_10216911034783541_5743884029749639587_n-CoL_i5Yy.jpg    290.62 kB
+dist/assets/125976119_10217940993491865_1944552093108914885_n-DgpxL5xk.jpg    343.73 kB
+dist/assets/132332691_10218164298634354_5381957020741761238_n-CVZabOtU.jpg    362.65 kB
+dist/assets/44045145_10212691504777928_3247657585502846976_n-Dz0HeKws.jpg     378.78 kB
+dist/assets/66744889_10214371131447545_2533396217711296512_n-BK5PlmsE.jpg     379.83 kB
+dist/assets/06-DBUHTYMz.jpg                                                   388.46 kB
+dist/assets/81846187_10215606231684279_6930196668608413696_n-3S-OxQtS.jpg     442.52 kB
+dist/assets/138942421_10218251509494571_8283741668232132027_n-1z0wcked.jpg    465.61 kB
+dist/assets/64955455_10214246904341945_4854985848342446080_n-DrSEE3fu.jpg     485.23 kB
+dist/assets/140865529_10218310746655463_8629647350408140511_n-RnZw2BZy.jpg    497.65 kB
+dist/assets/493590733_10227448460692603_6032103749313270138_n-C99_KWBh.jpg    552.39 kB
+dist/assets/131410171_10218089031512723_5620636036947936981_n-DSwN5MFN.jpg    554.45 kB
+dist/assets/76607533_10215401956177519_8283891749521195008_n-YSqGUXD9.jpg     592.59 kB
+dist/assets/82612012_10215689587448121_6742569248461160448_n-BPdGK4vR.jpg     667.48 kB
+dist/assets/dimsum-BEKixW9l.png                                             1,695.37 kB
+dist/assets/pre_mock2-C0yr5TbS.png                                          4,175.76 kB
+dist/assets/pre_packaging-CZY0pJeK.png                                      4,757.23 kB
+dist/assets/pre_mock1-CB48nppb.png                                          6,417.60 kB
+dist/assets/index-CmUDNAf4.css                                                 58.86 kB │ gzip:  10.57 kB
+dist/assets/arrow-left-ciDJ5wG-.js                                              0.17 kB │ gzip:   0.16 kB
+dist/assets/github-BCLAe-He.js                                                  0.40 kB │ gzip:   0.29 kB
+dist/assets/zap-CZ4fz8yj.js                                                     0.87 kB │ gzip:   0.49 kB
+dist/assets/ProjectDemo-kpK3gxq9.js                                             7.45 kB │ gzip:   2.94 kB
+dist/assets/ChatbotWidget-CDctehUg.js                                           8.86 kB │ gzip:   3.44 kB
+dist/assets/PresentationSection-CRMmICfb.js                                     9.71 kB │ gzip:   3.11 kB
+dist/assets/ProjectsSection-d-MwxMrl.js                                        10.01 kB │ gzip:   3.66 kB
+dist/assets/Gallery-DrQ2Vjgt.js                                                12.80 kB │ gzip:   3.46 kB
+dist/assets/Portfolio-BN2kwSXE.js                                              12.93 kB │ gzip:   3.80 kB
+dist/assets/Resume-D1lRSuYT.js                                                 13.19 kB │ gzip:   3.97 kB
+dist/assets/index-CsByxYM4.js                                                 422.75 kB │ gzip: 134.11 kB
+✓ built in 27.48s

@@ -1,0 +1,108 @@
+{
+  "checked_at": "2026-10-30T21:55:34.293Z",
+  "base": "https://pornpon-quiet-portfolio.vercel.app",
+  "fixtures": "Windows SAPI synthetic input, no real microphone",
+  "answer_input": "Unedited ASR transcript",
+  "checks": [
+    {
+      "route": "/api/voice/transcribe?lang=th",
+      "status": 200,
+      "elapsed_ms": 12144,
+      "result": {
+        "text": "เจเนซิสบล็อกดีบีรองรับการค้นหาแบบไหนบ้าง",
+        "language": "th"
+      }
+    },
+    {
+      "route": "/api/voice/reply",
+      "status": 200,
+      "elapsed_ms": 11217,
+      "result": {
+        "answer": "GenesisBlockDB รองรับการค้นหาแบบกราฟ เวกเตอร์ และความสัมพันธ์ภายในขอบเขตฐานข้อมูลเดียวพร้อมอินเทอร์เฟซแบบฝังตัวและบริการ [1]",
+        "citations": [
+          {
+            "title": "GenesisBlockDB",
+            "url": "https://github.com/Freshair129/GenesisBlock/blob/a14b6ad498d738e7a2343c901fff2b958035eba9/README.md",
+            "project_slug": "genesisblock",
+            "source_id": "e6c69386-1b93-4c2f-8944-7079cf4d4825",
+            "generation": "111e6504-6282-4ba2-a6b9-89ad543419bc"
+          }
+        ],
+        "confidence": "grounded_summary",
+        "suggested_questions": [],
+        "audio_status": "available",
+        "audio": {
+          "mime_type": "audio/wav",
+          "bytes": 524420,
+          "duration_seconds": 10.9245,
+          "sha256": "b2b23590ada606d40fac1b309e942524d8164df5ae71583ab046293b3f50130b"
+        }
+      }
+    },
+    {
+      "route": "/api/voice/transcribe?lang=en",
+      "status": 200,
+      "elapsed_ms": 4230,
+      "result": {
+        "text": "What is GenesisBlock Database?",
+        "language": "en"
+      }
+    },
+    {
+      "route": "/api/voice/reply",
+      "status": 200,
+      "elapsed_ms": 6222,
+      "result": {
+        "answer": "GenesisBlockDB is a repository that unifies graph, vector, and relational projections within a single database boundary. [1]",
+        "citations": [
+          {
+            "title": "GenesisBlockDB",
+            "url": "https://github.com/Freshair129/GenesisBlock/blob/a14b6ad498d738e7a2343c901fff2b958035eba9/README.md",
+            "project_slug": "genesisblock",
+            "source_id": "e6c69386-1b93-4c2f-8944-7079cf4d4825",
+            "generation": "111e6504-6282-4ba2-a6b9-89ad543419bc"
+          }
+        ],
+        "confidence": "grounded_summary",
+        "suggested_questions": [],
+        "audio_status": "available",
+        "audio": {
+          "mime_type": "audio/wav",
+          "bytes": 378740,
+          "duration_seconds": 7.8895,
+          "sha256": "df93876bbce9f10ce46962b13e703f9333886c50bec979feff82fb0d2e081705"
+        }
+      }
+    },
+    {
+      "route": "/api/voice/reply",
+      "status": 200,
+      "elapsed_ms": 3226,
+      "result": {
+        "answer": "I do not have verified evidence for this question. Browse the published projects or contact page.",
+        "citations": [],
+        "confidence": "none",
+        "suggested_questions": [
+          "/projects",
+          "/contact"
+        ],
+        "audio_status": "available",
+        "audio": {
+          "mime_type": "audio/wav",
+          "bytes": 333380,
+          "duration_seconds": 6.9445,
+          "sha256": "6ac6b589e60a656a9ac166915ef0549df21395d5bbb0b1e46f4c8b95c26c7a99"
+        }
+      }
+    },
+    {
+      "route": "/api/voice/transcribe?lang=en",
+      "status": 400,
+      "elapsed_ms": 605,
+      "result": {
+        "error": "INVALID_AUDIO"
+      }
+    }
+  ],
+  "result": "PASS_WITH_NATIVE_LOCAL_TTS"
+}

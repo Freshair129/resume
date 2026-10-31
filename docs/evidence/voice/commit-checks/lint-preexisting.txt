@@ -1,0 +1,84 @@
+
+> resume-web@0.0.0 lint
+> eslint .
+
+
+F:\resume\app\.runtime\thai-commit-review\candidate\src\SpotlightReveal.jsx
+  91:8  error  Error: Cannot access refs during render
+
+React refs are values that are not needed for rendering. Refs should only be accessed outside of render, such as in event handlers or effects. Accessing a ref value (the `current` property) during render can cause your component not to update as expected (https://react.dev/reference/react/useRef).
+
+  89 |     <div ref={wrapRef} className={`relative ${className}`}>
+  90 |       {children}
+> 91 |       {!prefersReducedMotion.current && (
+     |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Cannot access ref value during render
+  92 |         <>
+  93 |           <canvas className="absolute inset-0 pointer-events-none" style={{ display: 'none' }} ref={canvasRef} />
+  94 |           <div                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  react-hooks/refs
+  91:8  error  Error: Cannot access refs during render
+
+React refs are values that are not needed for rendering. Refs should only be accessed outside of render, such as in event handlers or effects. Accessing a ref value (the `current` property) during render can cause your component not to update as expected (https://react.dev/reference/react/useRef).
+
+  89 |     <div ref={wrapRef} className={`relative ${className}`}>
+  90 |       {children}
+> 91 |       {!prefersReducedMotion.current && (
+     |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Cannot access ref value during render
+  92 |         <>
+  93 |           <canvas className="absolute inset-0 pointer-events-none" style={{ display: 'none' }} ref={canvasRef} />
+  94 |           <div                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  react-hooks/refs
+  91:8  error  Error: Cannot access refs during render
+
+React refs are values that are not needed for rendering. Refs should only be accessed outside of render, such as in event handlers or effects. Accessing a ref value (the `current` property) during render can cause your component not to update as expected (https://react.dev/reference/react/useRef).
+
+  89 |     <div ref={wrapRef} className={`relative ${className}`}>
+  90 |       {children}
+> 91 |       {!prefersReducedMotion.current && (
+     |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Cannot access ref value during render
+  92 |         <>
+  93 |           <canvas className="absolute inset-0 pointer-events-none" style={{ display: 'none' }} ref={canvasRef} />
+  94 |           <div                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  react-hooks/refs
+  91:8  error  Error: Cannot access refs during render
+
+React refs are values that are not needed for rendering. Refs should only be accessed outside of render, such as in event handlers or effects. Accessing a ref value (the `current` property) during render can cause your component not to update as expected (https://react.dev/reference/react/useRef).
+
+   89 |     <div ref={wrapRef} className={`relative ${className}`}>
+   90 |       {children}
+>  91 |       {!prefersReducedMotion.current && (
+      |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+>  92 |         <>
+      | ^^^^^^^^^^
+>  93 |           <canvas className="absolute inset-0 pointer-events-none" style={{ display: 'none' }} ref={canvasRef} />
+      | ^^^^^^^^^^
+>  94 |           <div
+      | ^^^^^^^^^^
+>  95 |             ref={revealRef}
+      | ^^^^^^^^^^
+>  96 |             className="absolute inset-0 rounded-[3rem] bg-center bg-cover bg-no-repeat pointer-events-none z-20 transition-opacity duration-300"
+      | ^^^^^^^^^^
+>  97 |             style={{ backgroundImage: `url(${image})`, opacity: active ? 1 : 0 }}
+      | ^^^^^^^^^^
+>  98 |           />
+      | ^^^^^^^^^^
+>  99 |         </>
+      | ^^^^^^^^^^
+> 100 |       )}
+      | ^^^^^^^^ Cannot access ref value during render
+  101 |     </div>
+  102 |   );
+  103 | }  react-hooks/refs
+  91:9  error  Error: Cannot access refs during render
+
+React refs are values that are not needed for rendering. Refs should only be accessed outside of render, such as in event handlers or effects. Accessing a ref value (the `current` property) during render can cause your component not to update as expected (https://react.dev/reference/react/useRef).
+
+  89 |     <div ref={wrapRef} className={`relative ${className}`}>
+  90 |       {children}
+> 91 |       {!prefersReducedMotion.current && (
+     |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Cannot access ref value during render
+  92 |         <>
+  93 |           <canvas className="absolute inset-0 pointer-events-none" style={{ display: 'none' }} ref={canvasRef} />
+  94 |           <div
+
+To initialize a ref only once, check that the ref is null with the pattern `if (ref.current == null) { ref.current = ... }`                                                                                                                                                                                                                                                                                                                                                                                                                                                     react-hooks/refs
+
+✖ 5 problems (5 errors, 0 warnings)
+

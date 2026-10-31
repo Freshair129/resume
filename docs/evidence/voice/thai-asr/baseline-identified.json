@@ -1,0 +1,238 @@
+{
+  "checked_at": "2026-10-30T21:45:55.082Z",
+  "scope": "OS-synthesized speech and deterministic non-speech; not physical microphone",
+  "glossary": [],
+  "runtimes": [
+    {
+      "observed_at": "2026-10-30T21:45:55.171Z",
+      "runtime_id": "portfolio-asr",
+      "runtime_epoch": "ep-ed24dbc024ab-14e92612",
+      "physical_resource_id": "portfolio-cpu",
+      "worker": {
+        "name": "lalin-voice-worker",
+        "version": "0.1.1",
+        "source_commit": "d765e14664a73a936666759c13111325df25211d"
+      },
+      "engine": {
+        "name": "faster-whisper",
+        "version": "1.2.1",
+        "labeled_stub": false
+      },
+      "profiles": [
+        {
+          "profile_id": "portfolio-asr",
+          "profile_revision": "small-cpu4-beam5-v4",
+          "kind": "asr",
+          "engine": "faster-whisper",
+          "languages": [
+            "th",
+            "en"
+          ],
+          "accepted_audio_formats": [
+            "audio/wav",
+            "audio/x-wav",
+            "audio/mpeg",
+            "audio/ogg",
+            "audio/flac",
+            "audio/mp4"
+          ],
+          "output_formats": [],
+          "limits": {
+            "max_audio_bytes": 524288,
+            "max_audio_seconds": 15,
+            "max_text_code_points": 800,
+            "max_output_seconds": 60,
+            "speed_min": 1,
+            "speed_max": 1
+          },
+          "max_concurrency": 1,
+          "voices": [],
+          "assets": [
+            {
+              "role": "config.json",
+              "sha256": "b55496ac7940a7ae47d2c01eab40edfd8701feec1229d9cce3b40014383fb828"
+            },
+            {
+              "role": "model.bin",
+              "sha256": "3e305921506d8872816023e4c273e75d2419fb89b24da97b4fe7bce14170d671"
+            },
+            {
+              "role": "tokenizer.json",
+              "sha256": "fb7b63191e9bb045082c79fd742a3106a12c99513ab30df4a0d47fa6cb6fd0ab"
+            },
+            {
+              "role": "vocabulary.txt",
+              "sha256": "34ce3fe1c5041027b3f8d42912270993f986dbc4bb34cf27f951e34a1e453913"
+            }
+          ],
+          "manifest_sha256": "14e92612ca50fd8233e80221188678e1a24491855906aaefabad8854d2134afd",
+          "device": {
+            "configured": "cpu",
+            "effective": "cpu"
+          },
+          "state": {
+            "configured": true,
+            "supported": true,
+            "loaded": true,
+            "ready": true,
+            "ready_reason": null,
+            "qualified": false,
+            "qualification_note": "Slice B engine — real speech path; Thai quality/GPU qualification evidence pending"
+          }
+        }
+      ]
+    }
+  ],
+  "checks": [
+    {
+      "id": "th-original",
+      "language": "th",
+      "text": "เจอเนษิทรอดดีบรองรับการคุณหาแบบไหนบ้าง",
+      "reference": "GenesisBlockDB รองรับการค้นหาแบบไหนบ้าง",
+      "entity": true,
+      "original": "question-th.wav",
+      "sha256": "1830aefd5b0d89b2bd07b41738a125b537ebd7bfc9734665d31b4f65f0a6e919",
+      "file": "fixtures/th-original.wav",
+      "receipt": {
+        "glossary_applied": null
+      },
+      "elapsed_ms": 2959
+    },
+    {
+      "id": "th-definition",
+      "language": "th",
+      "text": "เจ๊เนศิตรอบ ดีวิคืออะไร",
+      "reference": "GenesisBlockDB คืออะไร",
+      "entity": true,
+      "sha256": "32661487f1ffdcd2bc306b4bc0163bca3082c955e8c64bb6279bf1d1068b45df",
+      "file": "fixtures/th-definition.wav",
+      "receipt": {
+        "glossary_applied": null
+      },
+      "elapsed_ms": 2344
+    },
+    {
+      "id": "th-search",
+      "language": "th",
+      "text": "เจอเนษิสปรอดดี วิควรหาข้อมูยังไหร่",
+      "reference": "GenesisBlockDB ค้นหาข้อมูลอย่างไร",
+      "entity": true,
+      "sha256": "836a7f1152a5e6ce5dde822b2d066a2642e60e9e329d6f3d801d28c3e590e985",
+      "file": "fixtures/th-search.wav",
+      "receipt": {
+        "glossary_applied": null
+      },
+      "elapsed_ms": 2661
+    },
+    {
+      "id": "th-architecture",
+      "language": "th",
+      "text": "ช่วยอาทิบายการออกแบบของ GNR SIT BLOCK DB",
+      "reference": "ช่วยอธิบายการออกแบบของ GenesisBlockDB",
+      "entity": true,
+      "sha256": "337b51d96a40af6b0d949a24fabc59543880b1aab53911f14b03da680621f189",
+      "file": "fixtures/th-architecture.wav",
+      "receipt": {
+        "glossary_applied": null
+      },
+      "elapsed_ms": 2321
+    },
+    {
+      "id": "th-portfolio",
+      "language": "th",
+      "text": "มีผลงานและปัญญาณประติดอะไรบ้าง",
+      "reference": "มีผลงานด้านปัญญาประดิษฐ์อะไรบ้าง",
+      "entity": false,
+      "sha256": "68abc072d7fa1a5350f439d622f0a91847f73e8ef1584a9df008e9c2d1da2735",
+      "file": "fixtures/th-portfolio.wav",
+      "receipt": {
+        "glossary_applied": null
+      },
+      "elapsed_ms": 2824
+    },
+    {
+      "id": "th-contact",
+      "language": "th",
+      "text": "ต้องการติดต่อเจ้าของผลงานได้อย่างไร",
+      "reference": "ต้องการติดต่อเจ้าของผลงานได้อย่างไร",
+      "entity": false,
+      "sha256": "a2c1011fa343bc7556813930787a6d039c5c30cc0cb976797873067aeec9c6bc",
+      "file": "fixtures/th-contact.wav",
+      "receipt": {
+        "glossary_applied": null
+      },
+      "elapsed_ms": 2631
+    },
+    {
+      "id": "th-genesis-other",
+      "language": "th",
+      "text": "นั่งซื้อเจนเนศิตร์เล่มนี้เกี่ยวกับอะไร",
+      "reference": "หนังสือเจเนซิสเล่มนี้เกี่ยวกับอะไร",
+      "entity": false,
+      "sha256": "6dd3b3e1579f2f21b288ce3cfc96d272baecc26f294d29afc30f2fe1c4b9139a",
+      "file": "fixtures/th-genesis-other.wav",
+      "receipt": {
+        "glossary_applied": null
+      },
+      "elapsed_ms": 2632
+    },
+    {
+      "id": "th-other-database",
+      "language": "th",
+      "text": "โทษเกราะฉันเก็บข้อมุ่นอะไร",
+      "reference": "โพสต์เกรสใช้เก็บข้อมูลอะไร",
+      "entity": false,
+      "sha256": "9f2af9d418041c0273ed3db439195c4f15fd851c52a5a8d3a039800eea156f78",
+      "file": "fixtures/th-other-database.wav",
+      "receipt": {
+        "glossary_applied": null
+      },
+      "elapsed_ms": 2811
+    },
+    {
+      "id": "en-original",
+      "language": "en",
+      "text": "What is Genesis Block Database?",
+      "reference": "What is GenesisBlockDB?",
+      "entity": true,
+      "original": "question-en.wav",
+      "sha256": "8b520811cdd13b4b3a979710c22b5d604136c0143cbc20f597a55efc22629a17",
+      "file": "fixtures/en-original.wav",
+      "receipt": {
+        "glossary_applied": null
+      },
+      "elapsed_ms": 2637
+    },
+    {
+      "id": "en-contact",
+      "language": "en",
+      "text": "How can I contact the owner?",
+      "reference": "How can I contact the owner?",
+      "entity": false,
+      "sha256": "97c3138535258b2a8195915258c1b21d84dc2effee7a7d72efec29e0e1e61925",
+      "file": "fixtures/en-contact.wav",
+      "receipt": {
+        "glossary_applied": null
+      },
+      "elapsed_ms": 2635
+    },
+    {
+      "id": "silence",
+      "language": "th",
+      "empty": "silence",
+      "sha256": "20eaebffe1816e0ffa6f7f854f5ef4ea80d5349faaf0ce1fec1b713e7fde58fa",
+      "file": "fixtures/silence.wav",
+      "error": "NO_SPEECH",
+      "elapsed_ms": 324
+    },
+    {
+      "id": "noise",
+      "language": "th",
+      "empty": "noise",
+      "sha256": "1d6d05717818e2cdaeada0fbbf87c168a93f470ef25112bbe937c4e60ce966dd",
+      "file": "fixtures/noise.wav",
+      "error": "NO_SPEECH",
+      "elapsed_ms": 329
+    }
+  ]
+}
