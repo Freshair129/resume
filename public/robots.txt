@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://resume-web.vercel.app/sitemap.xml
+Sitemap: https://resume-ecru-five-15.vercel.app/sitemap.xml
