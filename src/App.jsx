@@ -1,6 +1,6 @@
 import React, { useState, useEffect, lazy, Suspense } from 'react';
 import {
-  BrowserRouter as Router, Routes, Route, Link, useLocation
+  BrowserRouter as Router, Routes, Route, Link, Navigate, useLocation
 } from 'react-router-dom';
 import {
   Phone, Mail, MapPin, Code, Brain, Star,
@@ -12,6 +12,7 @@ import { Analytics } from "@vercel/analytics/react"
 import { SpeedInsights } from "@vercel/speed-insights/react"
 import { useLanguage } from './LanguageContext';
 import { resumeVariants } from './data/resumeVariants';
+import { profile, SITE_VARIANT } from './data/profile';
 import { Reveal, RevealGroup, RevealItem } from './MotionPrimitives';
 import SpotlightReveal from './SpotlightReveal';
 import { staggerContainer, staggerItem, pageTransition, hoverLift, tapPress } from './motion-variants';
@@ -30,8 +31,18 @@ const ProjectDemo = lazy(() => import('./ProjectDemo'));
 const ChatbotWidget = lazy(() => import('./chatbot/ChatbotWidget'));
 const ProjectsSection = lazy(() => import('./ProjectsSection'));
 const PresentationSection = lazy(() => import('./PresentationSection'));
+const ValueSection = lazy(() => import('./ValueSection'));
 
-const RESUME_VARIANT = 'content-coordinator';
+const RESUME_VARIANT = SITE_VARIANT;
+
+// Reset scroll on route change (AnimatePresence keeps the old scroll offset otherwise).
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+  }, [pathname]);
+  return null;
+};
 
 const RouteFallback = () => (
   <div className="min-h-screen flex items-center justify-center bg-white">
@@ -72,6 +83,7 @@ const ImageSlider = () => {
 
 const MainPortfolio = () => {
   const { t, language, toggleLanguage } = useLanguage();
+  const p = profile[language] || profile.th;
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -145,16 +157,22 @@ const MainPortfolio = () => {
             initial="hidden"
             animate="show"
           >
-            <motion.div variants={staggerItem} className="inline-flex items-center gap-2 bg-blue-50 text-blue-600 px-4 py-2 rounded-full text-sm font-bold">
-              <span className="flex h-2 w-2 rounded-full bg-blue-600 animate-pulse"></span>
-              {t.hero.available}
+            <motion.div variants={staggerItem} className="flex flex-wrap items-center justify-center md:justify-start gap-x-4 gap-y-2">
+              <span className="inline-flex items-center gap-2 bg-blue-50 text-blue-600 px-4 py-2 rounded-full text-sm font-bold">
+                <span className="flex h-2 w-2 rounded-full bg-blue-600 animate-pulse"></span>
+                {t.hero.available}
+              </span>
+              <span className="text-xs md:text-sm font-bold uppercase tracking-widest text-slate-500">{p.role}</span>
             </motion.div>
             <motion.h1 variants={staggerItem} className="text-colossal-heading text-mega text-slate-900">{t.hero.name}</motion.h1>
-            <motion.p variants={staggerItem} className="text-xl text-slate-600 max-w-xl mx-auto md:mx-0 leading-relaxed">{t.hero.desc}</motion.p>
-            <motion.div variants={staggerItem} className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start flex-wrap">
-              <motion.div whileHover={hoverLift} whileTap={tapPress}>
+            <motion.h2 variants={staggerItem} className="text-2xl md:text-3xl font-bold text-slate-800 leading-snug max-w-2xl mx-auto md:mx-0">
+              {p.headline}
+            </motion.h2>
+            <motion.p variants={staggerItem} className="text-lg text-slate-600 max-w-xl mx-auto md:mx-0 leading-relaxed">{p.intro}</motion.p>
+            <motion.div variants={staggerItem} className="flex flex-col sm:flex-row sm:flex-wrap gap-4 justify-center md:justify-start items-center">
+              <motion.div whileHover={hoverLift} whileTap={tapPress} className="w-full sm:w-auto">
                 <Link to={`/resume/${RESUME_VARIANT}`} className="bg-slate-900 text-white px-8 py-4 rounded-2xl font-bold flex items-center justify-center gap-2 shadow-xl shadow-slate-200 hover:bg-slate-800 transition-colors">
-                  {t.hero.viewResume} <FileText size={18} />
+                  {p.cta.primary} <FileText size={18} />
                 </Link>
               </motion.div>
               <motion.a
@@ -163,22 +181,24 @@ const MainPortfolio = () => {
                 href={resumeVariants[RESUME_VARIANT].downloadFile}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-white text-slate-900 border-2 border-slate-900 px-8 py-4 rounded-2xl font-bold flex items-center justify-center gap-2 shadow-xl shadow-slate-100 hover:bg-slate-50 transition-colors"
+                className="w-full sm:w-auto bg-white text-slate-900 border-2 border-slate-200 px-8 py-4 rounded-2xl font-bold flex items-center justify-center gap-2 hover:border-slate-900 transition-colors"
               >
-                {language === 'th' ? 'ดาวน์โหลด Resume (PDF)' : 'Download Resume (PDF)'} <Download size={18} />
+                {p.cta.secondary} <Download size={18} />
               </motion.a>
-            </motion.div>
-            <motion.div variants={staggerItem} className="flex flex-wrap gap-x-6 gap-y-2 justify-center md:justify-start items-center pt-1">
-              <Link to="/portfolio" className="inline-flex items-center gap-1.5 text-slate-700 font-bold hover:text-blue-600 transition-colors">
-                {t.hero.viewPortfolio} <ExternalLink size={16} />
+              <Link to="/portfolio" className="inline-flex items-center justify-center gap-1.5 px-2 py-2 text-slate-600 font-bold hover:text-blue-600 transition-colors">
+                {p.cta.portfolio} <ExternalLink size={16} />
               </Link>
-              <a href="/marketing/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-slate-500 text-sm font-bold hover:text-indigo-600 transition-colors">
-                Marketing Tech Portfolio <Cpu size={14} />
-              </a>
             </motion.div>
-            <motion.p variants={staggerItem} className="text-sm text-slate-500 font-medium">
-              <Sparkles size={14} className="inline mr-1 text-blue-600 animate-pulse" /> {t.chatbot.hint}
-            </motion.p>
+            <motion.div variants={staggerItem} className="grid grid-cols-3 gap-4 md:gap-8 pt-6 border-t border-slate-100 max-w-xl mx-auto md:mx-0">
+              {p.stats.map((s) => (
+                <div key={s.label} className="text-center md:text-left">
+                  <p className="text-3xl md:text-4xl font-black text-slate-900 tracking-tight leading-none">
+                    {s.value}<span className="text-sm md:text-base font-bold text-blue-600 ml-1">{s.unit}</span>
+                  </p>
+                  <p className="text-xs md:text-sm text-slate-500 font-medium leading-snug mt-2">{s.label}</p>
+                </div>
+              ))}
+            </motion.div>
           </motion.div>
           <motion.div
             className="flex-1 relative"
@@ -199,14 +219,19 @@ const MainPortfolio = () => {
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 bg-blue-600 rounded-2xl flex items-center justify-center text-white"><Brain size={24} /></div>
                 <div className="text-left">
-                  <div className="text-xs text-slate-400 font-bold uppercase">AI Specialist</div>
-                  <div className="text-lg font-black text-slate-900">Agentic RAG</div>
+                  <div className="text-xs text-slate-400 font-bold uppercase">{p.badge.kicker}</div>
+                  <div className="text-lg font-black text-slate-900">{p.badge.title}</div>
                 </div>
               </div>
             </div>
           </motion.div>
         </div>
       </section>
+
+      {/* Value Section — what hiring Pornpon does for the team */}
+      <Suspense fallback={<SectionFallback />}>
+        <ValueSection />
+      </Suspense>
 
       {/* Skills Section */}
       <section id="skills" className="bg-slate-50 py-24">
@@ -349,7 +374,7 @@ const MainPortfolio = () => {
           </div>
           <div className="bg-white/5 p-10 rounded-[3rem] text-center space-y-4 backdrop-blur-sm">
             <p className="text-slate-400">Thanks for visiting my portfolio.</p>
-            <p className="text-xs text-slate-600 font-bold uppercase tracking-widest">© 2025 PORNPON.P - DIGITAL PORTFOLIO</p>
+            <p className="text-xs text-slate-600 font-bold uppercase tracking-widest">© {new Date().getFullYear()} PORNPON.T · DIGITAL PORTFOLIO</p>
           </div>
         </div>
       </footer>
@@ -374,7 +399,7 @@ const AnimatedRoutes = () => {
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<Page><MainPortfolio /></Page>} />
-        <Route path="/resume" element={<Page><Resume /></Page>} />
+        <Route path="/resume" element={<Navigate to={`/resume/${RESUME_VARIANT}`} replace />} />
         <Route path="/resume/:variantSlug" element={<Page><Resume /></Page>} />
         <Route path="/portfolio" element={<Page><Portfolio /></Page>} />
         <Route path="/gallery" element={<Page><Gallery /></Page>} />
@@ -387,6 +412,7 @@ const AnimatedRoutes = () => {
 const App = () => {
   return (
     <Router>
+      <ScrollToTop />
       <AnimatedRoutes />
       <Suspense fallback={null}>
         <ChatbotWidget />

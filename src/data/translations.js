@@ -20,7 +20,7 @@ export const th = {
     hero: {
         available: "Available for Work",
         name: "พรพล ธนสุวรรณธาร",
-        role: "Assistant Marketing Manager & Digital Content Specialist",
+        role: "Content Coordinator & Multimedia Producer",
         desc: "สวัสดีครับ ผม บอส ครับ อายุ 32 ปี มีประสบการณ์การทำงานที่หลากหลายและครอบคลุม ทั้งในสายงาน Production จนไปถึง Management และปัจจุบันกำลังศึกษาและพัฒนา Future Skill ด้าน AI Innovation เพื่อนำเทคโนโลยี AI มาลดต้นทุนและเพิ่มการผลิตให้องค์กรครับ",
         viewResume: "ดู Resume",
         viewPortfolio: "ดู Portfolio",
@@ -97,8 +97,9 @@ export const th = {
     portfolio: {
         title: "SOCIAL",
         titleHighlight: "PORTFOLIO",
-        subtitle: "ผลงานจริงบน Social Media ที่พิสูจน์ด้วยยอด Engagement",
-        clickToView: "(Click to view original posts with real-time stats)",
+        subtitle: "ผลงานจริงที่เผยแพร่บนช่องทางของแบรนด์ ทั้งวิดีโอ Motion Graphic และ Cinematic",
+        clickToView: "กดเล่นเพื่อดูคลิป หรือเปิดโพสต์ต้นฉบับเพื่อดูสถิติล่าสุดบนแพลตฟอร์ม",
+        originalPost: "โพสต์ต้นฉบับ",
         galleryTitle: "PHOTOGRAPHY",
         galleryTitleHighlight: "GALLERY",
         galleryDesc: "รวมภาพผลงานการถ่ายภาพและเบื้องหลังการทำงาน",
@@ -231,7 +232,7 @@ export const en = {
     hero: {
         available: "Available for Work",
         name: "Pornpon Thanasuwanthat",
-        role: "Assistant Marketing Manager & Digital Content Specialist",
+        role: "Content Coordinator & Multimedia Producer",
         desc: "Hi, I'm Boss, 32 years old. I have diverse experience across Production and Management roles. Currently developing Future Skills in AI Innovation to leverage AI technology for cost reduction and productivity enhancement in organizations.",
         viewResume: "View Resume",
         viewPortfolio: "View Portfolio",
@@ -308,8 +309,9 @@ export const en = {
     portfolio: {
         title: "SOCIAL",
         titleHighlight: "PORTFOLIO",
-        subtitle: "Real works on Social Media proven by engagement metrics",
-        clickToView: "(Click to view original posts with real-time stats)",
+        subtitle: "Published work on the brands' own channels: video, motion graphics and cinematic pieces",
+        clickToView: "Press play to watch, or open the original post for live platform stats",
+        originalPost: "Original post",
         galleryTitle: "PHOTOGRAPHY",
         galleryTitleHighlight: "GALLERY",
         galleryDesc: "A collection of photography works and behind-the-scenes moments.",

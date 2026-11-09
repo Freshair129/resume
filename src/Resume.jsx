@@ -1,5 +1,5 @@
 import { Link, useParams } from 'react-router-dom';
-import { ArrowLeft, Phone, Mail, MapPin, Download, ExternalLink, Brain, Cpu, Code, Star, Briefcase, FileText, GraduationCap, CheckCircle2, Target } from 'lucide-react';
+import { ArrowLeft, Phone, Mail, MapPin, Download, ExternalLink, Brain, Cpu, Code, Star, Briefcase, FileText, GraduationCap, CheckCircle2, Target, Printer } from 'lucide-react';
 import { motion } from 'motion/react';
 import { useLanguage } from './LanguageContext';
 import React from 'react';
@@ -46,9 +46,9 @@ const Resume = () => {
     const softSkills = ["Communication", "Teamwork", "Crisis Solving", "Growth Mindset", "Management", "Adaptability", "Work Smart"];
 
     return (
-        <div className="min-h-screen bg-[#f8fafc] py-10 px-4 sm:px-6 lg:px-8 font-sans text-[#1e293b]">
-            <div className="max-w-5xl mx-auto mb-6 flex justify-between items-center">
-                <div className="flex gap-4">
+        <div className="resume-page min-h-screen bg-[#f8fafc] py-10 px-4 sm:px-6 lg:px-8 font-sans text-[#1e293b]">
+            <div className="max-w-5xl mx-auto mb-6 flex flex-wrap gap-3 justify-between items-center print:hidden">
+                <div className="flex flex-wrap gap-3">
                     <Link to="/" className="inline-flex items-center gap-2 text-[#475569] hover:text-[#2563eb] font-bold transition-colors bg-[#ffffff] px-4 py-2 rounded-xl shadow-sm border border-[#f1f5f9]">
                         <ArrowLeft size={18} /> {t.nav.home}
                     </Link>
@@ -56,10 +56,20 @@ const Resume = () => {
                         <Briefcase size={18} /> {t.nav.portfolio}
                     </Link>
                 </div>
-                <div className="text-xl font-black tracking-tighter text-[#2563eb] hidden sm:block">PORNPON.T</div>
+                <div className="flex items-center gap-4">
+                    <motion.button
+                        type="button"
+                        whileTap={tapPress}
+                        onClick={() => window.print()}
+                        className="inline-flex items-center gap-2 bg-[#0f172a] hover:bg-[#1e293b] text-white px-4 py-2 rounded-xl text-sm font-bold shadow-sm transition-colors"
+                    >
+                        <Printer size={16} /> {language === 'th' ? 'บันทึกหน้านี้เป็น PDF' : 'Save this page as PDF'}
+                    </motion.button>
+                    <div className="text-xl font-black tracking-tighter text-[#2563eb] hidden sm:block">PORNPON.T</div>
+                </div>
             </div>
             <motion.div
-                className="max-w-5xl mx-auto bg-[#ffffff] shadow-2xl rounded-2xl overflow-hidden flex flex-col md:flex-row"
+                className="resume-sheet max-w-5xl mx-auto bg-[#ffffff] shadow-2xl rounded-2xl overflow-hidden flex flex-col md:flex-row"
                 initial={{ opacity: 0, y: 24 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
@@ -252,7 +262,7 @@ const Resume = () => {
                             {experiences.map((exp, index) => {
                                 const isEmphasized = variant.emphasisKeys?.includes(exp.key);
                                 return (
-                                <RevealItem key={index} className={`relative pl-10 ${isEmphasized ? 'bg-[#eff6ff] -mx-3 px-3 pl-[52px] py-3 rounded-xl border border-[#bfdbfe]' : ''}`}>
+                                <RevealItem key={index} className={`relative pl-10 print-avoid-break ${isEmphasized ? 'bg-[#eff6ff] -mx-3 px-3 pl-[52px] py-3 rounded-xl border border-[#bfdbfe]' : ''}`}>
                                     <div className={`absolute ${isEmphasized ? 'left-3' : 'left-0'} top-1.5 w-[36px] h-[36px] bg-[#ffffff] border-2 ${isEmphasized ? 'border-[#2563eb] shadow-md shadow-blue-200' : 'border-[#2563eb]'} rounded-full flex items-center justify-center z-10 shadow-sm`}>
                                         <div className={`w-2 h-2 ${isEmphasized ? 'bg-[#2563eb]' : 'bg-[#2563eb]'} rounded-full`}></div>
                                     </div>

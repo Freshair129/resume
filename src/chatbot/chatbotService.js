@@ -1,132 +1,72 @@
-import { resumeContext, systemPrompt } from './chatbotContext';
-
 /**
- * Chatbot Service - EVA Backend Integration
+ * Chatbot Service
+ *
+ * 1. EVA backend (optional) — used only when VITE_USE_EVA_BACKEND=true and a URL is set.
+ * 2. /api/chat — Vercel Function that holds the Gemini key server-side (see api/chat.js).
+ *
+ * The browser never sees an API key.
  */
 
-const EVA_API_URL = import.meta.env.VITE_EVA_API_URL || 'http://localhost:8000/api/chat';
-const USE_EVA_BACKEND = import.meta.env.VITE_USE_EVA_BACKEND === 'true';
+const EVA_API_URL = import.meta.env.VITE_EVA_API_URL || '';
+const USE_EVA_BACKEND = import.meta.env.VITE_USE_EVA_BACKEND === 'true' && Boolean(EVA_API_URL);
+const CHAT_API_URL = import.meta.env.VITE_CHAT_API_URL || '/api/chat';
+
+const FALLBACK_BY_REASON = {
+    RECITATION: 'ขออภัยครับ ข้อมูลนี้ติดข้อจำกัดด้านลิขสิทธิ์ โปรดถามคำถามอื่นแทนนะครับ',
+    SAFETY: 'ขออภัยครับ ข้อความนี้ถูกกรองโดยระบบความปลอดภัย โปรดลองถามคำถามอื่นนะครับ',
+};
 
 export async function sendMessage(userMessage, conversationHistory = []) {
     if (USE_EVA_BACKEND) {
         try {
-            let conversationId = sessionStorage.getItem('eva_conversation_id');
-            const userName = sessionStorage.getItem('eva_user_name');
-            const userCompany = sessionStorage.getItem('eva_user_company');
-
-            // Get referral source from URL (e.g., ?ref=google)
-            const urlParams = new URLSearchParams(window.location.search);
-            const source = urlParams.get('ref') || 'General Visitor';
-
-            const response = await fetch(EVA_API_URL, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    message: userMessage,
-                    conversation_id: conversationId || null,
-                    metadata: {
-                        source,
-                        user_name: userName,
-                        user_company: userCompany
-                    }
-                })
-            });
-
-            if (response.ok) {
-                const data = await response.json();
-                if (data.conversation_id) sessionStorage.setItem('eva_conversation_id', data.conversation_id);
-                return data.response;
-            }
+            const reply = await sendMessageEva(userMessage);
+            if (reply) return reply;
         } catch (error) {
-            console.error('EVA API error, falling back to Gemini:', error);
+            console.error('EVA API error, falling back to /api/chat:', error);
         }
     }
 
-    return await sendMessageGemini(userMessage, conversationHistory);
+    return sendMessageServer(userMessage, conversationHistory);
 }
 
-async function sendMessageGemini(userMessage, conversationHistory = []) {
-    const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
-    if (!apiKey) throw new Error('Gemini API key missing');
+async function sendMessageEva(userMessage) {
+    const conversationId = sessionStorage.getItem('eva_conversation_id');
+    const userName = sessionStorage.getItem('eva_user_name');
+    const userCompany = sessionStorage.getItem('eva_user_company');
+    const source = new URLSearchParams(window.location.search).get('ref') || 'General Visitor';
 
-    // Using gemini-2.0-flash-lite-preview-02-05 on v1beta - Standard for 2026 efficient inference
-    const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite-preview-02-05:generateContent';
+    const response = await fetch(EVA_API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            message: userMessage,
+            conversation_id: conversationId || null,
+            metadata: { source, user_name: userName, user_company: userCompany },
+        }),
+    });
+    if (!response.ok) throw new Error(`EVA API request failed: ${response.status}`);
 
-    try {
-        const context = buildFullContext();
+    const data = await response.json();
+    if (data.conversation_id) sessionStorage.setItem('eva_conversation_id', data.conversation_id);
+    return data.response;
+}
 
-        // Using official system_instruction for Gemini 1.5
-        const systemInstruction = {
-            role: 'system',
-            parts: [{ text: `${systemPrompt}\n\nContext:\n${context}` }]
-        };
+async function sendMessageServer(userMessage, conversationHistory) {
+    const history = conversationHistory
+        .filter((msg) => msg?.role && msg?.content)
+        .map((msg) => ({ role: msg.role === 'user' ? 'user' : 'model', content: msg.content }));
 
-        const contents = [];
+    const response = await fetch(CHAT_API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: userMessage, history }),
+    });
 
-        // Correctly alternating history
-        conversationHistory.forEach(msg => {
-            if (msg.role && msg.content) {
-                contents.push({
-                    role: msg.role === 'user' ? 'user' : 'model',
-                    parts: [{ text: msg.content }]
-                });
-            }
-        });
-
-        // Current message
-        contents.push({
-            role: 'user',
-            parts: [{ text: userMessage }]
-        });
-
-        const response = await fetch(`${GEMINI_API_URL}?key=${apiKey}`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                system_instruction: systemInstruction,
-                contents: contents,
-                generationConfig: {
-                    temperature: 0.7,
-                    maxOutputTokens: 512,
-                    topP: 0.8,
-                    topK: 40
-                },
-                safetySettings: [
-                    { category: "HARM_CATEGORY_HARASSMENT", threshold: "BLOCK_NONE" },
-                    { category: "HARM_CATEGORY_HATE_SPEECH", threshold: "BLOCK_NONE" },
-                    { category: "HARM_CATEGORY_SEXUALLY_EXPLICIT", threshold: "BLOCK_NONE" },
-                    { category: "HARM_CATEGORY_DANGEROUS_CONTENT", threshold: "BLOCK_NONE" },
-                    { category: "HARM_CATEGORY_CIVIC_INTEGRITY", threshold: "BLOCK_NONE" }
-                ]
-            })
-        });
-
-        if (!response.ok) {
-            const errorData = await response.json();
-            console.error('Gemini API Error Body:', errorData);
-            throw new Error(`Gemini API Error: ${errorData.error?.message || response.statusText}`);
-        }
-
-        const data = await response.json();
-
-        if (data.candidates && data.candidates[0]?.content?.parts?.[0]?.text) {
-            return data.candidates[0].content.parts[0].text;
-        } else {
-            const finishReason = data.candidates?.[0]?.finishReason;
-            console.warn('Gemini Finish Reason:', finishReason, 'Data:', data);
-
-            if (finishReason === 'RECITATION') return "ขออภัยครับ ข้อมูลนี้ติดลิขสิทธิ์หรือข้อจำกัดบางอย่าง (Recitation) โปรดถามคำถามอื่นแทนนะครับ";
-            if (finishReason === 'SAFETY') return "ขออภัยครับ ข้อความนี้ถูกกรองโดยระบบความปลอดภัย (Safety) โปรดลองถามคำถามอื่นนะครับ";
-
-            throw new Error(`Model returned empty output. (Reason: ${finishReason || 'Unknown'})`);
-        }
-
-    } catch (error) {
-        console.error('Gemini Service Error:', error);
-        throw error;
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok) {
+        throw new Error(data.error || `Chat API error: ${response.status}`);
     }
-}
 
-function buildFullContext() {
-    return JSON.stringify(resumeContext, null, 2);
+    if (data.response) return data.response;
+    return FALLBACK_BY_REASON[data.reason] || 'ขออภัยครับ ตอบไม่ได้ในตอนนี้ ลองถามใหม่อีกครั้งนะครับ';
 }

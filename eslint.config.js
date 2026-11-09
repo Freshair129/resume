@@ -30,4 +30,9 @@ export default defineConfig([
       'react/jsx-uses-react': 'error',
     },
   },
+  {
+    // Node-side code: Vercel Functions and the Vite config/dev middleware.
+    files: ['api/**/*.js', 'vite.config.js'],
+    languageOptions: { globals: { ...globals.node } },
+  },
 ])

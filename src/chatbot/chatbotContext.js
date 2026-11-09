@@ -3,9 +3,9 @@ export const resumeContext = {
         name: "Pornpon Thanasuwanthat",
         nickname: "Boss",
         age: 32,
-        currentRole: "Assistant Manager & Digital Content Specialist",
+        currentRole: "Content Coordinator & Multimedia Producer (most recent role: Assistant Marketing Manager at V School Food Institute)",
         location: "Bangkok, Thailand",
-        description: "Diverse experience from Production to Management, currently focused on AI Innovation"
+        description: "4+ years coordinating end-to-end content production (video, motion graphics, photography, social) for beauty, automotive and education brands; managed teams of 60+; built AI MarTech systems (Zuri, V School CRM) that are in real use"
     },
 
     experience: [

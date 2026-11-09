@@ -1,10 +1,31 @@
 import { Link } from 'react-router-dom';
-import { ArrowLeft, ExternalLink, Heart, Eye, Github, Play } from 'lucide-react';
+import { ArrowLeft, ExternalLink, Github, Play, Clapperboard } from 'lucide-react';
 import { useState } from 'react';
 import { motion } from 'motion/react';
 import { useLanguage } from './LanguageContext';
 import { Reveal, RevealGroup, RevealItem } from './MotionPrimitives';
 import { hoverLift, tapPress } from './motion-variants';
+
+// Poster treatment per category — replaces the old black box when a platform
+// gives us no thumbnail (Facebook reels), so every card still reads as a designed piece.
+const CATEGORY_STYLE = {
+    beauty: { gradient: 'from-rose-400 via-pink-500 to-fuchsia-700', chip: 'bg-rose-50 text-rose-700 border-rose-100' },
+    auto: { gradient: 'from-amber-400 via-orange-500 to-red-600', chip: 'bg-amber-50 text-amber-700 border-amber-100' },
+    graphic: { gradient: 'from-violet-400 via-purple-500 to-indigo-700', chip: 'bg-violet-50 text-violet-700 border-violet-100' },
+    cinematic: { gradient: 'from-slate-600 via-slate-800 to-cyan-900', chip: 'bg-slate-100 text-slate-700 border-slate-200' },
+    ai: { gradient: 'from-indigo-500 via-blue-600 to-slate-900', chip: 'bg-indigo-50 text-indigo-700 border-indigo-100' },
+    default: { gradient: 'from-slate-700 via-slate-800 to-slate-900', chip: 'bg-slate-100 text-slate-600 border-slate-200' },
+};
+
+const categoriesOf = (work) => (Array.isArray(work.category) ? work.category : work.category ? [work.category] : []);
+const styleOf = (work) => CATEGORY_STYLE[categoriesOf(work)[0]] || CATEGORY_STYLE.default;
+
+// "Client: Piece" → { client, piece } so the poster can lead with the brand name.
+const splitTitle = (title) => {
+    const idx = title.indexOf(':');
+    if (idx === -1) return { client: null, piece: title };
+    return { client: title.slice(0, idx).trim(), piece: title.slice(idx + 1).trim() };
+};
 
 const Portfolio = () => {
     const { t } = useLanguage();
@@ -20,6 +41,7 @@ const Portfolio = () => {
     const socialWorks = [
         {
             id: 1,
+            category: 'auto',
             type: 'facebook',
             title: "U-Turn Shop: บริการซ่อมบิ๊กไบค์ครบวงจร",
             url: "https://www.facebook.com/reel/3132594807015735",
@@ -28,6 +50,7 @@ const Portfolio = () => {
         },
         {
             id: 2,
+            category: 'auto',
             type: 'facebook',
             title: "U-Turn Shop: ผลงานซ่อมบิ๊กไบค์ (2)",
             url: "https://www.facebook.com/reel/1126825051425488",
@@ -36,6 +59,7 @@ const Portfolio = () => {
         },
         {
             id: 3,
+            category: 'auto',
             type: 'facebook',
             title: "U-Turn Shop: รายการวาไรตี้ (Variety Style)",
             url: "https://www.facebook.com/reel/2986974011532958",
@@ -188,6 +212,30 @@ const Portfolio = () => {
         return w.category === activeCategory;
     });
 
+    // Designed poster used wherever the platform gives us no thumbnail.
+    const Poster = ({ work, children }) => {
+        const { client, piece } = splitTitle(work.title);
+        const style = styleOf(work);
+        const cats = categoriesOf(work);
+        return (
+            <div className={`w-full h-full relative overflow-hidden bg-gradient-to-br ${style.gradient}`}>
+                <div className="absolute inset-0 opacity-[0.12] bg-[radial-gradient(circle_at_20%_20%,white,transparent_45%),radial-gradient(circle_at_80%_80%,white,transparent_40%)]"></div>
+                <div className="absolute inset-0 p-6 flex flex-col justify-between text-left text-white">
+                    <div className="flex items-start justify-between gap-3">
+                        <span className="inline-flex items-center gap-1.5 text-[10px] font-black uppercase tracking-widest bg-white/15 backdrop-blur-sm px-2.5 py-1 rounded-full">
+                            <Clapperboard size={12} /> {cats[0] ? t.portfolio.categories[cats[0]] : work.type}
+                        </span>
+                    </div>
+                    <div className="pr-16">
+                        {client && <p className="text-xs font-bold uppercase tracking-widest text-white/75 mb-1">{client}</p>}
+                        <p className="text-xl md:text-2xl font-black leading-tight line-clamp-3 drop-shadow-sm">{piece}</p>
+                    </div>
+                </div>
+                {children}
+            </div>
+        );
+    };
+
     const renderMedia = (work) => {
         const isActivated = activated.has(work.id);
         const playable =
@@ -245,11 +293,9 @@ const Portfolio = () => {
                             loading="lazy"
                         />
                     ) : (
-                        <div className="w-full h-full bg-gradient-to-br from-slate-800 via-slate-900 to-black flex items-center justify-center p-6">
-                            <p className="text-slate-300 text-sm font-bold text-center line-clamp-3">{work.title}</p>
-                        </div>
+                        <Poster work={work} />
                     )}
-                    <div className="absolute inset-0 flex items-center justify-center bg-black/30 group-hover/poster:bg-black/10 transition-colors">
+                    <div className={`absolute inset-0 flex items-center justify-center transition-colors ${ytId ? 'bg-black/30 group-hover/poster:bg-black/10' : ''}`}>
                         <span className="w-16 h-16 rounded-full bg-white/95 flex items-center justify-center shadow-2xl group-hover/poster:scale-110 transition-transform">
                             <Play size={26} className="text-slate-900 ml-1" fill="currentColor" />
                         </span>
@@ -260,12 +306,16 @@ const Portfolio = () => {
 
         // Facebook without an embeddable URL → open externally
         return (
-            <div className="w-full h-full flex items-center justify-center flex-col gap-4 p-8 text-center bg-gradient-to-br from-slate-800 via-slate-900 to-black">
-                <p className="font-bold text-slate-300 text-sm line-clamp-3">{work.title}</p>
-                <a href={work.url} target="_blank" rel="noopener noreferrer" className="bg-white text-slate-900 px-6 py-2 rounded-full font-bold flex items-center gap-2 hover:bg-blue-50 transition-colors">
-                    <ExternalLink size={16} /> Open in Facebook
+            <Poster work={work}>
+                <a
+                    href={work.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="absolute bottom-6 right-6 bg-white text-slate-900 px-4 py-2 rounded-full font-bold text-sm flex items-center gap-2 hover:bg-blue-50 transition-colors shadow-lg"
+                >
+                    <ExternalLink size={14} /> Facebook
                 </a>
-            </div>
+            </Poster>
         );
     };
 
@@ -341,16 +391,30 @@ const Portfolio = () => {
 
                             {/* Content Info */}
                             <div className="p-6">
+                                {splitTitle(work.title).client && (
+                                    <p className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-1">{splitTitle(work.title).client}</p>
+                                )}
                                 <h3 className="font-bold text-lg text-slate-900 mb-2 line-clamp-2 leading-tight group-hover:text-blue-600 transition-colors">
-                                    {work.title}
+                                    {splitTitle(work.title).piece}
                                 </h3>
-                                <div className="flex items-center gap-4 mt-4 pt-4 border-t border-slate-50">
-                                    <div className="flex items-center gap-1.5 text-slate-500 text-sm font-semibold">
-                                        <Eye size={16} className="text-blue-500" /> {work.stats.views}
+                                <div className="flex items-center justify-between gap-3 mt-4 pt-4 border-t border-slate-100">
+                                    <div className="flex flex-wrap gap-1.5">
+                                        {categoriesOf(work).map((cat) => (
+                                            <span key={cat} className={`px-2.5 py-1 rounded-full text-[11px] font-bold border ${(CATEGORY_STYLE[cat] || CATEGORY_STYLE.default).chip}`}>
+                                                {t.portfolio.categories[cat] || cat}
+                                            </span>
+                                        ))}
                                     </div>
-                                    <div className="flex items-center gap-1.5 text-slate-500 text-sm font-semibold">
-                                        <Heart size={16} className="text-pink-500" /> {work.stats.likes}
-                                    </div>
+                                    {work.type !== 'github' && (
+                                        <a
+                                            href={work.url.replace('/embed/', '/watch?v=')}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="shrink-0 inline-flex items-center gap-1 text-xs font-bold text-slate-500 hover:text-blue-600 transition-colors"
+                                        >
+                                            {t.portfolio.originalPost} <ExternalLink size={12} />
+                                        </a>
+                                    )}
                                 </div>
                             </div>
                         </motion.div>

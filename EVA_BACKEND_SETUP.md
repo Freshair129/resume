@@ -45,7 +45,7 @@ npm run dev
 
 ✅ **API Endpoint Created** - FastAPI server with CORS
 ✅ **Website Updated** - Chatbot service connects to EVA
-✅ **Fallback Ready** - Falls back to Gemini if EVA unavailable
+✅ **Fallback Ready** - Falls back to `/api/chat` (Vercel Function holding the Gemini key server-side) if EVA unavailable
 ⏳ **EVA Integration** - Coming next (connect to Orchestrator)
 
 ---
@@ -65,7 +65,7 @@ npm run dev
 - [ ] Website connects to EVA API (check Network tab)
 - [ ] Chatbot sends/receives messages
 - [ ] CORS allows website domain
-- [ ] Fallback to Gemini works (if EVA is down)
+- [ ] Fallback to `/api/chat` works (if EVA is down) — needs `GEMINI_API_KEY` in `.env` locally and in Vercel project env
 
 ---
 
