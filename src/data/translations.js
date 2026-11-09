@@ -3,12 +3,27 @@ export const th = {
         home: "หน้าหลัก",
         skills: "ทักษะ",
         experience: "ประสบการณ์",
+        caseStudies: "กรณีศึกษา",
         portfolio: "Portfolio",
         gallery: "แกลเลอรี่",
         resume: "Resume",
         hireMe: "Hire me!!",
         backToHome: "กลับหน้าหลัก",
         backToPortfolio: "กลับหน้า Portfolio"
+    },
+    seo: {
+        pageTitles: {
+            home: "หน้าหลัก",
+            portfolio: "ผลงาน",
+            gallery: "แกลเลอรี่",
+            resume: "ประวัติการทำงาน"
+        },
+        pageDescriptions: {
+            home: "ช่วยทีมการตลาดส่งคอนเทนต์ทันแพลน คุมมาตรฐานแบรนด์ และลดงานซ้ำด้วย AI",
+            portfolio: "ผลงาน · Content Coordinator & Multimedia Producer",
+            gallery: "แกลเลอรี่ · Content Coordinator & Multimedia Producer",
+            resume: "ผมคือบอส ประสานงานการผลิตคอนเทนต์ครบวงจรมากว่า 4 ปี ให้แบรนด์สายความงาม ยานยนต์ และการศึกษา ตั้งแต่วาง Content Calendar คุม Brief และตารางถ่ายทำ ไปจนถึงตัดต่อและทำ Motion Graphic เอง และล่าสุดสร้างระบบ AI MarTech ที่ทีมใช้งานจริง"
+        }
     },
     chatbot: {
         welcomeMessage: "สวัสดีค่ะ! อีวา (EVA) เองค่ะ ผู้ช่วยดิจิทัลของบอส มีอะไรให้ช่วยไหมคะ? ✨",
@@ -17,6 +32,28 @@ export const th = {
         errorMessage: "ขออภัยครับ เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง 😅",
         hint: "คุยกับ EVA AI ที่บอสสร้างเองได้ที่นี่!",
         privacyNote: "ข้อความและข้อมูลติดต่อที่คุณกรอกจะถูกเก็บเพื่อให้บอสติดต่อกลับเท่านั้น"
+    },
+    a11y: {
+        skipToMain: "ข้ามไปยังเนื้อหาหลัก",
+        openMenu: "เปิดเมนู",
+        closeMenu: "ปิดเมนู",
+        openChat: "เปิดแชต EVA",
+        closeChat: "ปิดแชต EVA",
+        minimizeChat: "ย่อแชต EVA",
+        dismissHint: "ปิดคำแนะนำ",
+        closeGallery: "ปิดภาพขยาย",
+        closeDialog: "ปิดรายละเอียดโครงการ",
+        galleryImage: (number) => `ภาพเบื้องหลังหมายเลข ${number}`,
+        zoomGalleryImage: "ขยายภาพ"
+    },
+    caseStudies: {
+        eyebrow: "ผลงานที่สร้างผลลัพธ์",
+        title: "จากโจทย์งานสู่ระบบที่ทีมใช้จริง",
+        problem: "โจทย์",
+        approach: "แนวทาง",
+        result: "ผลลัพธ์",
+        viewCase: "ดูผลงานที่เกี่ยวข้อง",
+        portfolioFallback: "ชมผลงานคลินิกความงามใน Portfolio"
     },
     contact: {
         title: "ฝากข้อความให้บอสติดต่อกลับ",
@@ -232,12 +269,27 @@ export const en = {
         home: "Home",
         skills: "Skills",
         experience: "Experience",
+        caseStudies: "Case studies",
         portfolio: "Portfolio",
         gallery: "Gallery",
         resume: "Resume",
         hireMe: "Hire Me",
         backToHome: "Back to Home",
         backToPortfolio: "Back to Portfolio"
+    },
+    seo: {
+        pageTitles: {
+            home: "Home",
+            portfolio: "Portfolio",
+            gallery: "Gallery",
+            resume: "Resume"
+        },
+        pageDescriptions: {
+            home: "I help marketing teams ship content on schedule, keep the brand safe, and cut repetitive work with AI.",
+            portfolio: "Portfolio · Content Coordinator & Multimedia Producer",
+            gallery: "Gallery · Content Coordinator & Multimedia Producer",
+            resume: "I'm Boss. For 4+ years I've coordinated end-to-end content production for beauty, automotive and education brands: planning content calendars, running briefs and shoot schedules, editing video and motion graphics myself, and most recently building AI MarTech systems teams actually use."
+        }
     },
     chatbot: {
         welcomeMessage: "Hi! I'm EVA, Boss's AI partner. Nice to meet you! ✨ May I catch your name and company? (So I can remember you and prepare the best info for you!) 😊",
@@ -246,6 +298,28 @@ export const en = {
         errorMessage: "Sorry, an error occurred. Please try again 😅",
         hint: "Chat with EVA AI, my self-made assistant!",
         privacyNote: "Your message and contact details will be stored only so Boss can get back to you."
+    },
+    a11y: {
+        skipToMain: "Skip to main content",
+        openMenu: "Open menu",
+        closeMenu: "Close menu",
+        openChat: "Open EVA chat",
+        closeChat: "Close EVA chat",
+        minimizeChat: "Minimize EVA chat",
+        dismissHint: "Dismiss hint",
+        closeGallery: "Close enlarged image",
+        closeDialog: "Close project details",
+        galleryImage: (number) => `Behind-the-scenes photo ${number}`,
+        zoomGalleryImage: "Enlarge image"
+    },
+    caseStudies: {
+        eyebrow: "Work with impact",
+        title: "From business need to tools teams use",
+        problem: "Problem",
+        approach: "Approach",
+        result: "Result",
+        viewCase: "See related work",
+        portfolioFallback: "See clinic work in the Portfolio"
     },
     contact: {
         title: "Leave a message for Boss",

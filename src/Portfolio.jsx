@@ -250,7 +250,7 @@ const Portfolio = () => {
                     <div className="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center mb-4 text-white backdrop-blur-md border border-white/20">
                         <Github size={40} />
                     </div>
-                    <h4 className="text-white font-bold text-lg mb-2 relative z-10">AI Project</h4>
+                    <h3 className="text-white font-bold text-lg mb-2 relative z-10">AI Project</h3>
                     <p className="text-slate-400 text-xs relative z-10 px-4">{work.description}</p>
                     <a href={work.url} target="_blank" rel="noopener noreferrer" className="mt-4 bg-white text-slate-900 px-6 py-2 rounded-full font-bold text-sm flex items-center gap-2 hover:bg-blue-50 transition-colors z-10">
                         <ExternalLink size={14} /> View Code
@@ -291,6 +291,7 @@ const Portfolio = () => {
                             alt={work.title}
                             className="w-full h-full object-cover"
                             loading="lazy"
+                            decoding="async"
                         />
                     ) : (
                         <Poster work={work} />
@@ -340,11 +341,12 @@ const Portfolio = () => {
             <Reveal className="max-w-6xl mx-auto mb-12">
                 <p className="text-xl md:text-2xl text-slate-600 max-w-2xl leading-relaxed">
                     {t.portfolio.subtitle}
-                    <span className="text-sm text-slate-400 font-medium mt-2 block">{t.portfolio.clickToView}</span>
+                    <span className="text-sm text-slate-500 font-medium mt-2 block">{t.portfolio.clickToView}</span>
                 </p>
             </Reveal>
 
             {/* Category Filter */}
+            <h2 className="sr-only">{t.portfolio.title} {t.portfolio.titleHighlight}</h2>
             <div className="max-w-6xl mx-auto mb-10 overflow-x-auto">
                 <div className="flex gap-3 justify-start p-2 min-w-max">
                     {['all', 'graphic', 'cinematic', 'beauty', 'auto', 'ai'].map((cat) => (

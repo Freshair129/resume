@@ -18,6 +18,14 @@ const ChatbotModal = ({ onClose, messages, isLoading, onSendMessage }) => {
         inputRef.current?.focus();
     }, []);
 
+    useEffect(() => {
+        const handleEscape = (event) => {
+            if (event.key === 'Escape') onClose();
+        };
+        window.addEventListener('keydown', handleEscape);
+        return () => window.removeEventListener('keydown', handleEscape);
+    }, [onClose]);
+
     const handleSend = () => {
         if (inputValue.trim() && !isLoading) {
             onSendMessage(inputValue);
@@ -33,7 +41,7 @@ const ChatbotModal = ({ onClose, messages, isLoading, onSendMessage }) => {
     };
 
     return (
-        <div className="fixed bottom-6 right-6 z-50 w-[380px] h-[600px] max-h-[80vh] bg-white rounded-3xl shadow-2xl flex flex-col animate-in slide-in-from-bottom-8 duration-300 border border-slate-200">
+        <div role="dialog" aria-labelledby="eva-chat-title" className="fixed bottom-6 right-6 z-50 w-[380px] h-[600px] max-h-[80vh] bg-white rounded-3xl shadow-2xl flex flex-col animate-in slide-in-from-bottom-8 duration-300 border border-slate-200">
             {/* Header */}
             <div className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-4 rounded-t-3xl flex items-center justify-between">
                 <div className="flex items-center gap-3">
@@ -41,7 +49,7 @@ const ChatbotModal = ({ onClose, messages, isLoading, onSendMessage }) => {
                         <Bot size={24} />
                     </div>
                     <div>
-                        <h3 className="font-bold text-lg">EVA (อีวา)</h3>
+                        <h2 id="eva-chat-title" className="font-bold text-lg">EVA (อีวา)</h2>
                         <p className="text-xs text-white/80">Digital Soul & AI Partner</p>
                     </div>
                 </div>
@@ -49,14 +57,14 @@ const ChatbotModal = ({ onClose, messages, isLoading, onSendMessage }) => {
                     <button
                         onClick={onClose}
                         className="hover:bg-white/20 p-2 rounded-full transition-colors"
-                        aria-label="Minimize chat"
+                        aria-label={t.a11y.minimizeChat}
                     >
                         <Minimize2 size={18} />
                     </button>
                     <button
                         onClick={onClose}
                         className="hover:bg-white/20 p-2 rounded-full transition-colors"
-                        aria-label="Close chat"
+                        aria-label={t.a11y.closeChat}
                     >
                         <X size={18} />
                     </button>
@@ -139,7 +147,7 @@ const ChatbotModal = ({ onClose, messages, isLoading, onSendMessage }) => {
                         <Send size={20} />
                     </button>
                 </div>
-                <p className="text-xs text-slate-400 mt-2 text-center">
+                <p className="text-xs text-slate-500 mt-2 text-center">
                     Powered by Gemini AI • Responses may vary
                 </p>
             </div>

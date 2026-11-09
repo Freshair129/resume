@@ -3,10 +3,10 @@ import { motion } from 'motion/react';
 import { useLanguage } from './LanguageContext';
 import { Reveal, RevealGroup, RevealItem } from './MotionPrimitives';
 import { hoverLift } from './motion-variants';
-import dimsumImg from './assets/dimsum.png';
-import mock1Img from './assets/pre_mock1.png';
-import mock2Img from './assets/pre_mock2.png';
-import packagingImg from './assets/pre_packaging.png';
+import dimsumImg from './assets/dimsum.webp';
+import mock1Img from './assets/pre_mock1.webp';
+import mock2Img from './assets/pre_mock2.webp';
+import packagingImg from './assets/pre_packaging.webp';
 
 const PresentationSection = () => {
   const { language } = useLanguage();
@@ -158,6 +158,7 @@ const PresentationSection = () => {
                     src={work.image}
                     alt={work.title}
                     loading="lazy"
+                    decoding="async"
                     className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                   <div className="absolute top-3 right-3">

@@ -3,7 +3,7 @@ import { ArrowLeft, Phone, Mail, MapPin, Download, ExternalLink, Brain, Cpu, Cod
 import { motion } from 'motion/react';
 import { useLanguage } from './LanguageContext';
 import React from 'react';
-import profileImage from './assets/profile.jpg';
+import profileImage from './assets/profile.webp';
 import { resumeVariants, allExperiences } from './data/resumeVariants';
 import { RevealGroup, RevealItem } from './MotionPrimitives';
 import { tapPress } from './motion-variants';
@@ -85,6 +85,7 @@ const Resume = () => {
                                 src={profileImage}
                                 alt={t.resume.profileAlt}
                                 className="w-full h-full object-cover"
+                                decoding="async"
                                 onError={(e) => {
                                     e.target.src = "https://via.placeholder.com/150?text=Profile";
                                 }}

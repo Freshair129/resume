@@ -13,19 +13,20 @@ import { SpeedInsights } from "@vercel/speed-insights/react"
 import { useLanguage } from './LanguageContext';
 import ContactForm from './ContactForm';
 import { trackEvent } from './lib/track';
+import { usePageMeta } from './lib/seo';
 import { isDoNotTrackEnabled } from './lib/visitor';
 import { resumeVariants } from './data/resumeVariants';
 import { profile, SITE_VARIANT } from './data/profile';
 import { Reveal, RevealGroup, RevealItem } from './MotionPrimitives';
 import SpotlightReveal from './SpotlightReveal';
 import { staggerContainer, staggerItem, pageTransition, hoverLift, tapPress } from './motion-variants';
-import heroBg from './assets/hero-bg.jpg';
-import img02 from './assets/02.jpg';
-import img03 from './assets/03.jpg';
-import img04 from './assets/04.jpg';
-import img05 from './assets/05.jpg';
-import img06 from './assets/06.jpg';
-import profileImg from './assets/profile.jpg';
+import heroBg from './assets/hero-bg.webp';
+import img02 from './assets/02.webp';
+import img03 from './assets/03.webp';
+import img04 from './assets/04.webp';
+import img05 from './assets/05.webp';
+import img06 from './assets/06.webp';
+import profileImg from './assets/profile.webp';
 
 const Resume = lazy(() => import('./Resume'));
 const Portfolio = lazy(() => import('./Portfolio'));
@@ -35,9 +36,10 @@ const ChatbotWidget = lazy(() => import('./chatbot/ChatbotWidget'));
 const ProjectsSection = lazy(() => import('./ProjectsSection'));
 const PresentationSection = lazy(() => import('./PresentationSection'));
 const ValueSection = lazy(() => import('./ValueSection'));
+const CaseStudies = lazy(() => import('./CaseStudies'));
 
 const RESUME_VARIANT = SITE_VARIANT;
-const TRACKED_SECTIONS = ['value', 'skills', 'experience', 'projects', 'contact'];
+const TRACKED_SECTIONS = ['value', 'case-studies', 'skills', 'experience', 'projects', 'contact'];
 
 const SectionViewTracker = () => {
   const firedSections = useRef(new Set());
@@ -94,6 +96,11 @@ const ScrollToTop = () => {
   return null;
 };
 
+const PageMeta = () => {
+  usePageMeta();
+  return null;
+};
+
 const RouteFallback = () => (
   <div className="min-h-screen flex items-center justify-center bg-white">
     <div className="w-10 h-10 border-4 border-brand/20 border-t-brand rounded-full animate-spin" />
@@ -118,11 +125,12 @@ const ImageSlider = () => {
   return (
     <>
       <div className="absolute inset-0 w-full h-full rounded-[3rem] rotate-6 group-hover:rotate-3 transition-transform duration-500 overflow-hidden shadow-2xl bg-slate-100 z-0">
-        <img src={images[nextIndex]} alt="Next Slide" className="w-full h-full object-cover opacity-90 blur-[1px] brightness-75 transition-all duration-500 group-hover:opacity-100 group-hover:blur-0 group-hover:brightness-100" />
+        <img src={images[nextIndex]} alt="Next Slide" decoding="async" className="w-full h-full object-cover opacity-90 blur-[1px] brightness-75 transition-all duration-500 group-hover:opacity-100 group-hover:blur-0 group-hover:brightness-100" />
       </div>
       <div className="absolute inset-0 w-full h-full rounded-[3rem] -rotate-3 group-hover:rotate-0 transition-transform duration-500 border-4 border-white shadow-2xl overflow-hidden bg-white z-10">
         {images.map((img, index) => (
           <img key={index} src={img} alt={`Slide ${index}`}
+            decoding="async"
             className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${index === currentIndex ? 'opacity-100' : 'opacity-0'}`}
           />
         ))}
@@ -166,6 +174,7 @@ const MainPortfolio = () => {
             <a href="#home" className="text-sm font-medium hover:text-blue-600 transition-colors">{t.nav.home}</a>
             <a href="#skills" className="text-sm font-medium hover:text-blue-600 transition-colors">{t.nav.skills}</a>
             <a href="#experience" className="text-sm font-medium hover:text-blue-600 transition-colors">{t.nav.experience}</a>
+            <a href="#case-studies" className="text-sm font-medium hover:text-blue-600 transition-colors">{t.nav.caseStudies}</a>
             <a href="#projects" className="text-sm font-medium hover:text-blue-600 transition-colors">Projects</a>
             <Link to="/portfolio" onClick={() => trackEvent('cta_click', { cta: 'view_portfolio' })} className="text-sm font-medium hover:text-blue-600 transition-colors">{t.nav.portfolio}</Link>
             <Link to="/gallery" className="text-sm font-medium hover:text-blue-600 transition-colors">{t.nav.gallery}</Link>
@@ -177,7 +186,7 @@ const MainPortfolio = () => {
             </button>
             <a href="#contact" onClick={() => trackEvent('cta_click', { cta: 'hire_me' })} className="bg-blue-600 text-white px-5 py-2 rounded-full text-sm font-bold hover:bg-blue-700 shadow-lg shadow-blue-200 transition-all hover:-translate-y-0.5">{t.nav.hireMe}</a>
           </div>
-          <button className="md:hidden text-slate-900" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+          <button className="md:hidden text-slate-900" onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label={isMenuOpen ? t.a11y.closeMenu : t.a11y.openMenu} aria-expanded={isMenuOpen}>
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
@@ -186,6 +195,7 @@ const MainPortfolio = () => {
             <a href="#home" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>{t.nav.home}</a>
             <a href="#skills" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>{t.nav.skills}</a>
             <a href="#experience" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>{t.nav.experience}</a>
+            <a href="#case-studies" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>{t.nav.caseStudies}</a>
             <a href="#projects" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>Projects</a>
             <Link to="/portfolio" className="text-lg font-bold" onClick={() => { trackEvent('cta_click', { cta: 'view_portfolio' }); setIsMenuOpen(false); }}>{t.nav.portfolio}</Link>
             <Link to="/gallery" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>{t.nav.gallery}</Link>
@@ -214,7 +224,9 @@ const MainPortfolio = () => {
               </span>
               <span className="text-xs md:text-sm font-bold uppercase tracking-widest text-slate-500">{p.role}</span>
             </motion.div>
-            <motion.h1 variants={staggerItem} className="text-colossal-heading text-mega text-slate-900">{t.hero.name}</motion.h1>
+            <motion.div variants={staggerItem}>
+              <h1 className="text-colossal-heading text-mega text-slate-900">{t.hero.name}</h1>
+            </motion.div>
             <motion.h2 variants={staggerItem} className="text-2xl md:text-3xl font-bold text-slate-800 leading-snug max-w-2xl mx-auto md:mx-0">
               {p.headline}
             </motion.h2>
@@ -262,7 +274,7 @@ const MainPortfolio = () => {
                 <ImageSlider />
               </SpotlightReveal>
             </div>
-            <div className="hidden md:flex items-center gap-1.5 justify-center mt-3 text-slate-400 text-xs font-medium">
+            <div className="hidden md:flex items-center gap-1.5 justify-center mt-3 text-slate-500 text-xs font-medium">
               <MousePointerClick size={13} />
               <span>{language === 'th' ? 'ปัดเมาส์เพื่อเผยอีกด้าน' : 'move your cursor to reveal'}</span>
             </div>
@@ -283,6 +295,9 @@ const MainPortfolio = () => {
       <Suspense fallback={<SectionFallback />}>
         <ValueSection />
       </Suspense>
+      <Suspense fallback={<SectionFallback />}>
+        <CaseStudies />
+      </Suspense>
 
       {/* Skills Section */}
       <section id="skills" className="bg-slate-50 py-24">
@@ -290,7 +305,7 @@ const MainPortfolio = () => {
           <div className="flex flex-col lg:flex-row gap-12 items-start">
             <div className="lg:w-1/3 w-full lg:sticky top-24">
               <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl group border-8 border-white bg-white">
-                <img src={heroBg} alt="Profile Highlight" className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105" />
+                <img src={heroBg} alt="Profile Highlight" loading="lazy" decoding="async" className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-8">
                   <p className="text-white text-lg font-bold italic">"Crafting excellence."</p>
                 </div>
@@ -462,12 +477,15 @@ const AnimatedRoutes = () => {
 
 const App = () => {
   const analyticsEnabled = !isDoNotTrackEnabled();
+  const { t } = useLanguage();
 
   return (
     <Router>
+      <PageMeta />
       <ScrollToTop />
       <SectionViewTracker />
-      <AnimatedRoutes />
+      <a className="skip-link" href="#main">{t.a11y.skipToMain}</a>
+      <main id="main"><AnimatedRoutes /></main>
       <Suspense fallback={null}>
         <ChatbotWidget />
       </Suspense>

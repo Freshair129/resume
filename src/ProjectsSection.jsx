@@ -6,6 +6,7 @@ import {
 import { motion, AnimatePresence } from 'motion/react';
 import { Reveal, RevealGroup, RevealItem } from './MotionPrimitives';
 import { hoverLift } from './motion-variants';
+import { useLanguage } from './LanguageContext';
 
 /* ─────────────────── Project Data ─────────────────── */
 const PROJECTS = [
@@ -75,6 +76,7 @@ const PROJECTS = [
 
 /* ─────────────────── Case Study Modal ─────────────────── */
 function CaseStudyModal({ project, onClose }) {
+  const { t } = useLanguage();
   useEffect(() => {
     document.body.style.overflow = 'hidden';
     return () => { document.body.style.overflow = ''; };
@@ -106,6 +108,7 @@ function CaseStudyModal({ project, onClose }) {
         <div className={`relative bg-gradient-to-br ${project.modalGradient} p-8 pb-12 rounded-t-[2.5rem]`}>
           <button
             onClick={onClose}
+            aria-label={t.a11y.closeDialog}
             className="absolute top-5 right-5 w-10 h-10 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white transition-all"
           >
             <X size={20} />

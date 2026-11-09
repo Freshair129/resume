@@ -44,6 +44,28 @@ body {
     scroll-behavior: smooth;
 }
 
+:focus-visible {
+    outline: 2px solid #2563eb;
+    outline-offset: 2px;
+}
+
+.skip-link {
+    position: absolute;
+    top: 0.5rem;
+    left: 0.5rem;
+    z-index: 100;
+    transform: translateY(-200%);
+    border-radius: 0.5rem;
+    background: #fff;
+    padding: 0.75rem 1rem;
+    color: #0f172a;
+    box-shadow: 0 4px 12px rgb(15 23 42 / 20%);
+}
+
+.skip-link:focus-visible {
+    transform: translateY(0);
+}
+
 /* Colossal display heading helper — oversized, tight, condensed */
 .text-colossal-heading {
     font-family: var(--font-display);
