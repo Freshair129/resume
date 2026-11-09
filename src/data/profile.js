@@ -40,7 +40,7 @@ export const profile = {
           icon: 'shield',
           title: 'แบรนด์ปลอดภัย ทั้ง CI และนโยบายโฆษณา',
           desc: 'คุมมาตรฐาน Brand CI ทุกช่องทาง ตรวจงานเอเจนซี่ และเช็กคอนเทนต์ตาม Meta Ad Policy ด้วยระบบ AI ที่สร้างขึ้นเอง ก่อนที่แอดจะโดนปิด',
-          proof: 'Audit เอเจนซี่ดิจิทัลให้ Saint Thonglor Clinic และวาง Guideline การตอบแชทให้ทีมแอดมิน',
+          proof: 'Audit เอเจนซี่ดิจิทัลให้ Saint Thonglor Clinic และวาง Guideline การตอบแชทให้ทีมแอดมินของ U-Turn Shop บริษัทในเครือ',
           link: { href: '#projects', label: 'ดูระบบที่สร้าง' },
         },
         {
@@ -86,7 +86,7 @@ export const profile = {
           icon: 'shield',
           title: 'Brand stays safe: CI and ad policy',
           desc: 'Brand CI enforced on every channel, agency output audited, and content checked against Meta Ad Policy with a self-built AI reviewer before an ad account gets flagged.',
-          proof: 'Audited the digital agency for Saint Thonglor Clinic and wrote the admin response guidelines.',
+          proof: 'Audited the digital agency for Saint Thonglor Clinic and wrote the admin response guidelines for its sister company, U-Turn Shop.',
           link: { href: '#projects', label: 'See the systems' },
         },
         {

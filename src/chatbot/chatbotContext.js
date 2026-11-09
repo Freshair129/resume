@@ -34,7 +34,7 @@ export const resumeContext = {
         {
             title: "Content Creator",
             company: "Saint Thonglor Clinic",
-            period: "2020 - 2022",
+            period: "2020 - 2023",
             type: "Permanent",
             responsibilities: [
                 "Planned daily/monthly content and filming schedules",
@@ -44,8 +44,8 @@ export const resumeContext = {
         {
             title: "Content Creator",
             company: "U-Turn Shop",
-            period: "2020 - 2022",
-            type: "Part-Time",
+            period: "2020 - 2023",
+            type: "Freelance",
             responsibilities: [
                 "Planned and filmed product promo content",
                 "Consulted Admin team to improve service"
