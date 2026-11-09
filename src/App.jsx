@@ -1,4 +1,4 @@
-import React, { useState, useEffect, lazy, Suspense } from 'react';
+import React, { useState, useEffect, useRef, lazy, Suspense } from 'react';
 import {
   BrowserRouter as Router, Routes, Route, Link, Navigate, useLocation
 } from 'react-router-dom';
@@ -11,6 +11,9 @@ import { motion, AnimatePresence } from 'motion/react';
 import { Analytics } from "@vercel/analytics/react"
 import { SpeedInsights } from "@vercel/speed-insights/react"
 import { useLanguage } from './LanguageContext';
+import ContactForm from './ContactForm';
+import { trackEvent } from './lib/track';
+import { isDoNotTrackEnabled } from './lib/visitor';
 import { resumeVariants } from './data/resumeVariants';
 import { profile, SITE_VARIANT } from './data/profile';
 import { Reveal, RevealGroup, RevealItem } from './MotionPrimitives';
@@ -34,6 +37,53 @@ const PresentationSection = lazy(() => import('./PresentationSection'));
 const ValueSection = lazy(() => import('./ValueSection'));
 
 const RESUME_VARIANT = SITE_VARIANT;
+const TRACKED_SECTIONS = ['value', 'skills', 'experience', 'projects', 'contact'];
+
+const SectionViewTracker = () => {
+  const firedSections = useRef(new Set());
+
+  useEffect(() => {
+    if (isDoNotTrackEnabled() || typeof IntersectionObserver === 'undefined') return undefined;
+
+    const observedElements = new WeakSet();
+    let mutationObserver;
+    const intersectionObserver = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        const section = entry.target.id;
+        if (!entry.isIntersecting || entry.intersectionRatio < 0.4 || firedSections.current.has(section)) continue;
+
+        firedSections.current.add(section);
+        intersectionObserver.unobserve(entry.target);
+        trackEvent('section_view', { section });
+      }
+
+      if (firedSections.current.size === TRACKED_SECTIONS.length) {
+        intersectionObserver.disconnect();
+        mutationObserver?.disconnect();
+      }
+    }, { threshold: 0.4 });
+
+    const observeSections = () => {
+      for (const id of TRACKED_SECTIONS) {
+        const element = document.getElementById(id);
+        if (!element || observedElements.has(element) || firedSections.current.has(id)) continue;
+        observedElements.add(element);
+        intersectionObserver.observe(element);
+      }
+    };
+
+    mutationObserver = new MutationObserver(observeSections);
+    observeSections();
+    mutationObserver.observe(document.body, { childList: true, subtree: true });
+
+    return () => {
+      intersectionObserver.disconnect();
+      mutationObserver.disconnect();
+    };
+  }, []);
+
+  return null;
+};
 
 // Reset scroll on route change (AnimatePresence keeps the old scroll offset otherwise).
 const ScrollToTop = () => {
@@ -117,15 +167,15 @@ const MainPortfolio = () => {
             <a href="#skills" className="text-sm font-medium hover:text-blue-600 transition-colors">{t.nav.skills}</a>
             <a href="#experience" className="text-sm font-medium hover:text-blue-600 transition-colors">{t.nav.experience}</a>
             <a href="#projects" className="text-sm font-medium hover:text-blue-600 transition-colors">Projects</a>
-            <Link to="/portfolio" className="text-sm font-medium hover:text-blue-600 transition-colors">{t.nav.portfolio}</Link>
+            <Link to="/portfolio" onClick={() => trackEvent('cta_click', { cta: 'view_portfolio' })} className="text-sm font-medium hover:text-blue-600 transition-colors">{t.nav.portfolio}</Link>
             <Link to="/gallery" className="text-sm font-medium hover:text-blue-600 transition-colors">{t.nav.gallery}</Link>
-            <Link to="/resume" className="text-sm font-bold text-slate-900 hover:text-blue-600 transition-colors flex items-center gap-1">
+            <Link to="/resume" onClick={() => trackEvent('cta_click', { cta: 'view_resume' })} className="text-sm font-bold text-slate-900 hover:text-blue-600 transition-colors flex items-center gap-1">
               {t.nav.resume} <ExternalLink size={14} />
             </Link>
             <button onClick={toggleLanguage} className="flex items-center gap-1 bg-slate-100 px-3 py-1 rounded-full text-xs font-bold hover:bg-slate-200 transition-colors">
               <Globe size={14} /> {language.toUpperCase()}
             </button>
-            <a href="#contact" className="bg-blue-600 text-white px-5 py-2 rounded-full text-sm font-bold hover:bg-blue-700 shadow-lg shadow-blue-200 transition-all hover:-translate-y-0.5">{t.nav.hireMe}</a>
+            <a href="#contact" onClick={() => trackEvent('cta_click', { cta: 'hire_me' })} className="bg-blue-600 text-white px-5 py-2 rounded-full text-sm font-bold hover:bg-blue-700 shadow-lg shadow-blue-200 transition-all hover:-translate-y-0.5">{t.nav.hireMe}</a>
           </div>
           <button className="md:hidden text-slate-900" onClick={() => setIsMenuOpen(!isMenuOpen)}>
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -137,13 +187,13 @@ const MainPortfolio = () => {
             <a href="#skills" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>{t.nav.skills}</a>
             <a href="#experience" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>{t.nav.experience}</a>
             <a href="#projects" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>Projects</a>
-            <Link to="/portfolio" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>{t.nav.portfolio}</Link>
+            <Link to="/portfolio" className="text-lg font-bold" onClick={() => { trackEvent('cta_click', { cta: 'view_portfolio' }); setIsMenuOpen(false); }}>{t.nav.portfolio}</Link>
             <Link to="/gallery" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>{t.nav.gallery}</Link>
-            <Link to="/resume" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>{t.nav.resume}</Link>
+            <Link to="/resume" className="text-lg font-bold" onClick={() => { trackEvent('cta_click', { cta: 'view_resume' }); setIsMenuOpen(false); }}>{t.nav.resume}</Link>
             <button onClick={() => { toggleLanguage(); setIsMenuOpen(false); }} className="flex items-center gap-2 text-lg font-bold">
               <Globe size={20} /> {language === 'th' ? 'English' : 'ไทย'}
             </button>
-            <a href="#contact" className="bg-blue-600 text-white p-4 rounded-2xl text-center font-black" onClick={() => setIsMenuOpen(false)}>{t.nav.hireMe}</a>
+            <a href="#contact" className="bg-blue-600 text-white p-4 rounded-2xl text-center font-black" onClick={() => { trackEvent('cta_click', { cta: 'hire_me' }); setIsMenuOpen(false); }}>{t.nav.hireMe}</a>
           </div>
         )}
       </nav>
@@ -171,7 +221,7 @@ const MainPortfolio = () => {
             <motion.p variants={staggerItem} className="text-lg text-slate-600 max-w-xl mx-auto md:mx-0 leading-relaxed">{p.intro}</motion.p>
             <motion.div variants={staggerItem} className="flex flex-col sm:flex-row sm:flex-wrap gap-4 justify-center md:justify-start items-center">
               <motion.div whileHover={hoverLift} whileTap={tapPress} className="w-full sm:w-auto">
-                <Link to={`/resume/${RESUME_VARIANT}`} className="bg-slate-900 text-white px-8 py-4 rounded-2xl font-bold flex items-center justify-center gap-2 shadow-xl shadow-slate-200 hover:bg-slate-800 transition-colors">
+                <Link to={`/resume/${RESUME_VARIANT}`} onClick={() => trackEvent('cta_click', { cta: 'view_resume' })} className="bg-slate-900 text-white px-8 py-4 rounded-2xl font-bold flex items-center justify-center gap-2 shadow-xl shadow-slate-200 hover:bg-slate-800 transition-colors">
                   {p.cta.primary} <FileText size={18} />
                 </Link>
               </motion.div>
@@ -179,13 +229,14 @@ const MainPortfolio = () => {
                 whileHover={hoverLift}
                 whileTap={tapPress}
                 href={resumeVariants[RESUME_VARIANT].downloadFile}
+                onClick={() => trackEvent('cta_click', { cta: 'download_pdf' })}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full sm:w-auto bg-white text-slate-900 border-2 border-slate-200 px-8 py-4 rounded-2xl font-bold flex items-center justify-center gap-2 hover:border-slate-900 transition-colors"
               >
                 {p.cta.secondary} <Download size={18} />
               </motion.a>
-              <Link to="/portfolio" className="inline-flex items-center justify-center gap-1.5 px-2 py-2 text-slate-600 font-bold hover:text-blue-600 transition-colors">
+              <Link to="/portfolio" onClick={() => trackEvent('cta_click', { cta: 'view_portfolio' })} className="inline-flex items-center justify-center gap-1.5 px-2 py-2 text-slate-600 font-bold hover:text-blue-600 transition-colors">
                 {p.cta.portfolio} <ExternalLink size={16} />
               </Link>
             </motion.div>
@@ -372,8 +423,8 @@ const MainPortfolio = () => {
               <p className="flex items-center gap-4 text-xl text-slate-400"><MapPin /> {t.resume.location}</p>
             </div>
           </div>
-          <div className="bg-white/5 p-10 rounded-[3rem] text-center space-y-4 backdrop-blur-sm">
-            <p className="text-slate-400">Thanks for visiting my portfolio.</p>
+          <div className="bg-white/5 p-6 sm:p-8 rounded-[2rem] space-y-6 backdrop-blur-sm">
+            <ContactForm />
             <p className="text-xs text-slate-600 font-bold uppercase tracking-widest">© {new Date().getFullYear()} PORNPON.T · DIGITAL PORTFOLIO</p>
           </div>
         </div>
@@ -410,15 +461,18 @@ const AnimatedRoutes = () => {
 };
 
 const App = () => {
+  const analyticsEnabled = !isDoNotTrackEnabled();
+
   return (
     <Router>
       <ScrollToTop />
+      <SectionViewTracker />
       <AnimatedRoutes />
       <Suspense fallback={null}>
         <ChatbotWidget />
       </Suspense>
-      <Analytics />
-      <SpeedInsights />
+      {analyticsEnabled && <Analytics />}
+      {analyticsEnabled && <SpeedInsights />}
     </Router>
   );
 };

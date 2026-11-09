@@ -52,7 +52,7 @@ function vercelApiDev(env) {
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => {
   // Only server-side keys; VITE_* vars are handled by Vite itself.
-  const env = loadEnv(mode, process.cwd(), ['GEMINI_'])
+  const env = loadEnv(mode, process.cwd(), ['GEMINI_', 'SUPABASE_'])
   return {
     plugins: [react(), vercelApiDev(env)],
   }

@@ -7,6 +7,7 @@ import profileImage from './assets/profile.jpg';
 import { resumeVariants, allExperiences } from './data/resumeVariants';
 import { RevealGroup, RevealItem } from './MotionPrimitives';
 import { tapPress } from './motion-variants';
+import { trackEvent } from './lib/track';
 
 const Resume = () => {
     const { t, language } = useLanguage();
@@ -60,7 +61,7 @@ const Resume = () => {
                     <motion.button
                         type="button"
                         whileTap={tapPress}
-                        onClick={() => window.print()}
+                        onClick={() => { trackEvent('resume_pdf_print'); window.print(); }}
                         className="inline-flex items-center gap-2 bg-[#0f172a] hover:bg-[#1e293b] text-white px-4 py-2 rounded-xl text-sm font-bold shadow-sm transition-colors"
                     >
                         <Printer size={16} /> {language === 'th' ? 'บันทึกหน้านี้เป็น PDF' : 'Save this page as PDF'}

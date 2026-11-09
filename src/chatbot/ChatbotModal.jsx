@@ -65,6 +65,9 @@ const ChatbotModal = ({ onClose, messages, isLoading, onSendMessage }) => {
 
             {/* Messages Container */}
             <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-slate-50">
+                <p className="rounded-xl border border-blue-100 bg-blue-50 px-3 py-2 text-xs leading-relaxed text-slate-600">
+                    {t.chatbot?.privacyNote}
+                </p>
                 {messages.map((msg) => (
                     <div
                         key={msg.id}

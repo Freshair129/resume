@@ -2,10 +2,13 @@
 // Web-standard handler signature (Request -> Response). The same module is served
 // locally by the Vite dev middleware in vite.config.js.
 import { resumeContext, systemPrompt } from '../src/chatbot/chatbotContext.js';
+import { getSupabaseAdmin } from './_lib/supabase.js';
+import { isUuid, upsertVisitor } from './_lib/visitorData.js';
 
 const MODEL = process.env.GEMINI_MODEL || 'gemini-2.5-flash';
 const MAX_MESSAGE_CHARS = 2000;
 const MAX_HISTORY_TURNS = 20;
+const UUID_PATTERN = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 
 const json = (data, status = 200) =>
   new Response(JSON.stringify(data), {
@@ -15,6 +18,36 @@ const json = (data, status = 200) =>
 
 export function GET() {
   return json({ ok: true, model: MODEL, configured: Boolean(process.env.GEMINI_API_KEY) });
+}
+
+async function logChatExchange(body, userMessage, assistantMessage) {
+  const supabase = getSupabaseAdmin();
+  if (!supabase || body?.dnt === true) return;
+
+  const visitor = body?.visitor && typeof body.visitor === 'object' ? body.visitor : {};
+  const conversationId = body?.conversationId;
+  if (!isUuid(visitor.id) || typeof conversationId !== 'string' || !UUID_PATTERN.test(conversationId)) return;
+
+  await upsertVisitor(supabase, visitor);
+
+  const { error: conversationError } = await supabase.from('conversations').upsert({
+    id: conversationId,
+    visitor_id: visitor.id,
+    backend: 'gemini',
+  }, { onConflict: 'id', ignoreDuplicates: true });
+  if (conversationError) throw conversationError;
+
+  const { error: messagesError } = await supabase.from('messages').insert([
+    { conversation_id: conversationId, role: 'user', content: userMessage },
+    { conversation_id: conversationId, role: 'assistant', content: assistantMessage },
+  ]);
+  if (messagesError) throw messagesError;
+
+  const { error: countError } = await supabase.rpc('increment_conversation_message_count', {
+    p_conversation_id: conversationId,
+    p_message_delta: 2,
+  });
+  if (countError) throw countError;
 }
 
 export async function POST(request) {
@@ -69,7 +102,19 @@ export async function POST(request) {
   const data = await upstream.json();
   const candidate = data.candidates?.[0];
   const text = candidate?.content?.parts?.map((p) => p.text).filter(Boolean).join('');
-  if (text) return json({ response: text });
+  if (text) {
+    if (body?.dnt !== true && request.headers.get('dnt') !== '1') {
+      try {
+        await logChatExchange(body, message, text);
+      } catch (error) {
+        console.error('Chat logging failed:', {
+          code: error?.code || 'unknown',
+          message: error?.message || 'Unknown Supabase error',
+        });
+      }
+    }
+    return json({ response: text });
+  }
 
   const reason = candidate?.finishReason || data.promptFeedback?.blockReason || 'EMPTY';
   return json({ response: null, reason });

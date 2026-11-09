@@ -1,9 +1,30 @@
 import { useState, useCallback } from 'react';
 import { sendMessage } from './chatbotService';
 import { useLanguage } from '../LanguageContext';
+import { trackEvent } from '../lib/track';
+
+function saveDeclaredIdentity(name, company) {
+    try {
+        sessionStorage.setItem('eva_user_name', name);
+        sessionStorage.setItem('eva_user_company', company);
+    } catch {
+        // Chat should remain usable when browser storage is unavailable.
+    }
+}
+
+function readDeclaredIdentity() {
+    try {
+        return {
+            name: sessionStorage.getItem('eva_user_name'),
+            company: sessionStorage.getItem('eva_user_company'),
+        };
+    } catch {
+        return { name: null, company: null };
+    }
+}
 
 export function useChatbot() {
-    const { t } = useLanguage();
+    const { t, language } = useLanguage();
     const [isOpen, setIsOpen] = useState(false);
     const [messages, setMessages] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
@@ -21,17 +42,19 @@ export function useChatbot() {
     }, [messages.length, t.chatbot]);
 
     const toggleChat = useCallback(() => {
-        setIsOpen(prev => {
-            const newValue = !prev;
-            if (newValue && messages.length === 0) {
-                initializeChat();
-            }
-            return newValue;
-        });
-    }, [messages.length, initializeChat]);
+        if (isOpen) {
+            setIsOpen(false);
+            return;
+        }
+
+        setIsOpen(true);
+        if (messages.length === 0) initializeChat();
+        trackEvent('chat_opened');
+    }, [isOpen, messages.length, initializeChat]);
 
     const sendUserMessage = useCallback(async (userMessage) => {
         if (!userMessage.trim()) return;
+        trackEvent('chat_message_sent');
 
         // Detect Identity (Very simple regex for "Name จาก Company")
         // This will be improved to handle separate inputs or LLM-based extraction
@@ -39,8 +62,7 @@ export function useChatbot() {
         if (identityMatch) {
             const name = identityMatch[1];
             const company = identityMatch[2];
-            sessionStorage.setItem('eva_user_name', name);
-            sessionStorage.setItem('eva_user_company', company);
+            saveDeclaredIdentity(name, company);
         }
 
         const userMsg = {
@@ -54,8 +76,7 @@ export function useChatbot() {
         setError(null);
 
         try {
-            const userName = sessionStorage.getItem('eva_user_name');
-            const userCompany = sessionStorage.getItem('eva_user_company');
+            const { name: userName, company: userCompany } = readDeclaredIdentity();
 
             // Prepare conversation history
             const history = messages
@@ -66,7 +87,7 @@ export function useChatbot() {
                 }));
 
             // Get bot response with identity context
-            const botResponse = await sendMessage(userMessage, history, { name: userName, company: userCompany });
+            const botResponse = await sendMessage(userMessage, history, { name: userName, company: userCompany, language });
 
             // Add bot message
             const botMsg = {
@@ -91,7 +112,7 @@ export function useChatbot() {
         } finally {
             setIsLoading(false);
         }
-    }, [messages, t.chatbot]);
+    }, [messages, t.chatbot, language]);
 
     const clearChat = useCallback(() => {
         setMessages([]);

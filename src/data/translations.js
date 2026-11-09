@@ -15,7 +15,24 @@ export const th = {
         placeholder: "พิมพ์คำถามของคุณ...",
         send: "ส่ง",
         errorMessage: "ขออภัยครับ เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง 😅",
-        hint: "คุยกับ EVA AI ที่บอสสร้างเองได้ที่นี่!"
+        hint: "คุยกับ EVA AI ที่บอสสร้างเองได้ที่นี่!",
+        privacyNote: "ข้อความและข้อมูลติดต่อที่คุณกรอกจะถูกเก็บเพื่อให้บอสติดต่อกลับเท่านั้น"
+    },
+    contact: {
+        title: "ฝากข้อความให้บอสติดต่อกลับ",
+        name: "ชื่อ",
+        company: "บริษัท",
+        role: "ตำแหน่ง",
+        email: "อีเมล",
+        phone: "เบอร์โทรศัพท์",
+        message: "ข้อความ",
+        submit: "ส่งข้อความ",
+        submitting: "กำลังส่ง...",
+        success: "ส่งข้อความเรียบร้อยแล้ว บอสจะติดต่อกลับครับ",
+        error: "ส่งข้อความไม่สำเร็จ กรุณาลองอีกครั้ง",
+        contactRequired: "กรุณากรอกอีเมลหรือเบอร์โทรศัพท์อย่างน้อยหนึ่งช่อง",
+        consentNote: "การส่งแบบฟอร์มนี้ถือว่าคุณยินยอมให้ใช้ข้อมูลเพื่อการติดต่อกลับตาม PDPA",
+        privacyNote: "ข้อความและข้อมูลติดต่อที่คุณกรอกจะถูกเก็บเพื่อให้บอสติดต่อกลับเท่านั้น"
     },
     hero: {
         available: "Available for Work",
@@ -227,7 +244,24 @@ export const en = {
         placeholder: "Type your question...",
         send: "Send",
         errorMessage: "Sorry, an error occurred. Please try again 😅",
-        hint: "Chat with EVA AI, my self-made assistant!"
+        hint: "Chat with EVA AI, my self-made assistant!",
+        privacyNote: "Your message and contact details will be stored only so Boss can get back to you."
+    },
+    contact: {
+        title: "Leave a message for Boss",
+        name: "Name",
+        company: "Company",
+        role: "Role",
+        email: "Email",
+        phone: "Phone",
+        message: "Message",
+        submit: "Send message",
+        submitting: "Sending...",
+        success: "Message sent. Boss will get back to you.",
+        error: "Could not send your message. Please try again.",
+        contactRequired: "Please provide an email address or phone number.",
+        consentNote: "By submitting this form, you consent to using your information to contact you under Thailand's PDPA.",
+        privacyNote: "Your message and contact details will be stored only so Boss can get back to you."
     },
     hero: {
         available: "Available for Work",

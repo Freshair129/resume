@@ -6,6 +6,7 @@
  *
  * The browser never sees an API key.
  */
+import { getConversationId, getSource, getVisitorId, isDoNotTrackEnabled } from '../lib/visitor';
 
 const EVA_API_URL = import.meta.env.VITE_EVA_API_URL || '';
 const USE_EVA_BACKEND = import.meta.env.VITE_USE_EVA_BACKEND === 'true' && Boolean(EVA_API_URL);
@@ -16,7 +17,7 @@ const FALLBACK_BY_REASON = {
     SAFETY: 'ขออภัยครับ ข้อความนี้ถูกกรองโดยระบบความปลอดภัย โปรดลองถามคำถามอื่นนะครับ',
 };
 
-export async function sendMessage(userMessage, conversationHistory = []) {
+export async function sendMessage(userMessage, conversationHistory = [], identity = {}) {
     if (USE_EVA_BACKEND) {
         try {
             const reply = await sendMessageEva(userMessage);
@@ -26,7 +27,7 @@ export async function sendMessage(userMessage, conversationHistory = []) {
         }
     }
 
-    return sendMessageServer(userMessage, conversationHistory);
+    return sendMessageServer(userMessage, conversationHistory, identity);
 }
 
 async function sendMessageEva(userMessage) {
@@ -51,7 +52,7 @@ async function sendMessageEva(userMessage) {
     return data.response;
 }
 
-async function sendMessageServer(userMessage, conversationHistory) {
+async function sendMessageServer(userMessage, conversationHistory, identity) {
     const history = conversationHistory
         .filter((msg) => msg?.role && msg?.content)
         .map((msg) => ({ role: msg.role === 'user' ? 'user' : 'model', content: msg.content }));
@@ -59,7 +60,19 @@ async function sendMessageServer(userMessage, conversationHistory) {
     const response = await fetch(CHAT_API_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: userMessage, history }),
+        body: JSON.stringify({
+            message: userMessage,
+            history,
+            visitor: {
+                id: getVisitorId(),
+                name: identity?.name || null,
+                company: identity?.company || null,
+                source: getSource(),
+                language: identity?.language === 'en' ? 'en' : 'th',
+            },
+            conversationId: getConversationId(),
+            dnt: isDoNotTrackEnabled(),
+        }),
     });
 
     const data = await response.json().catch(() => ({}));
