@@ -29,5 +29,5 @@ dist-ssr
 !.env.example
 
 # Codex task working folders (templates are tracked)
-.codex/tasks/*
-!.codex/tasks/_template/
+.tasks/*
+!.tasks/_template/

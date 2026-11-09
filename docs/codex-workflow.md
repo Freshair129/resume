@@ -7,7 +7,7 @@ level**, not by role, so the expensive models and tools are only used where they
 pay off.
 
 Related: [`AGENTS.md`](../AGENTS.md) (shared rules every agent must follow),
-[`.codex/tasks/_template/`](../.codex/tasks/_template/) (handoff file templates).
+[`.tasks/_template/`](../.tasks/_template/) (handoff file templates).
 
 ---
 
@@ -32,7 +32,7 @@ Rules that keep this cheap:
   There is no second review layer.
 - **Fail fast, cheapest first.** lint, then build, then unit, then curl, then browser.
   Stop at the first failure and send it back; do not run expensive checks on a broken build.
-- **Reuse evidence.** If `git diff | sha1sum` matches the hash recorded in
+- **Reuse evidence.** If `git diff | git hash-object --stdin` matches the hash recorded in
   `evidence.md`, do not re-run tests. The gate reads evidence; it does not regenerate it.
 - **Computer use budget.** Tier B only, max 6 screenshots per task, at 375px and 1280px.
 - **Loop caps.** implement 2 attempts max, test 2 runs max, review-to-implementer 1 round
@@ -86,7 +86,7 @@ task, or when any acceptance check is `NOT VERIFIED`.
 
 ## 4. Handoff files
 
-Every task lives in `.codex/tasks/<task-id>/`. Copy `.codex/tasks/_template/` to start.
+Every task lives in `.tasks/<task-id>/`. Copy `.tasks/_template/` to start.
 `<task-id>` is `YYYYMMDD-short-slug`, for example `20261109-lead-form`.
 
 | File | Written by | Purpose |
@@ -112,7 +112,7 @@ Paste the matching block as the role instruction. `<id>` is the task folder name
 ### Router / planner (Sol, effort low)
 
 ```
-Read .codex/tasks/<id>/brief.md and inspect the repo. Write plan.md only.
+Read .tasks/<id>/brief.md and inspect the repo. Write plan.md only.
 - Assign risk level S, M or L using the table in docs/codex-workflow.md section 2.
 - List subtasks (max 5). Each names the files it may touch.
 - Test tier: "A only", or "A+B" if any file under src/ renders UI.
@@ -126,7 +126,7 @@ Do not write code. Keep plan.md under 40 lines.
 Implement exactly the subtask assigned to you in plan.md. Touch only its listed files.
 Before finishing run `npm run lint` and `npm run build` and fix your own errors.
 Append to evidence.md: each command, its exit code, the last 20 lines of output,
-and the output of `git diff | sha1sum`.
+and the output of `git diff | git hash-object --stdin`.
 Never commit. Never edit .env*, supabase/, api/ or vite.config.js unless plan.md
 lists them for your subtask.
 If still failing after 2 attempts, write BLOCKED and the reason in evidence.md and stop.
@@ -137,11 +137,11 @@ If still failing after 2 attempts, write BLOCKED and the reason in evidence.md a
 ```
 Tier A (effort medium, no browser): run every acceptance check in brief.md that can be
 verified with lint, build, unit tests or curl. Record each as PASS or FAIL with the
-command and output in evidence.md. Record `git diff | sha1sum`.
+command and output in evidence.md. Record `git diff | git hash-object --stdin`.
 Stop here if plan.md says "A only" or if any Tier A check FAILs.
 
 Tier B (effort high, computer use): run only the checks marked [visual] in brief.md.
-Max 6 screenshots, at 375px and 1280px widths, saved under .codex/tasks/<id>/shots/.
+Max 6 screenshots, at 375px and 1280px widths, saved under .tasks/<id>/shots/.
 Reference each screenshot path from evidence.md.
 Do not fix code. Report only.
 ```
@@ -156,9 +156,9 @@ Read brief.md, plan.md, evidence.md and `git diff`. Write review.md:
 - Fix anything of 10 lines or fewer yourself and record it. Send larger items back to
   the implementer once at most.
 - Mark each acceptance check ACCEPTED only if evidence.md shows the command ran and passed.
-Do not re-run tests Terra already ran unless `git diff | sha1sum` differs from the
+Do not re-run tests Terra already ran unless `git diff | git hash-object --stdin` differs from the
 hash in evidence.md.
-Then write summary.md in the exact format of .codex/tasks/_template/summary.md.
+Then write summary.md in the exact format of .tasks/_template/summary.md.
 ```
 
 ---

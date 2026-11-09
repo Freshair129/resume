@@ -57,8 +57,8 @@ risk, never role.
 
 ## Handoff format
 
-Each task has a folder `.codex/tasks/<YYYYMMDD-slug>/` with `brief.md`, `plan.md`,
-`evidence.md`, `review.md`, `summary.md`. Templates are in `.codex/tasks/_template/`.
+Each task has a folder `.tasks/<YYYYMMDD-slug>/` with `brief.md`, `plan.md`,
+`evidence.md`, `review.md`, `summary.md`. Templates are in `.tasks/_template/`.
 The lead reads `summary.md` only; it opens the diff when the status is
 `ACCEPTED_WITH_NOTES` on a level-L task or any check is `NOT VERIFIED`.
 

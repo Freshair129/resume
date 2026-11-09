@@ -3,7 +3,7 @@
 Append only. Newest entries at the bottom. Never delete earlier entries.
 
 ## Implementer — attempt 1 (Luna, effort <x>)
-Diff hash: `git diff | sha1sum` -> <hash>
+Diff hash: `git diff | git hash-object --stdin` -> <hash>
 
 ```
 $ npm run lint
