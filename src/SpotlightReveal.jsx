@@ -15,12 +15,12 @@ export default function SpotlightReveal({ image, radius = SPOTLIGHT_R, className
   const pos = useRef({ x: -999, y: -999 });
   const smooth = useRef({ x: -999, y: -999 });
   const rafRef = useRef(null);
-  const prefersReducedMotion = useRef(
-    typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  const [prefersReducedMotion] = useState(
+    () => typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
   );
 
   useEffect(() => {
-    if (prefersReducedMotion.current) return; // skip the effect entirely — accessibility
+    if (prefersReducedMotion) return; // skip the effect entirely — accessibility
     const wrap = wrapRef.current;
     if (!wrap) return;
 
@@ -83,12 +83,12 @@ export default function SpotlightReveal({ image, radius = SPOTLIGHT_R, className
       wrap.removeEventListener('mousemove', onMove);
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
     };
-  }, [radius]);
+  }, [radius, prefersReducedMotion]);
 
   return (
     <div ref={wrapRef} className={`relative ${className}`}>
       {children}
-      {!prefersReducedMotion.current && (
+      {!prefersReducedMotion && (
         <>
           <canvas className="absolute inset-0 pointer-events-none" style={{ display: 'none' }} ref={canvasRef} />
           <div
